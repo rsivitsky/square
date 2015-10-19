@@ -9,7 +9,7 @@ public class Valuta {
 
     @Id
     @Column(name = "VALUTA_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer valuta_id;
 
     @Column(name = "VALUTA_NAME")

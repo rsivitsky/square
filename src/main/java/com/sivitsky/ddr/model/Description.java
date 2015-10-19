@@ -8,7 +8,7 @@ public class Description {
 
     @Id
     @Column(name = "DESCRIPT_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer descript_id;
 
     @Column(name = "DESCRIPT_NAME")

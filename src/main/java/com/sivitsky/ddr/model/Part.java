@@ -8,7 +8,7 @@ public class Part {
 
     @Id
     @Column(name = "PART_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer part_id;
 
     @Column(name = "PART_NAME")

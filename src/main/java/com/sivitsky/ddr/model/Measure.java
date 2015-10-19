@@ -8,7 +8,7 @@ public class Measure {
 
     @Id
     @Column(name = "MEASURE_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer measure_id;
 
     @Column(name = "MEASURE_NAME")

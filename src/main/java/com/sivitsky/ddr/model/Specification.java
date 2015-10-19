@@ -8,7 +8,7 @@ public class Specification {
 
     @Id
     @Column(name = "SPEC_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer spec_id;
 
     @Column(name = "SPEC_NAME")

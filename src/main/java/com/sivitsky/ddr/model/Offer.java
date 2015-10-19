@@ -9,7 +9,7 @@ public class Offer {
 
     @Id
     @Column(name = "OFFER_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer offer_id;
 
     @Column(name = "OFFER_DATE")

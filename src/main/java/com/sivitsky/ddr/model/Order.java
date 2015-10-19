@@ -10,7 +10,7 @@ public class Order {
 
     @Id
     @Column(name = "ORDER_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer order_id;
 
     @Column(name = "ORDER_NUM")

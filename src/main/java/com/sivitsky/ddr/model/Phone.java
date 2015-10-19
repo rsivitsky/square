@@ -8,7 +8,7 @@ public class Phone {
 
     @Id
     @Column(name = "PHONE_ID")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer phone_id;
 
     @Column(name = "CONTACT_CONTACT_ID")

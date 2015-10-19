@@ -6,8 +6,9 @@ import javax.persistence.*;
 @Table(name = "USER")
 public class User {
 
-    @Id     @GeneratedValue
+    @Id
     @Column(name = "USER_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
 
     @Column(name = "LOGIN")
@@ -23,12 +24,12 @@ public class User {
     private String lastname;
 
     @ManyToOne
-    @JoinColumn(name="VENDOR_ID_VENDOR")
-    private Integer vendor_id_vendor;
+    @JoinColumn(name="vendor")
+    private Vendor vendor;
 
     @ManyToOne
-    @JoinColumn(name = "ROLE_ROLE_ID")
-    private Integer role_role_id;
+    @JoinColumn(name = "role")
+    private Role role;
 
     public String getLogin() {
         return login;
@@ -62,20 +63,20 @@ public class User {
         this.lastname = lastname;
     }
 
-    public Integer getRole_role_id() {
-        return role_role_id;
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setRole_role_id(Integer role_role_id) {
-        this.role_role_id = role_role_id;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
-    public Integer getVendor_id_vendor() {
-        return vendor_id_vendor;
+    public Role getRole() {
+        return role;
     }
 
-    public void setVendor_id_vendor(Integer vendor_id_vendor) {
-        this.vendor_id_vendor = vendor_id_vendor;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     public Integer getUser_id() {
