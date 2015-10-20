@@ -23,17 +23,17 @@ public class UserController {
 		this.userService = userService;
 	}
 	
-	@RequestMapping(value = "/users", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/users", method = RequestMethod.GET)
 	public String listUsers(Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("listUsers", this.userService.listUsers());
 		return "user";
-	}
+	}*/
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String startPage(Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("listUsers", this.userService.listUsers());
+		model.addAttribute("listUsers", userService.listUsers());
 		return "user";
 	}
 	

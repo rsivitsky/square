@@ -33,8 +33,7 @@ public class UserDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
 
-        return sessionFactory.getCurrentSession().createQuery("from User")
-                .list();
+        return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
 
     public User getUserById(int id) {
@@ -53,4 +52,6 @@ public class UserDAOImpl implements UserDAO {
 
     }
 
+    public void setDataSource(org.apache.commons.dbcp.BasicDataSource dataSource) {
+    }
 }
