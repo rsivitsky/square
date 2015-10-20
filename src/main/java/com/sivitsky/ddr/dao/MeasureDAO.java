@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface MeasureDAO {
 
-    public void addMeasure(Measure measure);
+    void addMeasure(Measure measure);
 
-    public List<Measure> listMeasure();
+    List<Measure> listMeasure();
 
-    public void removeMeasure(Integer id);
+    void removeMeasure(Integer id);
 
-    public void updateMeasure(Measure measure);
+    void updateMeasure(Measure measure);
 
-    public Measure getMeasureById(int id);
+    Measure getMeasureById(int id);
 
     void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
 

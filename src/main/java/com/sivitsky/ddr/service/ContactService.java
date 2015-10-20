@@ -6,10 +6,9 @@ import java.util.List;
 
 public interface ContactService {
 
-    public void addContact(Contact contact);
+    void addContact(Contact contact);
 
-    public List<Contact> listContact();
+    List<Contact> listContact();
 
-    public void removeContact(Integer id);
-
+    void removeContact(Integer id);
 }

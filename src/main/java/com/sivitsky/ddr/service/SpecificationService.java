@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface SpecificationService {
 
-    public void addSpecification(Specification specification);
+    void addSpecification(Specification specification);
 
-    public List<Specification> listSpecification();
+    List<Specification> listSpecification();
 
-    public void removeSpecification(Integer id);
+    void removeSpecification(Integer id);
 
 }

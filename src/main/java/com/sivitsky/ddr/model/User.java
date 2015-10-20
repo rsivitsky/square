@@ -3,32 +3,32 @@ package com.sivitsky.ddr.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "user")
 public class User {
 
     @Id
-    @Column(name = "USER_ID")
+    @Column(name = "user_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer user_id;
 
-    @Column(name = "LOGIN")
+    @Column(name = "login")
     private String login;
 
-    @Column(name = "PASSWORD")
+    @Column(name = "password")
     private String password;
 
-    @Column(name = "FIRSTNAME")
+    @Column(name = "firstname")
     private String firstname;
 
-    @Column(name = "LASTNAME")
+    @Column(name = "lastname")
     private String lastname;
 
     @ManyToOne
-    @JoinColumn(name="vendor")
+    @JoinColumn(name = "vendor_id_vendor")
     private Vendor vendor;
 
     @ManyToOne
-    @JoinColumn(name = "role")
+    @JoinColumn(name = "role_role_id")
     private Role role;
 
     public String getLogin() {
@@ -86,5 +86,4 @@ public class User {
     public void setUser_id(Integer user_id) {
         this.user_id = user_id;
     }
-
 }

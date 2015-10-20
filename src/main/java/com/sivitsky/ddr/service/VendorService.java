@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface VendorService {
 
-    public void addVendor(Vendor vendor);
+    void addVendor(Vendor vendor);
 
-    public List<Vendor> listVendor();
+    List<Vendor> listVendor();
 
-    public void removeVendor(Integer id);
+    void removeVendor(Integer id);
 
 }

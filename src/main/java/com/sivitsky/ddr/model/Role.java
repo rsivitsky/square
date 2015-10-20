@@ -3,15 +3,15 @@ package com.sivitsky.ddr.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ROLE")
+@Table(name = "role")
 public class Role {
 
     @Id
-    @Column(name = "ROLE_ID")
+    @Column(name = "role_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer role_id;
 
-    @Column(name = "ROLE_NAME")
+    @Column(name = "role_name")
     private String role_name;
 
     public Integer getRole_id() {

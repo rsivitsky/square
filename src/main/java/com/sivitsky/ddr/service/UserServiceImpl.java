@@ -2,6 +2,7 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.UserDAO;
 import com.sivitsky.ddr.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +11,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserDAO userDAO;
 
     @Transactional
@@ -24,7 +26,6 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public List<User> listUsers() {
-
         return this.userDAO.listUsers();
     }
 
@@ -36,8 +37,5 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void removeUser(Integer id) {
         this.userDAO.removeUser(id);
-    }
-
-    public void setUserDAO(com.sivitsky.ddr.dao.UserDAOImpl userDAO) {
     }
 }

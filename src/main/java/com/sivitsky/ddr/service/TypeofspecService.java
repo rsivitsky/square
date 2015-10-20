@@ -6,10 +6,9 @@ import java.util.List;
 
 public interface TypeofspecService {
 
-    public void addTypeofspec(Typeofspec typeofspec);
+    void addTypeofspec(Typeofspec typeofspec);
 
-    public List<Typeofspec> listTypeofspec();
+    List<Typeofspec> listTypeofspec();
 
-    public void removeTypeofspec(Integer id);
-
+    void removeTypeofspec(Integer id);
 }

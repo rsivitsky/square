@@ -1,12 +1,10 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Valuta;
 import com.sivitsky.ddr.model.Vendor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

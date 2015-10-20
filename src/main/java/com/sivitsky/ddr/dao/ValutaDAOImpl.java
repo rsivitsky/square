@@ -1,12 +1,10 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Specification;
-import com.sivitsky.ddr.model.Valuta;
+import com.sivitsky.ddr.model.Currency;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -23,13 +21,13 @@ public class ValutaDAOImpl implements ValutaDAO {
     }
 
     @Override
-    public void addValuta(Valuta valuta) {
-        sessionFactory.getCurrentSession().save(valuta);
+    public void addValuta(Currency currency) {
+        sessionFactory.getCurrentSession().save(currency);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Valuta> listValuta() {
+    public List<Currency> listValuta() {
 
         return sessionFactory.getCurrentSession().createQuery("from Valuta")
                 .list();
@@ -37,27 +35,27 @@ public class ValutaDAOImpl implements ValutaDAO {
 
     @Override
     public void removeValuta(Integer id) {
-        Valuta valuta = (Valuta) sessionFactory.getCurrentSession().load(
-                Valuta.class, id);
-        if (null != valuta) {
-            sessionFactory.getCurrentSession().delete(valuta);
+        Currency currency = (Currency) sessionFactory.getCurrentSession().load(
+                Currency.class, id);
+        if (null != currency) {
+            sessionFactory.getCurrentSession().delete(currency);
         }
 
     }
 
     @Override
-    public Valuta getValutaById(int id) {
+    public Currency getValutaById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Valuta valuta = (Valuta) session.load(Valuta.class, new Integer(id));
-        logger.info("Valuta loaded successfully, Valuta details="+valuta);
-        return valuta;
+        Currency currency = (Currency) session.load(Currency.class, new Integer(id));
+        logger.info("Currency loaded successfully, Currency details=" + currency);
+        return currency;
     }
 
     @Override
-    public void updateValuta(Valuta valuta) {
+    public void updateValuta(Currency currency) {
         Session session = this.sessionFactory.getCurrentSession();
-        session.update(valuta);
-        logger.info("Valuta updated successfully, Valuta Details="+valuta);
+        session.update(currency);
+        logger.info("Currency updated successfully, Currency Details=" + currency);
     }
 
 }

@@ -1,24 +1,24 @@
 package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.ValutaDAO;
-import com.sivitsky.ddr.model.Valuta;
+import com.sivitsky.ddr.model.Currency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-public class ValutaServiceImpl implements ValutaService {
+public class CurrencyServiceImpl implements CurrencyService {
 
     @Autowired
     private ValutaDAO valutaDAO;
 
     @Transactional
-    public void addValuta(Valuta valuta) {
-        valutaDAO.addValuta(valuta);
+    public void addValuta(Currency currency) {
+        valutaDAO.addValuta(currency);
     }
 
     @Transactional
-    public List<Valuta> listValuta() {
+    public List<Currency> listValuta() {
 
         return valutaDAO.listValuta();
     }

@@ -3,15 +3,15 @@ package com.sivitsky.ddr.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "VENDOR")
+@Table(name = "vendor")
 public class Vendor {
 
     @Id
-    @Column(name = "VENDOR_ID")
+    @Column(name = "vendor_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer vendor_id;
 
-    @Column(name = "VENDOR_NAME")
+    @Column(name = "vendor_name")
     private String vendor_name;
 
     public Integer getVendor_id() {

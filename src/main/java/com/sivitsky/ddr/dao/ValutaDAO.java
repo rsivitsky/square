@@ -1,20 +1,20 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Valuta;
+import com.sivitsky.ddr.model.Currency;
 
 import java.util.List;
 
 public interface ValutaDAO {
 
-    public void addValuta(Valuta valuta);
+    void addValuta(Currency currency);
 
-    public List<Valuta> listValuta();
+    List<Currency> listValuta();
 
-    public void removeValuta(Integer id);
+    void removeValuta(Integer id);
 
-    public void updateValuta(Valuta valuta);
+    void updateValuta(Currency currency);
 
-    public Valuta getValutaById(int id);
+    Currency getValutaById(int id);
 
     void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
 }

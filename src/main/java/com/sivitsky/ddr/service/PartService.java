@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface PartService {
 
-    public void addPart(Part part);
+    void addPart(Part part);
 
-    public List<Part> listPart();
+    List<Part> listPart();
 
-    public void removePart(Integer id);
+    void removePart(Integer id);
 
 }

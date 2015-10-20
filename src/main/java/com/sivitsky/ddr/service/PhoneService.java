@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface PhoneService {
 
-    public void addPhone(Phone phone);
+    void addPhone(Phone phone);
 
-    public List<Phone> listPhone();
+    List<Phone> listPhone();
 
-    public void removePhone(Integer id);
+    void removePhone(Integer id);
 
 }

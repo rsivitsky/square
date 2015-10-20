@@ -6,15 +6,13 @@ import java.util.List;
 
 public interface UserDAO {
 
-    public void addUser(User user);
+    void addUser(User user);
 
-    public List<User> listUsers();
+    List<User> listUsers();
 
-    public void updateUser(User user);
+    void updateUser(User user);
 
-    public User getUserById(int id);
+    User getUserById(int id);
 
-    public void removeUser(Integer id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeUser(Integer id);
 }

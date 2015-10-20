@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface MeasureService {
 
-    public void addMeasure(Measure measure);
+    void addMeasure(Measure measure);
 
-    public List<Measure> listMeasure();
+    List<Measure> listMeasure();
 
-    public void removeMeasure(Integer id);
+    void removeMeasure(Integer id);
 
 }

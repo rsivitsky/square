@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface OfferService {
 
-    public void addOffer(Offer offer);
+    void addOffer(Offer offer);
 
-    public List<Offer> listOffer();
+    List<Offer> listOffer();
 
-    public void removeOffer(Integer id);
+    void removeOffer(Integer id);
 
 }

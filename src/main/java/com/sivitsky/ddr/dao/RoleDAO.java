@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface RoleDAO {
 
-    public void addRole(Role role);
+    void addRole(Role role);
 
-    public List<Role> listRole();
+    List<Role> listRole();
 
-    public void removeRole(Integer id);
+    void removeRole(Integer id);
 
-    public void updateRole(Role role);
+    void updateRole(Role role);
 
-    public Role getRoleById(int id);
+    Role getRoleById(int id);
 
     void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
 }

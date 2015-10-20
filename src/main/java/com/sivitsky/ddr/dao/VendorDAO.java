@@ -6,15 +6,15 @@ import java.util.List;
 
 public interface VendorDAO {
 
-    public void addVendor(Vendor vendor);
+    void addVendor(Vendor vendor);
 
-    public List<Vendor> listVendor();
+    List<Vendor> listVendor();
 
-    public void removeVendor(Integer id);
+    void removeVendor(Integer id);
 
-    public void updateVendor(Vendor vendor);
+    void updateVendor(Vendor vendor);
 
-    public Vendor getVendorById(int id);
+    Vendor getVendorById(int id);
 
     void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
 }
