@@ -14,8 +14,6 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
-
-    @Autowired
     private SessionFactory sessionFactory;
 
     public void addUser(User user) {
@@ -31,6 +29,7 @@ public class UserDAOImpl implements UserDAO {
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
         return sessionFactory.getCurrentSession().createQuery("from User").list();
+        //return sessionFactory.getCurrentSession().createSQLQuery("select firstname, lastname, login from user").list();
     }
 
     public User getUserById(int id) {
@@ -46,4 +45,10 @@ public class UserDAOImpl implements UserDAO {
             sessionFactory.getCurrentSession().delete(user);
         }
     }
+
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
 }

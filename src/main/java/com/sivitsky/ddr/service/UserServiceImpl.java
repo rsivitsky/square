@@ -1,6 +1,6 @@
 package com.sivitsky.ddr.service;
 
-import com.sivitsky.ddr.dao.UserDAO;
+import com.sivitsky.ddr.dao.UserDAOImpl;
 import com.sivitsky.ddr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +11,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserDAO userDAO;
+    private UserDAOImpl userDAO;
 
     @Transactional
     public void addUser(User user) {
@@ -38,4 +37,10 @@ public class UserServiceImpl implements UserService {
     public void removeUser(Integer id) {
         this.userDAO.removeUser(id);
     }
+
+    @Autowired(required=true)
+    public void setUserDAO(UserDAOImpl userDAO) {
+        this.userDAO = userDAO;
+    }
+
 }

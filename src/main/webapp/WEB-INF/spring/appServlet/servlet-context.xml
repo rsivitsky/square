@@ -32,7 +32,7 @@
                 destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
         <beans:property name="url"
-                        value="jdbc:mysql://localhost:3307/offersdb"/>
+                        value="jdbc:mysql://localhost:3306/offersdb"/>
         <beans:property name="username" value="root"/>
         <beans:property name="password" value="1"/>
     </beans:bean>
@@ -41,13 +41,14 @@
     <beans:bean id="hibernate4AnnotatedSessionFactory"
                 class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <beans:property name="dataSource" ref="dataSource"/>
-        <beans:property name="annotatedClasses">
+        <beans:property name="packagesToScan" value="com.sivitsky.ddr.model"/>
+        <!--<beans:property name="annotatedClasses">
             <beans:list>
                 <beans:value>com.sivitsky.ddr.model.User</beans:value>
                 <beans:value>com.sivitsky.ddr.model.Vendor</beans:value>
                 <beans:value>com.sivitsky.ddr.model.Role</beans:value>
             </beans:list>
-        </beans:property>
+        </beans:property>-->
         <beans:property name="hibernateProperties">
             <beans:props>
                 <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
@@ -57,9 +58,13 @@
         </beans:property>
     </beans:bean>
 
-    <beans:bean id="userDAO" class="com.sivitsky.ddr.dao.UserDAOImpl"/>
+    <beans:bean id="userDAO" class="com.sivitsky.ddr.dao.UserDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
 
-    <beans:bean id="userService" class="com.sivitsky.ddr.service.UserServiceImpl"/>
+    <beans:bean id="userService" class="com.sivitsky.ddr.service.UserServiceImpl">
+        <beans:property name="userDAO" ref="userDAO"/>
+    </beans:bean>
 
     <beans:bean id="roleDAO" class="com.sivitsky.ddr.dao.RoleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>

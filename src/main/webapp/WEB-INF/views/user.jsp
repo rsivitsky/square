@@ -1,7 +1,9 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
+<%@ page language="java" contentType="text/html; charset=utf8"
+		 pageEncoding="utf8"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 	<title>User Page</title>
@@ -21,19 +23,6 @@
 
 <form:form action="${addAction}" commandName="user">
 <table>
-	<c:if test="${!empty user.firstname}">
-	<tr>
-		<td>
-			<form:label path="user_id">
-				<spring:message text="USER_ID"/>
-			</form:label>
-		</td>
-		<td>
-			<form:input path="user_id" readonly="true" size="8"  disabled="true" />
-			<form:hidden path="user_id" />
-		</td> 
-	</tr>
-	</c:if>
 	<tr>
 		<td>
 			<form:label path="firstname">
@@ -78,10 +67,11 @@
 	</tr>
 </table>	
 </form:form>
-<br>
-<h3>Users List</h3>
+
 <c:if test="${!empty listUsers}">
-	<table class="tg">
+	<br>
+	<h3>Users List</h3>
+	<table class="data">
 	<tr>
 		<th width="80">User ID</th>
 		<th width="120">User Firstname</th>
@@ -89,13 +79,13 @@
 		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
-	<c:forEach items="${listUsers}" var="person">
+	<c:forEach items="${listUsers}" var="useritem">
 		<tr>
-			<td>${user.user_id}</td>
-			<td>${user.firstname}</td>
-			<td>${user.lastname}</td>
-			<td><a href="<c:url value='/edit/${user.user_id}' />" >Edit</a></td>
-			<td><a href="<c:url value='/remove/${user.user_id}' />" >Delete</a></td>
+			<td>${useritem.user_id}</td>
+			<td>${useritem.firstname}</td>
+			<td>${useritem.lastname}</td>
+			<td><a href="<c:url value='/edit/${useritem.user_id}' />" >Edit</a></td>
+			<td><a href="<c:url value='/remove/${useritem.user_id}' />" >Delete</a></td>
 		</tr>
 	</c:forEach>
 	</table>
