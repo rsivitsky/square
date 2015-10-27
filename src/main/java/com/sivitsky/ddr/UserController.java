@@ -5,12 +5,11 @@ import com.sivitsky.ddr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@SessionAttributes({"user"})
 public class UserController {
 
 	private UserService userService;
@@ -37,9 +36,10 @@ public class UserController {
 
 	//For add and update person both
 	@RequestMapping(value= "/user/add", method = RequestMethod.POST)
-	public String addUser(@ModelAttribute("user") User user){
+	public String addUser(@ModelAttribute("user") User user, BindingResult result){
 
-		if(user.getUser_id() == 0){
+		//if(user.getUser_id() == 0){
+		if(this.userService.getUserById(user.getUser_id()) == null){
 			//new user, add it
 			//this.userService.addUser(user);
 			this.userService.addUser(user);
