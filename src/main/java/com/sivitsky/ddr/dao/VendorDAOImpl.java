@@ -20,12 +20,13 @@ public class VendorDAOImpl implements VendorDAO {
         this.sessionFactory = sf;
     }
 
-    @Override
     public void addVendor(Vendor vendor) {
+        int maxId = sessionFactory.getCurrentSession().createQuery("select max(vendor_id) from Vendor").getFirstResult()==null ? 0:
+                sessionFactory.getCurrentSession().createQuery("select max(vendor_id) from Vendor").getFirstResult();
+        vendor.setVendor_id(maxId+1);
         sessionFactory.getCurrentSession().save(vendor);
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public List<Vendor> listVendor() {
 
@@ -33,7 +34,6 @@ public class VendorDAOImpl implements VendorDAO {
                 .list();
     }
 
-    @Override
     public void removeVendor(Integer id) {
         Vendor vendor = (Vendor) sessionFactory.getCurrentSession().load(
                 Vendor.class, id);
@@ -43,7 +43,6 @@ public class VendorDAOImpl implements VendorDAO {
 
     }
 
-    @Override
     public Vendor getVendorById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Vendor vendor = (Vendor) session.load(Vendor.class, new Integer(id));
@@ -51,11 +50,15 @@ public class VendorDAOImpl implements VendorDAO {
         return vendor;
     }
 
-    @Override
     public void updateVendor(Vendor vendor) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(vendor);
         logger.info("Vendor updated successfully, Vendor Details="+vendor);
+    }
+
+    public Integer getMaxId(){
+        return sessionFactory.getCurrentSession().createQuery("select max(vendor_id) from Vendor").getFirstResult()==null ? 0:
+                sessionFactory.getCurrentSession().createQuery("select max(vendor_id) from Vendor").getFirstResult();
     }
 
 }

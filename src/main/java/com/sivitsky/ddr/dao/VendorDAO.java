@@ -17,4 +17,6 @@ public interface VendorDAO {
     Vendor getVendorById(int id);
 
     void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+
+    Integer getMaxId();
 }

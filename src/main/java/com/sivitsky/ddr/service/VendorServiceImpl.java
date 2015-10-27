@@ -30,4 +30,13 @@ public class VendorServiceImpl implements VendorService {
 
     public void setVendorDAO(com.sivitsky.ddr.dao.VendorDAOImpl vendorDAO) {
     }
+
+    @Transactional
+    public Vendor getVendorById(Integer id) {
+        return this.vendorDAO.getVendorById(id);
+    }
+
+    public Integer getMaxIdByVendor() {
+        return this.vendorDAO.getMaxId();
+    }
 }

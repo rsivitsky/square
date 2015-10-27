@@ -12,4 +12,8 @@ public interface VendorService {
 
     void removeVendor(Integer id);
 
+    Vendor getVendorById(Integer id);
+
+    Integer getMaxIdByVendor();
+
 }
