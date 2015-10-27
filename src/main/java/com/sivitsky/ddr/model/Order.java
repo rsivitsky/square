@@ -3,9 +3,9 @@ package com.sivitsky.ddr.model;
 import javax.persistence.*;
 import java.util.Date;
 
+//заказ покупателя
 @Entity
 @Table(name = "ORDER")
-
 public class Order {
 
     @Id

@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//описание запчасти (товара) - характеристики разные, параметры
 @Entity
 @Table(name = "DESCRIPTION")
 public class Description {

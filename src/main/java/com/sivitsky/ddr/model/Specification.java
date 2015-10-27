@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//описываются записи, составляющие спецификацию товара, примеры записи: "Объем", "Частота"
 @Entity
 @Table(name = "SPECIFICATION")
 public class Specification {

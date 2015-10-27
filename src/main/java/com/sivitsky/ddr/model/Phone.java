@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//номера телефонов
 @Entity
 @Table(name = "PHONE")
 public class Phone {

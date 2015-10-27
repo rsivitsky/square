@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//записи хранящие контактную информацию
 @Entity
 @Table(name = "CONTACT")
 public class Contact {

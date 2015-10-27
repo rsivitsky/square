@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//роли пользователей в приложении, к примеру администратор, пользователь, менеджер
 @Entity
 @Table(name = "role")
 public class Role {

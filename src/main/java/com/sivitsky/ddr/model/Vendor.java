@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//поставщики товара
 @Entity
 @Table(name = "vendor")
 public class Vendor {

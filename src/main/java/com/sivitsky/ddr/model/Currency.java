@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//Валюты
 @Entity
 @Table(name = "valuta")
 public class Currency {

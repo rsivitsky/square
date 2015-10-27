@@ -3,6 +3,7 @@ package com.sivitsky.ddr.model;
 import javax.persistence.*;
 import java.util.Date;
 
+//предложение товара конкретным поставщиком, (к примеру, с 01 января 15 г. Нетлайн предлагает память Кингстон за 10 долларов)
 @Entity
 @Table(name = "OFFER")
 public class Offer {

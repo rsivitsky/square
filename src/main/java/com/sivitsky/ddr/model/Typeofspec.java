@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//типы спецификации (считай разделы Описания товара) например "Технические характерстики", или "Основные"
 @Entity
 @Table(name = "TYPEOFSPEC")
 public class Typeofspec {

@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//запчасть (собственно товар) - в моем случае планка оперативной памяти
 @Entity
 @Table(name = "PART")
 public class Part {

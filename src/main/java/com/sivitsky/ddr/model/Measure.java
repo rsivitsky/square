@@ -2,6 +2,7 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 
+//единицы измерения, к примеру Kb, Gb, штуки и так далее
 @Entity
 @Table(name = "MEASURE")
 public class Measure {
