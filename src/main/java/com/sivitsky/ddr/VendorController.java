@@ -12,13 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @SessionAttributes({"vendor"})
 public class VendorController {
 
+	@Autowired
 	private VendorService vendorService;
-
-	@Autowired(required=true)
-	public void setVendorService(VendorService vendorService)
-	{
-		this.vendorService = vendorService;
-	}
 
 	@RequestMapping(value = "/vendor", method = RequestMethod.GET)
 	public String startPage(Model model) {

@@ -1,16 +1,14 @@
 package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Contact;
-import com.sivitsky.ddr.model.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.stereotype.Repository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-@Repository
+//@Repository
 public class ContactDAOImpl implements ContactDAO {
 
 

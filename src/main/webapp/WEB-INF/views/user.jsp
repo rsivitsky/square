@@ -81,11 +81,11 @@
 	</tr>
 	<c:forEach items="${listUsers}" var="useritem">
 		<tr>
-			<td>${useritem.user_id}</td>
+			<td>${useritem.id}</td>
 			<td>${useritem.firstname}</td>
 			<td>${useritem.lastname}</td>
-			<td><a href="<c:url value='/edit/${useritem.user_id}' />" >Edit</a></td>
-			<td><a href="<c:url value='/remove/${useritem.user_id}' />" >Delete</a></td>
+			<td><a href="<c:url value='/edit/${useritem.id}' />">Edit</a></td>
+			<td><a href="<c:url value='/remove/${useritem.id}' />">Delete</a></td>
 		</tr>
 	</c:forEach>
 	</table>

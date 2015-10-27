@@ -1,15 +1,12 @@
 package com.sivitsky.ddr.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "user")
-public class User {
-
-    @Id
-    @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer user_id;
+public class User extends ManagedEntity {
 
     @Column(name = "login")
     private String login;
@@ -22,14 +19,14 @@ public class User {
 
     @Column(name = "lastname")
     private String lastname;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "vendor_id")
+//    private Vendor vendor;
 
-    @ManyToOne
-    @JoinColumn(name = "vendor_id_vendor")
-    private Vendor vendor;
-
-    @ManyToOne
-    @JoinColumn(name = "role_role_id")
-    private Role role;
+    //    @ManyToOne
+    @Column(name = "role")
+    private String role;
 
     public String getLogin() {
         return login;
@@ -62,28 +59,12 @@ public class User {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-
-    public Vendor getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
+//
+//    public Vendor getVendor() {
+//        return vendor;
+//    }
+//
+//    public void setVendor(Vendor vendor) {
+//        this.vendor = vendor;
+//    }
 }

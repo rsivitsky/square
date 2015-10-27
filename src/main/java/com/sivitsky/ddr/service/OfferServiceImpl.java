@@ -2,14 +2,13 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.OfferDAO;
 import com.sivitsky.ddr.model.Offer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class OfferServiceImpl implements OfferService {
 
-    @Autowired
+    //    @Autowired
     private OfferDAO offerDAO;
 
     @Transactional

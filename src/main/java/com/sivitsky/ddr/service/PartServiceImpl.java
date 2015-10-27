@@ -2,14 +2,13 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.PartDAO;
 import com.sivitsky.ddr.model.Part;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class PartServiceImpl implements PartService {
 
-    @Autowired
+    //    @Autowired
     private PartDAO partDAO;
 
     @Transactional

@@ -15,7 +15,4 @@ public interface VendorDAO {
     void updateVendor(Vendor vendor);
 
     Vendor getVendorById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
-
 }

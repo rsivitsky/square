@@ -2,14 +2,13 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.SpecificationDAO;
 import com.sivitsky.ddr.model.Specification;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class SpecificationServiceImpl implements SpecificationService {
 
-    @Autowired
+    //    @Autowired
     private SpecificationDAO specificationDAO;
 
     @Transactional

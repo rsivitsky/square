@@ -2,14 +2,13 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.PhoneDAO;
 import com.sivitsky.ddr.model.Phone;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class PhoneServiceImpl implements PhoneService {
 
-    @Autowired
+    //    @Autowired
     private PhoneDAO phoneDAO;
 
     @Transactional

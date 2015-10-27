@@ -11,5 +11,4 @@ public interface RoleService {
     List<Role> listRole();
 
     void removeRole(Integer id);
-
 }

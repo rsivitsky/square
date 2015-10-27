@@ -2,14 +2,13 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.OrderDAO;
 import com.sivitsky.ddr.model.Order;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
+    //    @Autowired
     private OrderDAO orderDAO;
 
     @Transactional

@@ -5,20 +5,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-@Repository
+//@Repository
 public class VendorDAOImpl implements VendorDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(VendorDAOImpl.class);
 
     private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
-    }
 
     public void addVendor(Vendor vendor) {
         int maxId = sessionFactory.getCurrentSession().createQuery("select max(vendor_id) from Vendor").getFirstResult()==null ? 0:
@@ -54,5 +49,4 @@ public class VendorDAOImpl implements VendorDAO {
         session.update(vendor);
         logger.info("Vendor updated successfully, Vendor Details="+vendor);
     }
-
 }

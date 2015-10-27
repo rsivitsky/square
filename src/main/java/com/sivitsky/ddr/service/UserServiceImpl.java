@@ -2,20 +2,24 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.UserDAOImpl;
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
 
     private UserDAOImpl userDAO;
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public void addUser(User user) {
-        this.userDAO.addUser(user);
+        userRepository.save(user);
     }
 
     @Transactional
@@ -25,7 +29,11 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public List<User> listUsers() {
-        return this.userDAO.listUsers();
+        List<User> users = new ArrayList<User>();
+        for (User user : userRepository.findAll()) {
+            users.add(user);
+        }
+        return users;
     }
 
     @Transactional
@@ -37,10 +45,4 @@ public class UserServiceImpl implements UserService {
     public void removeUser(Integer id) {
         this.userDAO.removeUser(id);
     }
-
-    @Autowired(required=true)
-    public void setUserDAO(UserDAOImpl userDAO) {
-        this.userDAO = userDAO;
-    }
-
 }

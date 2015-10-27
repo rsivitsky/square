@@ -2,14 +2,13 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.ValutaDAO;
 import com.sivitsky.ddr.model.Currency;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 public class CurrencyServiceImpl implements CurrencyService {
 
-    @Autowired
+    //    @Autowired
     private ValutaDAO valutaDAO;
 
     @Transactional
