@@ -20,12 +20,10 @@ public class ValutaDAOImpl implements ValutaDAO {
         this.sessionFactory = sf;
     }
 
-    @Override
     public void addValuta(Currency currency) {
         sessionFactory.getCurrentSession().save(currency);
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public List<Currency> listValuta() {
 
@@ -33,7 +31,6 @@ public class ValutaDAOImpl implements ValutaDAO {
                 .list();
     }
 
-    @Override
     public void removeValuta(Integer id) {
         Currency currency = (Currency) sessionFactory.getCurrentSession().load(
                 Currency.class, id);
@@ -43,7 +40,6 @@ public class ValutaDAOImpl implements ValutaDAO {
 
     }
 
-    @Override
     public Currency getValutaById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
         Currency currency = (Currency) session.load(Currency.class, new Integer(id));
@@ -51,7 +47,6 @@ public class ValutaDAOImpl implements ValutaDAO {
         return currency;
     }
 
-    @Override
     public void updateValuta(Currency currency) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(currency);

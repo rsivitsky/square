@@ -18,6 +18,11 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Transactional
+    public void updateVendor(Vendor vendor) {
+        vendorDAO.updateVendor(vendor);
+    }
+
+    @Transactional
     public List<Vendor> listVendor() {
 
         return vendorDAO.listVendor();
@@ -36,7 +41,4 @@ public class VendorServiceImpl implements VendorService {
         return this.vendorDAO.getVendorById(id);
     }
 
-    public Integer getMaxIdByVendor() {
-        return this.vendorDAO.getMaxId();
-    }
 }

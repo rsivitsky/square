@@ -34,10 +34,14 @@
 		</td> 
 	</tr>
 	<tr>
-		<td colspan="2">
-				<input type="submit"
-					value="<spring:message text="Add Vendor"/>" />
-		</td>
+		<c:if test="${!empty vendor.vendor_name}">
+			<input type="submit"
+				   value="<spring:message text="Edit Vendor"/>" />
+		</c:if>
+		<c:if test="${empty vendor.vendor_name}">
+			<input type="submit"
+				   value="<spring:message text="Add Vendor"/>" />
+		</c:if>
 	</tr>
 </table>	
 </form:form>

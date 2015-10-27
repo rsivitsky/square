@@ -29,6 +29,11 @@ public class VendorController {
 
 	@RequestMapping(value= "/vendor/add", method = RequestMethod.POST)
 	public String addVendor(@ModelAttribute("vendor") Vendor vendor, BindingResult result){
+		if(this.vendorService.getVendorById(vendor.getVendor_id()) == null){
+			this.vendorService.addVendor(vendor);
+		}else{
+			this.vendorService.updateVendor(vendor);
+		}
 		this.vendorService.addVendor(vendor);
 		return "redirect:/vendor";
 	}
