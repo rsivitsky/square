@@ -16,14 +16,10 @@ public class UserDAOImpl implements UserDAO {
     private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
     private SessionFactory sessionFactory;
 
-    public void addUser(User user) {
-        sessionFactory.getCurrentSession().save(user);
-    }
-
-    public void updateUser(User user) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(user);
-        logger.info("User updated successfully, User Details=" + user);
+    public User saveUser(User user) {
+        sessionFactory.getCurrentSession().saveOrUpdate(user);
+        logger.info("User updated successfully, User id=" + user.getUser_id());
+        return user;
     }
 
     @SuppressWarnings("unchecked")

@@ -1,6 +1,7 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.service.RoleService;
 import com.sivitsky.ddr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,11 +14,19 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
 	private UserService userService;
+	private RoleService roleService;
+
 
 	@Autowired(required=true)
 	public void setUserService(UserService userService)
 	{
 		this.userService = userService;
+	}
+
+	@Autowired(required=true)
+	public void setRoleService(RoleService roleService)
+	{
+		this.roleService = roleService;
 	}
 /*
 	@RequestMapping(value = "/users", method = RequestMethod.GET)
@@ -31,25 +40,15 @@ public class UserController {
 	public String startPage(Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("listUsers", userService.listUsers());
+		model.addAttribute("listRoles", roleService.listRole());
 		return "user";
 	}
 
 	//For add and update person both
 	@RequestMapping(value= "/user/add", method = RequestMethod.POST)
 	public String addUser(@ModelAttribute("user") User user, BindingResult result){
-
-		if(user.getUser_id() == 0){
-		//if(this.userService.getUserById(user.getUser_id()) == null){
-			//new user, add it
-			//this.userService.addUser(user);
-			this.userService.addUser(user);
-		}else{
-			//existing person, call update
-			this.userService.updateUser(user);
-		}
-		
+		user = this.userService.saveUser(user);
 		return "redirect:/users";
-		
 	}
 	
 	@RequestMapping("/remove/{user_id}")
