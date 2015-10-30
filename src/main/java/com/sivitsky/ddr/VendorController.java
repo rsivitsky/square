@@ -34,7 +34,7 @@ public class VendorController {
                     VendorFullInfoDTO dto = new VendorFullInfoDTO();
                     dto.setId(vendor.getId());
                     dto.setName(vendor.getName());
-                    dto.getUsers().addAll(vendor.getAccounts().stream().map(vendorAccount -> {
+                    dto.getAccounts().addAll(vendor.getAccounts().stream().map(vendorAccount -> {
                         User user = vendorAccount.getUser();
                         return new VendorAccountInfoDTO(user.getId(),
                                 StringUtils.join(asList(user.getFirstname(), user.getLastname()), " "),

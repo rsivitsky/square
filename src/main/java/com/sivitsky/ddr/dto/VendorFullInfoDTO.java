@@ -6,7 +6,7 @@ import java.util.List;
 public class VendorFullInfoDTO {
     private Long id;
     private String name;
-    private List<VendorAccountInfoDTO> users = new ArrayList<>();
+    private List<VendorAccountInfoDTO> accounts = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -24,11 +24,11 @@ public class VendorFullInfoDTO {
         this.name = name;
     }
 
-    public List<VendorAccountInfoDTO> getUsers() {
-        return users;
+    public List<VendorAccountInfoDTO> getAccounts() {
+        return accounts;
     }
 
-    public void setUsers(List<VendorAccountInfoDTO> users) {
-        this.users = users;
+    public void setAccounts(List<VendorAccountInfoDTO> accounts) {
+        this.accounts = accounts;
     }
 }

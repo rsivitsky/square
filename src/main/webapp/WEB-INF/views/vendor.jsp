@@ -93,7 +93,7 @@
             <tr>
                 <td>${vendoritem.id}</td>
                 <td>${vendoritem.name}</td>
-                <td>${vendoritem.users.size()}</td>
+                <td>${vendoritem.accounts.size()}</td>
                 <td><a href="<c:url value='/vendor/remove/${vendoritem.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
