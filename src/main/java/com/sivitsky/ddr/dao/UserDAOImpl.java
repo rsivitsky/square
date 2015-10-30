@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAO {
     public void updateUser(User user) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(user);
-        logger.info("Person updated successfully, Person Details=" + user);
+        logger.info("User updated successfully, User Details=" + user);
     }
 
     @SuppressWarnings("unchecked")
@@ -32,14 +32,16 @@ public class UserDAOImpl implements UserDAO {
         //return sessionFactory.getCurrentSession().createSQLQuery("select firstname, lastname, login from user").list();
     }
 
-    public User getUserById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
+    public User getUserById(Long id) {
+        /*Session session = this.sessionFactory.getCurrentSession();
         User user = (User) session.load(User.class, new Integer(id));
         logger.info("User loaded successfully, User details=" + user);
-        return user;
+        return user;*/
+        return (User) this.sessionFactory.getCurrentSession().get(User.class, id);
+
     }
 
-    public void removeUser(Integer id) {
+    public void removeUser(Long id) {
         User user = (User) sessionFactory.getCurrentSession().load(User.class, id);
         if (null != user) {
             sessionFactory.getCurrentSession().delete(user);

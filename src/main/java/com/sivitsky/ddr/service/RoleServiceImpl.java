@@ -13,8 +13,8 @@ public class RoleServiceImpl implements RoleService {
     private RoleDAO roleDAO;
 
     @Transactional
-    public void addRole(Role role) {
-        roleDAO.addRole(role);
+    public Role saveRole(Role role) {
+        return  roleDAO.saveRole(role);
     }
 
     @Transactional
@@ -24,10 +24,15 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Transactional
-    public void removeRole(Integer id) {
+    public void removeRole(Long id) {
         roleDAO.removeRole(id);
     }
 
     public void setRoleDAO(com.sivitsky.ddr.dao.RoleDAOImpl roleDAO) {
+    }
+
+    @Transactional
+    public Role getRoleByID(Long id){
+        return roleDAO.getRoleById(id);
     }
 }

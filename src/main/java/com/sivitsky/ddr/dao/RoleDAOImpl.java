@@ -22,12 +22,12 @@ public class RoleDAOImpl implements RoleDAO {
         this.sessionFactory = sf;
     }
 
-    @Override
-    public void addRole(Role role) {
-        sessionFactory.getCurrentSession().save(role);
+    public Role saveRole(Role role) {
+        sessionFactory.getCurrentSession().saveOrUpdate(role);
+        logger.info("Role saved successfully, Role id="+role.getRole_id());
+        return role;
     }
 
-    @Override
     @SuppressWarnings("unchecked")
     public List<Role> listRole() {
 
@@ -35,29 +35,27 @@ public class RoleDAOImpl implements RoleDAO {
                 .list();
     }
 
-    @Override
-    public void removeRole(Integer id) {
+    public Role findById(Long id){
+        return (Role)sessionFactory.getCurrentSession().getNamedQuery("Role.FindById").setParameter("id", id).uniqueResult();
+    }
+
+    public List<Role> findAllWithDetail(){
+        return sessionFactory.getCurrentSession().getNamedQuery("Role.findAllWithDetail").list();
+    }
+
+    public void removeRole(Long id) {
         Role role = (Role) sessionFactory.getCurrentSession().load(
                 Role.class, id);
         if (null != role) {
             sessionFactory.getCurrentSession().delete(role);
         }
-
     }
 
-    @Override
-    public Role getRoleById(int id) {
+    public Role getRoleById(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Role role = (Role) session.load(Role.class, new Integer(id));
+        Role role = (Role) session.load(Role.class, new Long(id));
         logger.info("Role loaded successfully, Role details="+role);
         return role;
-    }
-
-    @Override
-    public void updateRole(Role role) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(role);
-        logger.info("Role updated successfully, Role Details="+role);
     }
 
 }

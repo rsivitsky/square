@@ -38,8 +38,8 @@ public class UserController {
 	@RequestMapping(value= "/user/add", method = RequestMethod.POST)
 	public String addUser(@ModelAttribute("user") User user, BindingResult result){
 
-		//if(user.getUser_id() == 0){
-		if(this.userService.getUserById(user.getUser_id()) == null){
+		if(user.getUser_id() == 0){
+		//if(this.userService.getUserById(user.getUser_id()) == null){
 			//new user, add it
 			//this.userService.addUser(user);
 			this.userService.addUser(user);
@@ -53,14 +53,14 @@ public class UserController {
 	}
 	
 	@RequestMapping("/remove/{user_id}")
-    public String removeUser(@PathVariable("user_id") int id){
+    public String removeUser(@PathVariable("user_id") Long id){
 		
         this.userService.removeUser(id);
         return "redirect:/users";
     }
  
     @RequestMapping("/edit/{user_id}")
-    public String editUser(@PathVariable("user_id") int id, Model model){
+    public String editUser(@PathVariable("user_id") Long id, Model model){
         model.addAttribute("user", this.userService.getUserById(id));
         model.addAttribute("listUsers", this.userService.listUsers());
         return "user";

@@ -54,6 +54,26 @@
 		</td>
 	</tr>
 	<tr>
+		<td>
+			<form:label path="password">
+				<spring:message text="Password"/>
+			</form:label>
+		</td>
+		<td>
+			<form:input path="password" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<form:label path="role">
+				<spring:message text="Role"/>
+			</form:label>
+		</td>
+		<td>
+			<form:input path="role" />
+		</td>
+	</tr>
+	<tr>
 		<td colspan="2">
 			<c:if test="${!empty user.firstname}">
 				<input type="submit"

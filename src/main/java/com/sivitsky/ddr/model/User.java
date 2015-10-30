@@ -1,89 +1,83 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "user")
-public class User {
+public class User implements Serializable{
+
+    private Long user_id;
+    private String login;
+    private String password;
+    private String firstname;
+    private String lastname;
+    private Role role;
+
+    public User(){}
+
+    public User(String login, String password, String firstname, String lastname){
+        this.login = login;
+        this.password = password;
+        this.firstname = firstname;
+        this.lastname = lastname;
+    }
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer user_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getUser_id() {
+        return this.user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
+    }
 
     @Column(name = "login")
-    private String login;
-
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "firstname")
-    private String firstname;
-
-    @Column(name = "lastname")
-    private String lastname;
-
-    @ManyToOne
-    @JoinColumn(name = "vendor_id_vendor")
-    private Vendor vendor;
-
-    @ManyToOne
-    @JoinColumn(name = "role_role_id")
-    private Role role;
-
     public String getLogin() {
-        return login;
+        return this.login;
     }
 
     public void setLogin(String login) {
         this.login = login;
     }
 
+    @Column(name = "password")
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @Column(name = "firstname")
     public String getFirstname() {
-        return firstname;
+        return this.firstname;
     }
 
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
+    @Column(name = "lastname")
     public String getLastname() {
-        return lastname;
+        return this.lastname;
     }
 
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
-    public Vendor getVendor() {
-        return vendor;
-    }
-
-    public void setVendor(Vendor vendor) {
-        this.vendor = vendor;
-    }
-
+    @ManyToOne
+    @JoinColumn(name = "role_id")
     public Role getRole() {
-        return role;
+        return this.role;
     }
 
     public void setRole(Role role) {
         this.role = role;
     }
 
-    public Integer getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(Integer user_id) {
-        this.user_id = user_id;
-    }
 }
