@@ -1,7 +1,8 @@
-package com.sivitsky.ddr.service;
+package com.sivitsky.ddr.service.impl;
 
 import com.sivitsky.ddr.dao.PartDAO;
 import com.sivitsky.ddr.model.Part;
+import com.sivitsky.ddr.service.PartService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

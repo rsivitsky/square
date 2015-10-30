@@ -1,7 +1,8 @@
-package com.sivitsky.ddr.service;
+package com.sivitsky.ddr.service.impl;
 
 import com.sivitsky.ddr.dao.TypeofspecDAO;
 import com.sivitsky.ddr.model.Typeofspec;
+import com.sivitsky.ddr.service.TypeofspecService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

@@ -1,6 +1,6 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Role;
+import com.sivitsky.ddr.model.VendorAccount;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
@@ -20,22 +20,22 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public void addRole(Role role) {
+    public void addRole(VendorAccount role) {
         sessionFactory.getCurrentSession().save(role);
     }
 
     @Override
     @SuppressWarnings("unchecked")
-    public List<Role> listRole() {
+    public List<VendorAccount> listRole() {
 
-        return sessionFactory.getCurrentSession().createQuery("from Role")
+        return sessionFactory.getCurrentSession().createQuery("from VendorAccount")
                 .list();
     }
 
     @Override
     public void removeRole(Integer id) {
-        Role role = (Role) sessionFactory.getCurrentSession().load(
-                Role.class, id);
+        VendorAccount role = (VendorAccount) sessionFactory.getCurrentSession().load(
+                VendorAccount.class, id);
         if (null != role) {
             sessionFactory.getCurrentSession().delete(role);
         }
@@ -43,15 +43,15 @@ public class RoleDAOImpl implements RoleDAO {
     }
 
     @Override
-    public Role getRoleById(int id) {
+    public VendorAccount getRoleById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Role role = (Role) session.load(Role.class, new Integer(id));
+        VendorAccount role = (VendorAccount) session.load(VendorAccount.class, new Integer(id));
         logger.info("Role loaded successfully, Role details="+role);
         return role;
     }
 
     @Override
-    public void updateRole(Role role) {
+    public void updateRole(VendorAccount role) {
         Session session = this.sessionFactory.getCurrentSession();
         session.update(role);
         logger.info("Role updated successfully, Role Details="+role);

@@ -22,7 +22,7 @@ public class UserController {
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public String listUsers(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("listUsers", this.userService.listUsers());
+        model.addAttribute("listUsers", userService.listUsers());
         return "user";
     }
 
@@ -52,19 +52,17 @@ public class UserController {
         return "redirect:/users";
     }
 
-
     @RequestMapping("/remove/{user_id}")
-    public String removeUser(@PathVariable("user_id") int id) {
+    public String removeUser(@PathVariable("user_id") long id) {
 
         this.userService.removeUser(id);
         return "redirect:/users";
     }
 
     @RequestMapping("/edit/{user_id}")
-    public String editUser(@PathVariable("user_id") int id, Model model) {
-        model.addAttribute("user", this.userService.getUserById(id));
-        model.addAttribute("listUsers", this.userService.listUsers());
+    public String editUser(@PathVariable("user_id") long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("listUsers", userService.listUsers());
         return "user";
     }
-
 }

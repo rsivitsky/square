@@ -1,7 +1,8 @@
-package com.sivitsky.ddr.service;
+package com.sivitsky.ddr.service.impl;
 
 import com.sivitsky.ddr.dao.MeasureDAO;
 import com.sivitsky.ddr.model.Measure;
+import com.sivitsky.ddr.service.MeasureService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

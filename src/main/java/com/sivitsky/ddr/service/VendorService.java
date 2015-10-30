@@ -12,8 +12,7 @@ public interface VendorService {
 
     List<Vendor> listVendor();
 
-    void removeVendor(Integer id);
+    void removeVendor(Long id);
 
-    Vendor getVendorById(Integer id);
-
+    Vendor getVendorById(Long id);
 }

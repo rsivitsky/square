@@ -1,34 +1,33 @@
 package com.sivitsky.ddr.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 //Валюты
 @Entity
-@Table(name = "valuta")
-public class Currency {
+@Table(name = "currency")
+public class Currency extends ManagedEntity {
 
-    @Id
-    @Column(name = "valuta_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer valuta_id;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "valuta_name")
-    private String valuta_name;
+    @Column(name = "symbol")
+    private String symbol;
 
-    public Integer getValuta_id() {
-        return valuta_id;
+    public String getName() {
+        return name;
     }
 
-    public void setValuta_id(Integer valuta_id) {
-        this.valuta_id = valuta_id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getValuta_name() {
-        return valuta_name;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setValuta_name(String valuta_name) {
-        this.valuta_name = valuta_name;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
-
 }

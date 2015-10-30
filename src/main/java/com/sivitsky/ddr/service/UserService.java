@@ -12,7 +12,7 @@ public interface UserService {
 
     List<User> listUsers();
 
-    void removeUser(Integer id);
+    void removeUser(Long id);
 
-    User getUserById(Integer id);
+    User getUserById(Long id);
 }

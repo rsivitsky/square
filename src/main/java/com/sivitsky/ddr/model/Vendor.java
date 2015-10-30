@@ -1,33 +1,33 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 //поставщики товара
 @Entity
 @Table(name = "vendor")
-public class Vendor {
+public class Vendor extends ManagedEntity {
 
-    @Id
-    @Column(name = "vendor_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer vendor_id;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "vendor_name")
-    private String vendor_name;
+    @OneToMany(mappedBy = "vendor", fetch = FetchType.EAGER)
+    private List<VendorAccount> accounts = new ArrayList<>();
 
-    public Integer getVendor_id() {
-        return vendor_id;
+    public String getName() {
+        return name;
     }
 
-    public void setVendor_id(Integer vendor_id) {
-        this.vendor_id = vendor_id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getVendor_name() {
-        return vendor_name;
+    public List<VendorAccount> getAccounts() {
+        return accounts;
     }
 
-    public void setVendor_name(String vendor_name) {
-        this.vendor_name = vendor_name;
+    public void setAccounts(List<VendorAccount> accounts) {
+        this.accounts = accounts;
     }
 }

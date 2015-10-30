@@ -1,7 +1,8 @@
-package com.sivitsky.ddr.service;
+package com.sivitsky.ddr.service.impl;
 
 import com.sivitsky.ddr.dao.ContactDAO;
 import com.sivitsky.ddr.model.Contact;
+import com.sivitsky.ddr.service.ContactService;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

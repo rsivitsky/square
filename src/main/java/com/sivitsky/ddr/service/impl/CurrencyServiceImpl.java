@@ -1,7 +1,8 @@
-package com.sivitsky.ddr.service;
+package com.sivitsky.ddr.service.impl;
 
 import com.sivitsky.ddr.dao.ValutaDAO;
 import com.sivitsky.ddr.model.Currency;
+import com.sivitsky.ddr.service.CurrencyService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

@@ -20,12 +20,8 @@ public class User extends ManagedEntity {
 
     @Column(name = "lastname")
     private String lastname;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "vendor_id")
-//    private Vendor vendor;
 
-    //    @ManyToOne
+    //User's role in terms of system AMDIN, USER
     @Column(name = "role")
     private String role;
 
@@ -60,12 +56,4 @@ public class User extends ManagedEntity {
     public void setLastname(String lastname) {
         this.lastname = lastname;
     }
-//
-//    public Vendor getVendor() {
-//        return vendor;
-//    }
-//
-//    public void setVendor(Vendor vendor) {
-//        this.vendor = vendor;
-//    }
 }
