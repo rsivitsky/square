@@ -6,7 +6,6 @@ import com.sivitsky.ddr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -46,7 +45,8 @@ public class UserController {
 
 	//For add and update person both
 	@RequestMapping(value= "/user/add", method = RequestMethod.POST)
-	public String addUser(@ModelAttribute("user") User user, BindingResult result){
+	public String addUser(@ModelAttribute("user") User user){
+		//user.setRole(roleService.getRoleByID(role_id));
 		user = this.userService.saveUser(user);
 		return "redirect:/users";
 	}

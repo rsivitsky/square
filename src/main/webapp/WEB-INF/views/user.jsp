@@ -65,12 +65,7 @@
 	</tr>
 	<tr>
 		<td>
-			<form:label path="role">
-				<spring:message text="Role"/>
-			</form:label>
-		</td>
-		<td>
-			<form:input path="role" />
+			<form:select path="role" items="${listRoles}" itemValue="role_id" itemLabel="role_name" /> <!--itemValue="role_id" itemLabel="role_name" />-->
 		</td>
 	</tr>
 	<tr>
