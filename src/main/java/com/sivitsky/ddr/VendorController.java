@@ -8,7 +8,6 @@ import com.sivitsky.ddr.service.VendorService;
 import com.sun.deploy.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +25,7 @@ public class VendorController {
     private VendorService vendorService;
 
     @RequestMapping(value = "/vendor", method = RequestMethod.GET)
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public String startPage(Model model) {
         model.addAttribute("vendor", new Vendor());
         model.addAttribute("listVendors",

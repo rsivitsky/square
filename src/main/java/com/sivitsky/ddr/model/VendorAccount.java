@@ -7,11 +7,11 @@ import javax.persistence.*;
 @Table(name = "vendor_account")
 public class VendorAccount extends ManagedEntity {
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "vendor_fk", nullable = false)
     private Vendor vendor;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "user_fk", nullable = false)
     private User user;
 
