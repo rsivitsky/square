@@ -5,7 +5,7 @@ import com.sivitsky.ddr.dto.VendorFullInfoDTO;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.model.Vendor;
 import com.sivitsky.ddr.service.VendorService;
-import com.sun.deploy.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
