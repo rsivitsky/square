@@ -20,11 +20,15 @@
         up static resources in the ${webappRoot}/resources directory -->
     <resources mapping="/resources/**" location="/resources/"/>
 
-    <!-- Resolves views selected for rendering by @Controllers to .jsp resources
-        in the /WEB-INF/views directory -->
-    <beans:bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <beans:property name="prefix" value="/WEB-INF/views/"/>
-        <beans:property name="suffix" value=".jsp"/>
+    <bean class="org.thymeleaf.spring4.view.ThymeleafViewResolver">
+        <property name="prefix" value="/WEB-INF/templates/"/>
+        <property name="templateEngine" ref="templateEngine"/>
+        <property name="order" value="1"/>
+        <property name="viewNames" value="*.html,*.xhtml"/>
+    </bean>
+
+    <beans:bean id="templateEngine"
+                class="org.thymeleaf.spring4.SpringTemplateEngine">
+        <beans:property name="templateResolver" ref="templateResolver"/>
     </beans:bean>
 </beans:beans>

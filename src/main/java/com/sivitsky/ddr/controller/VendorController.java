@@ -1,4 +1,4 @@
-package com.sivitsky.ddr;
+package com.sivitsky.ddr.controller;
 
 import com.sivitsky.ddr.dto.VendorAccountInfoDTO;
 import com.sivitsky.ddr.dto.VendorFullInfoDTO;

@@ -1,4 +1,4 @@
-package com.sivitsky.ddr;
+package com.sivitsky.ddr.controller;
 
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.repository.UserRepository;
@@ -26,12 +26,12 @@ public class UserController {
         return "user";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String startPage(Model model) {
-        model.addAttribute("user", new User());
-        model.addAttribute("listUsers", userService.listUsers());
-        return "user";
-    }
+//    @RequestMapping(value = "/", method = RequestMethod.GET)
+//    public String startPage(Model model) {
+//        model.addAttribute("user", new User());
+//        model.addAttribute("listUsers", userService.listUsers());
+//        return "user";
+//    }
 
     //For add and update person both
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
