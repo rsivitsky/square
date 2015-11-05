@@ -15,7 +15,7 @@
 
     <context:component-scan base-package="com.sivitsky.ddr"/>
     <context:annotation-config/>
-
+<!--
     <beans:bean id="conversionService"
           class="org.springframework.context.support.ConversionServiceFactoryBean">
         <beans:property name="converters">
@@ -23,7 +23,7 @@
                 <beans:bean class="com.sivitsky.ddr.StringToRole"/>
             </beans:set>
         </beans:property>
-    </beans:bean>
+    </beans:bean> -->
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving
         up static resources in the ${webappRoot}/resources directory -->

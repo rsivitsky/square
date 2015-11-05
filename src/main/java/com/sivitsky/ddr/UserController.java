@@ -47,9 +47,6 @@ public class UserController {
 	//For add and update person both
 	@RequestMapping(value= "/user/add", method = RequestMethod.POST)
 	public String addUser(@ModelAttribute("user") User user, BindingResult result){
-		//user.setRole(roleService.getRoleByID(role_id));
-		/*Role role = this.roleService.getRoleByID(Long.valueOf("2"));
-		user.setRole(role);*/
 		user = this.userService.saveUser(user);
 		return "redirect:/";
 	}

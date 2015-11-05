@@ -59,6 +59,7 @@
 		<tr>
 			<td>${roleitem.role_id}</td>
 			<td>${roleitem.role_name}</td>
+			<td><a href="<c:url value='/role/edit/${roleitem.role_id}' />" >Edit</a></td>
 			<td><a href="<c:url value='/role/remove/${roleitem.role_id}' />" >Delete</a></td>
 		</tr>
 	</c:forEach>

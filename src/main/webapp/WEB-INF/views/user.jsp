@@ -65,12 +65,7 @@
 	</tr>
 	<tr>
 		<td>
-
-				<form:select converter="conversionService" path="role.role_id" items="${listRoles}" itemValue="role_id" itemLabel="role_name" /> <!--itemValue="role_id" itemLabel="role_name" />-->
-
-			<%--<c:if test="${!empty user.role}">
-				<form:select converter="conversionService" path="role" selected = "2" items="${listRoles}" itemValue="role_id" itemLabel="role_name" /><!--itemValue="role_id" itemLabel="role_name" />-->
-			</c:if>--%>
+				<form:select converter="conversionService" path="role.role_id" items="${listRoles}" itemValue="role_id" itemLabel="role_name" />
 		</td>
 	</tr>
 	<tr>
