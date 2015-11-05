@@ -13,7 +13,7 @@ public class User implements Serializable{
     private String firstname;
     private String lastname;
     private Role role;
-
+    private Vendor vendor;
 
     public User(){}
 
@@ -81,4 +81,13 @@ public class User implements Serializable{
         this.role = role;
     }
 
+    @ManyToOne(targetEntity=Vendor.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "vendor_id")
+    public Vendor getVendor() {
+        return vendor;
+    }
+
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
+    }
 }

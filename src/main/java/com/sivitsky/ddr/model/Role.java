@@ -6,7 +6,7 @@ import javax.persistence.NamedQuery;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
-import com.sivitsky.ddr.model.User;
+//import com.sivitsky.ddr.model.User;
 
 @Entity
 @Table(name = "role")
