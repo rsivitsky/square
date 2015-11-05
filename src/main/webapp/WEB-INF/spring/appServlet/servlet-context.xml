@@ -14,6 +14,7 @@
     <annotation-driven/>
 
     <context:component-scan base-package="com.sivitsky.ddr"/>
+    <context:annotation-config/>
 
     <beans:bean id="conversionService"
           class="org.springframework.context.support.ConversionServiceFactoryBean">
@@ -30,6 +31,7 @@
 
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources
         in the /WEB-INF/views directory -->
+
     <beans:bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="prefix" value="/WEB-INF/views/"/>
@@ -77,6 +79,7 @@
     <beans:bean id="roleDAO" class="com.sivitsky.ddr.dao.RoleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
+
     <beans:bean id="roleService" class="com.sivitsky.ddr.service.RoleServiceImpl">
         <beans:property name="roleDAO" ref="roleDAO"/>
     </beans:bean>
@@ -84,6 +87,7 @@
     <beans:bean id="vendorDAO" class="com.sivitsky.ddr.dao.VendorDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
+
     <beans:bean id="vendorService" class="com.sivitsky.ddr.service.VendorServiceImpl">
         <beans:property name="vendorDAO" ref="vendorDAO"/>
     </beans:bean>
@@ -93,4 +97,5 @@
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
+
 </beans:beans>

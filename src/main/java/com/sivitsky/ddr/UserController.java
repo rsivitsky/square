@@ -6,6 +6,7 @@ import com.sivitsky.ddr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -45,24 +46,26 @@ public class UserController {
 
 	//For add and update person both
 	@RequestMapping(value= "/user/add", method = RequestMethod.POST)
-	public String addUser(@ModelAttribute("user") User user){
+	public String addUser(@ModelAttribute("user") User user, BindingResult result){
 		//user.setRole(roleService.getRoleByID(role_id));
+		/*Role role = this.roleService.getRoleByID(Long.valueOf("2"));
+		user.setRole(role);*/
 		user = this.userService.saveUser(user);
-		return "redirect:/users";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/remove/{user_id}")
     public String removeUser(@PathVariable("user_id") Long id){
 		
         this.userService.removeUser(id);
-        return "redirect:/users";
+        return "redirect:/";
     }
  
     @RequestMapping("/edit/{user_id}")
     public String editUser(@PathVariable("user_id") Long id, Model model){
         model.addAttribute("user", this.userService.getUserById(id));
         model.addAttribute("listUsers", this.userService.listUsers());
+		model.addAttribute("listRoles", this.roleService.listRole());
         return "user";
     }
-
 }

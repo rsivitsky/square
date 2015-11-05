@@ -65,7 +65,12 @@
 	</tr>
 	<tr>
 		<td>
-			<form:select path="role" items="${listRoles}" itemValue="role_id" itemLabel="role_name" /> <!--itemValue="role_id" itemLabel="role_name" />-->
+
+				<form:select converter="conversionService" path="role.role_id" items="${listRoles}" itemValue="role_id" itemLabel="role_name" /> <!--itemValue="role_id" itemLabel="role_name" />-->
+
+			<%--<c:if test="${!empty user.role}">
+				<form:select converter="conversionService" path="role" selected = "2" items="${listRoles}" itemValue="role_id" itemLabel="role_name" /><!--itemValue="role_id" itemLabel="role_name" />-->
+			</c:if>--%>
 		</td>
 	</tr>
 	<tr>
@@ -91,6 +96,7 @@
 		<th width="80">User ID</th>
 		<th width="120">User Firstname</th>
 		<th width="120">User Lastname</th>
+		<th width="120">User Role</th>
 		<th width="60">Edit</th>
 		<th width="60">Delete</th>
 	</tr>
@@ -99,6 +105,7 @@
 			<td>${useritem.user_id}</td>
 			<td>${useritem.firstname}</td>
 			<td>${useritem.lastname}</td>
+			<td>${useritem.role.role_name}</td>
 			<td><a href="<c:url value='/edit/${useritem.user_id}' />" >Edit</a></td>
 			<td><a href="<c:url value='/remove/${useritem.user_id}' />" >Delete</a></td>
 		</tr>

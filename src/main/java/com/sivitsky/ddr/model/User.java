@@ -71,7 +71,7 @@ public class User implements Serializable{
         this.lastname = lastname;
     }
 
-    @ManyToOne
+    @ManyToOne(targetEntity=Role.class, fetch=FetchType.EAGER)
     @JoinColumn(name = "role_id")
     public Role getRole() {
         return this.role;
