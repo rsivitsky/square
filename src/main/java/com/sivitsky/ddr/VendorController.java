@@ -29,18 +29,12 @@ public class VendorController {
 
 	@RequestMapping(value= "/vendor/add", method = RequestMethod.POST)
 	public String addVendor(@ModelAttribute("vendor") Vendor vendor, BindingResult result){
-		if(this.vendorService.getVendorById(vendor.getVendor_id()) == null){
-			this.vendorService.addVendor(vendor);
-		}else{
-			this.vendorService.updateVendor(vendor);
-		}
-		this.vendorService.addVendor(vendor);
+		vendor = this.vendorService.saveVendor(vendor);
 		return "redirect:/vendor";
 	}
 	
 	@RequestMapping("/vendor/remove/{vendor_id}")
     public String removeVendor(@PathVariable("vendor_id") int id){
-		
         this.vendorService.removeVendor(id);
         return "redirect:/vendor";
     }

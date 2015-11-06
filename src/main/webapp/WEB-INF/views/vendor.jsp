@@ -59,6 +59,7 @@
 		<tr>
 			<td>${vendoritem.vendor_id}</td>
 			<td>${vendoritem.vendor_name}</td>
+			<td><a href="<c:url value='/vendor/edit/${vendoritem.vendor_id}' />" >Edit</a></td>
 			<td><a href="<c:url value='/vendor/remove/${vendoritem.vendor_id}' />" >Delete</a></td>
 		</tr>
 	</c:forEach>

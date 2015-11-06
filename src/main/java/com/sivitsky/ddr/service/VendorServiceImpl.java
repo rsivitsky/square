@@ -13,18 +13,12 @@ public class VendorServiceImpl implements VendorService {
     private VendorDAO vendorDAO;
 
     @Transactional
-    public void addVendor(Vendor vendor) {
-        vendorDAO.addVendor(vendor);
-    }
-
-    @Transactional
-    public void updateVendor(Vendor vendor) {
-        vendorDAO.updateVendor(vendor);
+    public Vendor saveVendor(Vendor vendor) {
+       return vendorDAO.saveVendor(vendor);
     }
 
     @Transactional
     public List<Vendor> listVendor() {
-
         return vendorDAO.listVendor();
     }
 

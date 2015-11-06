@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface VendorService {
 
-    void addVendor(Vendor vendor);
-
-    void updateVendor(Vendor vendor);
+    Vendor saveVendor(Vendor vendor);
 
     List<Vendor> listVendor();
 

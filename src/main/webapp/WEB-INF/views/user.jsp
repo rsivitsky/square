@@ -65,11 +65,16 @@
 	</tr>
 	<tr>
 		<td>
-				<form:select converter="conversionService" path="role.role_id" items="${listRoles}" itemValue="role_id" itemLabel="role_name" />
+			<form:select path="role.role_id" items="${listRoles}" itemValue="role_id" itemLabel="role_name" />
 		</td>
 	</tr>
 	<tr>
-		<td colspan="2">
+		<td>
+			<form:select path="vendor.vendor_id" items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name" />
+		</td>
+	</tr>
+	<tr>
+	<td colspan="2">
 			<c:if test="${!empty user.firstname}">
 				<input type="submit"
 					value="<spring:message text="Edit User"/>" />
@@ -78,7 +83,7 @@
 				<input type="submit"
 					value="<spring:message text="Add User"/>" />
 			</c:if>
-		</td>
+	</td>
 	</tr>
 </table>	
 </form:form>

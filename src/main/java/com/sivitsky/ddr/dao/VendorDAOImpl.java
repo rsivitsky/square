@@ -20,16 +20,14 @@ public class VendorDAOImpl implements VendorDAO {
         this.sessionFactory = sf;
     }
 
-    public void addVendor(Vendor vendor) {
-        int maxId = sessionFactory.getCurrentSession().createQuery("select max(vendor_id) from Vendor").getFirstResult()==null ? 0:
-                sessionFactory.getCurrentSession().createQuery("select max(vendor_id) from Vendor").getFirstResult();
-        //vendor.setVendor_id(maxId+1);
-        sessionFactory.getCurrentSession().save(vendor);
+    public Vendor saveVendor(Vendor vendor) {
+        sessionFactory.getCurrentSession().saveOrUpdate(vendor);
+        logger.info("Vendor saved successfully, Vendor id=" + vendor.getVendor_id());
+        return vendor;
     }
 
     @SuppressWarnings("unchecked")
     public List<Vendor> listVendor() {
-
         return sessionFactory.getCurrentSession().createQuery("from Vendor")
                 .list();
     }
@@ -47,12 +45,6 @@ public class VendorDAOImpl implements VendorDAO {
         Vendor vendor = (Vendor) session.load(Vendor.class, new Integer(id));
         logger.info("Vendor loaded successfully, Vendor details="+vendor);
         return vendor;
-    }
-
-    public void updateVendor(Vendor vendor) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(vendor);
-        logger.info("Vendor updated successfully, Vendor Details="+vendor);
     }
 
 }

@@ -6,13 +6,11 @@ import java.util.List;
 
 public interface VendorDAO {
 
-    void addVendor(Vendor vendor);
+    Vendor saveVendor(Vendor vendor);
 
     List<Vendor> listVendor();
 
     void removeVendor(Integer id);
-
-    void updateVendor(Vendor vendor);
 
     Vendor getVendorById(int id);
 

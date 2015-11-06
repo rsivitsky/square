@@ -27,7 +27,6 @@ public class RoleController {
 		return "role";
 	}
 
-	//For add and update person both
 	@RequestMapping(value= "/role/add", method = RequestMethod.POST)
 	public String addRole(@ModelAttribute("role") Role role, BindingResult result){
 		role = this.roleService.saveRole(role);
@@ -36,7 +35,6 @@ public class RoleController {
 	
 	@RequestMapping("/role/remove/{role_id}")
     public String removeRole(@PathVariable("role_id") Long id){
-		
         this.roleService.removeRole(id);
         return "redirect:/role";
     }
@@ -45,7 +43,7 @@ public class RoleController {
     public String editRole(@PathVariable("role_id") Long id, Model model){
         model.addAttribute("role", this.roleService.getRoleByID(id));
         model.addAttribute("listRole", this.roleService.listRole());
-        return "user";
+        return "role";
     }
 
 }
