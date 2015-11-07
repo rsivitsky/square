@@ -34,13 +34,13 @@ public class VendorController {
 	}
 	
 	@RequestMapping("/vendor/remove/{vendor_id}")
-    public String removeVendor(@PathVariable("vendor_id") int id){
+    public String removeVendor(@PathVariable("vendor_id") Long id){
         this.vendorService.removeVendor(id);
         return "redirect:/vendor";
     }
  
     @RequestMapping("/vendor/edit/{vendor_id}")
-    public String editVendor(@PathVariable("vendor_id") int id, Model model){
+    public String editVendor(@PathVariable("vendor_id") Long id, Model model){
         model.addAttribute("vendor", this.vendorService.getVendorById(id));
         model.addAttribute("listVendors", this.vendorService.listVendor());
         return "vendor";

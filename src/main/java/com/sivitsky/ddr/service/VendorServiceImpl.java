@@ -23,15 +23,16 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Transactional
-    public void removeVendor(Integer id) {
+    public void removeVendor(Long id) {
         vendorDAO.removeVendor(id);
     }
 
-    public void setVendorDAO(com.sivitsky.ddr.dao.VendorDAOImpl vendorDAO) {
+    public void setVendorDAO(VendorDAO vendorDAO) {
+        this.vendorDAO = vendorDAO;
     }
 
     @Transactional
-    public Vendor getVendorById(Integer id) {
+    public Vendor getVendorById(Long id) {
         return this.vendorDAO.getVendorById(id);
     }
 

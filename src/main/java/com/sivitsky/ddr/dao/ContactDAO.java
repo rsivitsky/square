@@ -6,16 +6,12 @@ import java.util.List;
 
 public interface ContactDAO {
 
-    void addContact(Contact contact);
-
     List<Contact> listContact();
 
-    void removeContact(Integer id);
+    Contact saveContact(Contact contact);
 
-    void updateContact(Contact contact);
+    Contact getContactById(Long id);
 
-    Contact getContactById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeContact(Long id);
 
 }

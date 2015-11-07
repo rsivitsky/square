@@ -12,6 +12,7 @@ public class Vendor implements Serializable {
     private Long vendor_id;
     private String vendor_name;
     private Set<User> users = new HashSet<User>();
+    private Contact contact;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,5 +41,14 @@ public class Vendor implements Serializable {
 
     public void setUsers(Set<User> users) {
         this.users = users;
+    }
+
+    @OneToOne(cascade=CascadeType.ALL, mappedBy="vendor")
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

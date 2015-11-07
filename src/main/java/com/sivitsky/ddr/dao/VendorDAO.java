@@ -10,9 +10,9 @@ public interface VendorDAO {
 
     List<Vendor> listVendor();
 
-    void removeVendor(Integer id);
+    void removeVendor(Long id);
 
-    Vendor getVendorById(int id);
+    Vendor getVendorById(Long id);
 
     void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
 

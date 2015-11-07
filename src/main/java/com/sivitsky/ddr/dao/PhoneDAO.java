@@ -6,15 +6,11 @@ import java.util.List;
 
 public interface PhoneDAO {
 
-    void addPhone(Phone phone);
+    List<Phone> listPhones();
 
-    List<Phone> listPhone();
+    Phone savePhone(Phone phone);
 
-    void removePhone(Integer id);
+    Phone getPhoneById(Long id);
 
-    void updatePhone(Phone phone);
-
-    Phone getPhoneById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removePhone(Long id);
 }

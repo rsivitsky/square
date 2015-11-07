@@ -24,17 +24,11 @@ public class UserDAOImpl implements UserDAO {
 
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        return sessionFactory.getCurrentSession().createQuery("from User").list();
-        //return sessionFactory.getCurrentSession().createSQLQuery("select firstname, lastname, login from user").list();
+        return sessionFactory.getCurrentSession().createQuery("from user").list();
     }
 
     public User getUserById(Long id) {
-        /*Session session = this.sessionFactory.getCurrentSession();
-        User user = (User) session.load(User.class, new Integer(id));
-        logger.info("User loaded successfully, User details=" + user);
-        return user;*/
         return (User) this.sessionFactory.getCurrentSession().get(User.class, id);
-
     }
 
     public void removeUser(Long id) {

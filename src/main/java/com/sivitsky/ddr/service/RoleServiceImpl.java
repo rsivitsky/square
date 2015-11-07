@@ -28,7 +28,8 @@ public class RoleServiceImpl implements RoleService {
         roleDAO.removeRole(id);
     }
 
-    public void setRoleDAO(com.sivitsky.ddr.dao.RoleDAOImpl roleDAO) {
+    public void setRoleDAO(RoleDAO roleDAO) {
+        this.roleDAO = roleDAO;
     }
 
     @Transactional

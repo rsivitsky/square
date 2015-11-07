@@ -6,27 +6,26 @@ import javax.persistence.*;
 @Table(name = "PHONE")
 public class Phone {
 
+    private Long phone_id;
+    private Contact contact;
+
     @Id
-    @Column(name = "PHONE_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer phone_id;
-
-    @Column(name = "CONTACT_CONTACT_ID")
-    private Integer contact_id;
-
-    public Integer getPhone_id() {
+    @Column(name = "phone_id")
+    public Long getPhone_id() {
         return phone_id;
     }
 
-    public void setPhone_id(Integer phone_id) {
+    public void setPhone_id(Long phone_id) {
         this.phone_id = phone_id;
     }
 
-    public Integer getContact_id() {
-        return contact_id;
+    @ManyToOne(targetEntity=Role.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "contact_id")
+    public Contact getContact() {
+        return contact;
     }
 
-    public void setContact_id(Integer contact_id) {
-        this.contact_id = contact_id;
+    public void setContact(Contact contact) {
+        this.contact = contact;
     }
 }

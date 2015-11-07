@@ -28,11 +28,11 @@ public class VendorDAOImpl implements VendorDAO {
 
     @SuppressWarnings("unchecked")
     public List<Vendor> listVendor() {
-        return sessionFactory.getCurrentSession().createQuery("from Vendor")
+        return sessionFactory.getCurrentSession().createQuery("from vendor")
                 .list();
     }
 
-    public void removeVendor(Integer id) {
+    public void removeVendor(Long id) {
         Vendor vendor = (Vendor) sessionFactory.getCurrentSession().load(
                 Vendor.class, id);
         if (null != vendor) {
@@ -40,9 +40,9 @@ public class VendorDAOImpl implements VendorDAO {
         }
     }
 
-    public Vendor getVendorById(int id) {
+    public Vendor getVendorById(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Vendor vendor = (Vendor) session.load(Vendor.class, new Integer(id));
+        Vendor vendor = (Vendor) session.load(Vendor.class, new Long(id));
         logger.info("Vendor loaded successfully, Vendor details="+vendor);
         return vendor;
     }

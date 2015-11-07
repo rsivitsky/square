@@ -2,6 +2,8 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "CONTACT")
@@ -10,9 +12,8 @@ public class Contact implements Serializable {
     private Long contact_id;
     private String contact_adr;
     private String contact_site;
-
-    @Column(name = "vendor_id")
-    private Integer vendor_id;
+    private Vendor vendor;
+    private Set<Phone> phones = new HashSet<Phone>();
 
     @Id
     @Column(name = "contact_id")
@@ -43,12 +44,22 @@ public class Contact implements Serializable {
         this.contact_site = contact_site;
     }
 
-    public Integer getVendor_id() {
-        return vendor_id;
+    @OneToOne(cascade=CascadeType.ALL)
+    @JoinColumn(name="vendor_id")
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setVendor_id(Integer vendor_id) {
-        this.vendor_id = vendor_id;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Phone> getPhones() {
+        return phones;
+    }
+
+    public void setPhones(Set<Phone> phones) {
+        this.phones = phones;
+    }
 }

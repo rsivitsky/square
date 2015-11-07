@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface PhoneService {
 
-    void addPhone(Phone phone);
+    Phone savePhone(Phone phone);
 
-    List<Phone> listPhone();
+    List<Phone> listPhones();
 
-    void removePhone(Integer id);
+    void removePhone(Long id);
+
+    Phone getPhoneById(Long id);
 
 }
