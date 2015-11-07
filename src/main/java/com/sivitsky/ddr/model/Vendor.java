@@ -1,25 +1,26 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "vendor")
-public class Vendor {
+public class Vendor implements Serializable {
 
-    private Integer vendor_id;
+    private Long vendor_id;
     private String vendor_name;
     private Set<User> users = new HashSet<User>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vendor_id")
-    public Integer getVendor_id() {
+    public Long getVendor_id() {
         return vendor_id;
     }
 
-    public void setVendor_id(Integer vendor_id) {
+    public void setVendor_id(Long vendor_id) {
         this.vendor_id = vendor_id;
     }
 

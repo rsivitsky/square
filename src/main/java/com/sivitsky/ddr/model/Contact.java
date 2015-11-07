@@ -1,33 +1,31 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "CONTACT")
-public class Contact {
+public class Contact implements Serializable {
 
-    @Id
-    @Column(name = "CONTACT_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer contact_id;
-
-    @Column(name = "CONTACT_ADR")
+    private Long contact_id;
     private String contact_adr;
-
-    @Column(name = "CONTACT_SITE")
     private String contact_site;
 
-    @Column(name = "VENDOR_ID_VENDOR")
+    @Column(name = "vendor_id")
     private Integer vendor_id;
 
-    public Integer getContact_id() {
+    @Id
+    @Column(name = "contact_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getContact_id() {
         return contact_id;
     }
 
-    public void setContact_id(Integer contact_id) {
+    public void setContact_id(Long contact_id) {
         this.contact_id = contact_id;
     }
 
+    @Column(name = "contact_adr")
     public String getContact_adr() {
         return contact_adr;
     }
@@ -36,6 +34,7 @@ public class Contact {
         this.contact_adr = contact_adr;
     }
 
+    @Column(name = "contact_site")
     public String getContact_site() {
         return contact_site;
     }
