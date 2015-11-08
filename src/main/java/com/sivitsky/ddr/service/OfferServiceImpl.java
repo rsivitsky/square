@@ -13,19 +13,27 @@ public class OfferServiceImpl implements OfferService {
     private OfferDAO offerDAO;
 
     @Transactional
-    public void addOffer(Offer offer) {
-        offerDAO.addOffer(offer);
+    public Offer saveOffer(Offer offer) {
+        return offerDAO.saveOffer(offer);
     }
 
     @Transactional
     public List<Offer> listOffer() {
-
         return offerDAO.listOffer();
     }
 
     @Transactional
-    public void removeOffer(Integer id) {
+    public void removeOffer(Long id) {
         offerDAO.removeOffer(id);
+    }
+
+    public void setOfferDAO(OfferDAO offerDAO) {
+        this.offerDAO = offerDAO;
+    }
+
+    @Transactional
+    public Offer getOfferById(Long id) {
+        return this.offerDAO.getOfferById(id);
     }
 
 }
