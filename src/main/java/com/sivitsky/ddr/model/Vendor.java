@@ -12,6 +12,7 @@ public class Vendor implements Serializable {
     private Long vendor_id;
     private String vendor_name;
     private Set<User> users = new HashSet<User>();
+    private Set<Offer> offers = new HashSet<Offer>();
     private Contact contact;
 
     @Id
@@ -50,5 +51,14 @@ public class Vendor implements Serializable {
 
     public void setContact(Contact contact) {
         this.contact = contact;
+    }
+
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(Set<Offer> offers) {
+        this.offers = offers;
     }
 }

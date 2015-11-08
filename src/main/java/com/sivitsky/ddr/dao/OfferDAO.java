@@ -6,15 +6,11 @@ import java.util.List;
 
 public interface OfferDAO {
 
-    void addOffer(Offer offer);
-
     List<Offer> listOffer();
 
-    void removeOffer(Integer id);
+    Offer saveOffer(Offer offer);
 
-    void updateOffer(Offer offer);
+    Offer getOfferById(Long id);
 
-    Offer getOfferById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeOffer(Long id);
 }

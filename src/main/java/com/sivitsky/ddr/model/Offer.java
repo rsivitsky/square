@@ -7,34 +7,25 @@ import java.util.Date;
 @Table(name = "OFFER")
 public class Offer {
 
-    @Id
-    @Column(name = "OFFER_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer offer_id;
-
-    @Column(name = "OFFER_DATE")
+    private Long offer_id;
     private Date offer_date;
-
-    @Column(name = "OFFER_COST")
     private Float offer_cost;
-
-    @Column(name = "VALUTA_ID_VALUTA")
     private Integer valuta_id;
-
-    @Column(name = "PART_ID_PART")
     private Integer part_id;
+    private Vendor vendor;
 
-    @Column(name = "VENDOR_ID_VENDOR")
-    private Integer vendor_id;
-
-    public Integer getOffer_id() {
+    @Id
+    @Column(name = "offer_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getOffer_id() {
         return offer_id;
     }
 
-    public void setOffer_id(Integer offer_id) {
+    public void setOffer_id(Long offer_id) {
         this.offer_id = offer_id;
     }
 
+    @Column(name = "offer_date")
     public Date getOffer_date() {
         return offer_date;
     }
@@ -43,6 +34,7 @@ public class Offer {
         this.offer_date = offer_date;
     }
 
+    @Column(name = "offer_cost")
     public Float getOffer_cost() {
         return offer_cost;
     }
@@ -51,6 +43,7 @@ public class Offer {
         this.offer_cost = offer_cost;
     }
 
+    @Column(name = "valuta_id")
     public Integer getValuta_id() {
         return valuta_id;
     }
@@ -59,6 +52,7 @@ public class Offer {
         this.valuta_id = valuta_id;
     }
 
+    @Column(name = "part_id")
     public Integer getPart_id() {
         return part_id;
     }
@@ -67,11 +61,13 @@ public class Offer {
         this.part_id = part_id;
     }
 
-    public Integer getVendor_id() {
-        return vendor_id;
+    @ManyToOne(targetEntity=Vendor.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "vendor_id")
+    public Vendor getVendor() {
+        return vendor;
     }
 
-    public void setVendor_id(Integer vendor_id) {
-        this.vendor_id = vendor_id;
+    public void setVendor(Vendor vendor) {
+        this.vendor = vendor;
     }
 }

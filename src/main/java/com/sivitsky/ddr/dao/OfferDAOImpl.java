@@ -15,48 +15,32 @@ import java.util.List;
 public class OfferDAOImpl implements OfferDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(OfferDAOImpl.class);
-
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public void addOffer(Offer offer) {
-        sessionFactory.getCurrentSession().save(offer);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Offer> listOffer() {
-
-        return sessionFactory.getCurrentSession().createQuery("from Offer")
-                .list();
-    }
-
-    @Override
-    public void removeOffer(Integer id) {
-        Offer offer = (Offer) sessionFactory.getCurrentSession().load(
-                Offer.class, id);
-        if (null != offer) {
-            sessionFactory.getCurrentSession().delete(offer);
-        }
-
-    }
-
-    @Override
-    public Offer getOfferById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Offer offer = (Offer) session.load(Offer.class, new Integer(id));
-        logger.info("Offer loaded successfully, Offer details="+offer);
+    public Offer saveOffer(Offer offer) {
+        sessionFactory.getCurrentSession().saveOrUpdate(offer);
+        logger.info("Offer updated successfully, offer id=" + offer.getOffer_id());
         return offer;
     }
 
-    @Override
-    public void updateOffer(Offer offer) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(offer);
-        logger.info("Offer updated successfully, Offer Details="+offer);
+    @SuppressWarnings("unchecked")
+    public List<Offer> listOffer() {
+        return sessionFactory.getCurrentSession().createQuery("from offer").list();
+    }
+
+    public Offer getOfferById(Long id) {
+        return (Offer) this.sessionFactory.getCurrentSession().get(Offer.class, id);
+    }
+
+    public void removeOffer(Long id) {
+        Offer offer = (Offer) sessionFactory.getCurrentSession().load(Offer.class, id);
+        if (null != offer) {
+            sessionFactory.getCurrentSession().delete(offer);
+        }
     }
 }
