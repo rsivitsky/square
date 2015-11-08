@@ -6,34 +6,24 @@ import javax.persistence.*;
 @Table(name = "DESCRIPTION")
 public class Description {
 
-    @Id
-    @Column(name = "DESCRIPT_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer descript_id;
-
-    @Column(name = "DESCRIPT_NAME")
+    private Long descript_id;
     private String descript_name;
-
-    @Column(name = "SPECIFICATION_ID_SPEC")
-    private Integer spec_id;
-
-    @Column(name = "SPECIFICATION_TYPEOFSPEC_ID_TSPEC")
-    private Integer typeofspec_id;
-
-    @Column(name = "PART_ID_PART")
-    private Integer part_id;
-
-    @Column(name = "DESCRIPT_VALUE")
     private String descript_value;
+    private Part part;
+    private Specification specification;
 
-    public Integer getDescript_id() {
+    @Id
+    @Column(name = "descript_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getDescript_id() {
         return descript_id;
     }
 
-    public void setDescript_id(Integer descript_id) {
+    public void setDescript_id(Long descript_id) {
         this.descript_id = descript_id;
     }
 
+    @Column(name = "descript_name")
     public String getDescript_name() {
         return descript_name;
     }
@@ -42,30 +32,7 @@ public class Description {
         this.descript_name = descript_name;
     }
 
-    public Integer getSpec_id() {
-        return spec_id;
-    }
-
-    public void setSpec_id(Integer spec_id) {
-        this.spec_id = spec_id;
-    }
-
-    public Integer getTypeofspec_id() {
-        return typeofspec_id;
-    }
-
-    public void setTypeofspec_id(Integer typeofspec_id) {
-        this.typeofspec_id = typeofspec_id;
-    }
-
-    public Integer getPart_id() {
-        return part_id;
-    }
-
-    public void setPart_id(Integer part_id) {
-        this.part_id = part_id;
-    }
-
+    @Column(name = "descript_value")
     public String getDescript_value() {
         return descript_value;
     }
@@ -74,4 +41,23 @@ public class Description {
         this.descript_value = descript_value;
     }
 
+    @ManyToOne(targetEntity=Part.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "part_id")
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
+    }
+
+    @ManyToOne(targetEntity=Specification.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "specification_id")
+    public Specification getSpecification() {
+        return specification;
+    }
+
+    public void setSpecification(Specification specification) {
+        this.specification = specification;
+    }
 }

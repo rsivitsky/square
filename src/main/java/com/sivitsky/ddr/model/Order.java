@@ -42,7 +42,7 @@ public class Order {
         this.order_date = order_date;
     }
 
-    @ManyToOne(targetEntity=Role.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity=Offer.class, fetch=FetchType.EAGER)
     @JoinColumn(name = "offer_id")
     public Offer getOffer() {
         return offer;
@@ -52,7 +52,7 @@ public class Order {
         this.offer = offer;
     }
 
-    @ManyToOne(targetEntity=Role.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity=User.class, fetch=FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User getUser() {
         return user;

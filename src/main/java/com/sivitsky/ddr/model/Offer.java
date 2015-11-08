@@ -48,24 +48,6 @@ public class Offer {
         this.offer_cost = offer_cost;
     }
 
-    @Column(name = "valuta_id")
-    public Integer getValuta_id() {
-        return valuta_id;
-    }
-
-    public void setValuta_id(Integer valuta_id) {
-        this.valuta_id = valuta_id;
-    }
-
-    @Column(name = "part_id")
-    public Integer getPart_id() {
-        return part_id;
-    }
-
-    public void setPart_id(Integer part_id) {
-        this.part_id = part_id;
-    }
-
     @ManyToOne(targetEntity=Vendor.class, fetch=FetchType.EAGER)
     @JoinColumn(name = "vendor_id")
     public Vendor getVendor() {
@@ -76,7 +58,7 @@ public class Offer {
         this.vendor = vendor;
     }
 
-    @ManyToOne(targetEntity=Vendor.class, fetch=FetchType.EAGER)
+    @ManyToOne(targetEntity=Part.class, fetch=FetchType.EAGER)
     @JoinColumn(name = "part_id")
     public Part getPart() {
         return part;

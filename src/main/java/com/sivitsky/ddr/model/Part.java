@@ -11,6 +11,7 @@ public class Part {
     private Long part_id;
     private String part_name;
     private Set<Offer> offers = new HashSet<Offer>();
+    private Set<Description> descriptions = new HashSet<Description>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,5 +40,14 @@ public class Part {
 
     public void setOffers(Set<Offer> offers) {
         this.offers = offers;
+    }
+
+    @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Description> getDescriptions() {
+        return descriptions;
+    }
+
+    public void setDescriptions(Set<Description> descriptions) {
+        this.descriptions = descriptions;
     }
 }
