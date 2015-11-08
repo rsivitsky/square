@@ -13,6 +13,7 @@ public class Offer {
     private Integer valuta_id;
     private Integer part_id;
     private Vendor vendor;
+    private Part part;
 
     @Id
     @Column(name = "offer_id")
@@ -69,5 +70,15 @@ public class Offer {
 
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
+    }
+
+    @ManyToOne(targetEntity=Vendor.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "part_id")
+    public Part getPart() {
+        return part;
+    }
+
+    public void setPart(Part part) {
+        this.part = part;
     }
 }

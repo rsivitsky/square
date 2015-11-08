@@ -15,49 +15,33 @@ import java.util.List;
 public class PartDAOImpl implements PartDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(PartDAOImpl.class);
-
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public void addPart(Part part) {
-        sessionFactory.getCurrentSession().save(part);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Part> listPart() {
-
-        return sessionFactory.getCurrentSession().createQuery("from Part")
-                .list();
-    }
-
-    @Override
-    public void removePart(Integer id) {
-        Part part = (Part) sessionFactory.getCurrentSession().load(
-                Part.class, id);
-        if (null != part) {
-            sessionFactory.getCurrentSession().delete(part);
-        }
-
-    }
-
-    @Override
-    public Part getPartById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Part part = (Part) session.load(Part.class, new Integer(id));
-        logger.info("Part loaded successfully, Part details="+part);
+    public Part savePart(Part part) {
+        sessionFactory.getCurrentSession().saveOrUpdate(part);
+        logger.info("Part updated successfully, Part id=" + part.getPart_id());
         return part;
     }
 
-    @Override
-    public void updatePart(Part part) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(part);
-        logger.info("Part updated successfully, Part Details="+part);
+    @SuppressWarnings("unchecked")
+    public List<Part> listPart() {
+        return sessionFactory.getCurrentSession().createQuery("from part").list();
+    }
+
+    public Part getPartById(Long id) {
+        return (Part) this.sessionFactory.getCurrentSession().get(Part.class, id);
+    }
+
+    public void removePart(Long id) {
+        Part part = (Part) sessionFactory.getCurrentSession().load(Part.class, id);
+        if (null != part) {
+            sessionFactory.getCurrentSession().delete(part);
+        }
     }
 
 }

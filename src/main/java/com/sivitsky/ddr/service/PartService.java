@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface PartService {
 
-    void addPart(Part part);
+    Part savePart(Part part);
 
     List<Part> listPart();
 
-    void removePart(Integer id);
+    void removePart(Long id);
+
+    Part getPartById(Long id);
 
 }
