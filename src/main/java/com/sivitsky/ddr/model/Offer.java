@@ -14,6 +14,7 @@ public class Offer {
     private Integer part_id;
     private Vendor vendor;
     private Part part;
+    private Currency currency;
 
     @Id
     @Column(name = "offer_id")
@@ -80,5 +81,15 @@ public class Offer {
 
     public void setPart(Part part) {
         this.part = part;
+    }
+
+    @ManyToOne(targetEntity=Currency.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "valuta_id")
+    public Currency getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
     }
 }

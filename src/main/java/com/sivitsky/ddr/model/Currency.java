@@ -1,27 +1,29 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "valuta")
 public class Currency {
 
-    @Id
-    @Column(name = "valuta_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer valuta_id;
-
-    @Column(name = "valuta_name")
+    private Long valuta_id;
     private String valuta_name;
+    private Set<Offer> offers = new HashSet<Offer>();
 
-    public Integer getValuta_id() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "valuta_id")
+    public Long getValuta_id() {
         return valuta_id;
     }
 
-    public void setValuta_id(Integer valuta_id) {
+    public void setValuta_id(Long valuta_id) {
         this.valuta_id = valuta_id;
     }
 
+    @Column(name = "valuta_name")
     public String getValuta_name() {
         return valuta_name;
     }
@@ -30,4 +32,12 @@ public class Currency {
         this.valuta_name = valuta_name;
     }
 
+    @OneToMany(mappedBy = "valuta", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Offer> getOffers() {
+        return offers;
+    }
+
+    public void setOffers(Set<Offer> offers) {
+        this.offers = offers;
+    }
 }

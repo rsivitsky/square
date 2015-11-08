@@ -6,10 +6,12 @@ import java.util.List;
 
 public interface CurrencyService {
 
-    void addValuta(Currency currency);
+    Currency saveCurrency(Currency currency);
 
-    List<Currency> listValuta();
+    List<Currency> listCurrency();
 
-    void removeValuta(Integer id);
+    void removeCurrency(Long id);
+
+    Currency getCurrencyById(Long id);
 
 }
