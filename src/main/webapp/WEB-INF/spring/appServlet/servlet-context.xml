@@ -69,6 +69,54 @@
         <beans:property name="userDAO" ref="userDAO"/>
     </beans:bean>
 
+    <beans:bean id="contactDAO" class="com.sivitsky.ddr.dao.ContactDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="contactService" class="com.sivitsky.ddr.service.ContactServiceImpl">
+        <beans:property name="contactDAO" ref="contactDAO"/>
+    </beans:bean>
+
+    <beans:bean id="currencyDAO" class="com.sivitsky.ddr.dao.CurrencyDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="currencyService" class="com.sivitsky.ddr.service.CurrencyServiceImpl">
+        <beans:property name="currencyDAO" ref="currencyDAO"/>
+    </beans:bean>
+
+    <beans:bean id="orderDAO" class="com.sivitsky.ddr.dao.OrderDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="orderService" class="com.sivitsky.ddr.service.OrderServiceImpl">
+        <beans:property name="orderDAO" ref="orderDAO"/>
+    </beans:bean>
+
+    <beans:bean id="offerDAO" class="com.sivitsky.ddr.dao.OfferDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="offerService" class="com.sivitsky.ddr.service.OfferServiceImpl">
+        <beans:property name="offerDAO" ref="offerDAO"/>
+    </beans:bean>
+
+    <beans:bean id="partDAO" class="com.sivitsky.ddr.dao.PartDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="partService" class="com.sivitsky.ddr.service.PartServiceImpl">
+        <beans:property name="partDAO" ref="partDAO"/>
+    </beans:bean>
+
+    <beans:bean id="phoneDAO" class="com.sivitsky.ddr.dao.PhoneDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="phoneService" class="com.sivitsky.ddr.service.PhoneServiceImpl">
+        <beans:property name="phoneDAO" ref="phoneDAO"/>
+    </beans:bean>
+
     <beans:bean id="roleDAO" class="com.sivitsky.ddr.dao.RoleDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>

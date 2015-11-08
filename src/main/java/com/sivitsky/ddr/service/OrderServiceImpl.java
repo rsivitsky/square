@@ -13,19 +13,27 @@ public class OrderServiceImpl implements OrderService {
     private OrderDAO orderDAO;
 
     @Transactional
-    public void addOrder(Order order) {
-        orderDAO.addOrder(order);
+    public Order saveOrder(Order order) {
+        return orderDAO.saveOrder(order);
     }
 
     @Transactional
     public List<Order> listOrder() {
-
         return orderDAO.listOrder();
     }
 
     @Transactional
-    public void removeOrder(Integer id) {
+    public void removeOrder(Long id) {
         orderDAO.removeOrder(id);
+    }
+
+    public void setOrderDAO(OrderDAO orderDAO) {
+        this.orderDAO = orderDAO;
+    }
+
+    @Transactional
+    public Order getOrderById(Long id) {
+        return this.orderDAO.getOrderById(id);
     }
 
 }

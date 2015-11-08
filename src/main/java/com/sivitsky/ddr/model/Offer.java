@@ -2,6 +2,8 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "OFFER")
@@ -15,6 +17,7 @@ public class Offer {
     private Vendor vendor;
     private Part part;
     private Currency currency;
+    private Set<Order> orders = new HashSet<Order>();
 
     @Id
     @Column(name = "offer_id")
@@ -91,5 +94,14 @@ public class Offer {
 
     public void setCurrency(Currency currency) {
         this.currency = currency;
+    }
+
+    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
     }
 }

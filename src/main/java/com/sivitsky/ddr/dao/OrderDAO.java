@@ -6,16 +6,12 @@ import java.util.List;
 
 public interface OrderDAO {
 
-    void addOrder(Order order);
-
     List<Order> listOrder();
 
-    void removeOrder(Integer id);
+    Order saveOrder(Order Order);
 
-    void updateOrder(Order order);
+    Order getOrderById(Long id);
 
-    Order getOrderById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeOrder(Long id);
 
 }

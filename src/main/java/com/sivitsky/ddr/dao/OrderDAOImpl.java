@@ -15,49 +15,33 @@ import java.util.List;
 public class OrderDAOImpl implements OrderDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderDAOImpl.class);
-
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public void addOrder(Order order) {
-        sessionFactory.getCurrentSession().save(order);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Order> listOrder() {
-
-        return sessionFactory.getCurrentSession().createQuery("from Order")
-                .list();
-    }
-
-    @Override
-    public void removeOrder(Integer id) {
-        Order order = (Order) sessionFactory.getCurrentSession().load(
-                Order.class, id);
-        if (null != order) {
-            sessionFactory.getCurrentSession().delete(order);
-        }
-
-    }
-
-    @Override
-    public Order getOrderById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Order order = (Order) session.load(Order.class, new Integer(id));
-        logger.info("Order loaded successfully, Order details="+order);
+    public Order saveOrder(Order order) {
+        sessionFactory.getCurrentSession().saveOrUpdate(order);
+        logger.info("Order updated successfully, Order id=" + order.getOrder_id());
         return order;
     }
 
-    @Override
-    public void updateOrder(Order order) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(order);
-        logger.info("Order updated successfully, Order Details="+order);
+    @SuppressWarnings("unchecked")
+    public List<Order> listOrder() {
+        return sessionFactory.getCurrentSession().createQuery("from order").list();
+    }
+
+    public Order getOrderById(Long id) {
+        return (Order) this.sessionFactory.getCurrentSession().get(Order.class, id);
+    }
+
+    public void removeOrder(Long id) {
+        Order order = (Order) sessionFactory.getCurrentSession().load(Order.class, id);
+        if (null != order) {
+            sessionFactory.getCurrentSession().delete(order);
+        }
     }
 
 }
