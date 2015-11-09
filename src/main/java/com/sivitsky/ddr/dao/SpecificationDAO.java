@@ -6,15 +6,11 @@ import java.util.List;
 
 public interface SpecificationDAO {
 
-    void addSpecification(Specification specification);
-
     List<Specification> listSpecification();
 
-    void removeSpecification(Integer id);
+    Specification saveSpecification(Specification specification);
 
-    void updateSpecification(Specification specification);
+    Specification getSpecificationById(Long id);
 
-    Specification getSpecificationById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeSpecification(Long id);
 }

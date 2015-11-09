@@ -15,49 +15,32 @@ import java.util.List;
 public class SpecificationDAOImpl implements SpecificationDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(SpecificationDAOImpl.class);
-
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public void addSpecification(Specification specification) {
-        sessionFactory.getCurrentSession().save(specification);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Specification> listSpecification() {
-
-        return sessionFactory.getCurrentSession().createQuery("from Specification")
-                .list();
-    }
-
-    @Override
-    public void removeSpecification(Integer id) {
-        Specification specification = (Specification) sessionFactory.getCurrentSession().load(
-                Specification.class, id);
-        if (null != specification) {
-            sessionFactory.getCurrentSession().delete(specification);
-        }
-
-    }
-
-    @Override
-    public Specification getSpecificationById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Specification specification = (Specification) session.load(Specification.class, new Integer(id));
-        logger.info("Specification loaded successfully, Specification details="+specification);
+    public Specification saveSpecification(Specification specification) {
+        sessionFactory.getCurrentSession().saveOrUpdate(specification);
+        logger.info("Specification updated successfully, Specification id=" + specification.getSpec_id());
         return specification;
     }
 
-    @Override
-    public void updateSpecification(Specification specification) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(specification);
-        logger.info("Specification updated successfully, Specification Details="+specification);
+    @SuppressWarnings("unchecked")
+    public List<Specification> listSpecification() {
+        return sessionFactory.getCurrentSession().createQuery("from specification").list();
     }
 
+    public Specification getSpecificationById(Long id) {
+        return (Specification) this.sessionFactory.getCurrentSession().get(Specification.class, id);
+    }
+
+    public void removeSpecification(Long id) {
+        Specification specification = (Specification) sessionFactory.getCurrentSession().load(Specification.class, id);
+        if (null != specification) {
+            sessionFactory.getCurrentSession().delete(specification);
+        }
+    }
 }

@@ -1,33 +1,29 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "SPECIFICATION")
+@Table(name = "specification")
 public class Specification {
 
-    @Id
-    @Column(name = "SPEC_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer spec_id;
-
-    @Column(name = "SPEC_NAME")
+    private Long spec_id;
     private String spec_name;
+    private Set<Description> descriptions = new HashSet<Description>();
 
-    @Column(name = "MEASURE_ID_MEASURE")
-    private Integer measure_id;
-
-    @Column(name = "TYPEOFSPEC_ID_TSPEC")
-    private Integer typeofspec_id;
-
-    public Integer getSpec_id() {
+    @Id
+    @Column(name = "spec_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getSpec_id() {
         return spec_id;
     }
 
-    public void setSpec_id(Integer spec_id) {
+    public void setSpec_id(Long spec_id) {
         this.spec_id = spec_id;
     }
 
+    @Column(name = "spec_name")
     public String getSpec_name() {
         return spec_name;
     }
@@ -36,19 +32,12 @@ public class Specification {
         this.spec_name = spec_name;
     }
 
-    public Integer getMeasure_id() {
-        return measure_id;
+    @OneToMany(mappedBy = "specification", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Description> getDescriptions() {
+        return descriptions;
     }
 
-    public void setMeasure_id(Integer measure_id) {
-        this.measure_id = measure_id;
-    }
-
-    public Integer getTypeofspec_id() {
-        return typeofspec_id;
-    }
-
-    public void setTypeofspec_id(Integer typeofspec_id) {
-        this.typeofspec_id = typeofspec_id;
+    public void setDescriptions(Set<Description> descriptions) {
+        this.descriptions = descriptions;
     }
 }

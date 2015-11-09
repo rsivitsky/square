@@ -13,19 +13,27 @@ public class SpecificationServiceImpl implements SpecificationService {
     private SpecificationDAO specificationDAO;
 
     @Transactional
-    public void addSpecification(Specification specification) {
-        specificationDAO.addSpecification(specification);
+    public Specification saveSpecification(Specification specification) {
+        return specificationDAO.saveSpecification(specification);
     }
 
     @Transactional
     public List<Specification> listSpecification() {
-
         return specificationDAO.listSpecification();
     }
 
     @Transactional
-    public void removeSpecification(Integer id) {
+    public void removeSpecification(Long id) {
         specificationDAO.removeSpecification(id);
+    }
+
+    public void setSpecificationDAO(SpecificationDAO specificationDAO) {
+        this.specificationDAO = specificationDAO;
+    }
+
+    @Transactional
+    public Specification getSpecificationById(Long id) {
+        return this.specificationDAO.getSpecificationById(id);
     }
 
 }
