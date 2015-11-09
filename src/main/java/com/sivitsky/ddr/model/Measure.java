@@ -1,32 +1,43 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "MEASURE")
+@Table(name = "measure")
 public class Measure {
 
-    @Id
-    @Column(name = "MEASURE_ID")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer measure_id;
-
-    @Column(name = "MEASURE_NAME")
+    private Long measure_id;
     private String measure_name;
+    private Set<Specification> specifications = new HashSet<Specification>();
 
-    public Integer getMeasure_id() {
+    @Id
+    @Column(name = "measure_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Long getMeasure_id() {
         return measure_id;
     }
 
-    public void setMeasure_id(Integer measure_id) {
+    public void setMeasure_id(Long measure_id) {
         this.measure_id = measure_id;
     }
 
+    @Column(name = "measure_name")
     public String getMeasure_name() {
         return measure_name;
     }
 
     public void setMeasure_name(String measure_name) {
         this.measure_name = measure_name;
+    }
+
+    @OneToMany(mappedBy = "measure", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Specification> getSpecifications() {
+        return specifications;
+    }
+
+    public void setSpecifications(Set<Specification> specifications) {
+        this.specifications = specifications;
     }
 }

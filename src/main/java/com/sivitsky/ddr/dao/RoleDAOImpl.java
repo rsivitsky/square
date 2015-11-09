@@ -15,47 +15,33 @@ import java.util.List;
 public class RoleDAOImpl implements RoleDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(RoleDAOImpl.class);
-
     private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
-    }
 
     public Role saveRole(Role role) {
         sessionFactory.getCurrentSession().saveOrUpdate(role);
-        logger.info("Role saved successfully, Role id="+role.getRole_id());
+        logger.info("Role updated successfully, Role id=" + role.getRole_id());
         return role;
     }
 
     @SuppressWarnings("unchecked")
-    public List<Role> listRole() {
-
-        return sessionFactory.getCurrentSession().createQuery("from Role")
-                .list();
+    public List<Role> listRoles() {
+        return sessionFactory.getCurrentSession().createQuery("from role").list();
     }
 
-    public Role findById(Long id){
-        return (Role)sessionFactory.getCurrentSession().getNamedQuery("Role.FindById").setParameter("id", id).uniqueResult();
-    }
-
-    public List<Role> findAllWithDetail(){
-        return sessionFactory.getCurrentSession().getNamedQuery("Role.findAllWithDetail").list();
+    public Role getRoleById(Long id) {
+        return (Role) this.sessionFactory.getCurrentSession().get(Role.class, id);
     }
 
     public void removeRole(Long id) {
-        Role role = (Role) sessionFactory.getCurrentSession().load(
-                Role.class, id);
+        Role role = (Role) sessionFactory.getCurrentSession().load(Role.class, id);
         if (null != role) {
             sessionFactory.getCurrentSession().delete(role);
         }
     }
 
-    public Role getRoleById(Long id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Role role = (Role) session.load(Role.class, new Long(id));
-        logger.info("Role loaded successfully, Role details="+role);
-        return role;
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
 }

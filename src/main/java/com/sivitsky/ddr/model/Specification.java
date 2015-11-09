@@ -11,6 +11,8 @@ public class Specification {
     private Long spec_id;
     private String spec_name;
     private Set<Description> descriptions = new HashSet<Description>();
+    private Typeofspec typeofspec;
+    private Measure measure;
 
     @Id
     @Column(name = "spec_id")
@@ -39,5 +41,25 @@ public class Specification {
 
     public void setDescriptions(Set<Description> descriptions) {
         this.descriptions = descriptions;
+    }
+
+    @ManyToOne(targetEntity=Typeofspec.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "tspec_id")
+    public Typeofspec getTypeofspec() {
+        return typeofspec;
+    }
+
+    public void setTypeofspec(Typeofspec typeofspec) {
+        this.typeofspec = typeofspec;
+    }
+
+    @ManyToOne(targetEntity=Measure.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "measure_id")
+    public Measure getMeasure() {
+        return measure;
+    }
+
+    public void setMeasure(Measure measure) {
+        this.measure = measure;
     }
 }
