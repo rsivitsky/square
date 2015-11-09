@@ -6,16 +6,12 @@ import java.util.List;
 
 public interface MeasureDAO {
 
-    void addMeasure(Measure measure);
-
     List<Measure> listMeasure();
 
-    void removeMeasure(Integer id);
+    Measure saveMeasure(Measure measure);
 
-    void updateMeasure(Measure measure);
+    Measure getMeasureById(Long id);
 
-    Measure getMeasureById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeMeasure(Long id);
 
 }

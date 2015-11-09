@@ -9,7 +9,6 @@ import java.util.List;
 
 public class OfferServiceImpl implements OfferService {
 
-    @Autowired
     private OfferDAO offerDAO;
 
     @Transactional
@@ -27,6 +26,7 @@ public class OfferServiceImpl implements OfferService {
         offerDAO.removeOffer(id);
     }
 
+    @Autowired
     public void setOfferDAO(OfferDAO offerDAO) {
         this.offerDAO = offerDAO;
     }

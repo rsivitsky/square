@@ -6,15 +6,11 @@ import java.util.List;
 
 public interface TypeofspecDAO {
 
-    void addTypeofspec(Typeofspec typeofspec);
+    List<Typeofspec> listTypeofspecs();
 
-    List<Typeofspec> listTypeofspec();
+    Typeofspec saveTypeofspec(Typeofspec typeofspec);
 
-    void removeTypeofspec(Integer id);
+    Typeofspec getTypeofspecById(Long id);
 
-    void updateTypeofspec(Typeofspec typeofspec);
-
-    Typeofspec getTypeofspecById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeTypeofspec(Long id);
 }

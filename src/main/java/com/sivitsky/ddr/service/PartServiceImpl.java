@@ -9,7 +9,6 @@ import java.util.List;
 
 public class PartServiceImpl implements PartService {
 
-    @Autowired
     private PartDAO partDAO;
 
     @Transactional
@@ -27,6 +26,7 @@ public class PartServiceImpl implements PartService {
         partDAO.removePart(id);
     }
 
+    @Autowired
     public void setPartDAO(PartDAO partDAO) {
         this.partDAO = partDAO;
     }

@@ -9,7 +9,6 @@ import java.util.List;
 
 public class SpecificationServiceImpl implements SpecificationService {
 
-    @Autowired
     private SpecificationDAO specificationDAO;
 
     @Transactional
@@ -27,6 +26,7 @@ public class SpecificationServiceImpl implements SpecificationService {
         specificationDAO.removeSpecification(id);
     }
 
+    @Autowired
     public void setSpecificationDAO(SpecificationDAO specificationDAO) {
         this.specificationDAO = specificationDAO;
     }

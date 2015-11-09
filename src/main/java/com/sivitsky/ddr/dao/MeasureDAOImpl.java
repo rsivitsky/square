@@ -15,48 +15,32 @@ import java.util.List;
 public class MeasureDAOImpl implements MeasureDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(MeasureDAOImpl.class);
-
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
-    @Override
-    public void addMeasure(Measure measure) {
-        sessionFactory.getCurrentSession().save(measure);
+    public Measure saveMeasure(Measure measure) {
+        sessionFactory.getCurrentSession().saveOrUpdate(measure);
+        logger.info("Measure updated successfully, Measure id=" + measure.getMeasure_id());
+        return measure;
     }
 
     @SuppressWarnings("unchecked")
     public List<Measure> listMeasure() {
-
-        return sessionFactory.getCurrentSession().createQuery("from Measure")
-                .list();
+        return sessionFactory.getCurrentSession().createQuery("from measure").list();
     }
 
-    @Override
-    public void removeMeasure(Integer id) {
-        Measure measure = (Measure) sessionFactory.getCurrentSession().load(
-                Measure.class, id);
+    public Measure getMeasureById(Long id) {
+        return (Measure) this.sessionFactory.getCurrentSession().get(Measure.class, id);
+    }
+
+    public void removeMeasure(Long id) {
+        Measure measure = (Measure) sessionFactory.getCurrentSession().load(Measure.class, id);
         if (null != measure) {
             sessionFactory.getCurrentSession().delete(measure);
         }
-
     }
-
-    @Override
-    public Measure getMeasureById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Measure measure = (Measure) session.load(Measure.class, new Integer(id));
-        logger.info("Measure loaded successfully, Measure details="+measure);
-        return measure;
-    }
-
-    @Override
-    public void updateMeasure(Measure measure) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(measure);
-        logger.info("Measure updated successfully, Measure Details="+measure);
-    }
-
 }

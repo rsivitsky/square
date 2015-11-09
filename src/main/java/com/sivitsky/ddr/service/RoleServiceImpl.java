@@ -9,7 +9,6 @@ import java.util.List;
 
 public class RoleServiceImpl implements RoleService {
 
-    @Autowired
     private RoleDAO roleDAO;
 
     @Transactional
@@ -20,7 +19,7 @@ public class RoleServiceImpl implements RoleService {
     @Transactional
     public List<Role> listRole() {
 
-        return roleDAO.listRole();
+        return roleDAO.listRoles();
     }
 
     @Transactional
@@ -28,6 +27,7 @@ public class RoleServiceImpl implements RoleService {
         roleDAO.removeRole(id);
     }
 
+    @Autowired
     public void setRoleDAO(RoleDAO roleDAO) {
         this.roleDAO = roleDAO;
     }

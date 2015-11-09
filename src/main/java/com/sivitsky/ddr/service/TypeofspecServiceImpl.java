@@ -9,23 +9,31 @@ import java.util.List;
 
 public class TypeofspecServiceImpl implements TypeofspecService {
 
-    @Autowired
     private TypeofspecDAO typeofspecDAO;
 
     @Transactional
-    public void addTypeofspec(Typeofspec typeofspec) {
-        typeofspecDAO.addTypeofspec(typeofspec);
+    public Typeofspec saveTypeofspec(Typeofspec typeofspec) {
+        return  typeofspecDAO.saveTypeofspec(typeofspec);
     }
 
     @Transactional
     public List<Typeofspec> listTypeofspec() {
-
-        return typeofspecDAO.listTypeofspec();
+        return typeofspecDAO.listTypeofspecs();
     }
 
     @Transactional
-    public void removeTypeofspec(Integer id) {
+    public void removeTypeofspec(Long id) {
         typeofspecDAO.removeTypeofspec(id);
+    }
+
+    @Autowired
+    public void setTypeofspecDAO(TypeofspecDAO typeofspecDAO) {
+        this.typeofspecDAO = typeofspecDAO;
+    }
+
+    @Transactional
+    public Typeofspec getTypeofspecByID(Long id){
+        return typeofspecDAO.getTypeofspecById(id);
     }
 
 }

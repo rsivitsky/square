@@ -15,49 +15,33 @@ import java.util.List;
 public class TypeofspecDAOImpl implements TypeofspecDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(TypeofspecDAOImpl.class);
-
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
-    }
-
-    @Override
-    public void addTypeofspec(Typeofspec typeofspec) {
-        sessionFactory.getCurrentSession().save(typeofspec);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public List<Typeofspec> listTypeofspec() {
-
-        return sessionFactory.getCurrentSession().createQuery("from Typeofspec")
-                .list();
-    }
-
-    @Override
-    public void removeTypeofspec(Integer id) {
-        Typeofspec typeofspec = (Typeofspec) sessionFactory.getCurrentSession().load(
-                Typeofspec.class, id);
-        if (null != typeofspec) {
-            sessionFactory.getCurrentSession().delete(typeofspec);
-        }
-
-    }
-
-    @Override
-    public Typeofspec getTypeofspecById(int id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        Typeofspec typeofspec = (Typeofspec) session.load(Typeofspec.class, new Integer(id));
-        logger.info("Typeofspec loaded successfully, Typeofspec details="+typeofspec);
+    public Typeofspec saveTypeofspec(Typeofspec typeofspec) {
+        sessionFactory.getCurrentSession().saveOrUpdate(typeofspec);
+        logger.info("Typeofspec updated successfully, Typeofspec id=" + typeofspec.getTspec_id());
         return typeofspec;
     }
 
-    @Override
-    public void updateTypeofspec(Typeofspec typeofspec) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(typeofspec);
-        logger.info("Typeofspec updated successfully, Typeofspec Details="+typeofspec);
+    @SuppressWarnings("unchecked")
+    public List<Typeofspec> listTypeofspecs() {
+        return sessionFactory.getCurrentSession().createQuery("from typeofspec").list();
+    }
+
+    public Typeofspec getTypeofspecById(Long id) {
+        return (Typeofspec) this.sessionFactory.getCurrentSession().get(Typeofspec.class, id);
+    }
+
+    public void removeTypeofspec(Long id) {
+        Typeofspec typeofspec = (Typeofspec) sessionFactory.getCurrentSession().load(Typeofspec.class, id);
+        if (null != typeofspec) {
+            sessionFactory.getCurrentSession().delete(typeofspec);
+        }
+    }
+
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
 }

@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface TypeofspecService {
 
-    void addTypeofspec(Typeofspec typeofspec);
+    Typeofspec saveTypeofspec(Typeofspec typeofspec);
 
     List<Typeofspec> listTypeofspec();
 
-    void removeTypeofspec(Integer id);
+    void removeTypeofspec(Long id);
+
+    Typeofspec getTypeofspecByID(Long id);
 }

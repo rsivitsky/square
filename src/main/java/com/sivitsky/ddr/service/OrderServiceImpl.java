@@ -9,7 +9,6 @@ import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
 
-    @Autowired
     private OrderDAO orderDAO;
 
     @Transactional
@@ -27,6 +26,7 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.removeOrder(id);
     }
 
+    @Autowired
     public void setOrderDAO(OrderDAO orderDAO) {
         this.orderDAO = orderDAO;
     }

@@ -9,23 +9,31 @@ import java.util.List;
 
 public class MeasureServiceImpl implements MeasureService {
 
-    @Autowired
     private MeasureDAO measureDAO;
 
     @Transactional
-    public void addMeasure(Measure measure) {
-        measureDAO.addMeasure(measure);
+    public Measure saveMeasure(Measure measure) {
+        return  measureDAO.saveMeasure(measure);
     }
 
     @Transactional
     public List<Measure> listMeasure() {
-
         return measureDAO.listMeasure();
     }
 
     @Transactional
-    public void removeMeasure(Integer id) {
+    public void removeMeasure(Long id) {
         measureDAO.removeMeasure(id);
+    }
+
+    @Autowired
+    public void setMeasureDAO(MeasureDAO measureDAO) {
+        this.measureDAO = measureDAO;
+    }
+
+    @Transactional
+    public Measure getMeasureById(Long id){
+        return measureDAO.getMeasureById(id);
     }
 
 }
