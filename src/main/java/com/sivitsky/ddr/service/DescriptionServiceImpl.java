@@ -13,19 +13,27 @@ public class DescriptionServiceImpl implements DescriptionService {
     private DescriptionDAO descriptionDAO;
 
     @Transactional
-    public void addDescription(Description description) {
-        descriptionDAO.addDescription(description);
+    public Description saveDescription(Description description) {
+        return descriptionDAO.saveDescription(description);
     }
 
     @Transactional
     public List<Description> listDescription() {
-
         return descriptionDAO.listDescription();
     }
 
     @Transactional
-    public void removeDescription(Integer id) {
+    public void removeDescription(Long id) {
         descriptionDAO.removeDescription(id);
+    }
+
+    public void setDescriptionDAO(DescriptionDAO descriptionDAO) {
+        this.descriptionDAO = descriptionDAO;
+    }
+
+    @Transactional
+    public Description getDescriptionById(Long id) {
+        return this.descriptionDAO.getDescriptionById(id);
     }
 
 }

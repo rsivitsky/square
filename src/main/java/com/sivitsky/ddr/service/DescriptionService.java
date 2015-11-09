@@ -6,10 +6,11 @@ import java.util.List;
 
 public interface DescriptionService {
 
-    void addDescription(Description description);
+    Description saveDescription(Description description);
 
     List<Description> listDescription();
 
-    void removeDescription(Integer id);
+    void removeDescription(Long id);
 
+    Description getDescriptionById(Long id);
 }

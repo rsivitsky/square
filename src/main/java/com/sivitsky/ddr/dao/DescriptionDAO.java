@@ -6,16 +6,12 @@ import java.util.List;
 
 public interface DescriptionDAO {
 
-    void addDescription(Description description);
-
     List<Description> listDescription();
 
-    void removeDescription(Integer id);
+    Description saveDescription(Description description);
 
-    void updateDescription(Description description);
+    Description getDescriptionById(Long id);
 
-    Description getDescriptionById(int id);
-
-    void setSessionFactory(org.hibernate.SessionFactory sessionFactory);
+    void removeDescription(Long id);
 
 }
