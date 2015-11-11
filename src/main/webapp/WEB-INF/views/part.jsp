@@ -25,12 +25,18 @@
           <spring:message text="PartName"/>
         </form:label>
       </td>
+      <td>
+        <form:input path="part_name" />
+      </td>
     </tr>
     <tr>
       <td>
         <form:label path="descriptions">
           <spring:message text="Descriptions"/>
         </form:label>
+      </td>
+      <td>
+        <form:input path="descriptions" />
       </td>
     </tr>
     <tr>
@@ -64,8 +70,8 @@
         <td>${partitem.part_id}</td>
         <td>${partitem.part_name}</td>
         <td>${useritem.description}</td>
-        <td><a href="<c:url value='/edit/${partitem.part_id}' />" >Edit</a></td>
-        <td><a href="<c:url value='/remove/${partitem.part_id}' />" >Delete</a></td>
+        <td><a href="<c:url value='/part/edit/${partitem.part_id}' />" >Edit</a></td>
+        <td><a href="<c:url value='/part/remove/${partitem.part_id}' />" >Delete</a></td>
       </tr>
     </c:forEach>
   </table>

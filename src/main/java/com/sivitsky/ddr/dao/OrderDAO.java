@@ -8,7 +8,7 @@ public interface OrderDAO {
 
     List<Order> listOrder();
 
-    Order saveOrder(Order Order);
+    Order saveOrder(Order order);
 
     Order getOrderById(Long id);
 

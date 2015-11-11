@@ -30,7 +30,7 @@ public class PartDAOImpl implements PartDAO {
 
     @SuppressWarnings("unchecked")
     public List<Part> listPart() {
-        return sessionFactory.getCurrentSession().createQuery("from part").list();
+        return sessionFactory.getCurrentSession().createQuery("from Part").list();
     }
 
     public Part getPartById(Long id) {

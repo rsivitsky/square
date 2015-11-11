@@ -8,7 +8,7 @@ public interface VendorDAO {
 
     List<Vendor> listVendor();
 
-    Vendor saveVendor(Vendor Vendor);
+    Vendor saveVendor(Vendor vendor);
 
     Vendor getVendorById(Long id);
 

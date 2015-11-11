@@ -30,7 +30,7 @@ public class PartController {
     {
         model.addAttribute("part", new Part());
         model.addAttribute("listPart", partService.listPart());
-        return "redirect:/part";
+        return "part";
     }
 
     //For add and update part both
@@ -40,13 +40,13 @@ public class PartController {
         return "redirect:/part";
     }
 
-    @RequestMapping("/remove/{part_id}")
+    @RequestMapping("/part/remove/{part_id}")
     public String removeUser(@PathVariable("part_id") Long id){
         this.partService.removePart(id);
         return "redirect:/part";
     }
 
-    @RequestMapping("/edit/{part_id}")
+    @RequestMapping("/part/edit/{part_id}")
     public String editUser(@PathVariable("part_id") Long id, Model model){
         model.addAttribute("part", this.partService.getPartById(id));
         model.addAttribute("listPart", this.partService.listPart());
