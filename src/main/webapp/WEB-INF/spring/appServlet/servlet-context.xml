@@ -124,6 +124,14 @@
         <beans:property name="contactDAO" ref="contactDAO"/>
     </beans:bean>
 
+    <beans:bean id="descriptionDAO" class="com.sivitsky.ddr.dao.DescriptionDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="descriptionService" class="com.sivitsky.ddr.service.DescriptionServiceImpl">
+        <beans:property name="descriptionDAO" ref="descriptionDAO"/>
+    </beans:bean>
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
