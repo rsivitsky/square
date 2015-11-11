@@ -16,7 +16,7 @@ public class Currency {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "valuta_id")
     public Long getValuta_id() {
-        return valuta_id;
+        return this.valuta_id;
     }
 
     public void setValuta_id(Long valuta_id) {
@@ -25,16 +25,16 @@ public class Currency {
 
     @Column(name = "valuta_name")
     public String getValuta_name() {
-        return valuta_name;
+        return this.valuta_name;
     }
 
     public void setValuta_name(String valuta_name) {
         this.valuta_name = valuta_name;
     }
 
-    @OneToMany(mappedBy = "valuta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "currency", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Offer> getOffers() {
-        return offers;
+        return this.offers;
     }
 
     public void setOffers(Set<Offer> offers) {

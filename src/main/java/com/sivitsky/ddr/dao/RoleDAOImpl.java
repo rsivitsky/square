@@ -25,7 +25,7 @@ public class RoleDAOImpl implements RoleDAO {
 
     @SuppressWarnings("unchecked")
     public List<Role> listRoles() {
-        return sessionFactory.getCurrentSession().createQuery("from role").list();
+        return sessionFactory.getCurrentSession().createQuery("from Role").list();
     }
 
     public Role getRoleById(Long id) {

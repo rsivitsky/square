@@ -1,8 +1,6 @@
 package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Contact;
-import com.sivitsky.ddr.model.Contact;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

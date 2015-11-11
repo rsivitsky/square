@@ -28,7 +28,7 @@ public class VendorDAOImpl implements VendorDAO {
 
     @SuppressWarnings("unchecked")
     public List<Vendor> listVendor() {
-        return sessionFactory.getCurrentSession().createQuery("from vendor").list();
+        return sessionFactory.getCurrentSession().createQuery("from Vendor").list();
     }
 
     public Vendor getVendorById(Long id) {

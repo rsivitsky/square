@@ -11,31 +11,31 @@ import java.util.List;
 @Component
 public class ContactServiceImpl implements ContactService {
 
-    @Autowired
     private ContactDAO contactDAO;
 
     @Transactional
     public Contact saveContact(Contact contact) {
-        return contactDAO.saveContact(contact);
+        return this.contactDAO.saveContact(contact);
     }
 
     @Transactional
     public List<Contact> listContact() {
-        return contactDAO.listContact();
-    }
-
-    @Transactional
-    public void removeContact(Long id) {
-        contactDAO.removeContact(id);
-    }
-
-    public void setContactDAO(ContactDAO contactDAO) {
-        this.contactDAO = contactDAO;
+        return this.contactDAO.listContact();
     }
 
     @Transactional
     public Contact getContactById(Long id) {
         return this.contactDAO.getContactById(id);
+    }
+
+    @Transactional
+    public void removeContact(Long id) {
+        this.contactDAO.removeContact(id);
+    }
+
+    @Autowired(required=true)
+    public void setContactDAO(ContactDAO contactDAO) {
+        this.contactDAO = contactDAO;
     }
 
 }

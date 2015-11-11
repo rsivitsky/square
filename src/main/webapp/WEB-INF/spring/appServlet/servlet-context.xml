@@ -15,15 +15,6 @@
 
     <context:component-scan base-package="com.sivitsky.ddr"/>
     <context:annotation-config/>
-<!--
-    <beans:bean id="conversionService"
-          class="org.springframework.context.support.ConversionServiceFactoryBean">
-        <beans:property name="converters">
-            <beans:set>
-                <beans:bean class="com.sivitsky.ddr.StringToRole"/>
-            </beans:set>
-        </beans:property>
-    </beans:bean> -->
 
     <!-- Handles HTTP GET requests for /resources/** by efficiently serving
         up static resources in the ${webappRoot}/resources directory -->
@@ -67,14 +58,6 @@
 
     <beans:bean id="userService" class="com.sivitsky.ddr.service.UserServiceImpl">
         <beans:property name="userDAO" ref="userDAO"/>
-    </beans:bean>
-
-    <beans:bean id="contactDAO" class="com.sivitsky.ddr.dao.ContactDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
-    </beans:bean>
-
-    <beans:bean id="contactService" class="com.sivitsky.ddr.service.ContactServiceImpl">
-        <beans:property name="contactDAO" ref="contactDAO"/>
     </beans:bean>
 
     <beans:bean id="currencyDAO" class="com.sivitsky.ddr.dao.CurrencyDAOImpl">
@@ -131,6 +114,14 @@
 
     <beans:bean id="vendorService" class="com.sivitsky.ddr.service.VendorServiceImpl">
         <beans:property name="vendorDAO" ref="vendorDAO"/>
+    </beans:bean>
+
+    <beans:bean id="contactDAO" class="com.sivitsky.ddr.dao.ContactDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="contactService" class="com.sivitsky.ddr.service.ContactServiceImpl">
+        <beans:property name="contactDAO" ref="contactDAO"/>
     </beans:bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>

@@ -36,7 +36,7 @@ public class UserController {
 		this.vendorService = vendorService;
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
 	public String startPage(Model model) {
 		model.addAttribute("user", new User());
 		model.addAttribute("listUsers", userService.listUsers());
@@ -49,13 +49,13 @@ public class UserController {
 	@RequestMapping(value= "/user/add", method = RequestMethod.POST)
 	public String addUser(@ModelAttribute("user") User user, BindingResult result){
 		user = this.userService.saveUser(user);
-		return "redirect:/";
+		return "redirect:/user";
 	}
 	
 	@RequestMapping("/remove/{user_id}")
     public String removeUser(@PathVariable("user_id") Long id){
         this.userService.removeUser(id);
-        return "redirect:/";
+        return "redirect:/user";
     }
  
     @RequestMapping("/edit/{user_id}")

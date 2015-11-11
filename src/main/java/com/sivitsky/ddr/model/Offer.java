@@ -12,8 +12,6 @@ public class Offer {
     private Long offer_id;
     private Date offer_date;
     private Float offer_cost;
-    private Integer valuta_id;
-    private Integer part_id;
     private Vendor vendor;
     private Part part;
     private Currency currency;

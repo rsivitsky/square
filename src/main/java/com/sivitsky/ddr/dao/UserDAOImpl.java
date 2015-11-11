@@ -16,6 +16,11 @@ public class UserDAOImpl implements UserDAO {
     private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
     private SessionFactory sessionFactory;
 
+    @Autowired(required=true)
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     public User saveUser(User user) {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
         logger.info("User updated successfully, User id=" + user.getUser_id());
@@ -24,7 +29,7 @@ public class UserDAOImpl implements UserDAO {
 
     @SuppressWarnings("unchecked")
     public List<User> listUsers() {
-        return sessionFactory.getCurrentSession().createQuery("from user").list();
+        return sessionFactory.getCurrentSession().createQuery("from User").list();
     }
 
     public User getUserById(Long id) {
@@ -36,11 +41,6 @@ public class UserDAOImpl implements UserDAO {
         if (null != user) {
             sessionFactory.getCurrentSession().delete(user);
         }
-    }
-
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
     }
 
 }

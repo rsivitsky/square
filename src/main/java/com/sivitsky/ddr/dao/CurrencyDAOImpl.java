@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
-public class CurrencyDAOImpl {
+public class CurrencyDAOImpl implements CurrencyDAO{
 
     private static final Logger logger = LoggerFactory.getLogger(CurrencyDAOImpl.class);
     private SessionFactory sessionFactory;
