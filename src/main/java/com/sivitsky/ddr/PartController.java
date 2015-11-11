@@ -33,7 +33,6 @@ public class PartController {
         return "part";
     }
 
-    //For add and update part both
     @RequestMapping(value= "/part/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("part") Part part, BindingResult result){
         part = this.partService.savePart(part);

@@ -50,4 +50,15 @@ public class Part {
     public void setDescriptions(Set<Description> descriptions) {
         this.descriptions = descriptions;
     }
+
+    public void addDescriptions(Description description)
+    {
+        description.setPart(this);
+        getDescriptions().add(description);
+    }
+
+    public void removeDescriptions(Description description)
+    {
+        getDescriptions().remove(description);
+    }
 }
