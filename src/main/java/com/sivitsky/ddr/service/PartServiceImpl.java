@@ -22,6 +22,11 @@ public class PartServiceImpl implements PartService {
     }
 
     @Transactional
+    public List<Part> listPartWithDetail(){
+        return partDAO.listPartWithDetail();
+    }
+
+    @Transactional
     public void removePart(Long id) {
         partDAO.removePart(id);
     }

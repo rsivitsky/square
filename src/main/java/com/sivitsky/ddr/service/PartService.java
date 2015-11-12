@@ -10,6 +10,8 @@ public interface PartService {
 
     List<Part> listPart();
 
+    List<Part> listPartWithDetail();
+
     void removePart(Long id);
 
     Part getPartById(Long id);

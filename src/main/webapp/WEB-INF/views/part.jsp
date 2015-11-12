@@ -37,6 +37,7 @@
       </td>
       <td>
         <form:input path="descriptions" />
+        <a href="<c:url value='/part/description'/>" >Select description</a>
       </td>
     </tr>
     <tr>
