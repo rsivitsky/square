@@ -8,6 +8,8 @@ public interface PartDAO {
 
     List<Part> listPart();
 
+    List<Part> listPartWithDetail();
+
     Part savePart(Part part);
 
     Part getPartById(Long id);
