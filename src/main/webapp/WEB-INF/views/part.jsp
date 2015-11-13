@@ -25,17 +25,17 @@
   </tr>
   </thead>
   <tbody style="background:#ccc">
-  <c:forEach items="${parts}" var="part">
+  <c:forEach items="${listPart}" var="part">
     <c:url var="editUrl" value="/part/edit?pid=${part.part_id}" />
     <c:url var="deleteUrl" value="/part/remove?pid=${part.part_id}" />
 
-    <c:if test="${!empty part.descriptions}">
+    <c:if test="${!empty part.part_name}">
       <c:forEach items="${part.descriptions}" var="descript">
         <tr>
           <td><c:out value="${part.part_id}" /></td>
           <td><c:out value="${part.part_name}" /></td>
-          <td><a href="${editUrl}"><img src="${editImgUrl}"></img></a></td>
-          <td><a href="${deleteUrl}"><img src="${deleteImgUrl}"></img></a></td>
+          <td><a href="${editUrl}"><img src="${editImgUrl}"/></a></td>
+          <td><a href="${deleteUrl}"><img src="${deleteImgUrl}"/></a></td>
 
           <td><c:out value="${descript.descript_name}" /></td>
           <td><c:out value="${descript.descript_value}" /></td>
@@ -43,8 +43,8 @@
           <c:url var="editCcUrl" value="/part/descript/edit?pid=${part.part_id}&descr_id=${descript.descript_id}" />
           <c:url var="deleteCcUrl" value="/part/descript/delete?descr_id=${descript.descript_id}" />
           <td><a href="${addCcUrl}">+</a></td>
-          <td><a href="${editCcUrl}"><img src="${editImgUrl}"></img></a></td>
-          <td><a href="${deleteCcUrl}"><img src="${deleteImgUrl}"></img></a></td>
+          <td><a href="${editCcUrl}"><img src="${editImgUrl}"/></a></td>
+          <td><a href="${deleteCcUrl}"><img src="${deleteImgUrl}"/></a></td>
         </tr>
       </c:forEach>
     </c:if>
@@ -53,8 +53,8 @@
       <tr>
         <td><c:out value="${part.part_id}" /></td>
         <td><c:out value="${part.part_name}" /></td>
-        <td><a href="${editUrl}"><img src="${editImgUrl}"></img></a></td>
-        <td><a href="${deleteUrl}"><img src="${deleteImgUrl}"></img></a></td>
+        <td><a href="${editUrl}"><img src="${editImgUrl}"/></a></td>
+        <td><a href="${deleteUrl}"><img src="${deleteImgUrl}"/></a></td>
 
         <td>N/A</td>
         <td>N/A</td>
