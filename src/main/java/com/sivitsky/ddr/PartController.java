@@ -25,10 +25,10 @@ public class PartController {
         this.descriptionService = descriptionService;
     }
 
-    @RequestMapping("/part")
+    @RequestMapping("/part/list")
     public String startPart(Model model)
     {
-        model.addAttribute("part", new Part());
+        //model.addAttribute("part", new Part());
         model.addAttribute("listPart", partService.listPart());
         return "part";
     }

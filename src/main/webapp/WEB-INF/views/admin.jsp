@@ -29,7 +29,7 @@
   <a href="<c:url value='/vendor' />" >Поставщики</a>
   </td>
     <td>
-      <a href="<c:url value='/part' />" >Комплектующие</a>
+      <a href="<c:url value='/part/list' />" >Комплектующие</a>
     </td>
   </tr>
   </table>
