@@ -28,8 +28,8 @@ public class Description {
         return descript_name;
     }
 
-    public void setDescript_name(String descript_name) {
-        this.descript_name = descript_name;
+    public void setDescript_name() {
+        this.descript_name = getSpecification().getSpec_name();
     }
 
     @Column(name = "descript_value")
