@@ -15,10 +15,35 @@
   </style>
 </head>
 <body>
-<c:url var="addAction" value="/part/description/add" ></c:url>
+<c:url var="addAction" value="/part/descript/add" ></c:url>
 
 <form:form action="${addAction}" commandName="description">
-
+  <table>
+    <tr>
+      <td>
+        <form:label path="part">
+          <spring:message text="part_id"/>
+        </form:label>
+      </td>
+      <td>
+        <form:input path="part.part_id" disabled="true"/>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <form:label path="descript_name">
+          <spring:message text="descript name"/>
+        </form:label>
+      </td>
+      <td>
+        <form:input path="descript_name" />
+      </td>
+    </tr>
+    <tr>
+        <input type="submit"
+               value="<spring:message text="Add description"/>" />
+    </tr>
+  </table>
 </form:form>
 </body>
 </html>

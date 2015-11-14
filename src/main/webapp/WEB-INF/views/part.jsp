@@ -39,7 +39,7 @@
 
           <td><c:out value="${descript.descript_name}" /></td>
           <td><c:out value="${descript.descript_value}" /></td>
-          <c:url var="addCcUrl" value="/part/descript/add?pid=${part.part_id}" />
+          <c:url var="addDescrUrl" value="/part/descript/add?pid=${part.part_id}" />
           <c:url var="editCcUrl" value="/part/descript/edit?pid=${part.part_id}&descr_id=${descript.descript_id}" />
           <c:url var="deleteCcUrl" value="/part/descript/delete?descr_id=${descript.descript_id}" />
           <td><a href="${addCcUrl}">+</a></td>
@@ -58,8 +58,8 @@
 
         <td>N/A</td>
         <td>N/A</td>
-        <c:url var="addCcUrl" value="/part/descript/add?pid=${part.part_id}" />
-        <td><a href="${addCcUrl}">+</a></td>
+        <c:url var="addDescrUrl" value="/part/descript/add/${part.part_id}" />
+        <td><a href="${addDescrUrl}">+</a></td>
         <td></td>
         <td></td>
       </tr>
@@ -73,7 +73,7 @@
   No records found.
 </c:if>
 
-<p><a href="${addUrl}">Create new record</a></p>
+<p><a href="${addPartUrl}">Create new record</a></p>
 
 </body>
 </html>
