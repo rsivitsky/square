@@ -40,6 +40,16 @@
       </td>
     </tr>
     <tr>
+      <td>
+        <form:label path="descript_value">
+          <spring:message text="descript_value"/>
+        </form:label>
+      </td>
+      <td>
+        <form:input path="descript_value" />
+      </td>
+    </tr>
+    <tr>
         <input type="submit"
                value="<spring:message text="Add description"/>" />
     </tr>
