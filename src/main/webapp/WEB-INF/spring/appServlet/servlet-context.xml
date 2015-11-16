@@ -132,6 +132,14 @@
         <beans:property name="descriptionDAO" ref="descriptionDAO"/>
     </beans:bean>
 
+    <beans:bean id="typeofspecDAO" class="com.sivitsky.ddr.dao.TypeofspecDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
+    </beans:bean>
+
+    <beans:bean id="typeofspecService" class="com.sivitsky.ddr.service.TypeofspecServiceImpl">
+        <beans:property name="typeofspecDAO" ref="typeofspecDAO"/>
+    </beans:bean>
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
