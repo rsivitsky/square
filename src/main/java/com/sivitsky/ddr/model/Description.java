@@ -28,8 +28,8 @@ public class Description {
         return descript_name;
     }
 
-    public void setDescript_name() {
-        this.descript_name = getSpecification().getSpec_name();
+    public void setDescript_name(String descript_name) {
+        this.descript_name = descript_name;
     }
 
     @Column(name = "descript_value")
@@ -52,7 +52,7 @@ public class Description {
     }
 
     @ManyToOne(targetEntity=Specification.class, fetch=FetchType.EAGER)
-    @JoinColumn(name = "specification_id")
+    @JoinColumn(name = "spec_id")
     public Specification getSpecification() {
         return specification;
     }

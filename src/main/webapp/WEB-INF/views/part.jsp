@@ -73,7 +73,7 @@
   No records found.
 </c:if>
 
-<p><a href="${addPartUrl}">Create new record</a></p>
+<p><a href="${addUrl}">Create new record</a></p>
 
 </body>
 </html>

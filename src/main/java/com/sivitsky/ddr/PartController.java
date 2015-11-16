@@ -33,22 +33,28 @@ public class PartController {
         return "part";
     }
 
+    @RequestMapping(value="/part/add", method = RequestMethod.GET)
+    public String addUserGet(Model model){
+        model.addAttribute("part", new Part());
+        return "add_part";
+    }
+
     @RequestMapping(value= "/part/add", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute("part") Part part, BindingResult result){
+    public String addUserPost(@ModelAttribute("part") Part part, BindingResult result){
         part = this.partService.savePart(part);
-        return "redirect:/part";
+        return "redirect:/part/list";
     }
 
     @RequestMapping("/part/remove/{part_id}")
     public String removeUser(@PathVariable("part_id") Long id){
         this.partService.removePart(id);
-        return "redirect:/part";
+        return "redirect:/part/list";
     }
 
     @RequestMapping("/part/edit/{part_id}")
     public String editUser(@PathVariable("part_id") Long id, Model model){
         model.addAttribute("part", this.partService.getPartById(id));
         model.addAttribute("listPart", this.partService.listPart());
-        return "part";
+        return "redirect:/part/list";
     }
 }
