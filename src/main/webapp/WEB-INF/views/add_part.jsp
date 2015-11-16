@@ -25,8 +25,14 @@
     </td>
   </tr>
   <tr>
+    <c:if test="${!empty part.part_name}">
+      <input type="submit"
+             value="<spring:message text="Edit Role"/>" />
+    </c:if>
+    <c:if test="${empty part.part_name}">
       <input type="submit"
              value="<spring:message text="Add Role"/>" />
+    </c:if>
   </tr>
   </table>
 </form:form>

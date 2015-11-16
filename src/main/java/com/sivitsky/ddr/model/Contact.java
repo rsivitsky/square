@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "CONTACT")
+@Table(name = "contact")
 public class Contact implements Serializable {
 
     private Long contact_id;

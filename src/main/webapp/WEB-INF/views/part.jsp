@@ -12,7 +12,7 @@
 
 <c:url var="editImgUrl" value="/resources/img/edit.png" />
 <c:url var="deleteImgUrl" value="/resources/img/delete.png" />
-<c:url var="addUrl" value="/part/add" />
+<c:url var="addPartUrl" value="/part/add" />
 <table style="border: 1px solid; width: 100%; text-align:center">
   <thead style="background:#d3dce3">
   <tr>
@@ -26,16 +26,16 @@
   </thead>
   <tbody style="background:#ccc">
   <c:forEach items="${listPart}" var="part">
-    <c:url var="editUrl" value="/part/edit?pid=${part.part_id}" />
-    <c:url var="deleteUrl" value="/part/remove?pid=${part.part_id}" />
+    <c:url var="editPartUrl" value="/part/edit/${part.part_id}" />
+    <c:url var="deletePartUrl" value="/part/remove/${part.part_id}" />
 
     <c:if test="${!empty part.part_name}">
       <c:forEach items="${part.descriptions}" var="descript">
         <tr>
           <td><c:out value="${part.part_id}" /></td>
           <td><c:out value="${part.part_name}" /></td>
-          <td><a href="${editUrl}"><img src="${editImgUrl}"/></a></td>
-          <td><a href="${deleteUrl}"><img src="${deleteImgUrl}"/></a></td>
+          <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
+          <td><a href="${deletePartUrl}"><img src="${deleteImgUrl}"/></a></td>
 
           <td><c:out value="${descript.descript_name}" /></td>
           <td><c:out value="${descript.descript_value}" /></td>
@@ -53,8 +53,8 @@
       <tr>
         <td><c:out value="${part.part_id}" /></td>
         <td><c:out value="${part.part_name}" /></td>
-        <td><a href="${editUrl}"><img src="${editImgUrl}"/></a></td>
-        <td><a href="${deleteUrl}"><img src="${deleteImgUrl}"/></a></td>
+        <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
+        <td><a href="${deletePartUrl}"><img src="${deleteImgUrl}"/></a></td>
 
         <td>N/A</td>
         <td>N/A</td>
@@ -73,7 +73,7 @@
   No records found.
 </c:if>
 
-<p><a href="${addUrl}">Create new record</a></p>
+<p><a href="${addPartUrl}">Create new record</a></p>
 
 </body>
 </html>

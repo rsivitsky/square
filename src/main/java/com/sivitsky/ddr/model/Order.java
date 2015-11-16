@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "ORDER")
+@Table(name = "order")
 public class Order {
 
     private Long order_id;

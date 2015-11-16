@@ -3,7 +3,7 @@ package com.sivitsky.ddr.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "PHONE")
+@Table(name = "phone")
 public class Phone {
 
     private Long phone_id;

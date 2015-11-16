@@ -54,7 +54,7 @@ public class PartController {
     @RequestMapping("/part/edit/{part_id}")
     public String editUser(@PathVariable("part_id") Long id, Model model){
         model.addAttribute("part", this.partService.getPartById(id));
-        model.addAttribute("listPart", this.partService.listPart());
-        return "redirect:/part/list";
+       // model.addAttribute("listPart", this.partService.listPart());
+        return "add_part";
     }
 }
