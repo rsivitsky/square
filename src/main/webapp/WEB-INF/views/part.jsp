@@ -39,12 +39,12 @@
 
           <td><c:out value="${descript.descript_name}" /></td>
           <td><c:out value="${descript.descript_value}" /></td>
-          <c:url var="addDescrUrl" value="/part/descript/add?pid=${part.part_id}" />
-          <c:url var="editCcUrl" value="/part/descript/edit?pid=${part.part_id}&descr_id=${descript.descript_id}" />
-          <c:url var="deleteCcUrl" value="/part/descript/delete?descr_id=${descript.descript_id}" />
-          <td><a href="${addCcUrl}">+</a></td>
-          <td><a href="${editCcUrl}"><img src="${editImgUrl}"/></a></td>
-          <td><a href="${deleteCcUrl}"><img src="${deleteImgUrl}"/></a></td>
+          <c:url var="addDescrUrl" value="/part/descript/add/${part.part_id}" />
+          <c:url var="editDescUrl" value="/part/descript/edit?pid=${part.part_id}&descr_id=${descript.descript_id}" />
+          <c:url var="deleteDescUrl" value="/part/descript/delete?descr_id=${descript.descript_id}" />
+          <td><a href="${addDescrUrl}">+</a></td>
+          <td><a href="${editDescUrl}"><img src="${editImgUrl}"/></a></td>
+          <td><a href="${deleteDescUrl}"><img src="${deleteImgUrl}"/></a></td>
         </tr>
       </c:forEach>
     </c:if>

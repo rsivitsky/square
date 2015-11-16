@@ -36,7 +36,7 @@ public class DescriptionController {
     @RequestMapping(value = "/part/descript/add/{part_id}", method = RequestMethod.GET)
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model){
         Description description = new Description();
-       // description.setPart(partService.getPartById(part_id));
+        description.setPart(partService.getPartById(part_id));
         model.addAttribute("description", description);
         return "description";
     }
