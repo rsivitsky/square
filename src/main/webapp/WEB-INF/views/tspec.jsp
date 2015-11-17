@@ -39,14 +39,14 @@
                value="<spring:message text="Edit Type of specification/>" />
       </c:if>
       <c:if test="${empty tspec.tspec_name}">
-        <input type="submit"
-               value="<spring:message text="Add Type of specification"/>" />
+       <input type="submit"
+        value="<spring:message text="Edit Type of specification/>" />
       </c:if>
     </tr>
   </table>
 </form:form>
 
-<c:if test="${!empty listTSpec}">
+<c:if test="${!empty listtspec}">
   <br>
   <h3>TSpec List</h3>
   <table class="data">
@@ -55,7 +55,7 @@
       <th width="120">TSpec Name</th>
       <th width="60">Delete</th>
     </tr>
-    <c:forEach items="${listTSpec}" var="tspec_item">
+    <c:forEach items="${listtspec}" var="tspec_item">
       <tr>
         <td>${tspec_item.tspec_id}</td>
         <td>${tspec_item.tspec_name}</td>

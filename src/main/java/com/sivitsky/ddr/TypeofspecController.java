@@ -45,5 +45,4 @@ public class TypeofspecController {
         model.addAttribute("listtspec", this.typeofspecService.listTypeofspec());
         return "tspec";
     }
-
 }
