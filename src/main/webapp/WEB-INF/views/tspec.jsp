@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>
-  Add a Role
+  Add a Type of Specification
 </h1>
 
 <c:url var="addAction" value="/tspec/add" ></c:url>
@@ -26,7 +26,7 @@
     <tr>
       <td>
         <form:label path="tspec_name">
-          <spring:message text="TSpec_Name"/>
+          <spring:message text="type of specification's name"/>
         </form:label>
       </td>
       <td>
@@ -34,21 +34,23 @@
       </td>
     </tr>
     <tr>
-      <c:if test="${!empty tspec.tspec_name}">
-        <input type="submit"
-               value=<spring:message text="Edit Type of specification/>" />
-      </c:if>
-      <c:if test="${empty tspec.tspec_name}">
-       <input type="submit"
-        value=<spring:message text="Edit Type of specification/>" />
-      </c:if>
+      <td colspan="2">
+        <c:if test="${!empty tspec.tspec_name}">
+          <input type="submit"
+                 value="<spring:message text="Edit"/>" />
+        </c:if>
+        <c:if test="${empty tspec.tspec_name}">
+          <input type="submit"
+                 value="<spring:message text="Add"/>" />
+        </c:if>
+      </td>
     </tr>
   </table>
 </form:form>
 
 <c:if test="${!empty listtspec}">
   <br>
-  <h3>TSpec List</h3>
+  <h3>Type of specification's list</h3>
   <table class="data">
     <tr>
       <th width="80">TSpec ID</th>
