@@ -30,7 +30,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @SuppressWarnings("unchecked")
     public List<Order> listOrder() {
-        return sessionFactory.getCurrentSession().createQuery("from order").list();
+        return sessionFactory.getCurrentSession().createQuery("from Order").list();
     }
 
     public Order getOrderById(Long id) {

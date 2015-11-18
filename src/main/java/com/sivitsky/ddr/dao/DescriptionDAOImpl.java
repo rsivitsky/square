@@ -28,7 +28,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
 
     @SuppressWarnings("unchecked")
     public List<Description> listDescription() {
-        return sessionFactory.getCurrentSession().createQuery("from description").list();
+        return sessionFactory.getCurrentSession().createQuery("from Description").list();
     }
 
     public Description getDescriptionById(Long id) {

@@ -23,7 +23,7 @@ public class PhoneDAOImpl implements PhoneDAO {
 
     @SuppressWarnings("unchecked")
     public List<Phone> listPhones() {
-        return sessionFactory.getCurrentSession().createQuery("from phone").list();
+        return sessionFactory.getCurrentSession().createQuery("from Phone").list();
     }
 
     public Phone getPhoneById(Long id) {

@@ -30,7 +30,7 @@ public class SpecificationDAOImpl implements SpecificationDAO {
 
     @SuppressWarnings("unchecked")
     public List<Specification> listSpecification() {
-        return sessionFactory.getCurrentSession().createQuery("from specification").list();
+        return sessionFactory.getCurrentSession().createQuery("from Specification").list();
     }
 
     public Specification getSpecificationById(Long id) {

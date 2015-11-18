@@ -25,7 +25,7 @@ public class TypeofspecDAOImpl implements TypeofspecDAO {
 
     @SuppressWarnings("unchecked")
     public List<Typeofspec> listTypeofspecs() {
-        return sessionFactory.getCurrentSession().createQuery("from typeofspec").list();
+        return sessionFactory.getCurrentSession().createQuery("from Typeofspec").list();
     }
 
     public Typeofspec getTypeofspecById(Long id) {

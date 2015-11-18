@@ -36,11 +36,11 @@
     <tr>
       <c:if test="${!empty tspec.tspec_name}">
         <input type="submit"
-               value="<spring:message text="Edit Type of specification/>" />
+               value=<spring:message text="Edit Type of specification/>" />
       </c:if>
       <c:if test="${empty tspec.tspec_name}">
        <input type="submit"
-        value="<spring:message text="Edit Type of specification/>" />
+        value=<spring:message text="Edit Type of specification/>" />
       </c:if>
     </tr>
   </table>

@@ -26,7 +26,7 @@ public class CurrencyDAOImpl implements CurrencyDAO{
 
     @SuppressWarnings("unchecked")
     public List<Currency> listCurrency() {
-        return sessionFactory.getCurrentSession().createQuery("from currency").list();
+        return sessionFactory.getCurrentSession().createQuery("from Currency").list();
     }
 
     public Currency getCurrencyById(Long id) {

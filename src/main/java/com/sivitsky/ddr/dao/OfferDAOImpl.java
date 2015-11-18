@@ -30,7 +30,7 @@ public class OfferDAOImpl implements OfferDAO {
 
     @SuppressWarnings("unchecked")
     public List<Offer> listOffer() {
-        return sessionFactory.getCurrentSession().createQuery("from offer").list();
+        return sessionFactory.getCurrentSession().createQuery("from Offer").list();
     }
 
     public Offer getOfferById(Long id) {

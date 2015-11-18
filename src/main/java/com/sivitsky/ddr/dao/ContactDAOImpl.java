@@ -20,15 +20,15 @@ public class ContactDAOImpl implements ContactDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    public Contact saveContact(Contact Contact) {
-        sessionFactory.getCurrentSession().saveOrUpdate(Contact);
-        logger.info("Contact updated successfully, Contact id=" + Contact.getContact_id());
-        return Contact;
+    public Contact saveContact(Contact contact) {
+        sessionFactory.getCurrentSession().saveOrUpdate(contact);
+        logger.info("Contact updated successfully, Contact id=" + contact.getContact_id());
+        return contact;
     }
 
     @SuppressWarnings("unchecked")
     public List<Contact> listContact() {
-        return sessionFactory.getCurrentSession().createQuery("from contact").list();
+        return sessionFactory.getCurrentSession().createQuery("from Contact").list();
     }
 
     public Contact getContactById(Long id) {
@@ -36,9 +36,9 @@ public class ContactDAOImpl implements ContactDAO {
     }
 
     public void removeContact(Long id) {
-        Contact Contact = (Contact) sessionFactory.getCurrentSession().load(Contact.class, id);
-        if (null != Contact) {
-            sessionFactory.getCurrentSession().delete(Contact);
+        Contact contact = (Contact) sessionFactory.getCurrentSession().load(Contact.class, id);
+        if (null != contact) {
+            sessionFactory.getCurrentSession().delete(contact);
         }
     }
 }

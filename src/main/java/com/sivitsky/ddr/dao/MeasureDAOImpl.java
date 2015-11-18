@@ -30,7 +30,7 @@ public class MeasureDAOImpl implements MeasureDAO {
 
     @SuppressWarnings("unchecked")
     public List<Measure> listMeasure() {
-        return sessionFactory.getCurrentSession().createQuery("from measure").list();
+        return sessionFactory.getCurrentSession().createQuery("from Measure").list();
     }
 
     public Measure getMeasureById(Long id) {
