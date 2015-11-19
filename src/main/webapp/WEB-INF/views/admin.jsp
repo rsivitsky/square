@@ -15,24 +15,27 @@
   </style>
 </head>
 <body>
-<a href="<c:url value='/signout' />" >sign out</a>
+<a href="<c:url value='/signout' />">sign out</a>
 
-  <table>
+<table>
   <tr>
-  <td>
-    <a href="<c:url value='/role' />" >Роли пользователей</a>
-  </td>
-  <td>
-  <a href="<c:url value='/user' />" >Пользователи</a>
-  </td>
-  <td>
-  <a href="<c:url value='/vendor' />" >Поставщики</a>
-  </td>
     <td>
-      <a href="<c:url value='/part/list' />" >Комплектующие</a>
+      <a href="<c:url value='/role' />">Роли пользователей</a>
+    </td>
+    <td>
+      <a href="<c:url value='/user' />">Пользователи</a>
+    </td>
+    <td>
+      <a href="<c:url value='/vendor' />">Поставщики</a>
+    </td>
+    <td>
+      <a href="<c:url value='/part/list' />">Комплектующие</a>
+    </td>
+    <td>
+      <a href="<c:url value='/specification' />">Спецификации</a>
     </td>
   </tr>
-  </table>
+</table>
 
 </body>
 
