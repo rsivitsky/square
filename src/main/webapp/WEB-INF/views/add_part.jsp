@@ -22,9 +22,10 @@
     </td>
     <td>
       <form:input path="part_name" />
-    </td>
+    <td>
   </tr>
   <tr>
+    <td>
     <c:if test="${!empty part.part_name}">
       <input type="submit"
              value="<spring:message text="Edit Role"/>" />
@@ -33,10 +34,9 @@
       <input type="submit"
              value="<spring:message text="Add Role"/>" />
     </c:if>
+    </td>
   </tr>
   </table>
 </form:form>
-
-
 </body>
 </html>

@@ -32,6 +32,12 @@
       <a href="<c:url value='/part/list' />">Комплектующие</a>
     </td>
     <td>
+      <a href="<c:url value='/tspec' />">Виды спецификаций</a>
+    </td>
+    <td>
+      <a href="<c:url value='/measure' />">Единицы измерений</a>
+    </td>
+    <td>
       <a href="<c:url value='/specification' />">Спецификации</a>
     </td>
   </tr>
