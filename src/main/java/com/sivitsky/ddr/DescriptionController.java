@@ -1,25 +1,35 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Description;
+import com.sivitsky.ddr.model.Specification;
 import com.sivitsky.ddr.service.DescriptionService;
 import com.sivitsky.ddr.service.PartService;
+import com.sivitsky.ddr.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @SessionAttributes({"description"})
 public class DescriptionController {
 
     private DescriptionService descriptionService;
-
     private PartService partService;
+    private SpecificationService specificationService;
+    private List<Description> descriptionList;
 
     @Autowired(required=true)
     public void setDescriptionService(DescriptionService descriptionService) {
         this.descriptionService = descriptionService;
+    }
+
+
+    public void setSpecificationService(SpecificationService specificationService) {
+        this.specificationService = specificationService;
     }
 
     @Autowired(required=true)
@@ -35,15 +45,27 @@ public class DescriptionController {
 
     @RequestMapping(value = "/part/descript/add/{part_id}", method = RequestMethod.GET)
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model){
-        Description description = new Description();
-        description.setPart(partService.getPartById(part_id));
-        model.addAttribute("description", description);
+        for (Specification specification: specificationService.listSpecification()){
+            Description description = new Description();
+            description.setPart(partService.getPartById(part_id));
+            description.setSpecification(specification);
+            description.setDescript_name(specification.getSpec_name());
+            descriptionList.add(description);
+        }
+        model.addAttribute("descriptionList", descriptionList);
         return "description";
     }
 
-    @RequestMapping(value="/part/descript/add", method = RequestMethod.POST)
+   /* @RequestMapping(value="/part/descript/add", method = RequestMethod.POST)
     public String addDescriptionPost(@ModelAttribute("description") Description description, BindingResult result){
         descriptionService.saveDescription(description);
+        return "redirect:/part/list";
+    }*/
+    @RequestMapping(value="/part/descript/add", method = RequestMethod.POST)
+    public String addDescriptionPost(@ModelAttribute("descriptionList") List<Description> descriptionList, BindingResult result){
+        for(Description description: descriptionList) {
+            descriptionService.saveDescription(description);
+        }
         return "redirect:/part/list";
     }
 }

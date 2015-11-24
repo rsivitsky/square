@@ -18,7 +18,7 @@
 <c:url var="addAction" value="/part/descript/add" ></c:url>
 
 <form:form action="${addAction}" commandName="description">
-  <table>
+<%--  <table>
     <tr>
       <td>
         <form:label path="part">
@@ -53,6 +53,61 @@
         <input type="submit"
                value="<spring:message text="Add description"/>" />
     </tr>
+  </table>--%>
+  <table style="border: 1px solid; width: 100%; text-align:center">
+    <thead style="background:#d3dce3">
+    <tr>
+      <th>Id</th>
+      <th>Part Name</th>
+      <th colspan="2"></th>
+      <th>Descr Name</th>
+      <th>Descr Value</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+    <tbody style="background:#ccc">
+    <c:forEach items="${listPart}" var="part">
+      <c:url var="editPartUrl" value="/part/edit/${part.part_id}" />
+      <c:url var="deletePartUrl" value="/part/remove/${part.part_id}" />
+
+      <c:if test="${!empty part.part_name}">
+        <c:forEach items="${part.descriptions}" var="descript">
+          <tr>
+            <td><c:out value="${part.part_id}" /></td>
+            <td><c:out value="${part.part_name}" /></td>
+            <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
+            <td><a href="${deletePartUrl}"><img src="${deleteImgUrl}"/></a></td>
+
+            <td><c:out value="${descript.descript_name}" /></td>
+            <td><c:out value="${descript.descript_value}" /></td>
+            <c:url var="addDescrUrl" value="/part/descript/add/${part.part_id}" />
+            <c:url var="editDescUrl" value="/part/descript/edit?pid=${part.part_id}&descr_id=${descript.descript_id}" />
+            <c:url var="deleteDescUrl" value="/part/descript/delete?descr_id=${descript.descript_id}" />
+            <td><a href="${addDescrUrl}">+</a></td>
+            <td><a href="${editDescUrl}"><img src="${editImgUrl}"/></a></td>
+            <td><a href="${deleteDescUrl}"><img src="${deleteImgUrl}"/></a></td>
+          </tr>
+        </c:forEach>
+      </c:if>
+
+      <c:if test="${empty part.descriptions}">
+        <tr>
+          <td><c:out value="${part.part_id}" /></td>
+          <td><c:out value="${part.part_name}" /></td>
+          <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
+          <td><a href="${deletePartUrl}"><img src="${deleteImgUrl}"/></a></td>
+
+          <td>N/A</td>
+          <td>N/A</td>
+          <c:url var="addDescrUrl" value="/part/descript/add/${part.part_id}" />
+          <td><a href="${addDescrUrl}">+</a></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </c:if>
+
+    </c:forEach>
+    </tbody>
   </table>
 </form:form>
 </body>
