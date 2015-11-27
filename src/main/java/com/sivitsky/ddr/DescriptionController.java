@@ -8,8 +8,10 @@ import com.sivitsky.ddr.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class DescriptionController {
         return model;
     }
 
-    @RequestMapping(value = "/part/descript/add/{part_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/part/descript/edit/{part_id}", method = RequestMethod.GET)
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model){
         descriptionList = new ArrayList<Description>();
         for (Specification specification: specificationService.listSpecification()){
@@ -62,7 +64,7 @@ public class DescriptionController {
     public String addDescriptionPost(@ModelAttribute("description") Description description, BindingResult result){
         descriptionService.saveDescription(description);
         return "redirect:/part/list";
-    }*/
+    }
 
     @RequestMapping(value="/part/descript/add", method = RequestMethod.POST)
     public String addDescriptionPost(@ModelAttribute("descriptionList") List<Description> descriptionList, BindingResult result){
@@ -70,5 +72,5 @@ public class DescriptionController {
             descriptionService.saveDescription(description);
         }
         return "redirect:/part/list";
-    }
+    }*/
 }
