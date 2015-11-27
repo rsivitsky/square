@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,14 +21,14 @@ public class DescriptionController {
     private DescriptionService descriptionService;
     private PartService partService;
     private SpecificationService specificationService;
-    private List<Description> descriptionList;
+    private List<Description> descriptionList = new ArrayList<Description>();
 
     @Autowired(required=true)
     public void setDescriptionService(DescriptionService descriptionService) {
         this.descriptionService = descriptionService;
     }
 
-
+    @Autowired(required=true)
     public void setSpecificationService(SpecificationService specificationService) {
         this.specificationService = specificationService;
     }
@@ -51,6 +52,7 @@ public class DescriptionController {
             description.setSpecification(specification);
             description.setDescript_name(specification.getSpec_name());
             descriptionList.add(description);
+            Long id = description.getDescript_id();
         }
         model.addAttribute("descriptionList", descriptionList);
         return "description";
@@ -61,6 +63,7 @@ public class DescriptionController {
         descriptionService.saveDescription(description);
         return "redirect:/part/list";
     }*/
+
     @RequestMapping(value="/part/descript/add", method = RequestMethod.POST)
     public String addDescriptionPost(@ModelAttribute("descriptionList") List<Description> descriptionList, BindingResult result){
         for(Description description: descriptionList) {

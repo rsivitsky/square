@@ -34,7 +34,7 @@ public class Specification {
         this.spec_name = spec_name;
     }
 
-    @OneToMany(mappedBy = "specification", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "specification", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     public Set<Description> getDescriptions() {
         return descriptions;
     }

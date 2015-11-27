@@ -17,8 +17,8 @@
 <body>
 <c:url var="addAction" value="/part/descript/add" ></c:url>
 
-<form:form action="${addAction}" commandName="description">
-<%--  <table>
+<%--<form:form action="${addAction}" commandName="description">
+  <table>
     <tr>
       <td>
         <form:label path="part">
@@ -53,7 +53,8 @@
         <input type="submit"
                value="<spring:message text="Add description"/>" />
     </tr>
-  </table>--%>
+  </table>
+  </form:form>--%>
   <table style="border: 1px solid; width: 100%; text-align:center">
     <thead style="background:#d3dce3">
     <tr>
@@ -66,12 +67,10 @@
     </tr>
     </thead>
     <tbody style="background:#ccc">
-    <c:forEach items="${listPart}" var="part">
-      <c:url var="editPartUrl" value="/part/edit/${part.part_id}" />
-      <c:url var="deletePartUrl" value="/part/remove/${part.part_id}" />
+    <c:forEach items="${listDescription}" var="descript">
+      <c:url var="editDescriptUrl" value="/part/description/edit/${descript.descript_id}" />
+      <c:url var="deletePartUrl" value="/part/description/remove/${descript.descript_id}" />
 
-      <c:if test="${!empty part.part_name}">
-        <c:forEach items="${part.descriptions}" var="descript">
           <tr>
             <td><c:out value="${part.part_id}" /></td>
             <td><c:out value="${part.part_name}" /></td>
@@ -87,10 +86,9 @@
             <td><a href="${editDescUrl}"><img src="${editImgUrl}"/></a></td>
             <td><a href="${deleteDescUrl}"><img src="${deleteImgUrl}"/></a></td>
           </tr>
-        </c:forEach>
-      </c:if>
 
-      <c:if test="${empty part.descriptions}">
+
+    <%--  <c:if test="${empty part.descriptions}">
         <tr>
           <td><c:out value="${part.part_id}" /></td>
           <td><c:out value="${part.part_name}" /></td>
@@ -104,11 +102,10 @@
           <td></td>
           <td></td>
         </tr>
-      </c:if>
+      </c:if>--%>
 
     </c:forEach>
     </tbody>
   </table>
-</form:form>
 </body>
 </html>
