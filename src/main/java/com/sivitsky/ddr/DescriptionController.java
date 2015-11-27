@@ -21,7 +21,7 @@ public class DescriptionController {
     private DescriptionService descriptionService;
     private PartService partService;
     private SpecificationService specificationService;
-    private List<Description> descriptionList = new ArrayList<Description>();
+    private List<Description> descriptionList;
 
     @Autowired(required=true)
     public void setDescriptionService(DescriptionService descriptionService) {
@@ -46,13 +46,13 @@ public class DescriptionController {
 
     @RequestMapping(value = "/part/descript/add/{part_id}", method = RequestMethod.GET)
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model){
+        descriptionList = new ArrayList<Description>();
         for (Specification specification: specificationService.listSpecification()){
             Description description = new Description();
             description.setPart(partService.getPartById(part_id));
             description.setSpecification(specification);
             description.setDescript_name(specification.getSpec_name());
             descriptionList.add(description);
-            Long id = description.getDescript_id();
         }
         model.addAttribute("descriptionList", descriptionList);
         return "description";

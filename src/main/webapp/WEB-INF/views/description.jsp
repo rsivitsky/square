@@ -62,6 +62,7 @@
       <th colspan="2"></th>
       <th>Descr Name</th>
       <th>Descr Value</th>
+      <th>Measure</th>
       <th colspan="3"></th>
     </tr>
     </thead>
@@ -77,6 +78,7 @@
 
             <td><c:out value="${descript.descript_name}" /></td>
             <td><input value="${descript.descript_value}"/> </td>
+            <td><c:out value="${descript.specification.measure.measure_name}" /></td>
             <c:url var="addDescrUrl" value="/part/descript/add/${part.part_id}" />
             <c:url var="editDescUrl" value="/part/descript/edit?pid=${part.part_id}&descr_id=${descript.descript_id}" />
             <c:url var="deleteDescUrl" value="/part/descript/delete?descr_id=${descript.descript_id}" />
