@@ -58,7 +58,6 @@
   <table style="border: 1px solid; width: 100%; text-align:center">
     <thead style="background:#d3dce3">
     <tr>
-      <th>Id</th>
       <th>Part Name</th>
       <th colspan="2"></th>
       <th>Descr Name</th>
@@ -67,18 +66,17 @@
     </tr>
     </thead>
     <tbody style="background:#ccc">
-    <c:forEach items="${listDescription}" var="descript">
+    <c:forEach items="${descriptionList}" var="descript">
       <c:url var="editDescriptUrl" value="/part/description/edit/${descript.descript_id}" />
       <c:url var="deletePartUrl" value="/part/description/remove/${descript.descript_id}" />
 
           <tr>
-            <td><c:out value="${part.part_id}" /></td>
-            <td><c:out value="${part.part_name}" /></td>
+            <td><c:out value="${descript.part.part_name}" /></td>
             <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
             <td><a href="${deletePartUrl}"><img src="${deleteImgUrl}"/></a></td>
 
             <td><c:out value="${descript.descript_name}" /></td>
-            <td><c:out value="${descript.descript_value}" /></td>
+            <td><input value="${descript.descript_value}"/> </td>
             <c:url var="addDescrUrl" value="/part/descript/add/${part.part_id}" />
             <c:url var="editDescUrl" value="/part/descript/edit?pid=${part.part_id}&descr_id=${descript.descript_id}" />
             <c:url var="deleteDescUrl" value="/part/descript/delete?descr_id=${descript.descript_id}" />
