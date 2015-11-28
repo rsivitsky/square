@@ -16,7 +16,7 @@
 </head>
 <body>
 <h1>
-	Add a Role
+	Add a role
 </h1>
 
 <c:url var="addAction" value="/role/add" ></c:url>

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"description"})
+@SessionAttributes({"descriptionList"})
 public class DescriptionController {
 
     private DescriptionService descriptionService;
@@ -57,20 +57,16 @@ public class DescriptionController {
             descriptionList.add(description);
         }
         model.addAttribute("descriptionList", descriptionList);
+        model.addAttribute("part", partService.getPartById(part_id));
         return "description";
     }
 
-   /* @RequestMapping(value="/part/descript/add", method = RequestMethod.POST)
-    public String addDescriptionPost(@ModelAttribute("description") Description description, BindingResult result){
-        descriptionService.saveDescription(description);
-        return "redirect:/part/list";
-    }
-
-    @RequestMapping(value="/part/descript/add", method = RequestMethod.POST)
-    public String addDescriptionPost(@ModelAttribute("descriptionList") List<Description> descriptionList, BindingResult result){
-        for(Description description: descriptionList) {
+    @RequestMapping(value = "/part/descript/edit/{part_id}", method = RequestMethod.POST)
+    public String addDescriptionPost(@PathVariable("part_id") Long part_id)
+    {
+        for (Description description: descriptionList){
             descriptionService.saveDescription(description);
         }
-        return "redirect:/part/list";
-    }*/
+        return "part";
+    }
 }
