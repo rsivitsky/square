@@ -49,15 +49,20 @@ public class DescriptionController {
     @RequestMapping(value = "/part/descript/edit/{part_id}", method = RequestMethod.GET)
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model){
         descriptionList = new ArrayList<Description>();
-        for (Specification specification: specificationService.listSpecification()){
-            Description description = new Description();
-            description.setPart(partService.getPartById(part_id));
-            description.setSpecification(specification);
-            description.setDescript_name(specification.getSpec_name());
-            descriptionList.add(description);
+        descriptionList = descriptionService.listDescriptionByPartId(part_id);
+        if (descriptionList != null){
         }
-        model.addAttribute("descriptionList", descriptionList);
+        else{
+            for (Specification specification: specificationService.listSpecification()){
+                Description description = new Description();
+                description.setPart(partService.getPartById(part_id));
+                description.setSpecification(specification);
+                description.setDescript_name(specification.getSpec_name());
+                descriptionList.add(description);
+            }
+        }
         model.addAttribute("part", partService.getPartById(part_id));
+        model.addAttribute("descriptionList", descriptionList);
         return "description";
     }
 

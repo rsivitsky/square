@@ -8,6 +8,8 @@ public interface DescriptionDAO {
 
     List<Description> listDescription();
 
+    List<Description> listDescriptionByPartId(Long id);
+
     Description saveDescription(Description description);
 
     Description getDescriptionById(Long id);

@@ -10,6 +10,8 @@ public interface DescriptionService {
 
     List<Description> listDescription();
 
+    List<Description> listDescriptionByPartId(Long id);
+
     void removeDescription(Long id);
 
     Description getDescriptionById(Long id);

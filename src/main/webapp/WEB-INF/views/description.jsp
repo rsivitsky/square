@@ -62,7 +62,7 @@
         <c:forEach items="${descriptionList}" var="descript">
             <tr>
                 <td><c:out value="${descript.descript_name}"/></td>
-                <td><input value="${descript.descript_value}"/></td>
+                <td><c:out value="${descript.descript_value}"/></td>
                 <td><c:out value="${descript.specification.measure.measure_name}"/></td>
             </tr>
         </c:forEach>

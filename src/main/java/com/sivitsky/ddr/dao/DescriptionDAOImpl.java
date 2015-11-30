@@ -31,6 +31,11 @@ public class DescriptionDAOImpl implements DescriptionDAO {
         return sessionFactory.getCurrentSession().createQuery("from Description").list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Description> listDescriptionByPartId(Long id) {
+        return sessionFactory.getCurrentSession().createQuery("from Description where part_id= :part_id").setParameter("part_id",id).list();
+    }
+
     public Description getDescriptionById(Long id) {
         return (Description) this.sessionFactory.getCurrentSession().get(Description.class, id);
     }

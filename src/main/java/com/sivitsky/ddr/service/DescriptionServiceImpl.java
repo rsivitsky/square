@@ -23,6 +23,11 @@ public class DescriptionServiceImpl implements DescriptionService {
     }
 
     @Transactional
+    public List<Description> listDescriptionByPartId(Long id) {
+        return descriptionDAO.listDescriptionByPartId(id);
+    }
+
+    @Transactional
     public void removeDescription(Long id) {
         descriptionDAO.removeDescription(id);
     }
