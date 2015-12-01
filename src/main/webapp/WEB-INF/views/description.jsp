@@ -49,7 +49,7 @@
 <body>
 <h3 style="border: 1px solid; width: 100%; text-align:center">${part.part_name}</h3>
 <c:url var="addAction" value="/part/descript/edit/${part.part_id}"/>
-<form:form action="${addAction}" commandName="descriptionList" method="post">
+<form:form action="${addAction}" commandName="descriptionWrapper" method="post">
     <table style="border: 1px solid; width: 100%; text-align:center">
         <thead style="background:#d3dce3">
         <tr>
@@ -59,17 +59,21 @@
         </tr>
         </thead>
         <tbody style="background:#ccc">
-        <c:forEach items="${descriptionList}" var="descript">
+        <c:forEach items="${descriptionWrapper.descriptionList}" var="descript" varStatus="i">
             <tr>
-                <td><c:out value="${descript.descript_name}"/></td>
-                <td><c:out value="${descript.descript_value}"/></td>
-                <td><c:out value="${descript.specification.measure.measure_name}"/></td>
-            </tr>
-        </c:forEach>
-        </tbody>
-    </table>
-    <input type="submit"
-           value="<spring:message text="Save"/>"/>
+                <td>name: <form:input path="descriptionList[${i.index}].descript_name" value="${descript.descript_name}"/></td>
+                <%--<td><c:out value="${descript.descript_name}"/></td>--%>
+                <td>value: <form:input path="descriptionList[${i.index}].descript_value" value="${descript.descript_value}"/></td>
+            <%--<td><form:input path="descriptionList[${i.index}].descript_value"  value = "${descript.descript_value}"/></td>
+            <td><c:out value="${descript.descript_value}"/></td>
+            <td><c:out value="${descript.specification.measure.measure_name}"/></td>--%>
+                <td>value: <form:input path="descriptionList[${i.index}].specification.measure.measure_name" value="${descript.specification.measure.measure_name}"/></td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+<input type="submit"
+       value="<spring:message text="Save"/>"/>
 </form:form>
 </body>
 </html>

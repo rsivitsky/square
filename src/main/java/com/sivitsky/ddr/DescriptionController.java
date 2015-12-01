@@ -3,6 +3,7 @@ package com.sivitsky.ddr;
 import com.sivitsky.ddr.model.Description;
 import com.sivitsky.ddr.model.Specification;
 import com.sivitsky.ddr.service.DescriptionService;
+import com.sivitsky.ddr.service.DescriptionWrapper;
 import com.sivitsky.ddr.service.PartService;
 import com.sivitsky.ddr.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,8 +62,9 @@ public class DescriptionController {
                 descriptionList.add(description);
             }
         }
+        DescriptionWrapper descriptionWrapper = new DescriptionWrapper(descriptionList);
         model.addAttribute("part", partService.getPartById(part_id));
-        model.addAttribute("descriptionList", descriptionList);
+        model.addAttribute("descriptionWrapper", descriptionWrapper);
         return "description";
     }
 
