@@ -44,6 +44,12 @@ public class DescriptionController {
         return model;
     }
 
+    @RequestMapping("/part/{part_id}/descript/remove/{descript_id}")
+    public String removeUser(@PathVariable("descript_id") Long id, @PathVariable("part_id") Long part_id){
+        this.descriptionService.removeDescription(id);
+        return "redirect:/part/descript/edit/"+part_id.toString();
+    }
+
     @RequestMapping(value = "/part/descript/edit/{part_id}", method = RequestMethod.GET)
     public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model){
         descriptionList = new ArrayList<Description>();

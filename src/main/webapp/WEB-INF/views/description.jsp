@@ -48,6 +48,7 @@
 </head>
 <body>
 <h3 style="border: 1px solid; width: 100%; text-align:center">${part.part_name}</h3>
+<c:url var="deleteImgUrl" value="/resources/img/delete.png" />
 <c:url var="addAction" value="/part/descript/save"></c:url>
 <form:form action="${addAction}" commandName="descriptionWrapper" method="post">
     <table style="border: 1px solid; width: 100%; text-align:center">
@@ -60,11 +61,13 @@
         </thead>
         <tbody style="background:#ccc">
         <c:forEach items="${descriptionWrapper.descriptionList}" var="descript" varStatus="i">
+            <c:url var="deleteDescriptUrl" value="/part/${part.part_id}/descript/remove/${descript.descript_id}" />
             <tr>
                 <td><c:out value="${descript.descript_name}"/></td>
                 <td>value: <form:input path="descriptionList[${i.index}].descript_value"
                                        value="${descript.descript_value}"/></td>
                 <td><c:out value="${descript.specification.measure.measure_name}"/></td>
+                <td><a href="${deleteDescriptUrl}"><img src="${deleteImgUrl}"/></a></td>
             </tr>
         </c:forEach>
         </tbody>
