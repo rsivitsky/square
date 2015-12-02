@@ -9,16 +9,13 @@ import com.sivitsky.ddr.service.SpecificationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"descriptionList"})
+@SessionAttributes({"descriptionWrapper"})
 public class DescriptionController {
 
     private DescriptionService descriptionService;
@@ -68,12 +65,12 @@ public class DescriptionController {
         return "description";
     }
 
-    @RequestMapping(value = "/part/descript/edit/{part_id}", method = RequestMethod.POST)
-    public String addDescriptionPost(@PathVariable("part_id") Long part_id)
+    @RequestMapping(value = "/part/descript/save", method = RequestMethod.POST)
+    public String addDescriptionPost(@ModelAttribute("descriptionWrapper") DescriptionWrapper descriptionWrapper)
     {
-        for (Description description: descriptionList){
+        for (Description description: descriptionWrapper.getDescriptionList()){
             descriptionService.saveDescription(description);
         }
-        return "part";
+        return "redirect:/part/list";
     }
 }
