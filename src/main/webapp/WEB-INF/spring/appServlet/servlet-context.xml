@@ -52,6 +52,8 @@
         </beans:property>
     </beans:bean>
 
+    <beans:bean id="UserDetailsService" class="com.sivitsky.ddr.service.UserDetailsServiceImpl"/>
+
     <beans:bean id="userDAO" class="com.sivitsky.ddr.dao.UserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory" />
     </beans:bean>

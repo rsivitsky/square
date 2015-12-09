@@ -6,10 +6,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class AdminController {
+@RequestMapping("/login")
+public class LoginController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String startPage(Model model) {
-        return "index";
+    @RequestMapping(method = RequestMethod.GET)
+    public String loginPage(Model model){
+        return "login";
     }
 }
