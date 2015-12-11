@@ -12,4 +12,9 @@ public class AdminController {
     public String startPage(Model model) {
         return "index";
     }
+
+    @RequestMapping(value = "/index", method = RequestMethod.GET)
+    public String startPageo(Model model) {
+        return "index";
+    }
 }
