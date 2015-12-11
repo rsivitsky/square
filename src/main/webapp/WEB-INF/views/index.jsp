@@ -13,14 +13,8 @@
 
   <title>Spring Security</title>
 
-  <!-- Bootstrap core CSS -->
   <link href="<c:url value="/css/bootstrap.css" />" rel="stylesheet">
 
-  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-  <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-  <![endif]-->
 </head>
 
 <body>
@@ -33,14 +27,43 @@
       продажа запчастей
     </p>
     <sec:authorize access="!isAuthenticated()">
-      <p>
-        не прошел
-      </p>
-      <p><a class="btn btn-lg btn-success" href="<c:url value="/login" />" role="button">Войти</a></p>
+      <div class="container" style="width: 300px;">
+        <c:url value="/j_spring_security_check" var="loginUrl" />
+        <form action="${loginUrl}" method="post">
+          <h2 class="form-signin-heading">Please sign in</h2>
+          <table>
+            <tr>
+              <th><label for="login">Login</label></th>
+              <td>
+                <input type="text" class="form-control" id="login" name="j_username" placeholder="login" required autofocus>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="password">Password</label></th>
+              <td>
+                <input type="password" class="form-control" id="password" name="j_password" placeholder="password" required>
+              </td>
+            </tr>
+            <tr>
+              <th></th>
+              <td>
+                <label for="remember_me"
+                       class="inline">Remember me</label>
+                <input id="remember_me"
+                       name="_spring_security_remember_me"
+                       type="checkbox"/>
+                <!-- Флажок "запомнить меня" -->
+              </td>
+            </tr>
+          </table>
+          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+      </div>
+     <%-- <p><a class="btn btn-lg btn-success" href="<c:url value="/login" />" role="button">Войти</a></p>--%>
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
       <p>Ваш логин: <sec:authentication property="principal.username" /></p>
-      <%--<p><a class="btn btn-lg btn-danger" href="<c:url value="/logout" />" role="button">Выйти</a></p>--%>
+      <p><a class="btn btn-lg btn-danger" href="<c:url value="/logout" />" role="button">Выйти</a></p>
 
     </sec:authorize>
   </div>

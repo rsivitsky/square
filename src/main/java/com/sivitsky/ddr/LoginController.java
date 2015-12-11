@@ -13,8 +13,9 @@ public class LoginController {
         return "login";
     }
 
+/*
     @RequestMapping(value="j_spring_security_check", method = RequestMethod.POST)
     public String loginPagePost(Model model){
         return "index";
-    }
+    }*/
 }
