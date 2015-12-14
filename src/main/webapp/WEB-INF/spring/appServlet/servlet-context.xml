@@ -24,13 +24,14 @@
     <!-- Resolves views selected for rendering by @Controllers to .jsp resources
         in the /WEB-INF/views directory -->
 
+    <!--delete this bean for setting Apache tiles below
     <beans:bean
             class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <beans:property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView" />
         <beans:property name="prefix" value="/WEB-INF/views/"/>
         <beans:property name="suffix" value=".jsp"/>
-    </beans:bean>
+    </beans:bean>-->
 
     <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
                 destroy-method="close">
@@ -49,21 +50,22 @@
                 p:paramName = "lang"/>
     </interceptors>
 
-    <!--use Tiles framework-->
-    <beans:bean class=
-                  "org.springframework.web.servlet.view.tiles2.TilesViewResolver"/>
-
-    <beans:bean class = "org.springframework.ui.context.support.ResourceBundleThemeSource" id = "themeSource"/>
-    <beans:bean class = "org.springframework.web.servlet.theme.CookieThemeResolver"
-                id = "themeResolver" p:cookieName = "theme" p:defaultThemeName = "standard"/>
-
-    <beans:bean class=
-                  "org.springframework.web.servlet.view.tiles2.TilesConfigurer">
-        <property name="definitions">
-            <list>
-                <value>/WEB-INF/tiles.xml</value>
-            </list>
-        </property>
+    <!--configuration Apache Tiles-->
+    <beans:bean
+            class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+            id="tilesViewResolver">
+        <beans:property name = "viewClass"
+                        value = "org.springframework.web.servlet.view.tiles3.TilesView"/>
+    </beans:bean>
+    <beans:bean
+            class = "org.springframework.web.servlet.view.tiles3.TilesConfigurer"
+            id="tilesConfigurer">
+        <beans:property name="definitions">
+            <beans:list>
+                <beans:value>/WEB-INF/layouts/tiles.xml</beans:value>
+                <beans:value>/WEB-INF/views/**/views.xml</beans:value>
+            </beans:list>
+        </beans:property>
     </beans:bean>
 
     <!-- Hibernate 4 SessionFactory Bean definition -->

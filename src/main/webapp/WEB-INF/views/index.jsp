@@ -63,7 +63,7 @@
     </sec:authorize>
     <sec:authorize access="isAuthenticated()">
       <p>Ваш логин: <sec:authentication property="principal.username" /></p>
-      <p><a class="btn btn-lg btn-danger" href="<c:url value="/logout" />" role="button">Выйти</a></p>
+      <p><a class="btn btn-lg btn-danger" href="<c:url value="/part/list" />" role="button">part list</a></p>
 
     </sec:authorize>
   </div>
