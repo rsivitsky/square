@@ -1,22 +1,25 @@
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<!DOCTYPE HTML>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 
-<!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
+  header
 </head>
-<body class = "tundra spring">
-<div id="headerWrapper">
-  <tiles:insertAttribute name = "header" ignore="true" />
+<body>
+<div id="banner">
+  <tiles:insertAttribute name="header" />
 </div>
-<div id="wrapper">
-  <tiles:insertAttribute name="menu" ignore="true" />
-  <div id = "main">
-    <tiles:insertAttribute name = "body"/>
-    <tiles:insertAttribute name = "footer" ignore = "true"/>
-  </div>
+<div></div>
+<tiles:insertAttribute name="menu" />
+<div></div>
+<div id="page">
+  <tiles:insertAttribute name="body" />
+</div>
+<div></div>
+<div id="footer_wrapper">
+  <tiles:insertAttribute name="footer" />
 </div>
 </body>
 </html>

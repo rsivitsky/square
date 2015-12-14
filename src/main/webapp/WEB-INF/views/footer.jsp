@@ -4,4 +4,5 @@
     <jsp:directive.page contentType="text/html;charset=UTF-8"/>
     <spring:url value="/part/list" var="homeUrl"/>
     <а href="${homeUrl}">PART LIST</а>
+    footer body
 </div>
