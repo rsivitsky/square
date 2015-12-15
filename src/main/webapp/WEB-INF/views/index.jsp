@@ -1,9 +1,8 @@
-<?xrnl version = "l.O" encoding = "UTF-8" standalone = "no"?>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
 
     <div class="thumbnail" style="margin-top: 20px;">
-        <h1>DDR.COM</h1>
-
         <p class="lead">
             продажа запчастей
         </p>

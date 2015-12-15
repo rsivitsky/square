@@ -1,4 +1,5 @@
-<?xrnl version = "l.O" encoding="UTF-8" standalone = "no"?>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div id = "menu">
-    <h3>menu</h3>
+    <h3>МЕНЮ</h3>
 </div>
