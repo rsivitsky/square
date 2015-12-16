@@ -3,14 +3,10 @@
 <div class="container">
 
     <div class="thumbnail" style="margin-top: 20px;">
-        <p class="lead">
-            продажа запчастей
-        </p>
         <sec:authorize access="!isAuthenticated()">
             <div class="container" style="width: 300px;">
                 <c:url value="/j_spring_security_check" var="loginUrl"/>
                 <form action="${loginUrl}" method="post">
-                    <h2 class="form-signin-heading">Please sign in</h2>
                     <table>
                         <tr>
                             <th><label for="login">Login</label></th>
