@@ -13,7 +13,8 @@
     <link href="<c:url value="/resources/css/bootstrap.css" />" rel="stylesheet"  type="text/css" />
 </head>
 <body>
-<div class="container">
+<div class="wrapper-container">
+    <%--
 <table class="table table-hover">
 
     <tr>
@@ -36,6 +37,54 @@
         </td>
     </tr>
 </table>
+--%>
+        <header>
+            <tiles:insertAttribute name="header" ignore="true"/>
+            <form name="search" action="#" method="get" class="form-inline form-search pull-right">
+                <div class="input-group">
+                    <label class="sr-only" for="searchInput">Search</label>
+                    <input class="form-control" id="searchInput" type="text" name="search" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button type="submit" class="btn btn-primary">GO</button>
+                    </div>
+                </div>
+            </form>
+        </header>
+        <tiles:insertAttribute name="menu" ignore="true"/>
+       <%-- <nav>
+
+            <nav class="navbar navbar-default">
+                <ul class="nav navbar-nav">
+                    <li><a href="/home/">Home</a></li>
+                    <li class="active"><a href="/about/">About us</a></li>
+                    <li><a href="/services/">Services</a></li>
+                    <li><a href="/partners/">Partners</a></li>
+                    <li><a href="/customers/">Customers</a></li>
+                    <li><a href="/projects/">Projects</a></li>
+                    <li><a href="/careers/">Careers</a></li>
+                    <li><a href="/contact/">Contact</a></li>
+                </ul>
+            </nav>
+        </nav> --%>
+        <div class="heading"></div>
+        <div class="row">
+            <aside class="col-md-7">
+                <ul class="list-group submenu">
+                    <li class="list-group-item active">Lorem ipsum</li>
+                    <li class="list-group-item"><a href="/donec/">Donec tincidunt laoreet</a></li>
+                    <li class="list-group-item"><a href="/vestibulum/">Vestibulum elit</a></li>
+                    <li class="list-group-item"><a href="/etiam/">Etiam pharetra</a></li>
+                    <li class="list-group-item"><a href="/phasellus/">Phasellus placerat</a></li>
+                    <li class="list-group-item"><a href="/cras/">Cras et nisi vitae odio</a></li>
+                </ul>
+            </aside>
+            <section class="col-md-17">
+                <tiles:insertAttribute name="body" ignore="true"/>
+            </section>
+        </div>
 </div>
+<footer>
+    <tiles:insertAttribute name="footer" ignore="true"/>
+</footer>
 </body>
 </html>
