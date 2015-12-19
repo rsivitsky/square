@@ -1,9 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div class="container">
     <c:url var="editImgUrl" value="/resources/img/edit.png" />
     <c:url var="deleteImgUrl" value="/resources/img/delete.png" />
     <c:url var="addPartUrl" value="/part/add" />
+
     <table style="border: 1px solid; width: 100%; text-align:center">
         <thead style="background:#d3dce3">
         <tr>
