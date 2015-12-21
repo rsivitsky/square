@@ -6,10 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
-@SessionAttributes({"part"})
+//@SessionAttributes({"part"})
 public class HomeController {
     private PartService partService;
 
@@ -25,7 +24,7 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String startPageo(Model model) {
-        return "index";
+    public String startPageIdx() {
+        return "redirect:/";
     }
 }

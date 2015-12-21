@@ -47,7 +47,6 @@
     <p>Ваш логин: <sec:authentication property="principal.username"/></p>
 </sec:authorize>
     <tiles:insertAttribute name="footer" ignore="true"/>
-
 </body>
 
 </html>

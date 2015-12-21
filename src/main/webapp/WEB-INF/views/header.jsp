@@ -10,6 +10,7 @@
 <spring:message code="label.auth_incorrect_passw" var="auth_incorrect_passw"/>
 <spring:message code="label.forgot_passw" var="forgot_passw"/>
 <spring:message code="label.remember_me" var="remember_me"/>
+<spring:url var = "logoutUrl" value = "/j_spring_security_logout" />
 <c:url value="/j_spring_security_check" var="loginUrl"/>
 
 <div id="header">
@@ -68,5 +69,10 @@
                 </ul>
             </li>
         </ul>
+    </sec:authorize>
+    <sec:authorize access="isAuthenticated()">
+        <div>
+            <a href=${logoutUrl}>${logout}</a>
+        </div>
     </sec:authorize>
 </div>
