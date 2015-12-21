@@ -1,14 +1,12 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<div class="container">
     <spring:message code="label.admin" var="admin"/>
+    <spring:message code="label.home" var="home"/>
     <nav>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
-                <li><a href="/home/">Home</a></li>
+                <li><a href="/index">${home}</a></li>
                 <li class="active"><a href="/about/">About us</a></li>
-                <li><a href="/services/"> ${admin}</a></li>
+                <li><a href="/service"> ${admin}</a></li>
                 <li><a href="/partners/">Partners</a></li>
                 <li><a href="/customers/">Customers</a></li>
                 <li><a href="/projects/">Projects</a></li>
@@ -17,4 +15,4 @@
             </ul>
         </nav>
     </nav>
-</div>
+

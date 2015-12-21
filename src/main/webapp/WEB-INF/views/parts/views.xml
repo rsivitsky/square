@@ -6,4 +6,7 @@
     <definition name="index" extends="default">
         <put-attribute name="body" value = "/WEB-INF/views/index.jsp" />
     </definition>
+    <definition name="service" extends="default">
+        <put-attribute name="body" value="WEB-INF/views/service.jsp"/>
+    </definition>
 </tiles-definitions>
