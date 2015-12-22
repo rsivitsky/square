@@ -18,16 +18,16 @@
 <body>
 <div class="container" height="100%">
     <div class="row">
-        <div class="span12 col-lg-offset-11">
+        <div class="span12 col-sm-offset-10">
             <tiles:insertAttribute name="header" ignore="true"/>
         </div>
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-sm-10">
                 <tiles:insertAttribute name="menu" ignore="true"/>
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <ul class="list-group">
                     <li class="list-group-item active">Lorem ipsum</li>
                     <li class="list-group-item"><a href="/donec/">Donec tincidunt laoreet</a></li>
@@ -37,7 +37,7 @@
                     <li class="list-group-item"><a href="/cras/">Cras et nisi vitae odio</a></li>
                 </ul>
             </div>
-            <div class="col-md-9">
+            <div class="col-sm-9">
                 <tiles:insertAttribute name="body" ignore="true"/>
             </div>
         </div>
