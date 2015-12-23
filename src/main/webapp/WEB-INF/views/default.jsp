@@ -18,10 +18,10 @@
 <body>
 <div class="container">
     <div class="row">
-        <div class="col-md-9">
+        <div class="col-md-8">
             <tiles:insertAttribute name="menu" ignore="true"/>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <tiles:insertAttribute name="header" ignore="true"/>
         </div>
     </div>
@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-10" align="center">
+        <div class="col-sm-10" align="center">
             <sec:authorize access="isAuthenticated()">
                 <p>Ваш логин: <sec:authentication property="principal.username"/></p>
             </sec:authorize>

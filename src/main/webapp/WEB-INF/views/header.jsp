@@ -12,27 +12,27 @@
 <spring:message code="label.remember_me" var="remember_me"/>
 <spring:url var="logoutUrl" value="/j_spring_security_logout"/>
 <c:url value="/j_spring_security_check" var="loginUrl"/>
-<div class="row">
-    <div class="col-md-6" align="center" >
-        <a href="?lang=en_US">English</a>|<a href="?lang=ru_RU">Русский</a>
+
+<form class="form-inline">
+    <div class="form-group">
+            <a href="?lang=en_US">English</a>|<a href="?lang=ru_RU">Русский</a>
     </div>
-    <div class="col-md-6">
+    <div class="form-group col-lg-offset-2">
         <sec:authorize access="!isAuthenticated()">
             <!-- DROPDOWN LOGIN STARTS HERE -->
-            <ul id="signInDropdown" class="nav navbar-nav navbar-right">
-                <li class="dropdown">
                     <button type="button" id="dropdownMenu1" data-toggle="dropdown"
                             class="btn btn-default navbar-btn dropdown-toggle">
                         <i class="glyphicon glyphicon-user color-blue"></i> ${login} <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
                         <li>
-                            <div class="container" style="width: 300px;">
-                                <form action="${loginUrl}" method="post">
+                            <div class="container" style="width: 300px; height: auto">
+                                <form action="${loginUrl}" method="post" role="form" style="height: auto">
                                     <div class="form-group">
                                         <div class="input-group">
-                                        <span class="input-group-addon"><i
-                                                class="glyphicon glyphicon-user color-blue"></i></span>
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-user color-blue"></i>
+                                                </span>
                                             <!--LOGIN-->
                                             <input id="login" name="j_username"
                                                    placeholder=${auth_login} class="form-control"
@@ -44,8 +44,9 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="input-group">
-                                <span class="input-group-addon"><i
-                                        class="glyphicon glyphicon-lock color-blue"></i></span>
+                                                <span class="input-group-addon">
+                                                    <i class="glyphicon glyphicon-lock color-blue"></i>
+                                                </span>
                                             <!--PASSWORD-->
                                             <input id="password" name="j_password"
                                                    placeholder=${auth_passw} class="form-control"
@@ -61,22 +62,23 @@
                                     </div>
                                     <div class="form-group">
                                         <!--RESET PASSWORD LINK-->
-                                    <span class="pull-left"><input id="remember_me"
-                                                                   name="_spring_security_remember_me"
-                                                                   type="checkbox"/>${remember_me}
-                                    </span>
+                                            <span class="pull-left">
+                                                <input id="remember_me" name="_spring_security_remember_me"
+                                                       type="checkbox"/>${remember_me}
+                                            </span>
                                         <!-- Флажок "запомнить меня" -->
-                                        <span class="pull-right"><a href="#">${forgot_passw}</a></span>
+                                            <span class="pull-right">
+                                                <a href="#">${forgot_passw}</a>
+                                            </span>
                                     </div>
                                 </form>
                             </div>
                         </li>
                     </ul>
-                </li>
-            </ul>
+
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
             <a href=${logoutUrl}>${logout}</a>
         </sec:authorize>
-    </div>
-</div>
+        </div>
+</form>
