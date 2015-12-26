@@ -10,7 +10,7 @@ public class Manufactur {
 
     private Long manufactur_id;
     private String manufactur_name;
-    private Set<Offer> offers = new HashSet<Offer>();
+    private Set<Part> parts = new HashSet<Part>();
 
     @Id
     @Column(name = "manufactur_id")
@@ -32,12 +32,12 @@ public class Manufactur {
         this.manufactur_name = manufactur_name;
     }
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<Offer> getOffers() {
-        return offers;
+    @OneToMany(mappedBy = "manufactur", cascade = CascadeType.ALL, orphanRemoval = true)
+    public Set<Part> getParts() {
+        return parts;
     }
 
-    public void setOffers(Set<Offer> offers) {
-        this.offers = offers;
+    public void setParts(Set<Part> parts) {
+        this.parts = parts;
     }
 }

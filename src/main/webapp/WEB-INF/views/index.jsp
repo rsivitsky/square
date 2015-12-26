@@ -6,24 +6,21 @@
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
 <c:url var="addPartUrl" value="/part/add"/>
-
+<c:url var="editPartUrl" value="/part/edit/${part.part_id}"/>
+<c:url var="deletePartUrl" value="/part/remove/${part.part_id}"/>
+<c:url var="editDescUrl" value="/part/descript/edit/${part.part_id}"/>
 <%--<table style="border: 1px solid; width: 100%; text-align:center">--%>
-<table class="table table-hover table-responsive"/>
-    <%--<thead style="background:#d3dce3">--%>
-    <tr>
-        <th>#</th>
-        <th>Part Name</th>
-        <th colspan="2"></th>
-        <th>Description</th>
-        <%--<th colspan="3"></th>-->
-    </tr>
-    </thead>
-<%--<tbody style="background:#ccc">--%>
+<table class="table table-hover table-responsive">
+<thead style="background:#d3dce3">
+<tr>
+    <th>#</th>
+    <th>Part Name</th>
+    <th colspan="2"></th>
+    <th>Description</th>
+</tr>
+</thead>
+<tbody style="background:#ccc">
 <c:forEach items="${listPart}" var="part">
-    <c:url var="editPartUrl" value="/part/edit/${part.part_id}"/>
-    <c:url var="deletePartUrl" value="/part/remove/${part.part_id}"/>
-    <c:url var="editDescUrl" value="/part/descript/edit/${part.part_id}"/>
-
     <c:if test="${!empty part.part_name}">
         <tr>
             <td><c:out value="${part.part_id}"/></td>
@@ -36,10 +33,7 @@
 </c:forEach>
 </tbody>
 </table>
-
 <br>
-
 <sec:authorize access="isAuthenticated()">
-<p>Ваш логин: <sec:authentication property="principal.username"/></p>
+    <p>Ваш логин: <sec:authentication property="principal.username"/></p>
 </sec:authorize>
-

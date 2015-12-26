@@ -6,10 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "offer")
+@Table(name = "offer")/*
 @NamedQueries(
         @NamedQuery(name="Offer.allFiltersForOrders", query="select distinct c from Offer c left join fetch c.part t" )
-)
+)*/
 public class Offer {
 
     private Long offer_id;
@@ -19,7 +19,6 @@ public class Offer {
     private Float offer_sum;
     private Vendor vendor;
     private Part part;
-    private Manufactur manufactur;
     private Currency currency;
     private Set<Order> orders = new HashSet<Order>();
 
@@ -78,16 +77,6 @@ public class Offer {
 
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
-    }
-
-    @ManyToOne(targetEntity=Manufactur.class, fetch=FetchType.EAGER)
-    @JoinColumn(name = "manufactur_id")
-    public Manufactur getManufactur() {
-        return manufactur;
-    }
-
-    public void setManufactur(Manufactur manufactur) {
-        this.manufactur = manufactur;
     }
 
     @ManyToOne(targetEntity=Part.class, fetch=FetchType.EAGER)

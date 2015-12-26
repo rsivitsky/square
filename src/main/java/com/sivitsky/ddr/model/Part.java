@@ -13,6 +13,7 @@ public class Part {
 
     private Long part_id;
     private String part_name;
+    private Manufactur manufactur;
     private Set<Offer> offers = new HashSet<Offer>();
     private Set<Description> descriptions = new HashSet<Description>();
 
@@ -34,6 +35,16 @@ public class Part {
 
     public void setPart_name(String part_name) {
         this.part_name = part_name;
+    }
+
+    @ManyToOne(targetEntity=Manufactur.class, fetch=FetchType.EAGER)
+    @JoinColumn(name = "manufactur_id")
+    public Manufactur getManufactur() {
+        return manufactur;
+    }
+
+    public void setManufactur(Manufactur manufactur) {
+        this.manufactur = manufactur;
     }
 
     @OneToMany(mappedBy = "part", cascade = CascadeType.ALL, orphanRemoval = true)

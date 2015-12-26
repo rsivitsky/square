@@ -28,14 +28,6 @@
     <div class="row">
         <div class="col-sm-3">
             <tiles:insertAttribute name="filter" ignore="true"/>
-            <%--<ul class="list-group">
-                <li class="list-group-item active">Lorem ipsum</li>
-                <li class="list-group-item"><a href="/donec/">Donec tincidunt laoreet</a></li>
-                <li class="list-group-item"><a href="/vestibulum/">Vestibulum elit</a></li>
-                <li class="list-group-item"><a href="/etiam/">Etiam pharetra</a></li>
-                <li class="list-group-item"><a href="/phasellus/">Phasellus placerat</a></li>
-                <li class="list-group-item"><a href="/cras/">Cras et nisi vitae odio</a></li>
-            </ul>--%>
         </div>
         <div class="col-sm-9">
             <tiles:insertAttribute name="body" ignore="true"/>
@@ -46,10 +38,12 @@
             <sec:authorize access="isAuthenticated()">
                 <p>Ваш логин: <sec:authentication property="principal.username"/></p>
             </sec:authorize>
-            <tiles:insertAttribute name="footer" ignore="true"/>
         </div>
     </div>
 </div>
 </body>
+<footer>
+    <tiles:insertAttribute name="footer" ignore="true"/>
+</footer>
 
 </html>

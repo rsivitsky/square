@@ -114,7 +114,15 @@
         </beans:property>
     </beans:bean>
 
-    <beans:bean id="UserDetailsService" class="com.sivitsky.ddr.service.UserDetailsServiceImpl"/>
+    <beans:bean id="userDetailsService" class="com.sivitsky.ddr.service.UserDetailsServiceImpl"/>
+
+    <beans:bean id="partDAO" class="com.sivitsky.ddr.dao.PartDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="partService" class="com.sivitsky.ddr.service.PartServiceImpl">
+        <beans:property name="partDAO" ref="partDAO"/>
+    </beans:bean>
 
     <beans:bean id="userDAO" class="com.sivitsky.ddr.dao.UserDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
@@ -146,14 +154,6 @@
 
     <beans:bean id="offerService" class="com.sivitsky.ddr.service.OfferServiceImpl">
         <beans:property name="offerDAO" ref="offerDAO"/>
-    </beans:bean>
-
-    <beans:bean id="partDAO" class="com.sivitsky.ddr.dao.PartDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="partService" class="com.sivitsky.ddr.service.PartServiceImpl">
-        <beans:property name="partDAO" ref="partDAO"/>
     </beans:bean>
 
     <beans:bean id="phoneDAO" class="com.sivitsky.ddr.dao.PhoneDAOImpl">
