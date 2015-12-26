@@ -13,11 +13,11 @@
 <spring:url var="logoutUrl" value="/j_spring_security_logout"/>
 <c:url value="/j_spring_security_check" var="loginUrl"/>
 
-<form class="form-inline">
-    <div class="form-group">
+<div>
+
         <a href="?lang=en_US">English</a>|<a href="?lang=ru_RU">Русский</a>
-    </div>
-    <div class="form-group col-lg-offset-2">
+
+
         <sec:authorize access="!isAuthenticated()">
             <!-- DROPDOWN LOGIN STARTS HERE-->
             <button type="button" id="dropdownMenu1" data-toggle="dropdown"
@@ -74,10 +74,8 @@
                     </div>
                 </li>
             </ul>
-
         </sec:authorize>
         <sec:authorize access="isAuthenticated()">
-            <a href=${logoutUrl}>${logout}</a>
+             <a href=${logoutUrl}>${logout}</a>
         </sec:authorize>
-    </div>
-</form>
+</div>
