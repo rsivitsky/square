@@ -26,12 +26,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-3">
-            <tiles:insertAttribute name="filter" ignore="true"/>
-        </div>
-        <div class="col-sm-9">
             <tiles:insertAttribute name="body" ignore="true"/>
-        </div>
     </div>
     <div class="row">
         <div class="col-sm-10" align="center">

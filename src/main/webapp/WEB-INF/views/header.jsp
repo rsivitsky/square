@@ -27,7 +27,7 @@
             <ul class="dropdown-menu dropdown-menu-right">
                 <li>
                     <div class="container" style="width: 300px">
-                        <form action="${loginUrl}" method="post" role="form">
+                        <form action="${loginUrl}" method="post">
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon">
