@@ -14,12 +14,16 @@
     <div class="row">
         <div class="col-md-3">
             <form role="form">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="check1" onchange="">
-                        Обычный чекбокс, который можно отметить
-                    </label>
-                </div>
+                <c:forEach items="${listManufactur}" var="manufactur">
+                    <c:if test="${!empty manufactur.manufactur_name}">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="check1" onchange="">
+                                ${manufactur.manufactur_name}
+                            </label>
+                        </div>
+                    </c:if>
+                </c:forEach>
                 <div class="checkbox disabled">
                     <label>
                         <input type="checkbox" value="check2" disabled>
