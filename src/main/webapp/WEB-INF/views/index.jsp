@@ -6,27 +6,24 @@
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
 <c:url var="addPartUrl" value="/part/add"/>
-<c:url var="editPartUrl" value="/part/edit/${part.part_id}"/>
-<c:url var="deletePartUrl" value="/part/remove/${part.part_id}"/>
-<c:url var="editDescUrl" value="/part/descript/edit/${part.part_id}"/>
 
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <form role="form">
+            <form role="form" name="filter_form" method="get">
                 <c:forEach items="${listManufactur}" var="manufactur">
                     <c:if test="${!empty manufactur.manufactur_name}">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" value="check1" onchange="">
+                                <input type="checkbox" name="manufacturs" onclick="this.form.submit();" value=${manufactur.manufactur_name}>
                                 ${manufactur.manufactur_name}
                             </label>
                         </div>
                     </c:if>
                 </c:forEach>
-                <div class="checkbox disabled">
+                <div class="checkbox">
                     <label>
-                        <input type="checkbox" value="check2" disabled>
+                        <input type="checkbox" value="check2" onclick="">
                         Заблокированный чекбокс, не отмечается
                     </label>
                 </div>
@@ -51,6 +48,9 @@
                    <%-- </thead>
                     <tbody style="background:#ccc">--%>
                 <c:forEach items="${listPart}" var="part">
+                    <c:url var="editPartUrl" value="/part/edit/${part.part_id}"/>
+                    <c:url var="deletePartUrl" value="/part/remove/${part.part_id}"/>
+                    <c:url var="editDescUrl" value="/part/descript/edit/${part.part_id}"/>
                     <c:if test="${!empty part.part_name}">
                         <tr>
                             <td><c:out value="${part.part_id}"/></td>
