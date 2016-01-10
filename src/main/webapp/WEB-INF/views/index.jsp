@@ -6,20 +6,19 @@
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
 <c:url var="addPartUrl" value="/part/add"/>
+<c:set var="manufacturs" scope="session"/>
 
 <div class="container">
     <div class="row">
         <div class="col-md-3">
             <form role="form" name="filter_form" method="get">
-                <c:forEach items="${listManufactur}" var="manufactur">
-                    <c:if test="${!empty manufactur.manufactur_name}">
+                <c:forEach items="${manufacturFilterList}" var="manufacturFilter">
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox" name="manufacturs" onclick="this.form.submit();" value=${manufactur.manufactur_name}>
-                                ${manufactur.manufactur_name}
+                                <input type="checkbox" name="manufacturs" onclick="this.form.submit();" value=${manufacturFilter.usage}>
+                                ${manufacturFilter.manufactur.manufactur_name}
                             </label>
                         </div>
-                    </c:if>
                 </c:forEach>
                 <div class="checkbox">
                     <label>

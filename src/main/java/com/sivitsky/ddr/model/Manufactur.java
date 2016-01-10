@@ -40,4 +40,5 @@ public class Manufactur {
     public void setParts(Set<Part> parts) {
         this.parts = parts;
     }
+
 }
