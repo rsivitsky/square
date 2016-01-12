@@ -27,6 +27,11 @@ public class PartServiceImpl implements PartService {
     }
 
     @Transactional
+    public List<Part> listPartWithManufactursFilter(Long[] mas_id){
+        return partDAO.listPartWithManufactursFilter(mas_id);
+    }
+
+    @Transactional
     public void removePart(Long id) {
         partDAO.removePart(id);
     }

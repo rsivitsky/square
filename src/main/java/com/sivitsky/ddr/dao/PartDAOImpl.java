@@ -38,6 +38,11 @@ public class PartDAOImpl implements PartDAO {
         return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Part> listPartWithManufactursFilter(Long[] mas_id) {
+        return sessionFactory.getCurrentSession().getNamedQuery("Part.findByManufactId").setParameterList("mas_id", mas_id).list();
+    }
+
     public Part getPartById(Long id) {
         return (Part) this.sessionFactory.getCurrentSession().get(Part.class, id);
     }

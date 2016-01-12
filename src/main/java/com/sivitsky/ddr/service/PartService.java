@@ -12,6 +12,8 @@ public interface PartService {
 
     List<Part> listPartWithDetail();
 
+    List<Part> listPartWithManufactursFilter(Long[] mas_id);
+
     void removePart(Long id);
 
     Part getPartById(Long id);

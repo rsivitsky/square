@@ -6,11 +6,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "part")
-@NamedQueries(
-        @NamedQuery(name="Part.findAllWithDetail", query="select distinct c from Part c left join fetch c.descriptions t" )
+@NamedQueries({
+        @NamedQuery(name="Part.findAllWithDetail", query="select distinct c from Part c left join fetch c.descriptions t" ),
+        @NamedQuery(name="Part.findByManufactId", query="select distinct c from Part c left join fetch c.descriptions t " +
+                "where c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))" )
+        }
 )
 public class Part {
-
     private Long part_id;
     private String part_name;
     private Manufactur manufactur;

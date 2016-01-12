@@ -29,10 +29,10 @@ public class HomeController {
         }
     }
 
-    void setUsageAsTrue(String[] array_manufacturs) {
-        for (String select_id : array_manufacturs) {
+    void setUsageAsTrue(Long[] array_manufacturs) {
+        for (Long select_id : array_manufacturs) {
             for (ManufacturFilterService manufacturFilter : manufacturFilterList) {
-                if (manufacturFilter.getManufactur().getManufactur_id().toString().equals(select_id)) {
+                if (manufacturFilter.getManufactur().getManufactur_id().equals(select_id)) {
                     manufacturFilter.setUsage(true);
                 }
             }
@@ -62,9 +62,17 @@ public class HomeController {
     public String startPage(@RequestParam(value = "manufacturs", required = false) String[] array_manufacturs, Model model) {
         setUsageAsFalse();
         if (array_manufacturs != null && array_manufacturs.length > 0) {
-            setUsageAsTrue(array_manufacturs);
+            Long[] l_array_manufacturs = new Long[array_manufacturs.length];
+            for(int i = 0;i < array_manufacturs.length;i++)
+            {
+                l_array_manufacturs[i] = Long.parseLong(array_manufacturs[i]);
+            }
+            setUsageAsTrue(l_array_manufacturs);
+            model.addAttribute("listPart", partService.listPartWithManufactursFilter(l_array_manufacturs));
         }
-        model.addAttribute("listPart", partService.listPartWithDetail());
+        else {
+            model.addAttribute("listPart", partService.listPartWithDetail());
+        }
         model.addAttribute("manufacturFilterList", manufacturFilterList);
         return "index";
     }

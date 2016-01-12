@@ -10,6 +10,8 @@ public interface PartDAO {
 
     List<Part> listPartWithDetail();
 
+    List<Part> listPartWithManufactursFilter(Long[] mas_id);
+
     Part savePart(Part part);
 
     Part getPartById(Long id);
