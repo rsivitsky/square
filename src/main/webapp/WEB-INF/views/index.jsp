@@ -16,7 +16,12 @@
                 <c:forEach items="${manufacturFilterList}" var="manufacturFilter">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="manufacturs" value=${manufacturFilter.manufactur.manufactur_id}>
+                            <c:if test="${manufacturFilter.usage!=false}">
+                                <input type="checkbox" name="manufacturs" checked value=${manufacturFilter.manufactur.manufactur_id}>
+                            </c:if>
+                            <c:if test="${manufacturFilter.usage==false}">
+                                <input type="checkbox" name="manufacturs" value=${manufacturFilter.manufactur.manufactur_id}>
+                            </c:if>
                                 ${manufacturFilter.manufactur.manufactur_name}
                         </label>
                     </div>

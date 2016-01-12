@@ -44,6 +44,9 @@ public class HomeController{
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String startPage(@RequestParam(value = "manufacturs", required = false) String[] mas_manufacturs, Model model) {
+        for (ManufacturFilterService manufacturFilter: manufacturFilterList) {
+            manufacturFilter.setUsage(false);
+        }
         if (mas_manufacturs != null && mas_manufacturs.length > 0){
             for (String select_id:mas_manufacturs){
                 for (ManufacturFilterService manufacturFilter: manufacturFilterList) {
