@@ -17,27 +17,29 @@
                     <div class="checkbox">
                         <label>
                             <c:if test="${manufacturFilter.usage!=false}">
-                                <input type="checkbox" name="manufacturs" checked value=${manufacturFilter.manufactur.manufactur_id}>
+                                <input type="checkbox" name="manufacturs" checked onclick="this.form.submit();"
+                                       value=${manufacturFilter.manufactur.manufactur_id}>
                             </c:if>
                             <c:if test="${manufacturFilter.usage==false}">
-                                <input type="checkbox" name="manufacturs" value=${manufacturFilter.manufactur.manufactur_id}>
+                                <input type="checkbox" name="manufacturs" onclick="this.form.submit();"
+                                       value=${manufacturFilter.manufactur.manufactur_id}>
                             </c:if>
                                 ${manufacturFilter.manufactur.manufactur_name}
                         </label>
                     </div>
                 </c:forEach>
-                <input type="submit" value="Submit">
-            </form>
-            <%
-                String select[] = request.getParameterValues("manufacturs");
-                if (select != null && select.length != 0) {
-                    out.println("You have selected: ");
-                    for (int i = 0; i < select.length; i++) {
+                    <%-- <input type="submit" value="Submit">--%>
+                 </form>
+                 <%--  <%
+                      String select[] = request.getParameterValues("manufacturs");
+                      if (select != null && select.length != 0) {
+                          out.println("You have selected: ");
+                          for (int i = 0; i < select.length; i++) {
 
-                        out.println(select[i]);
-                    }
-                }
-            %>
+                              out.println(select[i]);
+                          }
+                      }
+                  %>--%>
         </div>
         <div class="col-md-9">
             <table class="table table-hover table-responsive">

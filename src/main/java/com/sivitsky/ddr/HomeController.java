@@ -18,22 +18,38 @@ import java.util.List;
 
 @Controller
 @SessionAttributes({"manufacturFilterList"})
-public class HomeController{
+public class HomeController {
     private PartService partService;
     private ManufacturService manufacturService;
-    private List<ManufacturFilterService> manufacturFilterList=new ArrayList<ManufacturFilterService>();
+    private List<ManufacturFilterService> manufacturFilterList = new ArrayList<ManufacturFilterService>();
 
-    @Autowired(required=true)
+    void setUsageAsFalse() {
+        for (ManufacturFilterService manufacturFilter : manufacturFilterList) {
+            manufacturFilter.setUsage(false);
+        }
+    }
+
+    void setUsageAsTrue(String[] array_manufacturs) {
+        for (String select_id : array_manufacturs) {
+            for (ManufacturFilterService manufacturFilter : manufacturFilterList) {
+                if (manufacturFilter.getManufactur().getManufactur_id().toString().equals(select_id)) {
+                    manufacturFilter.setUsage(true);
+                }
+            }
+        }
+    }
+
+    @Autowired(required = true)
     public void setPartService(PartService partService) {
         this.partService = partService;
     }
 
-    @Autowired(required=true)
+    @Autowired(required = true)
     public void setManufacturService(ManufacturService manufacturService) {
         this.manufacturService = manufacturService;
         //manufacturFilterList=new ArrayList<ManufacturFilterService>();
-        if (manufacturService.listManufactur().size()>0){
-            for(Manufactur manufactur:manufacturService.listManufactur()){
+        if (manufacturService.listManufactur().size() > 0) {
+            for (Manufactur manufactur : manufacturService.listManufactur()) {
                 ManufacturFilterService manufacturFilterService = new ManufacturFilterService();
                 manufacturFilterService.setManufactur(manufactur);
                 manufacturFilterService.setUsage(false);
@@ -43,18 +59,10 @@ public class HomeController{
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String startPage(@RequestParam(value = "manufacturs", required = false) String[] mas_manufacturs, Model model) {
-        for (ManufacturFilterService manufacturFilter: manufacturFilterList) {
-            manufacturFilter.setUsage(false);
-        }
-        if (mas_manufacturs != null && mas_manufacturs.length > 0){
-            for (String select_id:mas_manufacturs){
-                for (ManufacturFilterService manufacturFilter: manufacturFilterList) {
-                    if (manufacturFilter.getManufactur().getManufactur_id().toString().equals(select_id)){
-                        manufacturFilter.setUsage(true);
-                    }
-                }
-            }
+    public String startPage(@RequestParam(value = "manufacturs", required = false) String[] array_manufacturs, Model model) {
+        setUsageAsFalse();
+        if (array_manufacturs != null && array_manufacturs.length > 0) {
+            setUsageAsTrue(array_manufacturs);
         }
         model.addAttribute("listPart", partService.listPartWithDetail());
         model.addAttribute("manufacturFilterList", manufacturFilterList);
