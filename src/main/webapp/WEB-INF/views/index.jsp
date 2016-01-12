@@ -28,30 +28,16 @@
                         </label>
                     </div>
                 </c:forEach>
-                    <%-- <input type="submit" value="Submit">--%>
-                 </form>
-                 <%--  <%
-                      String select[] = request.getParameterValues("manufacturs");
-                      if (select != null && select.length != 0) {
-                          out.println("You have selected: ");
-                          for (int i = 0; i < select.length; i++) {
-
-                              out.println(select[i]);
-                          }
-                      }
-                  %>--%>
+            </form>
         </div>
         <div class="col-md-9">
             <table class="table table-hover table-responsive">
-                <%-- <thead style="background:#d3dce3">--%>
                 <tr>
                     <th>#</th>
                     <th>Part Name</th>
                     <th colspan="2"></th>
                     <th>Description</th>
                 </tr>
-                <%-- </thead>
-                 <tbody style="background:#ccc">--%>
                 <c:forEach items="${listPart}" var="part">
                     <c:url var="editPartUrl" value="/part/edit/${part.part_id}"/>
                     <c:url var="deletePartUrl" value="/part/remove/${part.part_id}"/>
@@ -66,7 +52,6 @@
                         </tr>
                     </c:if>
                 </c:forEach>
-                <%-- </tbody>--%>
             </table>
             <br>
             <sec:authorize access="isAuthenticated()">
