@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
@@ -13,39 +14,37 @@
         <div class="col-md-3">
             <form role="form" name="filter_form" method="get">
                 <c:forEach items="${manufacturFilterList}" var="manufacturFilter">
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="manufacturs" onclick="this.form.submit();" value=${manufacturFilter.usage}>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="manufacturs" value=${manufacturFilter.manufactur.manufactur_id}>
                                 ${manufacturFilter.manufactur.manufactur_name}
-                            </label>
-                        </div>
+                        </label>
+                    </div>
                 </c:forEach>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" value="check2" onclick="">
-                        Заблокированный чекбокс, не отмечается
-                    </label>
-                </div>
-                <select class="form-control" multiple>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                </select>
+                <input type="submit" value="Submit">
             </form>
+            <%
+                String select[] = request.getParameterValues("manufacturs");
+                if (select != null && select.length != 0) {
+                    out.println("You have selected: ");
+                    for (int i = 0; i < select.length; i++) {
+
+                        out.println(select[i]);
+                    }
+                }
+            %>
         </div>
         <div class="col-md-9">
             <table class="table table-hover table-responsive">
-               <%-- <thead style="background:#d3dce3">--%>
+                <%-- <thead style="background:#d3dce3">--%>
                 <tr>
                     <th>#</th>
                     <th>Part Name</th>
                     <th colspan="2"></th>
                     <th>Description</th>
                 </tr>
-                   <%-- </thead>
-                    <tbody style="background:#ccc">--%>
+                <%-- </thead>
+                 <tbody style="background:#ccc">--%>
                 <c:forEach items="${listPart}" var="part">
                     <c:url var="editPartUrl" value="/part/edit/${part.part_id}"/>
                     <c:url var="deletePartUrl" value="/part/remove/${part.part_id}"/>
@@ -60,7 +59,7 @@
                         </tr>
                     </c:if>
                 </c:forEach>
-               <%-- </tbody>--%>
+                <%-- </tbody>--%>
             </table>
             <br>
             <sec:authorize access="isAuthenticated()">

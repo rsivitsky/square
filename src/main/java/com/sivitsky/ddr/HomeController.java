@@ -9,17 +9,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 @SessionAttributes({"manufacturFilterList"})
-public class HomeController {
+public class HomeController{
     private PartService partService;
     private ManufacturService manufacturService;
-    private List<ManufacturFilterService> manufacturFilterList;
+    private List<ManufacturFilterService> manufacturFilterList=new ArrayList<ManufacturFilterService>();
 
     @Autowired(required=true)
     public void setPartService(PartService partService) {
@@ -29,7 +31,7 @@ public class HomeController {
     @Autowired(required=true)
     public void setManufacturService(ManufacturService manufacturService) {
         this.manufacturService = manufacturService;
-        manufacturFilterList=new ArrayList<ManufacturFilterService>();
+        //manufacturFilterList=new ArrayList<ManufacturFilterService>();
         if (manufacturService.listManufactur().size()>0){
             for(Manufactur manufactur:manufacturService.listManufactur()){
                 ManufacturFilterService manufacturFilterService = new ManufacturFilterService();
@@ -41,7 +43,23 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String startPage(Model model) {
+    public String startPage(@RequestParam(value = "manufacturs", required = false) String[] mas_manufacturs, Model model) {
+        if (mas_manufacturs != null && mas_manufacturs.length > 0){
+            for (String select_id:mas_manufacturs){
+                for (ManufacturFilterService manufacturFilter: manufacturFilterList) {
+                    if (manufacturFilter.getManufactur().getManufactur_id().toString().equals(select_id)){
+                        manufacturFilter.setUsage(true);
+                    }
+                }
+            }
+        }
+        model.addAttribute("listPart", partService.listPartWithDetail());
+        model.addAttribute("manufacturFilterList", manufacturFilterList);
+        return "index";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String startPagePost(Model model) {
         model.addAttribute("listPart", partService.listPartWithDetail());
         model.addAttribute("manufacturFilterList", manufacturFilterList);
         return "index";
