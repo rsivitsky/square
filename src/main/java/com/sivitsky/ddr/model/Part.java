@@ -9,7 +9,10 @@ import java.util.Set;
 @NamedQueries({
         @NamedQuery(name="Part.findAllWithDetail", query="select distinct c from Part c left join fetch c.descriptions t" ),
         @NamedQuery(name="Part.findByManufactId", query="select distinct c from Part c left join fetch c.descriptions t " +
-                "where c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))" )
+                "where c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))" ),
+        @NamedQuery(name="Part.findByManufactIdAndPrice", query="select distinct c from Part c left join fetch c.descriptions t left join fetch c.offers o " +
+                "where (:mas_id is null or c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)) and " +
+                "(:price_from is null or o.offer_price >= :price_from) and (:price_till is null or o.offer_price < :price_till))" )
         }
 )
 public class Part {

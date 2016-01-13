@@ -12,6 +12,8 @@ public interface PartDAO {
 
     List<Part> listPartWithManufactursFilter(Long[] mas_id);
 
+    List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Integer price_from, Integer price_till);
+
     Part savePart(Part part);
 
     Part getPartById(Long id);

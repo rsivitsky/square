@@ -43,6 +43,13 @@ public class PartDAOImpl implements PartDAO {
         return sessionFactory.getCurrentSession().getNamedQuery("Part.findByManufactId").setParameterList("mas_id", mas_id).list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Integer price_from, Integer price_till) {
+        return sessionFactory.getCurrentSession().getNamedQuery("Part.findByManufactIdAndPrice").setParameterList("mas_id", mas_id)
+                .setParameter("price_from", price_from)
+                .setParameter("price_till", price_till).list();
+    }
+
     public Part getPartById(Long id) {
         return (Part) this.sessionFactory.getCurrentSession().get(Part.class, id);
     }
@@ -53,5 +60,4 @@ public class PartDAOImpl implements PartDAO {
             sessionFactory.getCurrentSession().delete(part);
         }
     }
-
 }
