@@ -32,8 +32,8 @@ public class PartServiceImpl implements PartService {
     }
 
     @Transactional
-    public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Integer price_from, Integer price_till){
-        return partDAO.listPartByManufactIdAndPrice(mas_id, price_from, price_till);
+    public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to){
+        return partDAO.listPartByManufactIdAndPrice(mas_id, price_from, price_to);
     }
 
     @Transactional

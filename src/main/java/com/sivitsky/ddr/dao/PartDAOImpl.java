@@ -44,10 +44,10 @@ public class PartDAOImpl implements PartDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Integer price_from, Integer price_till) {
+    public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to) {
         return sessionFactory.getCurrentSession().getNamedQuery("Part.findByManufactIdAndPrice").setParameterList("mas_id", mas_id)
                 .setParameter("price_from", price_from)
-                .setParameter("price_till", price_till).list();
+                .setParameter("price_to", price_to).list();
     }
 
     public Part getPartById(Long id) {

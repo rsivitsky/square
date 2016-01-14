@@ -12,7 +12,7 @@ public interface PartDAO {
 
     List<Part> listPartWithManufactursFilter(Long[] mas_id);
 
-    List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Integer price_from, Integer price_till);
+    List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to);
 
     Part savePart(Part part);
 
