@@ -4,8 +4,6 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<spring:message code="label.from" var="from"/>
-<spring:message code="label.to" var="to"/>
 <spring:message code="label.price" var="price"/>
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
