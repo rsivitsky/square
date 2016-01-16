@@ -28,7 +28,6 @@ public class PartController {
     @RequestMapping("/part/list")
     public String startPart(Model model)
     {
-        //model.addAttribute("part", new Part());
         model.addAttribute("listPart", partService.listPartWithDetail());
         return "part";
     }

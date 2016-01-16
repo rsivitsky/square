@@ -12,7 +12,7 @@
     Add a Part
 </h1>
 <c:url var="addAction" value="/part/add"></c:url>
-<form:form action="${addAction}" commandName="part">
+<form:form action="${addAction}" commandName="part" enctype="multipart/form-data">
     <table>
         <tr>
             <td>
@@ -22,7 +22,11 @@
             </td>
             <td>
                     <form:input path="part_name"/>
+            </td>
             <td>
+                <input name="file" type="file"/>
+            </td>
+
         </tr>
         <tr>
             <td>

@@ -19,6 +19,7 @@ public class Part {
     private Long part_id;
     private String part_name;
     private Manufactur manufactur;
+    private byte[] photo;
     private Set<Offer> offers = new HashSet<Offer>();
     private Set<Description> descriptions = new HashSet<Description>();
 
@@ -31,6 +32,17 @@ public class Part {
 
     public void setPart_id(Long part_id) {
         this.part_id = part_id;
+    }
+
+    @Basic(fetch= FetchType.LAZY)
+    @Lob
+    @Column(name = "photo")
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Column(name = "part_name")
