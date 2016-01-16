@@ -5,6 +5,9 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <spring:message code="label.price" var="price"/>
+<spring:message code="label.part_photo" var="part_photo"/>
+<spring:url value="/part/photo" var="partPhotoUrl"/>
+
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
 <c:url var="addPartUrl" value="/part/add"/>
@@ -57,7 +60,8 @@
                     <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
                     <td><a href="${deletePartUrl}"><img src="${deleteImgUrl}"/></a></td>
                     <td><a href="${editDescUrl}">go to description</a></td>
-                </tr>
+                    <td>${part_photo}</td>
+                    <td><img src="${partPhotoUrl}/${part.part_id}"/></td>
             </c:if>
         </c:forEach>
     </table>

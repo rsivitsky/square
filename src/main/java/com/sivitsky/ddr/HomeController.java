@@ -1,16 +1,14 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Manufactur;
+import com.sivitsky.ddr.model.Part;
 import com.sivitsky.ddr.service.ManufacturFilterService;
 import com.sivitsky.ddr.service.ManufacturService;
 import com.sivitsky.ddr.service.PartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.*;
 
 import java.util.ArrayList;
@@ -110,5 +108,12 @@ public class HomeController {
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String startPageIdx() {
         return "redirect:/";
+    }
+
+    @RequestMapping(value = "/part/photo/{part_id}", method = RequestMethod.GET)
+    @ResponseBody
+    public byte [] downloadPhoto (@PathVariable ("part_id") Long part_id) {
+        Part part = partService.getPartById(part_id);
+        return part.getPhoto();
     }
 }

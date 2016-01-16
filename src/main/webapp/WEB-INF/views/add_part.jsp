@@ -24,7 +24,7 @@
                     <form:input path="part_name"/>
             </td>
             <td>
-                <input name="file" type="file"/>
+                <input name="img_file" type="file"/>
             </td>
 
         </tr>
