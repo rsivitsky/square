@@ -56,9 +56,7 @@
             <c:url var="editDescUrl" value="/part/descript/edit/${part.part_id}"/>
             <c:if test="${!empty part.part_name}">
                 <tr style="height: 15px">
-                    <td>
-                        <img src="${partPhotoUrl}/${part.part_id}" class="img-rounded" height="40" width="150"/>
-                    </td>
+                    <td><img src="${partPhotoUrl}/${part.part_id}" class="img-rounded" height="40" width="150"/></td>
                     <td><c:out value="${part.part_id}"/></td>
                     <td><c:out value="${part.part_name}"/></td>
                     <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
