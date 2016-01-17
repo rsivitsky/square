@@ -44,6 +44,7 @@
 <div class="col-md-9">
     <table class="table table-hover table-responsive">
         <tr>
+            <th>${part_photo}</th>
             <th>#</th>
             <th>Part Name</th>
             <th colspan="2"></th>
@@ -54,14 +55,16 @@
             <c:url var="deletePartUrl" value="/part/remove/${part.part_id}"/>
             <c:url var="editDescUrl" value="/part/descript/edit/${part.part_id}"/>
             <c:if test="${!empty part.part_name}">
-                <tr>
+                <tr style="height: 15px">
+                    <td>
+                        <img src="${partPhotoUrl}/${part.part_id}" class="img-rounded" height="40" width="150"/>
+                    </td>
                     <td><c:out value="${part.part_id}"/></td>
                     <td><c:out value="${part.part_name}"/></td>
                     <td><a href="${editPartUrl}"><img src="${editImgUrl}"/></a></td>
                     <td><a href="${deletePartUrl}"><img src="${deleteImgUrl}"/></a></td>
                     <td><a href="${editDescUrl}">go to description</a></td>
-                    <td>${part_photo}</td>
-                    <td><img src="${partPhotoUrl}/${part.part_id}"/></td>
+                </tr>
             </c:if>
         </c:forEach>
     </table>
