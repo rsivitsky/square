@@ -33,6 +33,10 @@ public class CurrencyDAOImpl implements CurrencyDAO{
         return (Currency) this.sessionFactory.getCurrentSession().get(Currency.class, id);
     }
 
+    public Currency getCurrencyByName(String name){
+        return (Currency) this.sessionFactory.getCurrentSession().get(Currency.class, name);
+    }
+
     public void removeCurrency(Long id) {
         Currency currency = (Currency) sessionFactory.getCurrentSession().load(Currency.class, id);
         if (null != currency) {

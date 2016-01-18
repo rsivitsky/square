@@ -12,5 +12,7 @@ public interface CurrencyDAO {
 
     Currency getCurrencyById(Long id);
 
+    Currency getCurrencyByName(String name);
+
     void removeCurrency(Long id);
 }
