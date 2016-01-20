@@ -72,6 +72,12 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                     case 2:
                         offer.setOffer_price(Float.parseFloat((String) getCellValue(nextCell)));
                         break;
+                    case 3:
+                        try {
+                            offer.setCurrency(currencyService.getCurrencyByName((String) getCellValue(nextCell)));
+                        } catch (NullPointerException e) {
+                            offer.setCurrency(currencyService.getCurrencyById(1L));
+                        }
                 }
             }
             listOffers.add(offer);

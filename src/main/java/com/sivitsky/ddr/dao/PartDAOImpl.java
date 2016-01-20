@@ -54,6 +54,10 @@ public class PartDAOImpl implements PartDAO {
         return (Part) this.sessionFactory.getCurrentSession().get(Part.class, id);
     }
 
+    public Part getPartByName(String name) {
+        return (Part) this.sessionFactory.getCurrentSession().get(Part.class, name);
+    }
+
     public void removePart(Long id) {
         Part part = (Part) sessionFactory.getCurrentSession().load(Part.class, id);
         if (null != part) {

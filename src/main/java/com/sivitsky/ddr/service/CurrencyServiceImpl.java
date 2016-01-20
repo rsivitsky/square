@@ -36,5 +36,9 @@ public class CurrencyServiceImpl implements CurrencyService {
         return this.currencyDAO.getCurrencyById(id);
     }
 
+    @Transactional
+    public Currency getCurrencyByName(String name) {
+        return this.currencyDAO.getCurrencyByName(name);
+    }
 
 }

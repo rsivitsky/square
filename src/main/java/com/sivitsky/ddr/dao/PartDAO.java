@@ -18,5 +18,7 @@ public interface PartDAO {
 
     Part getPartById(Long id);
 
+    Part getPartByName(String name);
+
     void removePart(Long id);
 }
