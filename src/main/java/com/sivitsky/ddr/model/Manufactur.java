@@ -1,12 +1,13 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "manufactur")
-public class Manufactur {
+public class Manufactur implements Serializable {
 
     private Long manufactur_id;
     private String manufactur_name;

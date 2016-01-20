@@ -1,6 +1,7 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,7 +16,7 @@ import java.util.Set;
                 "(:price_from is null or o.offer_price >= :price_from) and (:price_to is null or o.offer_price < :price_to))" )
         }
 )
-public class Part {
+public class Part implements Serializable {
     private Long part_id;
     private String part_name;
     private Manufactur manufactur;

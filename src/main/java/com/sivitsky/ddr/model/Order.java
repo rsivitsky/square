@@ -1,11 +1,12 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "order")
-public class Order {
+public class Order implements Serializable {
 
     private Long order_id;
     private Integer order_num;

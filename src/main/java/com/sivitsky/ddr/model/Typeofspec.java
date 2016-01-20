@@ -1,12 +1,13 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "typeofspec")
-public class Typeofspec {
+public class Typeofspec implements Serializable {
 
     private Long tspec_id;
     private String tspec_name;

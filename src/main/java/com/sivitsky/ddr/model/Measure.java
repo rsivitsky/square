@@ -1,12 +1,13 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "measure")
-public class Measure {
+public class Measure implements Serializable {
 
     private Long measure_id;
     private String measure_name;

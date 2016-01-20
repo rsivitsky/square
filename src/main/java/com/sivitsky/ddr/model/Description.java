@@ -1,10 +1,11 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "description")
-public class Description {
+public class Description implements Serializable {
 
     private Long descript_id;
     private String descript_name;
