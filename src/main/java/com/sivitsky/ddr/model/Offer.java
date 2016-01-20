@@ -5,8 +5,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +17,7 @@ import java.util.Set;
 public class Offer implements Serializable {
 
     private Long offer_id;
-    private DateTime offer_date;
+    private Date offer_date;
     private Float offer_price;
     private Integer offer_num;
     private Float offer_sum;
@@ -58,23 +56,12 @@ public class Offer implements Serializable {
     }
 
     @Column(name = "offer_date")
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
-    public DateTime getOffer_date() {
+    public Date getOffer_date() {
         return offer_date;
     }
 
-    public void setOffer_date(DateTime offer_date) {
+    public void setOffer_date(Date offer_date) {
         this.offer_date = offer_date;
-    }
-
-    @Transient
-    public String getOfferDateString(){
-    String offerDateString = "";
-    if (offer_date != null)
-        offerDateString = org.joda.time.format.DateTimeFormat
-            .forPattern("yyyy-MM-dd") .print(offer_date);
-    return offerDateString;
     }
 
     @Column(name = "offer_price")

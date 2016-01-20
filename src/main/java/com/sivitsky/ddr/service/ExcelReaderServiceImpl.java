@@ -7,14 +7,13 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.joda.time.DateTime;
 
 import java.awt.print.Book;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Date;
-import org.joda.time.DateTime;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -52,7 +51,7 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
 
                 switch (columnIndex) {
                     case 1:
-                        offer.setOffer_date(DateTime.parse((String) getCellValue(nextCell)));
+                        offer.setOffer_date(Date.valueOf((String) getCellValue(nextCell)));
                         break;
                     case 2:
                         offer.setOffer_price(Float.parseFloat((String) getCellValue(nextCell)));
