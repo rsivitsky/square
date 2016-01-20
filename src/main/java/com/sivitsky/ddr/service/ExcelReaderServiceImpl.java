@@ -7,6 +7,8 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.awt.print.Book;
 import java.io.File;
@@ -18,9 +20,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@Component
 public class ExcelReaderServiceImpl implements ExcelReaderService {
 
-   public Object getCellValue(Cell cell){
+    private PartService partService;
+    private CurrencyService currencyService;
+
+    @Autowired(required = true)
+    public void setPartService(PartService partService) {
+        this.partService = partService;
+    }
+
+    @Autowired(required = true)
+    public void setCurrencyService(CurrencyService currencyService) {
+        this.currencyService = currencyService;
+    }
+
+    public Object getCellValue(Cell cell) {
         switch (cell.getCellType()) {
             case Cell.CELL_TYPE_STRING:
                 return cell.getStringCellValue();
@@ -32,7 +48,7 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
         return null;
     }
 
-   public List<Offer> readBooksFromExcelFile(String excelFilePath) throws IOException {
+    public List<Offer> readBooksFromExcelFile(String excelFilePath) throws IOException {
         List<Offer> listOffers = new ArrayList<Offer>();
         FileInputStream inputStream = new FileInputStream(new File(excelFilePath));
 
@@ -65,7 +81,7 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
         return listOffers;
     }
 
-   public Workbook getWorkbook(FileInputStream inputStream, String excelFilePath) throws IOException {
+    public Workbook getWorkbook(FileInputStream inputStream, String excelFilePath) throws IOException {
         Workbook workbook = null;
         if (excelFilePath.endsWith("xlsx")) {
             workbook = new XSSFWorkbook(inputStream);
