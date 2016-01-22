@@ -29,7 +29,7 @@ public class MeasureController {
 
 	@RequestMapping(value= "/measure/add", method = RequestMethod.POST)
 	public String addMeasure(@ModelAttribute("measure") Measure measure, BindingResult result){
-		measure = this.measureService.saveMeasure(measure);
+		this.measureService.saveMeasure(measure);
 		return "redirect:/measure";
 	}
 	

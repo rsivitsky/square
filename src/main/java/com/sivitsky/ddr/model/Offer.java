@@ -10,10 +10,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "offer")/*
-@NamedQueries(
-        @NamedQuery(name="Offer.allFiltersForOrders", query="select distinct c from Offer c left join fetch c.part t" )
-)*/
+@Table(name = "offer")
+@NamedQueries({
+       // @NamedQuery(name="Offer.allFiltersForOrders", query="select distinct c from Offer c left join fetch c.part t" ),
+        @NamedQuery(name="Offer.getOffersByVendorId", query="from Offer where vendor_id = :vendor_id" )
+}
+)
 public class Offer implements Serializable {
 
     private Long offer_id;

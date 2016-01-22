@@ -43,4 +43,9 @@ public class OfferDAOImpl implements OfferDAO {
             sessionFactory.getCurrentSession().delete(offer);
         }
     }
+
+    public List<Offer> getOffersByVendorId(Long vendor_id){
+        return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByVendorId")
+                .setParameter("vendor_id", vendor_id).list();
+    }
 }

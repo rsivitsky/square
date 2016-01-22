@@ -10,6 +10,8 @@ public interface OfferService {
 
     List<Offer> listOffer();
 
+    List<Offer> getOffersByVendorId(Long vendor_id);
+
     void removeOffer(Long id);
 
     Offer getOfferById(Long id);

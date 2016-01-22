@@ -12,5 +12,7 @@ public interface OfferDAO {
 
     Offer getOfferById(Long id);
 
+    List<Offer> getOffersByVendorId(Long id);
+
     void removeOffer(Long id);
 }

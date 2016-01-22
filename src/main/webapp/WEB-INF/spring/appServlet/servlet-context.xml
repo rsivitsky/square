@@ -118,6 +118,8 @@
         </beans:property>
     </beans:bean>
 
+    <beans:bean id="excelReaderService" class="com.sivitsky.ddr.service.ExcelReaderServiceImpl"/>
+
     <beans:bean id="userDetailsService" class="com.sivitsky.ddr.service.UserDetailsServiceImpl"/>
 
     <beans:bean id="partDAO" class="com.sivitsky.ddr.dao.PartDAOImpl">
