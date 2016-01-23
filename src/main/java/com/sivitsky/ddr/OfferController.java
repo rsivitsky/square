@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
+@SessionAttributes({"offer","listOffers"})
 public class OfferController {
 
     private OfferService offerService;
@@ -34,12 +32,6 @@ public class OfferController {
         model.addAttribute("offer", new Offer());
         model.addAttribute("listOffers", this.offerService.getOffersByVendorId(id));
         return "offers";
-    }
-
-    @RequestMapping("/offers/add")
-    public String addOffer(@ModelAttribute("offer") Offer offer) {
-        this.offerService.saveOffer(offer);
-        return "redirect:/offers";
     }
 
     @RequestMapping("/offers/remove/{offer_id}")
