@@ -4,15 +4,15 @@
 
 <tiles-definitions>
     <definition name="index" extends="default">
-        <put-attribute name="body" value = "/WEB-INF/views/index.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/index.jsp"/>
     </definition>
     <definition name="add_part" extends="default">
-        <put-attribute name="body" value = "/WEB-INF/views/add_part.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/add_part.jsp"/>
     </definition>
     <definition name="part" extends="default">
-        <put-attribute name="body" value = "/WEB-INF/views/part.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/part.jsp"/>
     </definition>
-    <!--<definition name="service" extends="default">
-        <put-attribute name="body" value="WEB-INF/views/service.jsp"/>
-    </definition>-->
+    <definition name="offers" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/offer.jsp"/>
+    </definition>
 </tiles-definitions>
