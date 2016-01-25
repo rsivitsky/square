@@ -77,16 +77,6 @@ public class OfferController {
         return "offers";
     }
 
-    @RequestMapping("/offers/edit/{offer_id,vendor_id}")
-    public String editVendorsOffer(@PathVariable("offer_id") Long offer_id, @PathVariable("vendor_id") Long vendor_id, Model model) {
-        model.addAttribute("offer", this.offerService.getOfferById(offer_id));
-        model.addAttribute("listOffers", this.offerService.listOffer());
-        model.addAttribute("listVendor", this.vendorService.getVendorById(vendor_id));
-        model.addAttribute("listCurrency", this.currencyService.listCurrency());
-        model.addAttribute("listPart", this.partService.listPart());
-        return "offers";
-    }
-
     @RequestMapping(value = "/offers/add", method = RequestMethod.POST)
     public String addOffer(@ModelAttribute("offer") Offer offer, BindingResult result) {
         this.offerService.saveOffer(offer);
