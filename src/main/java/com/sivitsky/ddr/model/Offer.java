@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -58,6 +59,7 @@ public class Offer implements Serializable {
     }
 
     @Column(name = "offer_date")
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     public Date getOffer_date() {
         return offer_date;
     }
