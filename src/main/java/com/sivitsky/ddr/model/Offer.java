@@ -107,7 +107,7 @@ public class Offer implements Serializable {
         this.currency = currency;
     }
 
-    @OneToMany(mappedBy = "offer", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "offer")
     public Set<Order> getOrders() {
         return orders;
     }
