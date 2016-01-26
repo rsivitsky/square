@@ -5,83 +5,83 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<spring:message code="label.offer_date" var="offer_date"/>
+<spring:message code="label.offer_vendor" var="offer_vendor"/>
+<spring:message code="label.offer_part" var="offer_part"/>
+<spring:message code="label.offer_price" var="offer_price"/>
+<spring:message code="label.offer_num" var="offer_num"/>
+<spring:message code="label.offer_sum" var="offer_sum"/>
+<spring:message code="label.offer_currency" var="offer_currency"/>
+
 <c:url var="addAction" value="/offers/add"></c:url>
 <div>
     <form:form action="${addAction}" commandName="offer">
-        <table>
+        <table class="table table-hover table-responsive">
+            <tr>
+                <th>
+                    <form:label path="vendor">
+                        <spring:message text="${offer_vendor}"/>
+                    </form:label>
+                </th>
+                <th>
+                    <form:label path="offer_date">
+                        <spring:message text="${offer_date}"/>
+                    </form:label>
+                </th>
+                <th>
+                    <form:label path="part">
+                        <spring:message text="${offer_part}"/>
+                    </form:label>
+                </th>
+                <th>
+                    <form:label path="currency">
+                        <spring:message text="${offer_currency}"/>
+                    </form:label>
+                </th>
+                <th>
+                    <form:label path="offer_price">
+                        <spring:message text="${offer_price}"/>
+                    </form:label>
+                </th>
+                <th>
+                    <form:label path="offer_num">
+                        <spring:message text="${offer_num}"/>
+                    </form:label>
+                </th>
+                <th>
+                    <form:label path="offer_sum">
+                        <spring:message text="${offer_sum}"/>
+                    </form:label>
+                </th>
+            </tr>
             <tr>
                 <td>
-                    <form:label path="offer_date">
-                        <spring:message text="offer's date"/>
-                    </form:label>
+                    <form:select path="vendor.vendor_id" name="vendor" items="${listVendor}" itemValue="vendor_id"
+                                 itemLabel="vendor_name"/>
                 </td>
                 <td>
                     <form:input type="date" path="offer_date"/>
-                </td>
-            </tr>
-            <tr>
-                <form:label path="currency">
-                    <spring:message text="currency"/>
-                </form:label>
-                <td>
-                    <form:select path="currency.valuta_id" name="currency" items="${listCurrency}" itemValue="valuta_id"
-                                 itemLabel="valuta_name"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="offer_price">
-                        <spring:message text="price"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:input path="offer_price"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="part">
-                        <spring:message text="part"/>
-                    </form:label>
                 </td>
                 <td>
                     <form:select path="part.part_id" name="part" items="${listPart}" itemValue="part_id"
                                  itemLabel="part_name"/>
                 </td>
-            </tr>
-
-            <tr>
                 <td>
-                    <form:label path="vendor">
-                        <spring:message text="vendor"/>
-                    </form:label>
+                    <form:select path="currency.valuta_id" name="currency" items="${listCurrency}" itemValue="valuta_id"
+                                 itemLabel="valuta_name"/>
                 </td>
                 <td>
-                    <form:select path="vendor.vendor_id" name="vendor" items="${listVendor}" itemValue="vendor_id"
-                                 itemLabel="vendor_name"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="offer_num">
-                        <spring:message text="num"/>
-                    </form:label>
+                    <form:input path="offer_price"/>
                 </td>
                 <td>
                     <form:input path="offer_num" name="offer_num"/>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="offer_sum">
-                        <spring:message text="summ"/>
-                    </form:label>
                 </td>
                 <td>
                     <form:input path="offer_sum" name="offer_sum"/>
                 </td>
             </tr>
             <tr>
+                <td>
                 <c:if test="${!empty offer.offer_id}">
                     <input type="submit"
                            value="<spring:message text="Edit"/>"/>
@@ -90,6 +90,7 @@
                     <input type="submit"
                            value="<spring:message text="Add"/>"/>
                 </c:if>
+                </td>
             </tr>
         </table>
     </form:form>
@@ -100,17 +101,38 @@
         <h3>offer list</h3>
         <table class="table table-hover table-responsive">
             <tr>
-                <th width="80">id</th>
-                <th width="120">date</th>
-                <th width="120">currensy</th>
-                <th width="60">delete</th>
+                <th>
+                    ${offer_vendor}
+                </th>
+                <th>
+                    ${offer_date}
+                </th>
+                <th>
+                    ${offer_part}
+                </th>
+                <th>
+                    ${offer_currency}
+                </th>
+                <th>
+                    ${offer_price}
+                </th>
+                <th>
+                    ${offer_num}
+                </th>
+                <th>
+                    ${offer_sum}
+                </th>
             </tr>
             <c:forEach items="${listOffers}" var="offer_item">
                 <tr>
-                    <td>${offer_item.offer_id}</td>
+                    <td>${offer_item.vendor.vendor_name}</td>
                     <td><fmt:formatDate pattern="dd-MM-yyyy"
                                     value="${offer_item.offer_date}" /></td>
+                    <td>${offer_item.part.part_name}</td>
                     <td>${offer_item.currency.valuta_name}</td>
+                    <td>${offer_item.offer_price}</td>
+                    <td>${offer_item.offer_num}</td>
+                    <td>${offer_item.offer_sum}</td>
                     <td><a href="<c:url value='/offers/edit/${offer_item.offer_id}' />">Edit</a></td>
                     <td><a href="<c:url value='/offers/remove/${offer_item.offer_id}' />">Delete</a></td>
                 </tr>
