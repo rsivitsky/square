@@ -1,5 +1,6 @@
 package com.sivitsky.ddr.dao;
 
+import com.sivitsky.ddr.model.Currency;
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.Part;
 import org.hibernate.Session;
@@ -55,7 +56,8 @@ public class PartDAOImpl implements PartDAO {
     }
 
     public Part getPartByName(String name) {
-        return (Part) this.sessionFactory.getCurrentSession().get(Part.class, name);
+        return (Part)sessionFactory.getCurrentSession().createQuery("select v from Part v where v.part_name = :part_name")
+                .setParameter("part_name", name).uniqueResult();
     }
 
     public void removePart(Long id) {

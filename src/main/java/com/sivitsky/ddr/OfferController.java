@@ -2,15 +2,14 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Measure;
 import com.sivitsky.ddr.model.Offer;
-import com.sivitsky.ddr.service.CurrencyService;
-import com.sivitsky.ddr.service.OfferService;
-import com.sivitsky.ddr.service.PartService;
-import com.sivitsky.ddr.service.VendorService;
+import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
 
 @Controller
 @SessionAttributes({"offer","listOffers", "vendor_id"})
@@ -20,6 +19,12 @@ public class OfferController {
     private CurrencyService currencyService;
     private PartService partService;
     private VendorService vendorService;
+    private ExcelReaderService excelReaderService;
+
+    @Autowired(required=true)
+    public void setExcelReaderService(ExcelReaderService excelReaderService) {
+        this.excelReaderService = excelReaderService;
+    }
 
     @Autowired(required=true)
          public void setOfferService(OfferService offerService) {
@@ -79,7 +84,19 @@ public class OfferController {
 
     @RequestMapping(value = "/offers/add", method = RequestMethod.POST)
     public String addOffer(@ModelAttribute("offer") Offer offer, BindingResult result) {
-        this.offerService.saveOffer(offer);
+            this.offerService.saveOffer(offer);
+            return "redirect:/offers";
+    }
+
+    @RequestMapping(value = "/offers/load", method = RequestMethod.POST)
+    public String loadOffer(@ModelAttribute("offer") Offer offer, @RequestParam(value="offers_file", required = false) javax.servlet.http.Part offers_file, BindingResult result){
+        if (offers_file != null) {
+            try {
+                excelReaderService.readBooksFromExcelFile(offers_file);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         return "redirect:/offers";
     }
 }

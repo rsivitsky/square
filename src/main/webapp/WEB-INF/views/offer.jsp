@@ -12,9 +12,21 @@
 <spring:message code="label.offer_num" var="offer_num"/>
 <spring:message code="label.offer_sum" var="offer_sum"/>
 <spring:message code="label.offer_currency" var="offer_currency"/>
+<spring:message code="label.offer_loadfromfile" var="loadfromfile"/>
 
-<c:url var="addAction" value="/offers/add"></c:url>
-<div>
+<c:url var="editImgUrl" value="/resources/img/edit.png"/>
+<c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
+<c:url var="addAction" value="/offers/add"/>
+<c:url var="loadAction" value="/offers/load"/>
+
+<div class="col-md-8">
+    <form:form action="${loadAction}" method="post" enctype="multipart/form-data">
+               <input type="file" name="offers_file" >
+        <input type="submit"
+               value="<spring:message text="load"/>"/>
+    </form:form>
+</div>
+<div class="col-md-8">
     <form:form action="${addAction}" commandName="offer">
         <table class="table table-hover table-responsive">
             <tr>
@@ -57,31 +69,31 @@
             <tr>
                 <td>
                     <form:select path="vendor.vendor_id" name="vendor" items="${listVendor}" itemValue="vendor_id"
-                                 itemLabel="vendor_name"/>
+                                 itemLabel="vendor_name" cssStyle="border: none"/>
                 </td>
                 <td>
-                    <form:input type="date" path="offer_date"/>
+                    <form:input type="date" path="offer_date" cssStyle="border: none"/>
                 </td>
                 <td>
                     <form:select path="part.part_id" name="part" items="${listPart}" itemValue="part_id"
-                                 itemLabel="part_name"/>
+                                 itemLabel="part_name" cssStyle="border: none"/>
                 </td>
                 <td>
                     <form:select path="currency.valuta_id" name="currency" items="${listCurrency}" itemValue="valuta_id"
-                                 itemLabel="valuta_name"/>
+                                 itemLabel="valuta_name" cssStyle="border: none"/>
                 </td>
                 <td>
-                    <form:input path="offer_price"/>
+                    <form:input path="offer_price" cssStyle="border: none"/>
                 </td>
                 <td>
-                    <form:input path="offer_num" name="offer_num"/>
+                    <form:input path="offer_num" name="offer_num" cssStyle="border: none"/>
                 </td>
                 <td>
-                    <form:input path="offer_sum" name="offer_sum"/>
+                    <form:input path="offer_sum" name="offer_sum" cssStyle="border: none"/>
                 </td>
             </tr>
             <tr>
-                <td>
+                <td colspan="5">
                 <c:if test="${!empty offer.offer_id}">
                     <input type="submit"
                            value="<spring:message text="Edit"/>"/>
@@ -122,6 +134,12 @@
                 <th>
                     ${offer_sum}
                 </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
             </tr>
             <c:forEach items="${listOffers}" var="offer_item">
                 <tr>
@@ -133,8 +151,8 @@
                     <td>${offer_item.offer_price}</td>
                     <td>${offer_item.offer_num}</td>
                     <td>${offer_item.offer_sum}</td>
-                    <td><a href="<c:url value='/offers/edit/${offer_item.offer_id}' />">Edit</a></td>
-                    <td><a href="<c:url value='/offers/remove/${offer_item.offer_id}' />">Delete</a></td>
+                    <td><a href="<c:url value='/offers/edit/${offer_item.offer_id}' />"><img src="${editImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/offers/remove/${offer_item.offer_id}' />"><img src="${deleteImgUrl}"/></a></td>
                 </tr>
             </c:forEach>
         </table>

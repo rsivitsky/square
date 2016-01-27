@@ -1,6 +1,7 @@
 package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Currency;
+import com.sivitsky.ddr.model.Part;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +35,8 @@ public class CurrencyDAOImpl implements CurrencyDAO{
     }
 
     public Currency getCurrencyByName(String name){
-        return (Currency) this.sessionFactory.getCurrentSession().get(Currency.class, name);
+       return (Currency)sessionFactory.getCurrentSession().createQuery("select v from Currency v where v.valuta_name = :valuta_name")
+                .setParameter("valuta_name", name).uniqueResult();
     }
 
     public void removeCurrency(Long id) {

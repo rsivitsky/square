@@ -51,4 +51,9 @@ public class PartServiceImpl implements PartService {
         return this.partDAO.getPartById(id);
     }
 
+    @Transactional
+    public Part getPartByName(String name) {
+        return this.partDAO.getPartByName(name);
+    }
+
 }

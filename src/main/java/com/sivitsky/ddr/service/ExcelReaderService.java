@@ -13,6 +13,8 @@ import java.util.List;
 
 public interface ExcelReaderService {
     Object getCellValue(Cell cell);
-    List<Offer> readBooksFromExcelFile(String excelFilePath) throws IOException;
+    //List<Offer> readBooksFromExcelFile(String excelFilePath) throws IOException;
+    //void readBooksFromExcelFile(String excelFilePath) throws IOException;
+    List<Offer> readBooksFromExcelFile(javax.servlet.http.Part offers_file) throws IOException;
     Workbook getWorkbook(FileInputStream inputStream, String excelFilePath) throws IOException;
 }

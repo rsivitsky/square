@@ -40,5 +40,4 @@ public class CurrencyServiceImpl implements CurrencyService {
     public Currency getCurrencyByName(String name) {
         return this.currencyDAO.getCurrencyByName(name);
     }
-
 }

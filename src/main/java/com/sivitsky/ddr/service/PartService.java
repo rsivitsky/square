@@ -20,4 +20,6 @@ public interface PartService {
 
     Part getPartById(Long id);
 
+    Part getPartByName(String name);
+
 }
