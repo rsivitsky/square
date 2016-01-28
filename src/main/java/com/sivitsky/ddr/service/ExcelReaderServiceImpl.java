@@ -2,6 +2,7 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.model.Currency;
 import com.sivitsky.ddr.model.Offer;
+import com.sivitsky.ddr.model.Vendor;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -25,7 +26,6 @@ import java.util.List;
 @Component
 public class ExcelReaderServiceImpl implements ExcelReaderService {
 
-    // private PartService partService;
     private CurrencyService currencyService;
     private OfferService offerService;
     private PartService partService;
@@ -57,15 +57,12 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
         return null;
     }
 
-    public List<Offer> readBooksFromExcelFile(javax.servlet.http.Part offers_file) throws IOException {
-        List<Offer> listOffers = new ArrayList<Offer>();
+    public void readBooksFromExcelFile(javax.servlet.http.Part offers_file, Vendor vendor) throws IOException {
         InputStream inputStream = offers_file.getInputStream();
-
         Workbook workbook = new XSSFWorkbook(inputStream);
         Sheet firstSheet = workbook.getSheetAt(0);
-
         for (Row nextRow : firstSheet) {
-            if (nextRow.getRowNum() > 1) {
+            if (nextRow.getRowNum() > 0) {
                 Iterator<Cell> cellIterator = nextRow.cellIterator();
                 Offer offer = new Offer();
                 while (cellIterator.hasNext()) {
@@ -99,17 +96,16 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                             offer.setOffer_num((int) nextCell.getNumericCellValue());
                             break;
                         case 6:
-                            offer.setOffer_sum(Float.parseFloat(getCellValue(nextCell).toString()));
+                            offer.setOffer_sum((float)(nextCell.getNumericCellValue()));
                             break;
                     }
                 }
+                offer.setVendor(vendor);
                 offerService.saveOffer(offer);
-                listOffers.add(offer);
             }
         }
         workbook.close();
         inputStream.close();
-        return listOffers;
     }
 
     public Workbook getWorkbook(FileInputStream inputStream, String excelFilePath) throws IOException {
