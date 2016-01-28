@@ -19,9 +19,10 @@
 <c:url var="addAction" value="/offers/add"/>
 <c:url var="loadAction" value="/offers/load"/>
 
-<div class="col-md-8">
+<div class="col-md-4">
     <form:form action="${loadAction}" method="post" enctype="multipart/form-data">
                <input type="file" name="offers_file" >
+        <br>
         <input type="submit"
                value="<spring:message text="load"/>"/>
     </form:form>

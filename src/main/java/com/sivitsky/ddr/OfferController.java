@@ -2,14 +2,21 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Measure;
 import com.sivitsky.ddr.model.Offer;
+import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.model.Vendor;
 import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.security.Permission;
+import java.security.Principal;
 
 @Controller
 @SessionAttributes({"offer","listOffers", "vendor_id"})
@@ -47,10 +54,17 @@ public class OfferController {
     }
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
-    public String listOffers(Model model) {
+    public String listOffers(HttpServletRequest request, Model model, Principal principal) {
+        SecurityContextHolderAwareRequestWrapper securityContextHolderAwareRequestWrapper = new SecurityContextHolderAwareRequestWrapper(request, "");
+        if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_ADMIN")){
+            model.addAttribute("listOffers", this.offerService.listOffer());
+        }
+        else if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_VENDOR")) {
+            User user = (User) principal;
+            model.addAttribute("listOffers", this.offerService.getOffersByVendorId(user.getVendor().getVendor_id()));
+        }
         model.addAttribute("offer", new Offer());
         model.addAttribute("listCurrency", this.currencyService.listCurrency());
-        model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listPart", this.partService.listPart());
         model.addAttribute("listVendor", this.vendorService.listVendor());
         return "offers";
