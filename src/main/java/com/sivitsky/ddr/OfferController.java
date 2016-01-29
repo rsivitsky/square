@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.security.Permission;
 import java.security.Principal;
 
 @Controller
@@ -61,30 +60,21 @@ public class OfferController {
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
     public String listOffers(HttpServletRequest request, Model model, Principal principal) {
+        Offer offer = new Offer();
         SecurityContextHolderAwareRequestWrapper securityContextHolderAwareRequestWrapper = new SecurityContextHolderAwareRequestWrapper(request, "");
         if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_ADMIN")) {
             model.addAttribute("listOffers", this.offerService.listOffer());
         } else if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_VENDOR")) {
             User user = userService.getUserByName(principal.getName());
+            offer.setVendor(user.getVendor());
             model.addAttribute("listOffers", this.offerService.getOffersByVendorId(user.getVendor().getVendor_id()));
         }
-        model.addAttribute("offer", new Offer());
+        model.addAttribute("offer", offer);
         model.addAttribute("listCurrency", this.currencyService.listCurrency());
         model.addAttribute("listPart", this.partService.listPart());
         model.addAttribute("listVendor", this.vendorService.listVendor());
         return "offers";
     }
-
-    /*
-    @RequestMapping("/offers/{vendor_id}")
-    public String listOffersByVendorId(@PathVariable("vendor_id") Long id, Model model) {
-        model.addAttribute("offer", new Offer());
-        model.addAttribute("listOffers", offerService.getOffersByVendorId(id));
-        model.addAttribute("listVendor", vendorService.getVendorById(id));
-        model.addAttribute("listCurrency", currencyService.listCurrency());
-        model.addAttribute("listPart", partService.listPart());
-        return "offers";
-    }*/
 
     @RequestMapping("/offers/remove/{offer_id}")
     public String removeOffer(@PathVariable("offer_id") Long offer_id) {

@@ -2,6 +2,7 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.model.Currency;
 import com.sivitsky.ddr.model.Offer;
+import com.sivitsky.ddr.model.Part;
 import com.sivitsky.ddr.model.Vendor;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
@@ -85,13 +86,19 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                                 break;
                             }
                         case 4:
-                            try {
-                                offer.setPart(partService.getPartByName(nextCell.getStringCellValue()));
-                                break;
-                            } catch (NullPointerException e) {
-                                offer.setPart(partService.getPartById(1L));
-                                break;
-                            }
+                                if (partService.getPartByName(nextCell.getStringCellValue())!=null)
+                                {
+                                    offer.setPart(partService.getPartByName(nextCell.getStringCellValue()));
+                                    break;
+                                }
+                                else
+                                {
+                                    Part part = new Part();
+                                    part.setPart_name(nextCell.getStringCellValue());
+                                    partService.savePart(part);
+                                    offer.setPart(part);
+                                    break;
+                                }
                         case 5:
                             offer.setOffer_num((int) nextCell.getNumericCellValue());
                             break;

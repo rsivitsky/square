@@ -31,11 +31,13 @@
     <form:form action="${addAction}" commandName="offer">
         <table class="table table-hover table-responsive">
             <tr>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <th>
                     <form:label path="vendor">
                         <spring:message text="${offer_vendor}"/>
                     </form:label>
                 </th>
+                </sec:authorize>
                 <th>
                     <form:label path="offer_date">
                         <spring:message text="${offer_date}"/>
@@ -68,10 +70,12 @@
                 </th>
             </tr>
             <tr>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
                 <td>
                     <form:select path="vendor.vendor_id" name="vendor" items="${listVendor}" itemValue="vendor_id"
                                  itemLabel="vendor_name" cssStyle="border: none"/>
                 </td>
+                </sec:authorize>
                 <td>
                     <form:input type="date" path="offer_date" cssStyle="border: none"/>
                 </td>

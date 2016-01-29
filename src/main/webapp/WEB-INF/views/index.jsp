@@ -68,7 +68,7 @@
     </table>
     <br>
 
-    <sec:authorize access="hasRole('role_admin')">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
         <p>Ваш логин: <sec:authentication property="principal.username"/></p>
     </sec:authorize>
 
