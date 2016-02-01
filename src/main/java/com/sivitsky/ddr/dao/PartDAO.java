@@ -8,7 +8,7 @@ public interface PartDAO {
 
     List<Part> listPart();
 
-    List<Part> listPartWithDetail();
+    List<Object[]> listPartWithDetail();
 
     List<Part> listPartWithManufactursFilter(Long[] mas_id);
 

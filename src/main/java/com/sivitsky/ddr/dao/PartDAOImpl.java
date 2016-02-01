@@ -35,8 +35,14 @@ public class PartDAOImpl implements PartDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Part> listPartWithDetail() {
-        return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").list();
+    public List<Object[]> listPartWithDetail() {
+       /* return sessionFactory.getCurrentSession().createSQLQuery("select distinct a.part_id as part_id, a.part_name as part_name, a.photo as photo, count(v.part_id) as offer_count, " +
+                "min(v.offer_price) as min_price, b.descript_name from offer v left join part a left join description b " +
+                "on a.part_id = b.part_id on v.part_id = a.part_id group by a.part_id").list();
+                */
+        //return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").list();
+        return sessionFactory.getCurrentSession().createQuery("select part.part_id as part_id, part.part_name as part_name, MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count from Part part join  part.offers offer group by part.part_id").list();
+        //рабочий return sessionFactory.getCurrentSession().createQuery("select part.part_id, part.part_name, MIN (offer.offer_price), COUNT (offer.offer_id) from Part part join  part.offers offer group by part.part_id").list();
     }
 
     @SuppressWarnings("unchecked")

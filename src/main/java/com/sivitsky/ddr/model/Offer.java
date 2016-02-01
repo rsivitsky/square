@@ -13,8 +13,10 @@ import java.util.Set;
 @Entity
 @Table(name = "offer")
 @NamedQueries({
-       // @NamedQuery(name="Offer.allFiltersForOrders", query="select distinct c from Offer c left join fetch c.part t" ),
-        @NamedQuery(name="Offer.getOffersByVendorId", query="from Offer where vendor_id = :vendor_id" )
+        @NamedQuery(name="Offer.getOffersByVendorId", query="from Offer where vendor_id = :vendor_id" ),
+        @NamedQuery(name="Offer.Detailed", query = "from Offer a left join fetch a.part b left join fetch b.descriptions c where a.offer_num > 0 and " +
+                "(:mas_id is null or b.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))) and " +
+                "(:price_from is null or a.offer_price > :price_from) and (:price_to is null or a.offer_price < :price_to))")
 }
 )
 public class Offer implements Serializable {

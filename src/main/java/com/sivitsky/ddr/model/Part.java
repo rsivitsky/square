@@ -9,11 +9,11 @@ import java.util.Set;
 @Table(name = "part")
 @NamedQueries({
         @NamedQuery(name="Part.findAllWithDetail", query="select distinct c from Part c left join fetch c.descriptions t" ),
-        @NamedQuery(name="Part.findByManufactId", query="select distinct c from Part c left join fetch c.descriptions t " +
+        @NamedQuery(name="Part.findByManufactId", query="select distinct c from Part c left join c.descriptions t " +
                 "where c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))" ),
-        @NamedQuery(name="Part.findByManufactIdAndPrice", query="select distinct c from Part c left join fetch c.descriptions t left join fetch c.offers o " +
-                "where (:mas_id is null or c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)) and " +
-                "(:price_from is null or o.offer_price >= :price_from) and (:price_to is null or o.offer_price < :price_to))" )
+        @NamedQuery(name="Part.findByManufactIdAndPrice", query="select c, t, o, min(o.offer_price) as min_price, count (o.offer_id) as count_offer from Part c left join fetch c.descriptions t left join fetch c.offers o" +
+                " where (:mas_id is null or c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)) and " +
+                "(:price_from = 0.0f or o.offer_price >= :price_from) and (:price_to = 0.0f or o.offer_price <= :price_to)) group by part" )
         }
 )
 public class Part implements Serializable {

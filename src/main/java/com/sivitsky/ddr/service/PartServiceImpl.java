@@ -22,7 +22,7 @@ public class PartServiceImpl implements PartService {
     }
 
     @Transactional
-    public List<Part> listPartWithDetail(){
+    public List<Object[]> listPartWithDetail(){
         return partDAO.listPartWithDetail();
     }
 
