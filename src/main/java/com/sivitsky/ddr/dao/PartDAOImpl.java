@@ -48,14 +48,14 @@ public class PartDAOImpl implements PartDAO {
     public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to) {
         if (mas_id.length == 0) {
             String hql = "select part.part_id as part_id, part.part_name as part_name, " +
-                    "MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count from Part part join  part.offers offer " +
+                    "MIN (offer.offer_price) as min_price, COUNT (offer.offer_id), currency.valuta_name as offer_count from Part part join  part.offers offer join offer.currency currency " +
                     "where (:price_from = 0.0f or offer.offer_price >= :price_from) and (:price_to = 0.0f or offer.offer_price <= :price_to) group by part.part_id";
             return sessionFactory.getCurrentSession().createQuery(hql)
                     .setParameter("price_from", price_from)
                     .setParameter("price_to", price_to).list();
         } else {
             String hql = "select part.part_id as part_id, part.part_name as part_name, " +
-                    "MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count from Part part join  part.offers offer " +
+                    "MIN (offer.offer_price) as min_price, COUNT (offer.offer_id), currency.valuta_name as offer_count from Part part join  part.offers offer join offer.currency currency " +
                     "where (:price_from = 0.0f or offer.offer_price >= :price_from) and (:price_to = 0.0f or offer.offer_price <= :price_to) and (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)))" +
                     " group by part.part_id";
             return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("mas_id", mas_id)

@@ -8,7 +8,7 @@ import java.util.Set;
 @Entity
 @Table(name = "part")
 @NamedQueries({
-        @NamedQuery(name="Part.findAllWithDetail", query="select part.part_id as part_id, part.part_name as part_name, MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count from Part part join  part.offers offer group by part.part_id" ),
+        @NamedQuery(name="Part.findAllWithDetail", query="select part.part_id as part_id, part.part_name as part_name, MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count, currency.valuta_name from Part part join  part.offers offer join offer.currency currency group by part.part_id" ),
         @NamedQuery(name="Part.findByManufactId", query="select distinct c from Part c left join c.descriptions t " +
                 "where c.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))" ),
         }
