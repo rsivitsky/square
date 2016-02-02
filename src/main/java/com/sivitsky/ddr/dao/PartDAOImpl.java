@@ -18,7 +18,7 @@ public class PartDAOImpl implements PartDAO {
     private static final Logger logger = LoggerFactory.getLogger(PartDAOImpl.class);
     private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
+    @Autowired(required = true)
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
@@ -36,13 +36,7 @@ public class PartDAOImpl implements PartDAO {
 
     @SuppressWarnings("unchecked")
     public List<Object[]> listPartWithDetail() {
-       /* return sessionFactory.getCurrentSession().createSQLQuery("select distinct a.part_id as part_id, a.part_name as part_name, a.photo as photo, count(v.part_id) as offer_count, " +
-                "min(v.offer_price) as min_price, b.descript_name from offer v left join part a left join description b " +
-                "on a.part_id = b.part_id on v.part_id = a.part_id group by a.part_id").list();
-                */
-        //return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").list();
-        return sessionFactory.getCurrentSession().createQuery("select part.part_id as part_id, part.part_name as part_name, MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count from Part part join  part.offers offer group by part.part_id").list();
-        //рабочий return sessionFactory.getCurrentSession().createQuery("select part.part_id, part.part_name, MIN (offer.offer_price), COUNT (offer.offer_id) from Part part join  part.offers offer group by part.part_id").list();
+        return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").list();
     }
 
     @SuppressWarnings("unchecked")
@@ -52,9 +46,22 @@ public class PartDAOImpl implements PartDAO {
 
     @SuppressWarnings("unchecked")
     public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to) {
-        return sessionFactory.getCurrentSession().getNamedQuery("Part.findByManufactIdAndPrice").setParameterList("mas_id", mas_id)
-                .setParameter("price_from", price_from)
-                .setParameter("price_to", price_to).list();
+        if (mas_id.length == 0) {
+            String hql = "select part.part_id as part_id, part.part_name as part_name, " +
+                    "MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count from Part part join  part.offers offer " +
+                    "where (:price_from = 0.0f or offer.offer_price >= :price_from) and (:price_to = 0.0f or offer.offer_price <= :price_to) group by part.part_id";
+            return sessionFactory.getCurrentSession().createQuery(hql)
+                    .setParameter("price_from", price_from)
+                    .setParameter("price_to", price_to).list();
+        } else {
+            String hql = "select part.part_id as part_id, part.part_name as part_name, " +
+                    "MIN (offer.offer_price) as min_price, COUNT (offer.offer_id) as offer_count from Part part join  part.offers offer " +
+                    "where (:price_from = 0.0f or offer.offer_price >= :price_from) and (:price_to = 0.0f or offer.offer_price <= :price_to) and (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)))" +
+                    " group by part.part_id";
+            return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("mas_id", mas_id)
+                    .setParameter("price_from", price_from)
+                    .setParameter("price_to", price_to).list();
+        }
     }
 
     public Part getPartById(Long id) {
@@ -62,7 +69,7 @@ public class PartDAOImpl implements PartDAO {
     }
 
     public Part getPartByName(String name) {
-        return (Part)sessionFactory.getCurrentSession().createQuery("select v from Part v where v.part_name = :part_name")
+        return (Part) sessionFactory.getCurrentSession().createQuery("select v from Part v where v.part_name = :part_name")
                 .setParameter("part_name", name).uniqueResult();
     }
 
