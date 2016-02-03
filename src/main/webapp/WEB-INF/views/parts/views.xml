@@ -18,4 +18,7 @@
     <definition name="vendor" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/vendor.jsp"/>
     </definition>
+    <definition name="partsOffers" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/partsOffers.jsp"/>
+    </definition>
 </tiles-definitions>

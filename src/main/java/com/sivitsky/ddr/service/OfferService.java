@@ -12,6 +12,8 @@ public interface OfferService {
 
     List<Offer> getOffersByVendorId(Long vendor_id);
 
+    List<Offer> getOffersByPartId(Long part_id);
+
     void removeOffer(Long id);
 
     Offer getOfferById(Long id);

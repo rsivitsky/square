@@ -13,6 +13,11 @@
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
 <c:url var="addPartUrl" value="/part/add"/>
 <c:set var="manufacturs" scope="session"/>
+<%--
+<c:set var="price_from" value="${price_from}" scope="session"/>
+<c:set var="price_to" value="${price_to}" scope="session"/>
+--%>
+
 <div class="col-md-3">
     <form method="get" role="form" >
         <label class="control-label">${producer}</label>
@@ -44,16 +49,19 @@
 </div>
 <div class="col-md-9">
     <table class="table table-hover">
-        <c:forEach items="${listPart}" var="p">
-            <c:if test="${!empty p[1]}">
+        <c:forEach items="${listPart}" var="part">
+            <c:url var="offersInfo" value="/offers/${part[0]}"/>
+            <c:url var="offersPrice" value="/offers/price/${part[0]}"/>
+            <c:url var="partInfo" value="/part/info/${part[0]}"/>
+            <c:if test="${!empty part[1]}">
                 <tr>
-                    <td><img src="${partPhotoUrl}/${p[0]}" class="img-rounded" height="40" width="150"/>
+                    <td><a href="${partInfo}"><img src="${partPhotoUrl}/${part[0]}" class="img-rounded" height="40" width="150"/></a>
                     </td>
-                    <td><c:out value="${p[1]}"/></td>
+                    <td><a href="${partInfo}"><c:out value="${part[1]}"/></a></td>
                     <td>
-                        от <c:out value="${p[2]}"/> <c:out value="${p[4]}"/>
+                        <a href="${offersPrice}">от <c:out value="${part[2]}"/> <c:out value="${part[4]}"/></a>
                         <br>
-                        <c:out value="${p[3]}"/> предложений
+                        <a href="${offersInfo}"><c:out value="${part[3]}"/> предложений</a>
                     </td>
                 </tr>
             </c:if>

@@ -110,4 +110,10 @@ public class OfferController {
         }
         return "redirect:/offers";
     }
+
+    @RequestMapping(value="/offers/{part_id}", method = RequestMethod.GET)
+    public String PartsOffers(HttpServletRequest request, Model model, @PathVariable("part_id") Long part_id){
+        model.addAttribute("listPartsOffers", this.offerService.getOffersByPartId(part_id));
+        return "partsOffers";
+    }
 }

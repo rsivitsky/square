@@ -48,4 +48,9 @@ public class OfferDAOImpl implements OfferDAO {
        return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByVendorId")
                 .setParameter("vendor_id", vendor_id).list();
     }
+
+    public List<Offer> getOffersByPartId(Long part_id){
+        return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByPartId")
+                .setParameter("part_id", part_id).list();
+    }
 }

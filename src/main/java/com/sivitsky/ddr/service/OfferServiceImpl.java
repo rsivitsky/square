@@ -37,7 +37,12 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Transactional
-    public List<Offer> getOffersByVendorId(Long vendor_id){
+         public List<Offer> getOffersByVendorId(Long vendor_id){
         return this.offerDAO.getOffersByVendorId(vendor_id);
+    }
+
+    @Transactional
+    public List<Offer> getOffersByPartId(Long part_id){
+        return this.offerDAO.getOffersByPartId(part_id);
     }
 }
