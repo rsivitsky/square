@@ -44,13 +44,17 @@ public class OfferDAOImpl implements OfferDAO {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public List<Offer> getOffersByVendorId(Long vendor_id){
        return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByVendorId")
                 .setParameter("vendor_id", vendor_id).list();
     }
 
-    public List<Offer> getOffersByPartId(Long part_id){
+    @SuppressWarnings("unchecked")
+    public List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to){
         return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByPartId")
-                .setParameter("part_id", part_id).list();
+                .setParameter("part_id", part_id)
+                .setParameter("price_from", price_from).setParameter("price_to", price_to)
+                .list();
     }
 }

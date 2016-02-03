@@ -12,7 +12,7 @@ public interface OfferService {
 
     List<Offer> getOffersByVendorId(Long vendor_id);
 
-    List<Offer> getOffersByPartId(Long part_id);
+    List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to);
 
     void removeOffer(Long id);
 

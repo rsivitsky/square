@@ -42,7 +42,7 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Transactional
-    public List<Offer> getOffersByPartId(Long part_id){
-        return this.offerDAO.getOffersByPartId(part_id);
+    public List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to){
+        return this.offerDAO.getOffersByPartId(part_id, price_from, price_to);
     }
 }
