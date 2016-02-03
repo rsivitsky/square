@@ -14,7 +14,11 @@ import java.util.Set;
 @Table(name = "offer")
 @NamedQueries({
         @NamedQuery(name="Offer.getOffersByVendorId", query="from Offer where vendor_id = :vendor_id" ),
-        @NamedQuery(name="Offer.getOffersByPartId", query="from Offer where part_id = :part_id and (:price_from=0.0f or offer_price > :price_from) and (:price_to=0.0f or offer_price <= :price_to)" ),
+        @NamedQuery(name="Offer.getOffersMaxAndMinPrice", query = "select part.part_id, part.part_name, min(offer.offer_price), max(offer.offer_price), count (offer.offer_id) as min_price from Offer offer join offer.part part " +
+                "where part.part_id = :part_id and (:price_from=0.0f or offer.offer_price >= :price_from) and (:price_to=0.0f or offer.offer_price <= :price_to) " +
+                "group by part.part_id"),
+        @NamedQuery(name="Offer.getOffersByPartId", query="from Offer where part_id = :part_id and (:price_from=0.0f or offer_price > :price_from) " +
+                "and (:price_to=0.0f or offer_price <= :price_to)" ),
         @NamedQuery(name="Offer.Detailed", query = "from Offer a left join fetch a.part b left join fetch b.descriptions c where a.offer_num > 0 and " +
                 "(:mas_id is null or b.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id))) and " +
                 "(:price_from is null or a.offer_price > :price_from) and (:price_to is null or a.offer_price < :price_to))")

@@ -12,6 +12,7 @@
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
 <c:url var="addPartUrl" value="/part/add"/>
+
 <c:set var="manufacturs" scope="session"/>
 <%--
 <c:set var="price_from" value="${price_from}" scope="session"/>
@@ -34,6 +35,7 @@
                     ${manufacturFilter.manufactur.manufactur_name}
             </div>
         </c:forEach>
+        <br>
         <label class="control-label">${price_minimum}</label>
         <div class="row" id="price_row">
             <div class="col-md-6 form-group">
@@ -50,8 +52,8 @@
 <div class="col-md-9">
     <table class="table table-hover">
         <c:forEach items="${listPart}" var="part">
-            <c:url var="offersInfo" value="/offers/${part[0]}"/>
-            <c:url var="offersPrice" value="/offers/price/${part[0]}"/>
+            <c:url var="offersInfo" value="/offers/partinfo/${part[0]}"/>
+            <c:url var="offersPrice" value="/offers/price/${manufacturs}/${part[0]}"/>
             <c:url var="partInfo" value="/part/info/${part[0]}"/>
             <c:if test="${!empty part[1]}">
                 <tr>

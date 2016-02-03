@@ -18,4 +18,6 @@ public interface OfferService {
 
     Offer getOfferById(Long id);
 
+    Object getOffersMaxAndMinPrice(Long part_id, Float price_from, Float price_to);
+
 }

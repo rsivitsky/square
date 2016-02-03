@@ -16,5 +16,7 @@ public interface OfferDAO {
 
     List<Offer> getOffersByPartId(Long id, Float price_from, Float price_to);
 
+    Object getOffersMaxAndMinPrice(Long id, Float price_from, Float price_to);
+
     void removeOffer(Long id);
 }

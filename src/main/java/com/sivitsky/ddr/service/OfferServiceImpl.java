@@ -45,4 +45,9 @@ public class OfferServiceImpl implements OfferService {
     public List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to){
         return this.offerDAO.getOffersByPartId(part_id, price_from, price_to);
     }
+
+    @Transactional
+    public Object getOffersMaxAndMinPrice(Long part_id, Float price_from, Float price_to){
+        return this.offerDAO.getOffersMaxAndMinPrice(part_id, price_from, price_to);
+    }
 }

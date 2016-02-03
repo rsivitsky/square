@@ -14,10 +14,7 @@
 <c:url value="/j_spring_security_check" var="loginUrl"/>
 
 <div>
-
-        <a href="?lang=en_US">English</a>|<a href="?lang=ru_RU">Русский</a>
-
-
+        <a href="?lang=en_US">English</a> | <a href="?lang=ru_RU">Русский</a>
         <sec:authorize access="!isAuthenticated()">
             <!-- DROPDOWN LOGIN STARTS HERE-->
             <button type="button" id="dropdownMenu1" data-toggle="dropdown"

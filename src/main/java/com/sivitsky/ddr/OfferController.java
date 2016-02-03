@@ -111,9 +111,12 @@ public class OfferController {
         return "redirect:/offers";
     }
 
-    @RequestMapping(value="/offers/{part_id}", method = RequestMethod.GET)
+    @RequestMapping(value="/offers/partinfo/{part_id}", method = RequestMethod.GET)
     public String PartsOffers(HttpServletRequest request, Model model, @RequestParam(value = "price_from", required = false) Float price_from, @RequestParam(value = "price_to", required = false) Float price_to, @PathVariable("part_id") Long part_id){
-        model.addAttribute("listPartsOffers", this.offerService.getOffersByPartId(part_id, Float.parseFloat(request.getSession().getAttribute("price_from").toString()), Float.parseFloat(request.getSession().getAttribute("price_to").toString())));
+        Float max_price = Float.parseFloat(request.getSession().getAttribute("price_to").toString());
+        Float min_price = Float.parseFloat(request.getSession().getAttribute("price_from").toString());
+        model.addAttribute("part", this.offerService.getOffersMaxAndMinPrice(part_id, min_price, max_price));
+        model.addAttribute("listPartsOffers", this.offerService.getOffersByPartId(part_id, min_price, max_price));
         return "partsOffers";
     }
 }
