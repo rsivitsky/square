@@ -19,7 +19,6 @@
                 </td>
             </tr>
         </c:forEach>
-    </
     <table>
-    </c:if>
+        </c:if>
 </div>
