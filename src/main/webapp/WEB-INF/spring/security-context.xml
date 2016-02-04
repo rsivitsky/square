@@ -12,6 +12,8 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/vendor" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/offer/*" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>
         <intercept-url pattern="/offer" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>
+        <intercept-url pattern="/part/*" access="permitAll"/>
+        <intercept-url pattern="/part" access="permitAll"/>
         <intercept-url pattern="/**" access="permitAll"/>
 
         <form-login login-page="/index"

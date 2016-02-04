@@ -4,7 +4,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <spring:url value="/part/photo" var="partPhotoUrl"/>
-<spring:url value="/part/info/${part[0]}" var="partInfo"/>
+<spring:url value="/part/description/${part[0]}" var="partInfo"/>
 <spring:message code="label.vendors" var="number_sellers"/>
 
 <div class="col-md-12">

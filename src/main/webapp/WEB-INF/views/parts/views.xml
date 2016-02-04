@@ -21,4 +21,10 @@
     <definition name="partsOffers" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/partsOffers.jsp"/>
     </definition>
+    <definition name="partDescription" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/partDescription.jsp"/>
+    </definition>
+    <definition name="role" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/role.jsp"/>
+    </definition>
 </tiles-definitions>

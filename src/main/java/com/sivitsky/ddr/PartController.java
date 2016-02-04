@@ -71,4 +71,11 @@ public class PartController {
         // model.addAttribute("listPart", this.partService.listPart());
         return "add_part";
     }
+
+    @RequestMapping(value="/part/description/{part_id}", method = RequestMethod.GET)
+    public String partDescription(Model model, @PathVariable("part_id") Long part_id) {
+        model.addAttribute("part", this.partService.getPartById(part_id));
+        model.addAttribute("descriptions", this.descriptionService.listDescriptionByPartId(part_id));
+        return "partDescription";
+    }
 }
