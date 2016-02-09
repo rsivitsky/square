@@ -43,5 +43,4 @@ public class OrderDAOImpl implements OrderDAO {
             sessionFactory.getCurrentSession().delete(order);
         }
     }
-
 }

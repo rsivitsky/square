@@ -146,20 +146,20 @@
         <beans:property name="currencyDAO" ref="currencyDAO"/>
     </beans:bean>
 
-    <beans:bean id="orderDAO" class="com.sivitsky.ddr.dao.OrderDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="orderService" class="com.sivitsky.ddr.service.OrderServiceImpl">
-        <beans:property name="orderDAO" ref="orderDAO"/>
-    </beans:bean>
-
     <beans:bean id="offerDAO" class="com.sivitsky.ddr.dao.OfferDAOImpl">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
 
     <beans:bean id="offerService" class="com.sivitsky.ddr.service.OfferServiceImpl">
         <beans:property name="offerDAO" ref="offerDAO"/>
+    </beans:bean>
+
+    <beans:bean id="orderDAO" class="com.sivitsky.ddr.dao.OrderDAOImpl">
+        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </beans:bean>
+
+    <beans:bean id="orderService" class="com.sivitsky.ddr.service.OrderServiceImpl">
+        <beans:property name="orderDAO" ref="orderDAO"/>
     </beans:bean>
 
     <beans:bean id="phoneDAO" class="com.sivitsky.ddr.dao.PhoneDAOImpl">

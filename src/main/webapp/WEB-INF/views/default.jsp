@@ -37,8 +37,10 @@
     </div>
 </div>
 </body>
+<%--
 <footer>
     <tiles:insertAttribute name="footer" ignore="true"/>
 </footer>
+--%>
 
 </html>

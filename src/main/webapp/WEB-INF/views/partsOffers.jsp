@@ -6,7 +6,9 @@
 <spring:url value="/part/photo" var="partPhotoUrl"/>
 <spring:url value="/part/description/${part[0]}" var="partInfo"/>
 <spring:message code="label.vendors" var="number_sellers"/>
+<spring:message code="label.put_to_cart" var="put_to_cart"/>
 
+<c:set var="quantity" scope="request"/>
 <div class="col-md-12">
     <c:if test="${part != null}">
         <div class="row">
@@ -28,20 +30,31 @@
         </div>
     </c:if>
     <c:if test="${!empty listPartsOffers}">
-    <table class="table table-hover">
-        <c:forEach items="${listPartsOffers}" var="partsOffer">
-        <tr>
-            <td>
-                    ${partsOffer.offer_price}
-            </td>
-            <td>
-                    ${partsOffer.currency.valuta_name}
-            </td>
-            <td>
-                    ${partsOffer.vendor.vendor_name}
-            </td>
-        </tr>
-        </c:forEach>
-        <table>
-            </c:if>
+        <table class="table table-hover">
+            <c:forEach items="${listPartsOffers}" var="partsOffer">
+                <form action="/cart/add/${partsOffer.offer_id}" method="get">
+                <tr>
+                    <td>
+                            ${partsOffer.offer_price} ${partsOffer.currency.valuta_name}
+                    </td>
+
+                    <td>
+                            ${partsOffer.vendor.vendor_name}
+                    </td>
+                    <td>
+                        <input type="number" name="quantity" value="1">
+                       </td>
+                    <td>
+
+                         <%--   <a href="<c:url value="/cart/add">
+                                <c:param name="offerId" value="${partsOffer.offer_id}"/>
+                       </c:url>">add to your cart</a>--%>
+<input type="submit">
+                   </td>
+               </tr>
+                </form>
+           </c:forEach>
+       </table>
+   </c:if>
 </div>
+
