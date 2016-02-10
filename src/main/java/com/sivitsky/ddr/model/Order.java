@@ -13,9 +13,14 @@ public class Order implements Serializable {
     private Long booking_id;
     private Integer booking_num;
     private Date booking_date;
+    private OrderStatus booking_status;
     private Offer offer;
     private User user;
     private Part part;
+
+    public Order() {
+        this.setBooking_status(OrderStatus.NEW);
+    }
 
     @Id
     @Column(name = "booking_id")
@@ -74,5 +79,14 @@ public class Order implements Serializable {
 
     public void setPart(Part part) {
         this.part = part;
+    }
+
+    @Column(name = "booking_status")
+    public String getBooking_status() {
+        return booking_status.toString();
+    }
+
+    public void setBooking_status(OrderStatus booking_status) {
+        this.booking_status = booking_status;
     }
 }
