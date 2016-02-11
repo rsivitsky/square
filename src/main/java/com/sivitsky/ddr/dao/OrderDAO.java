@@ -17,4 +17,6 @@ public interface OrderDAO {
 
     List<Order> listOrderByUserId(Long id);
 
+    Object getOrderTotalByUserId(Long id);
+
 }

@@ -14,4 +14,6 @@ public interface OrderService {
 
     Order getOrderById(Long id);
 
+    Object getOrderTotalByUserId(Long id);
+
 }

@@ -10,13 +10,17 @@ import java.util.Date;
 @Table(name = "booking")
 @NamedQueries({
         @NamedQuery(name="Order.getOrdersByUserId", query="select order_date, part.part_name, order_num, booking_status from Order where user_id = :user_id " +
-                " group by booking_status having booking_status in (:booking_status)" )
+        " and booking_status in (:booking_status)" ),
+        @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order.order_id) as total_num, " +
+                "sum(offer.booking_sum) as total_sum " +
+                "from Order group by user_id")
 })
 
 public class Order implements Serializable {
 
     private Long booking_id;
     private Integer booking_num;
+    private Float booking_sum;
     private Date booking_date;
     private String booking_status;
     private Offer offer;
@@ -93,5 +97,14 @@ public class Order implements Serializable {
 
     public void setBooking_status(String booking_status) {
         this.booking_status = booking_status;
+    }
+
+    @Column(name = "booking_sum")
+    public Float getBooking_sum() {
+        return booking_sum;
+    }
+
+    public void setBooking_sum(Float booking_sum) {
+        this.booking_sum = booking_sum;
     }
 }

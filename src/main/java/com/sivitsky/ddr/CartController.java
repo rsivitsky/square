@@ -46,6 +46,7 @@ public class CartController {
         order.setOrder_date(new Date());
         order.setPart(offerService.getOfferById(offer_id).getPart());
         order.setOrder_num(quantity);
+        order.setBooking_sum(quantity*offerService.getOfferById(offer_id).getOffer_price());
         order.setUser(userService.getUserByName(principal.getName()));
         orderService.saveOrder(order);
         return "redirect:/offers/partinfo/"+offerService.getOfferById(offer_id).getPart().getPart_id();

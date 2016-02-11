@@ -36,4 +36,9 @@ public class OrderServiceImpl implements OrderService {
         return this.orderDAO.getOrderById(id);
     }
 
+    @Transactional
+    public Object getOrderTotalByUserId(Long id){
+        return this.orderDAO.getOrderTotalByUserId(id);
+    }
+
 }

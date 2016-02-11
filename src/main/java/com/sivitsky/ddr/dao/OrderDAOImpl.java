@@ -54,4 +54,12 @@ public class OrderDAOImpl implements OrderDAO {
                 .setParameter("user_id", user_id).setParameter("booking_status", booking_status)
                 .list();
     }
+
+    @SuppressWarnings("unchecked")
+    public Object getOrderTotalByUserId(Long user_id){
+        String[] booking_status = {OrderStatus.NEW.toString(), OrderStatus.PAID.toString()};
+        return sessionFactory.getCurrentSession().getNamedQuery("Order.getCountAndSumOrdersByUserId")
+                .setParameter("user_id", user_id).setParameter("booking_status", booking_status)
+                .uniqueResult();
+    }
 }
