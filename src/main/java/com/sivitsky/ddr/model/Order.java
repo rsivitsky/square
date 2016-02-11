@@ -8,6 +8,11 @@ import java.util.Date;
 
 @Entity
 @Table(name = "booking")
+@NamedQueries({
+        @NamedQuery(name="Order.getOrdersByUserId", query="select order_date, part.part_name, order_num, booking_status from Order where user_id = :user_id " +
+                " group by booking_status having booking_status in (:booking_status)" )
+})
+
 public class Order implements Serializable {
 
     private Long booking_id;

@@ -57,6 +57,7 @@ public class OfferDAOImpl implements OfferDAO {
                 .setParameter("price_from", price_from).setParameter("price_to", price_to)
                 .list();
         }
+
     @SuppressWarnings("unchecked")
     public Object getOffersMaxAndMinPrice(Long part_id, Float price_from, Float price_to){
         return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersMaxAndMinPrice")

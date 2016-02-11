@@ -81,5 +81,4 @@
             </c:forEach>
         </table>
     </c:if>
-
 </div>

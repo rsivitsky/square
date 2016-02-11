@@ -1,7 +1,6 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Order;
-import com.sivitsky.ddr.model.OrderStatus;
 import com.sivitsky.ddr.service.OfferService;
 import com.sivitsky.ddr.service.OrderService;
 import com.sivitsky.ddr.service.UserService;
@@ -12,13 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 
 @Controller
 public class CartController {

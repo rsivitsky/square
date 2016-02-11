@@ -1,6 +1,7 @@
 package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Order;
+import com.sivitsky.ddr.model.User;
 
 import java.util.List;
 
@@ -13,5 +14,7 @@ public interface OrderDAO {
     Order getOrderById(Long id);
 
     void removeOrder(Long id);
+
+    List<Order> listOrderByUserId(Long id);
 
 }
