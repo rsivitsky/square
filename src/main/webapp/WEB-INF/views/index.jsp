@@ -9,10 +9,6 @@
 <spring:message code="label.part_photo" var="part_photo"/>
 <spring:url value="/part/photo" var="partPhotoUrl"/>
 
-<c:url var="editImgUrl" value="/resources/img/edit.png"/>
-<c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
-<c:url var="addPartUrl" value="/part/add"/>
-
 <c:set var="manufacturs" scope="session"/>
 <%--
 <c:set var="price_from" value="${price_from}" scope="session"/>

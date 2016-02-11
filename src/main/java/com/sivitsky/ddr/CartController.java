@@ -1,6 +1,7 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Order;
+import com.sivitsky.ddr.model.OrderStatus;
 import com.sivitsky.ddr.service.OfferService;
 import com.sivitsky.ddr.service.OrderService;
 import com.sivitsky.ddr.service.UserService;
@@ -44,12 +45,7 @@ public class CartController {
     public String addToCart(@PathVariable("offer_id") Long offer_id, @RequestParam(value="quantity", required = false) Integer quantity, Principal principal) throws ParseException {
         Order order = new Order();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Calendar calendar = new GregorianCalendar();
 
-        String sdate = sdf.format(new Date());
-
-        System.out.println(calendar); //15/10/2013
-        Date date = sdf.parse("2016-02-08 02:46:05");
         order.setOffer(offerService.getOfferById(offer_id));
         order.setOrder_date(new Date());
         order.setPart(offerService.getOfferById(offer_id).getPart());

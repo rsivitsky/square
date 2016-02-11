@@ -36,13 +36,13 @@ public class PartController {
     }
 
     @RequestMapping(value = "/part/add", method = RequestMethod.GET)
-    public String addUserGet(Model model) {
+    public String addPartGet(Model model) {
         model.addAttribute("part", new Part());
         return "add_part";
     }
 
     @RequestMapping(value = "/part/add", method = RequestMethod.POST)
-    public String addUserPost(@ModelAttribute("part") Part part, @RequestParam(value = "img_file", required = false) javax.servlet.http.Part img_file, BindingResult result) {
+    public String addPartPost(@ModelAttribute("part") Part part, @RequestParam(value = "img_file", required = false) javax.servlet.http.Part img_file, BindingResult result) {
         if (img_file != null) {
             byte[] fileContent = null;
             try {
@@ -60,14 +60,14 @@ public class PartController {
     }
 
     @RequestMapping("/part/remove/{part_id}")
-    public String removeUser(@PathVariable("part_id") Long id) {
-        this.partService.removePart(id);
+    public String removePart(@PathVariable("part_id") Long part_id) {
+        this.partService.removePart(part_id);
         return "redirect:/part/list";
     }
 
     @RequestMapping("/part/edit/{part_id}")
-    public String editUser(@PathVariable("part_id") Long id, Model model) {
-        model.addAttribute("part", this.partService.getPartById(id));
+    public String editPart(@PathVariable("part_id") Long part_id, Model model) {
+        model.addAttribute("part", this.partService.getPartById(part_id));
         // model.addAttribute("listPart", this.partService.listPart());
         return "add_part";
     }

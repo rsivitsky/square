@@ -15,6 +15,9 @@
     <definition name="offers" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/offer.jsp"/>
     </definition>
+    <definition name="order" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/order.jsp"/>
+    </definition>
     <definition name="vendor" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/vendor.jsp"/>
     </definition>

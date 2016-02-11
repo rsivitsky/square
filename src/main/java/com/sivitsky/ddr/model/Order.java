@@ -13,13 +13,13 @@ public class Order implements Serializable {
     private Long booking_id;
     private Integer booking_num;
     private Date booking_date;
-    private OrderStatus booking_status;
+    private String booking_status;
     private Offer offer;
     private User user;
     private Part part;
 
     public Order() {
-        this.setBooking_status(OrderStatus.NEW);
+        this.setBooking_status(OrderStatus.NEW.toString());
     }
 
     @Id
@@ -37,8 +37,8 @@ public class Order implements Serializable {
     public Integer getOrder_num() {return booking_num;
     }
 
-    public void setOrder_num(Integer order_num) {
-        this.booking_num = order_num;
+    public void setOrder_num(Integer booking_num) {
+        this.booking_num = booking_num;
     }
 
     @Column(name = "booking_date")
@@ -83,10 +83,10 @@ public class Order implements Serializable {
 
     @Column(name = "booking_status")
     public String getBooking_status() {
-        return booking_status.toString();
+        return this.booking_status;
     }
 
-    public void setBooking_status(OrderStatus booking_status) {
+    public void setBooking_status(String booking_status) {
         this.booking_status = booking_status;
     }
 }

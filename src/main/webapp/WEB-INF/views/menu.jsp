@@ -14,7 +14,7 @@
                 <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')">
                     <li><a href="/offers"> ${offer}</a></li>
                 </sec:authorize>
-                <li><a href="/orders">${order}</a></li>
+                <li><a href="/order/list">${order}</a></li>
                 <li><a href="/vendor">${vendor}</a></li>
                 <li class="active"><a href="/about">${about}</a></li>
             </ul>
