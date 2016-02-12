@@ -2,10 +2,8 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.OrderStatus;
-import com.sivitsky.ddr.service.OfferService;
-import com.sivitsky.ddr.service.OrderService;
-import com.sivitsky.ddr.service.PartService;
-import com.sivitsky.ddr.service.UserService;
+import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +16,13 @@ public class OrderController {
     private PartService partService;
     private UserService userService;
     private OfferService offerService;
+    private CurrencyService currencyService; User user = new User();
+
+
+    @Autowired(required = true)
+    public void setCurrencyService(CurrencyService currencyService) {
+        this.currencyService = currencyService;
+    }
 
     @Autowired(required = true)
     public void setOrderService(OrderService orderService) {
@@ -46,6 +51,7 @@ public class OrderController {
         model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listUser", this.userService.listUsers());
         model.addAttribute("listPart", this.partService.listPart());
+        model.addAttribute("listCurrency", this.currencyService.listCurrency());
         model.addAttribute("Status", OrderStatus.values());
         return "order";
     }
@@ -68,6 +74,7 @@ public class OrderController {
         model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listUser", this.userService.listUsers());
         model.addAttribute("listPart", this.partService.listPart());
+        model.addAttribute("listCurrency", this.currencyService.listCurrency());
         model.addAttribute("Status", OrderStatus.values());
         return "order";
     }

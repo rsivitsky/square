@@ -9,11 +9,11 @@ import java.util.Date;
 @Entity
 @Table(name = "booking")
 @NamedQueries({
-        @NamedQuery(name="Order.getOrdersByUserId", query="select order_date, part.part_name, order_num, booking_status from Order where user_id = :user_id " +
-        " and booking_status in (:booking_status)" ),
-        @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order.order_id) as total_num, " +
-                "sum(offer.booking_sum) as total_sum " +
-                "from Order group by user_id")
+        @NamedQuery(name="Order.getOrdersByUserId", query="select order_date, part.part_name, order_num, booking_status from Order " +
+                "where user_id = :user_id and booking_status in (:booking_status)" ),
+        @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order_id) as total_num, " +
+                "sum(booking_sum) as total_sum " +
+                "from Order where user_id = :user_id and booking_status in (:booking_status) group by user_id ")
 })
 
 public class Order implements Serializable {

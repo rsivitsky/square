@@ -102,4 +102,9 @@ public class User implements Serializable{
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
+
+    @Override
+    public String toString() {
+        return ((firstname != null)?firstname:"-")+" "+((lastname != null)?lastname:"-");
+    }
 }
