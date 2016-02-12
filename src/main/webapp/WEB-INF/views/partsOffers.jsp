@@ -45,11 +45,8 @@
                         <input type="number" name="quantity" value="1">
                        </td>
                     <td>
-
-                         <%--   <a href="<c:url value="/cart/add">
-                                <c:param name="offerId" value="${partsOffer.offer_id}"/>
-                       </c:url>">add to your cart</a>--%>
-<input type="submit">
+                             <input type="submit"
+                                    value="<spring:message text="${put_to_cart}"/>"/>
                    </td>
                </tr>
                 </form>

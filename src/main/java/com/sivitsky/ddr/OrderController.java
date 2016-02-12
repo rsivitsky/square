@@ -11,18 +11,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@SessionAttributes({"order"})
 public class OrderController {
     private OrderService orderService;
     private PartService partService;
     private UserService userService;
     private OfferService offerService;
-    private CurrencyService currencyService; User user = new User();
-
-
-    @Autowired(required = true)
-    public void setCurrencyService(CurrencyService currencyService) {
-        this.currencyService = currencyService;
-    }
 
     @Autowired(required = true)
     public void setOrderService(OrderService orderService) {
@@ -51,7 +45,6 @@ public class OrderController {
         model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listUser", this.userService.listUsers());
         model.addAttribute("listPart", this.partService.listPart());
-        model.addAttribute("listCurrency", this.currencyService.listCurrency());
         model.addAttribute("Status", OrderStatus.values());
         return "order";
     }
@@ -74,7 +67,6 @@ public class OrderController {
         model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listUser", this.userService.listUsers());
         model.addAttribute("listPart", this.partService.listPart());
-        model.addAttribute("listCurrency", this.currencyService.listCurrency());
         model.addAttribute("Status", OrderStatus.values());
         return "order";
     }

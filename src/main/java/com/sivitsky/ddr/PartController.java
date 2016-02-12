@@ -68,7 +68,6 @@ public class PartController {
     @RequestMapping("/part/edit/{part_id}")
     public String editPart(@PathVariable("part_id") Long part_id, Model model) {
         model.addAttribute("part", this.partService.getPartById(part_id));
-        // model.addAttribute("listPart", this.partService.listPart());
         return "add_part";
     }
 

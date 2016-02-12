@@ -13,6 +13,9 @@
 <spring:message code="label.order_currency" var="order_currency"/>
 <spring:message code="label.order_sum" var="order_sum"/>
 <spring:message code="label.order_offer" var="order_offer"/>
+<spring:message code="label.edit" var="order_edit"/>
+<spring:message code="label.add" var="order_add"/>
+<spring:message code="label.delete" var="order_delete"/>
 
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
@@ -20,90 +23,124 @@
 
 <div class="col-md-12">
     <form:form action="${addOrderUrl}" commandName="order" method="post" enctype="multipart/form-data">
-
-        <span class="label label-info" >${order_date}</span>
-        <form:input type="date" path="order_date" cssStyle="border: none"/>
-
-        <form:select path="part.part_id" name="part" items="${listPart}" itemValue="part_id"
-                     itemLabel="part_name" cssStyle="border: none"/>
-
-        <form:select path="offer.offer_id" name="offer" items="${listOffers}" itemValue="offer_id"
-                     itemLabel="offer_id" cssStyle="border: none"/>
-
-        <form:select path="user.user_id" name="user" items="${listUser}" itemValue="user_id"
-                     cssStyle="border: none"/>
-
-        <form:input path="order_num" cssStyle="border: none" itemLabel="num"/>
-
-        <form:input path="booking_sum" cssStyle="border: none" itemLabel="sum"/>
-
-        <form:select path="offer.currency.valuta_id" name="currency" items="${listCurrency}" itemValue="valuta_id"
-                     itemLabel="valuta_name" cssStyle="border: none"/>
-
-        <form:select path="booking_status">
-            <form:option value="-" label="--Please Select"/>
-            <form:options items="${Status}"/>
-        </form:select>
-
-        <c:if test="${!empty order.order_id}">
-            <input type="submit"
-                   value="<spring:message text="Edit"/>"/>
-        </c:if>
-        <c:if test="${empty order.order_id}">
-            <input type="submit"
-                   value="<spring:message text="Add"/>"/>
-        </c:if>
+    <table class="table table-hover table-responsive">
+        <tr>
+            <th>
+                <span class="label label-primary">${order_date}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_part}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_offer}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_user}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_num}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_sum}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_status}</span>
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <form:input type="date" path="order_date" cssStyle="border: none"/>
+            </td>
+            <td>
+                <form:select path="part.part_id" name="part" items="${listPart}" itemValue="part_id"
+                             itemLabel="part_name" cssStyle="border: none"/>
+            </td>
+            <td>
+                <form:select path="offer.offer_id" name="offer" items="${listOffers}" itemValue="offer_id"
+                             itemLabel="offer_id" cssStyle="border: none"/>
+            </td>
+            <td>
+                <form:select path="user.user_id" name="user" items="${listUser}" itemValue="user_id"
+                             cssStyle="border: none"/>
+            </td>
+            <td>
+                <form:input path="order_num" itemLabel="num"/>
+            </td>
+            <td>
+                <form:input path="booking_sum" itemLabel="sum"/>
+            </td>
+            <td>
+                <form:select path="booking_status">
+                    <form:option value="-" label="--Please Select"/>
+                    <form:options items="${Status}"/>
+                </form:select>
+            </td>
+            <tr>
+                <td colspan="7">
+                    <c:if test="${!empty order.order_id}">
+                        <input type="submit"
+                               value="<spring:message text="${order_edit}"/>"/>
+                    </c:if>
+                    <c:if test="${empty order.order_id}">
+                        <input type="submit"
+                               value="<spring:message text="${order_add}"/>"/>
+                    </c:if>
+                </td>
+            </tr>
+        </tr>
+    </table>
     </form:form>
 
     <c:if test="${!empty orderList}">
-        <br>
-        <h3>order list</h3>
-        <table class="table table-hover table-responsive">
+    <br>
+
+    <h3>order list</h3>
+    <table class="table table-hover table-responsive">
+        <tr>
+            <th>
+                <span class="label label-primary">${order_date}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_status}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_user}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_part}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_num}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_sum}</span>
+            </th>
+            <th>
+                <span class="label label-primary">${order_currency}</span>
+            </th>
+            <th>
+
+            </th>
+            <th>
+
+            </th>
+        </tr>
+        <c:forEach items="${orderList}" var="order_item">
             <tr>
-                <th>
-                    <span class="label label-info">${order_date}</span>
-                </th>
-                <th>
-                    <span class="label label-info">${order_status}</span>
-                </th>
-                <th>
-                    <span class="label label-info">${order_user}</span>
-                </th>
-                <th>
-                    <span class="label label-info">${order_part}</span>
-                </th>
-                <th>
-                    <span class="label label-info">${order_num}</span>
-                </th>
-                <th>
-                    <span class="label label-info">${order_sum}</span>
-                </th>
-                <th>
-                    <span class="label label-info">${order_currency}</span>
-                </th>
-                <th>
-
-                </th>
-                <th>
-
-                </th>
+                <td><fmt:formatDate pattern="dd-MM-yyyy"
+                                    value="${order_item.order_date}"/></td>
+                <td>${order_item.booking_status}</td>
+                <td>${order_item.user.firstname} ${order_item.user.lastname}</td>
+                <td>${order_item.part.part_name}</td>
+                <td>${order_item.order_num}</td>
+                <td>${order_item.booking_sum}</td>
+                <td>${order_item.offer.currency.valuta_name}</td>
+                <td><a href="<c:url value='/order/edit/${order_item.order_id}' />" title=${order_edit}><img src="${editImgUrl}"/></a>
+                </td>
+                <td><a href="<c:url value='/order/remove/${order_item.order_id}' />" title=${order_delete}><img
+                        src="${deleteImgUrl}"/></a></td>
             </tr>
-            <c:forEach items="${orderList}" var="order_item">
-                <tr>
-                    <td><fmt:formatDate pattern="dd-MM-yyyy"
-                                        value="${order_item.order_date}"/></td>
-                    <td>${order_item.booking_status}</td>
-                    <td>${order_item.user.firstname} ${order_item.user.lastname}</td>
-                    <td>${order_item.part.part_name}</td>
-                    <td>${order_item.order_num}</td>
-                    <td>${order_item.booking_sum}</td>
-                    <td>${order_item.offer.currency.valuta_name}</td>
-                    <td><a href="<c:url value='/order/edit/${order_item.order_id}' />"><img src="${editImgUrl}"/></a>
-                    </td>
-                    <td><a href="<c:url value='/order/remove/${order_item.order_id}' />"><img
-                            src="${deleteImgUrl}"/></a></td>
-                </tr>
-            </c:forEach>
-        </table>
+        </c:forEach>
+    </table>
     </c:if>
-</div>
+    </div>
