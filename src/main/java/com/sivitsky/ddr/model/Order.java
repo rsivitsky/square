@@ -11,9 +11,8 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name="Order.getOrdersByUserId", query="select order_date, part.part_name, order_num, booking_status from Order " +
                 "where user_id = :user_id and booking_status in (:booking_status)" ),
-        @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order_id) as total_num, " +
-                "sum(booking_sum) as total_sum " +
-                "from Order where user_id = :user_id and booking_status in (:booking_status) group by user_id ")
+        @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order_id) as cart_num, " +
+                "sum(booking_sum) as total_sum from Order where user_id = :user_id and booking_status ='NEW' group by user_id")
 })
 
 public class Order implements Serializable {

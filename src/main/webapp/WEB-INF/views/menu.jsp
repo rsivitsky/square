@@ -10,6 +10,17 @@
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
                 <li><a href="/index">${home}</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-th-large"></i> Drop Down
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Item1</a></li>
+                        <li><a href="#">Item2</a></li>
+                        <li><a href="#">Item3</a></li>
+                    </ul>
+                </li>
                 <li><a href="/part/list"> ${admin}</a></li>
                 <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')">
                     <li><a href="/offers"> ${offer}</a></li>

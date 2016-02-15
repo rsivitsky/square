@@ -7,6 +7,8 @@
 <spring:message code="label.producer" var="producer"/>
 <spring:message code="label.price_minimum" var="price_minimum"/>
 <spring:message code="label.part_photo" var="part_photo"/>
+<spring:message code="label.cart_num" var="cart_num"/>
+<spring:message code="label.cart_sum" var="cart_sum"/>
 <spring:url value="/part/photo" var="partPhotoUrl"/>
 
 <c:set var="manufacturs" scope="session"/>
@@ -20,11 +22,11 @@
         <label class="control-label">${producer}</label>
         <c:forEach items="${manufacturFilterList}" var="manufacturFilter">
             <div class="checkbox col-lg-push-1">
-                <c:if test="${manufacturFilter.usage!=false}">
+                <c:if test="${manufacturFilter.usage}">
                     <input type="checkbox" name="manufacturs" checked onclick="this.form.submit();"
                            value=${manufacturFilter.manufactur.manufactur_id}>
                 </c:if>
-                <c:if test="${manufacturFilter.usage==false}">
+                <c:if test="${!manufacturFilter.usage}">
                     <input type="checkbox" name="manufacturs" onclick="this.form.submit();"
                            value=${manufacturFilter.manufactur.manufactur_id}>
                 </c:if>
@@ -44,6 +46,43 @@
             </div>
         </div>
     </form>
+
+    <div>
+        <c:if test="${!empty cartInfo}">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="label label-primary">${cart_num}</span>
+                </div>
+                <div class="col-md-6">
+                    <span class="label label-primary">${cart_sum}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="label label-primary">"${cartInfo[0]}"</span>
+                </div>
+                <div class="col-md-6">
+                    <span class="label label-primary">${cartInfo[1]}</span>
+                </div>
+            </div>
+        </c:if>
+        <c:if test="${empty cartInfo}">
+            <div class="row">
+                <div class="col-md-6">
+                    <span class="label label-primary">${cart_num}</span>
+                </div>
+                <div class="col-md-6">
+                    <span class="label label-primary">${cart_sum}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    empty cart
+                </div>
+            </div>
+        </c:if>
+    </div>
+
 </div>
 <div class="col-md-9">
     <table class="table table-hover">

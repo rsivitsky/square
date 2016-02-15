@@ -2,6 +2,7 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.OrderDAO;
 import com.sivitsky.ddr.model.Order;
+import com.sivitsky.ddr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,8 +38,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public Object getOrderTotalByUserId(Long id){
-        return this.orderDAO.getOrderTotalByUserId(id);
+    public Object getOrderTotalByUserId(Long user, String[] status){
+        return this.orderDAO.getOrderTotalByUserId(user, status);
     }
 
 }

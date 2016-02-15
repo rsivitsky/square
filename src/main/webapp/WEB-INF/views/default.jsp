@@ -26,6 +26,9 @@
         </div>
     </div>
     <div class="row">
+        <tiles:insertAttribute name="cart_info" ignore="true"/>
+    </div>
+    <div class="row">
             <tiles:insertAttribute name="body" ignore="true"/>
     </div>
     <div class="row">
@@ -37,10 +40,5 @@
     </div>
 </div>
 </body>
-<%--
-<footer>
-    <tiles:insertAttribute name="footer" ignore="true"/>
-</footer>
---%>
 
 </html>

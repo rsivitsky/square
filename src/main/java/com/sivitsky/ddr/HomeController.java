@@ -1,8 +1,6 @@
 package com.sivitsky.ddr;
 
-import com.sivitsky.ddr.model.Manufactur;
-import com.sivitsky.ddr.model.Offer;
-import com.sivitsky.ddr.model.Part;
+import com.sivitsky.ddr.model.*;
 import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,14 +8,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList"})
+@SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList", "cartInfo"})
 public class HomeController {
     private PartService partService;
     private ManufacturService manufacturService;
+    private UserService userService;
+    private OrderService orderService;
     private List<ManufacturFilterService> manufacturFilterList = new ArrayList<ManufacturFilterService>();
     private Float price_from;
     private Float price_to;
@@ -60,6 +61,16 @@ public class HomeController {
     }
 
     @Autowired(required = true)
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    @Autowired(required = true)
+    public void setOrderService(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @Autowired(required = true)
     public void setManufacturService(ManufacturService manufacturService) {
         this.manufacturService = manufacturService;
         if (manufacturService.listManufactur().size() > 0) {
@@ -76,7 +87,17 @@ public class HomeController {
     public String startPage(@RequestParam(value = "manufacturs", required = false) String[] array_manufacturs,
                             @RequestParam(value = "price_from", required = false) String price_from,
                             @RequestParam(value = "price_to", required = false) String price_to,
-                            Model model) {
+                            Model model, Principal principal)
+    {
+      if (principal!=null){
+            String[] booking_status = new String[2];
+            booking_status[0] = OrderStatus.NEW.name();
+            booking_status[1] = OrderStatus.PAID.name();
+            User user = userService.getUserByName(principal.getName());
+            if (user!=null){
+                model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user.getUser_id(), booking_status));
+            }
+        }
         setUsageAsFalse();
         this.setPrice_from((price_from != null) ? price_from : "0");
         this.setPrice_to((price_to != null) ? price_to : "0");
