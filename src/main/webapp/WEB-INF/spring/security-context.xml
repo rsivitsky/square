@@ -16,6 +16,8 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/offer" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>
         <intercept-url pattern="/cart/add" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>
         <intercept-url pattern="/cart/add/*" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>
+        <intercept-url pattern="/cart/info" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+        <intercept-url pattern="/cart/info/*" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
         <intercept-url pattern="/part/*" access="permitAll"/>
         <intercept-url pattern="/part" access="permitAll"/>
         <intercept-url pattern="/**" access="permitAll"/>

@@ -38,8 +38,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public Object getOrderTotalByUserId(Long user, String[] status){
+         public Object getOrderTotalByUserId(Long user, String[] status){
         return this.orderDAO.getOrderTotalByUserId(user, status);
     }
 
+    @Transactional
+    public  List<Order> getOrdersByUserId(Long user_id){
+        return this.orderDAO.getOrdersByUserId(user_id);
+    }
+
+    @Transactional
+    public  void cancelOrder(Long order_id){
+        this.orderDAO.cancelOrder(order_id);
+    }
 }

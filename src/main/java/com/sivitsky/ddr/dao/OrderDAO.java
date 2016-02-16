@@ -19,4 +19,8 @@ public interface OrderDAO {
 
     Object getOrderTotalByUserId(Long user_id, String[] status);
 
+    List<Order> getOrdersByUserId(Long user_id);
+
+    void cancelOrder(Long order_id);
+
 }

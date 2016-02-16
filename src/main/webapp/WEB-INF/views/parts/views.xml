@@ -30,4 +30,7 @@
     <definition name="role" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/role.jsp"/>
     </definition>
+    <definition name="cart" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/cart.jsp"/>
+    </definition>
 </tiles-definitions>

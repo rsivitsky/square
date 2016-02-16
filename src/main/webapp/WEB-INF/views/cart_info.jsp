@@ -7,6 +7,10 @@
 <spring:message code="label.cart" var="cart"/>
 <spring:message code="label.cart_num" var="cart_num"/>
 <spring:message code="label.cart_sum" var="cart_sum"/>
+<spring:message code="label.cancel" var="cancel"/>
+
+<c:set var="user_id" value="${cartInfo[0]}" scope="session"/>
+
 <div class="hero-unit">
 <c:set var="cartInfo" value= "${cartInfo}"/>
     <sec:authorize access="isAuthenticated()">
@@ -21,10 +25,10 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    ${cartInfo[0]}
+                    <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[0]}</a>
                 </div>
                 <div class="col-md-6">
-                   ${cartInfo[1]}
+                    <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[1]}</a>
                 </div>
             </div>
         </c:if>

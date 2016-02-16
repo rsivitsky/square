@@ -17,4 +17,8 @@ public interface OrderService {
 
     Object getOrderTotalByUserId(Long user, String[] status);
 
+    List<Order> getOrdersByUserId(Long user);
+
+    void cancelOrder(Long order_id);
+
 }
