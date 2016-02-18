@@ -35,7 +35,7 @@ public class PartController {
         return "part";
     }
 
-    @RequestMapping(value = "/part/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/part/add")
     public String addPartGet(Model model) {
         model.addAttribute("part", new Part());
         return "add_part";
