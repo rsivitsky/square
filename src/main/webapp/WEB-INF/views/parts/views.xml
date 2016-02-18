@@ -39,4 +39,19 @@
     <definition name="measure" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/measure.jsp"/>
     </definition>
+    <definition name="manufactur" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/manufactur.jsp"/>
+    </definition>
+    <definition name="description" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/description.jsp"/>
+    </definition>
+    <definition name="specification" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/specification.jsp"/>
+    </definition>
+    <definition name="tspec" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/tspec.jsp"/>
+    </definition>
+    <definition name="user" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/user.jsp"/>
+    </definition>
 </tiles-definitions>

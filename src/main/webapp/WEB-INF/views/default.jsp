@@ -27,6 +27,7 @@
     </div>
     <div class="row">
         <tiles:insertAttribute name="cart_info" ignore="true"/>
+        <br>
     </div>
     <div class="row">
             <tiles:insertAttribute name="body" ignore="true"/>

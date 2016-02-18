@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Controller
-@SessionAttributes({"part"})
+@SessionAttributes({"part", "listPart"})
 public class PartController {
     private PartService partService;
     private DescriptionService descriptionService;
@@ -29,8 +29,9 @@ public class PartController {
         this.descriptionService = descriptionService;
     }
 
-    @RequestMapping("/part/list")
+    @RequestMapping(value = "/part/list", method = RequestMethod.GET)
     public String startPart(Model model) {
+        model.addAttribute("part", new Part());
         model.addAttribute("listPart", partService.listPartWithDetail());
         return "part";
     }
