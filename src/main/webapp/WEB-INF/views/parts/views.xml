@@ -33,4 +33,10 @@
     <definition name="cart" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/cart.jsp"/>
     </definition>
+    <definition name="currency" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/currency.jsp"/>
+    </definition>
+    <definition name="measure" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/measure.jsp"/>
+    </definition>
 </tiles-definitions>

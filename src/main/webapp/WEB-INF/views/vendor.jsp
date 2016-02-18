@@ -3,6 +3,10 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:url var="editImgUrl" value="/resources/img/edit.png"/>
+<c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
+
 <div>
     <c:url var="addAction" value="/vendor/add"></c:url>
     <form:form action="${addAction}" commandName="vendor">
@@ -44,8 +48,8 @@
                 <tr>
                     <td>${vendoritem.vendor_id}</td>
                     <td>${vendoritem.vendor_name}</td>
-                    <td><a href="<c:url value='/vendor/edit/${vendoritem.vendor_id}' />">Edit</a></td>
-                    <td><a href="<c:url value='/vendor/remove/${vendoritem.vendor_id}' />">Delete</a></td>
+                    <td><a href="<c:url value='/vendor/edit/${vendoritem.vendor_id}' />"><img src="${editImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/vendor/remove/${vendoritem.vendor_id}' />"><img src="${deleteImgUrl}"/></a></td>
                 </tr>
             </c:forEach>
         </table>

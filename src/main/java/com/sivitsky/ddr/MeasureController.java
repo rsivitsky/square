@@ -21,7 +21,7 @@ public class MeasureController {
 	}
 
 	@RequestMapping(value = "/measure", method = RequestMethod.GET)
-	public String startPage(Model model) {
+	public String getMeasure(Model model) {
 		model.addAttribute("measure", new Measure());
 		model.addAttribute("listMeasure", measureService.listMeasure());
 		return "measure";

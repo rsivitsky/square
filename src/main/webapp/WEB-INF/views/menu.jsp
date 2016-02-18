@@ -8,6 +8,7 @@
 <spring:message code="label.order" var="order"/>
 <spring:message code="label.vendor" var="vendor"/>
 <spring:message code="label.role" var="role"/>
+<spring:message code="label.measure" var="measure"/>
 <spring:message code="label.currency" var="currency"/>
 <spring:message code="label.manufactur" var="manufactur"/>
 <spring:message code="label.part" var="part"/>
@@ -22,9 +23,10 @@
 <c:url var="roleUrl" value="/role"/>
 <c:url var="partUrl" value="/part/list"/>
 <c:url var="userUrl" value="/user"/>
-<c:url var="currencyUrl" value="#"/>
+<c:url var="currencyUrl" value="/currency"/>
 <c:url var="manufacturUrl" value="/manufactur"/>
 <c:url var="vendorUrl" value="/vendor"/>
+<c:url var="measureUrl" value="/measure"/>
 <c:url var="specificationUrl" value="/specification"/>
 <c:url var="typeOfSpecUrl" value="/tspec"/>
 <c:url var="homeUrl" value="/index"/>
@@ -45,14 +47,15 @@
                     <ul class="dropdown-menu">
                         <li><a href=${offerUrl}>${offer}</a></li>
                         <li><a href=${orderUrl}>${order}</a></li>
-                        <li><a href="${roleUrl}">${role}</a></li>
-                        <li><a href="${userUrl}">${user}</a></li>
-                        <li><a href="${partUrl}">${part}</a></li>
-                        <li><a href="${typeOfSpecUrl}">${typeOfSpec}</a></li>
-                        <li><a href="${specificationUrl}">${specification}</a></li>
-                        <li><a href="${currencyUrl}">${currency}</a></li>
-                        <li><a href="${manufacturUrl}">${manufactur}</a></li>
-                        <li><a href="${vendorUrl}">${vendor}</a></li>
+                        <li><a href=${roleUrl}>${role}</a></li>
+                        <li><a href=${userUrl}>${user}</a></li>
+                        <li><a href=${partUrl}>${part}</a></li>
+                        <li><a href=${measureUrl}>${measure}</a></li>
+                        <li><a href=${typeOfSpecUrl}>${typeOfSpec}</a></li>
+                        <li><a href=${specificationUrl}>${specification}</a></li>
+                        <li><a href=${currencyUrl}>${currency}</a></li>
+                        <li><a href=${manufacturUrl}>${manufactur}</a></li>
+                        <li><a href=${vendorUrl}>${vendor}</a></li>
                     </ul>
                 </li>
             </sec:authorize>

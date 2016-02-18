@@ -7,28 +7,27 @@
 
 <c:url var="editImgUrl" value="/resources/img/edit.png"/>
 <c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
-
-<c:url var="addAction" value="/measure/add" ></c:url>
+<c:url var="addAction" value="/currency/add" />
 
 <div>
-<form:form action="${addAction}" commandName="measure">
+<form:form action="${addAction}" commandName="currency">
 <table>
 	<tr>
 		<td>
-			<form:label path="measure_name">
-				<spring:message text="measureName"/>
+			<form:label path="valuta_name">
+				<spring:message text="valutaName"/>
 			</form:label>
 		</td>
 		<td>
-			<form:input path="measure_name" />
+			<form:input path="valuta_name" />
 		</td>
 	</tr>
 	<tr>
-		<c:if test="${!empty measure.measure_name}">
+		<c:if test="${!empty currency.valuta_name}">
 			<input type="submit"
 				   value="<spring:message text="Edit"/>" />
 		</c:if>
-		<c:if test="${empty measure.measure_name}">
+		<c:if test="${empty currency.valuta_name}">
 			<input type="submit"
 				   value="<spring:message text="Add"/>" />
 		</c:if>
@@ -36,21 +35,21 @@
 </table>	
 </form:form>
 
-<c:if test="${!empty listMeasure}">
+<c:if test="${!empty listCurrency}">
 	<br>
-	<h3>measure list</h3>
+	<h3>currency list</h3>
 	<table class="data">
 	<tr>
-		<th width="80">measure ID</th>
-		<th width="120">measure Name</th>
+		<th width="80">currency ID</th>
+		<th width="120">currency Name</th>
 		<th width="60">Delete</th>
 	</tr>
-	<c:forEach items="${listMeasure}" var="measure_item">
+	<c:forEach items="${listCurrency}" var="currency_item">
 		<tr>
-			<td>${measure_item.measure_id}</td>
-			<td>${measure_item.measure_name}</td>
-			<td><a href="<c:url value='/measure/edit/${measure_item.measure_id}' />" ><img src="${editImgUrl}"/></a></td>
-			<td><a href="<c:url value='/measure/remove/${measure_item.measure_id}' />" ><img src="${deleteImgUrl}"/></a></td>
+			<td>${currency_item.valuta_id}</td>
+			<td>${currency_item.valuta_name}</td>
+			<td><a href="<c:url value='/currency/edit/${currency_item.valuta_id}' />" ><img src="${editImgUrl}"/></a></td>
+			<td><a href="<c:url value='/currency/remove/${currency_item.valuta_id}' />" ><img src="${deleteImgUrl}"/></a></td>
 		</tr>
 	</c:forEach>
 	</table>
