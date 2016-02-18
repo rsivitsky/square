@@ -21,6 +21,8 @@ public interface OrderDAO {
 
     List<Order> getOrdersByUserId(Long user_id);
 
+    List<Order> getOrdersByVendorId(Long vendor_id);
+
     void cancelOrder(Long order_id);
 
 }

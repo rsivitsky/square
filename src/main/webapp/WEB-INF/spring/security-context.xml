@@ -10,6 +10,16 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
         <intercept-url pattern="/vendor/*" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/vendor" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/manufactur/*" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/manufactur" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/specification/*" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/specification" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/user/*" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/user" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/currency/*" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/currency" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/role/*" access="hasAnyRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/role" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/order/*" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/order" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/offer/*" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>

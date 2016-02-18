@@ -9,6 +9,9 @@ import java.util.Date;
 @Entity
 @Table(name = "booking")
 @NamedQueries({
+        @NamedQuery(name="Order.getOrderesByVendorId", query="select o.order_date, o.part.part_name, o.order_num, o.booking_status " +
+                "from Order o join o.offer off join off.vendor ven " +
+                "where ven.vendor_id = :vendor_id" ),
         @NamedQuery(name="Order.getOrderesByUserId", query="select order_date, part.part_name, order_num, booking_status from Order " +
                 "where user_id = :user_id and booking_status in (:booking_status)" ),
         @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order_id) as cart_num, " +

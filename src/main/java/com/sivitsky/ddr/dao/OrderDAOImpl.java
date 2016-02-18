@@ -70,6 +70,13 @@ public class OrderDAOImpl implements OrderDAO {
                 .list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Order> getOrdersByVendorId(Long vendor_id){
+        return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrderesByVendorId")
+                .setParameter("vendor_id", vendor_id)
+                .list();
+    }
+
     public void cancelOrder(Long order_id){
         sessionFactory.getCurrentSession().createQuery("update Order set booking_status = 'CANCELED'" +
                 " where order_id = :order_id").setParameter("order_id", order_id).executeUpdate();

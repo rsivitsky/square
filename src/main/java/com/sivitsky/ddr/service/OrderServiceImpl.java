@@ -48,6 +48,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
+    public  List<Order> getOrdersByVendorId(Long vendor_id){
+        return this.orderDAO.getOrdersByVendorId(vendor_id);
+    }
+
+    @Transactional
     public  void cancelOrder(Long order_id){
         this.orderDAO.cancelOrder(order_id);
     }
