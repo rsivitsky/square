@@ -11,11 +11,8 @@
 <spring:message code="label.public_cancel" var="cancel"/>
 <spring:url value="/role" var="list_role"/>
 <spring:url value="/role/add" var="addAction"/>
-<%--
-<c:url var="addAction" value="/role/add" ></c:url>
-<c:url var="list_role" value="/role" ></c:url>--%>
-<c:url var="editImgUrl" value="/resources/img/edit.png"/>
-<c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
+<spring:url value="/resources/img/edit.png" var="editImgUrl"/>
+<spring:url value="/resources/img/delete.png" var="deleteImgUrl"/>
 
 <div class="col-md-3">
 	<form:form action="${addAction}" commandName="role" >

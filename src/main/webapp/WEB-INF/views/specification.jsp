@@ -1,60 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-         pageEncoding="utf8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title>Specification Page</title>
-    <style type="text/css">
-        .tg {
-            border-collapse: collapse;
-            border-spacing: 0;
-            border-color: #ccc;
-        }
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-        .tg td {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #fff;
-        }
+<spring:message code="label.add" var="add"/>
+<spring:message code="label.edit" var="edit"/>
+<spring:url value="/specification/add" var="addAction"/>
+<spring:url value="/resources/img/edit.png" var="editImgUrl"/>
+<spring:url value="/resources/img/delete.png" var="deleteImgUrl"/>
 
-        .tg th {
-            font-family: Arial, sans-serif;
-            font-size: 14px;
-            font-weight: normal;
-            padding: 10px 5px;
-            border-style: solid;
-            border-width: 1px;
-            overflow: hidden;
-            word-break: normal;
-            border-color: #ccc;
-            color: #333;
-            background-color: #f0f0f0;
-        }
-
-        .tg .tg-4eph {
-            background-color: #f9f9f9
-        }
-    </style>
-</head>
-<body>
-<h1>
-    Add a Specification
-</h1>
-
-<c:url var="addAction" value="/specification/add"></c:url>
-
+<div>
 <form:form action="${addAction}" commandName="specification">
-    <table>
+    <table class="table table-hover">
         <tr>
             <td>
                 <form:label path="spec_name">
@@ -75,22 +34,21 @@
             <td>
                 <form:select path="measure.measure_id" items="${listMeasure}" itemValue="measure_id"
                              itemLabel="measure_name"/>
-                    <%--<form:select path="measure.measure_id" multiple="false">
-                        <form:option value="0" label="Select..." />
-                        <form:options itemValue="measure_id" items="${listMeasure}" itemLabel="measure_name" />
-                    </form:select>--%>
             </td>
         </tr>
         <tr>
             <td colspan="2">
                 <c:if test="${!empty specification.spec_name}">
-                    <input type="submit"
-                           value="<spring:message text="Edit"/>"/>
+                    <input type="submit" class="btn btn-info"
+                           value="<spring:message text="${edit}"/>"/>
                 </c:if>
                 <c:if test="${empty specification.spec_name}">
-                    <input type="submit"
-                           value="<spring:message text="Add"/>"/>
+                    <input type="submit" class="btn btn-info"
+                           value="<spring:message text="${add}"/>"/>
                 </c:if>
+            </td>
+            <td colspan="2">
+                <a href="${list_role}" class="btn btn-info" role="button">${cancel}</a>
             </td>
         </tr>
     </table>
@@ -99,26 +57,17 @@
 <c:if test="${!empty listSpec}">
     <br>
     <h3>Specification List</h3>
-    <table class="data">
-        <tr>
-            <th width="80">Spec ID</th>
-            <th width="120">Spec name</th>
-            <th width="120">Type of spec</th>
-            <th width="120">Measure</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
-        </tr>
+    <table class="table table-hover">
         <c:forEach items="${listSpec}" var="specitem">
             <tr>
                 <td>${specitem.spec_id}</td>
                 <td>${specitem.spec_name}</td>
                 <td>${specitem.typeofspec.tspec_name}</td>
                 <td>${specitem.measure.measure_name}</td>
-                <td><a href="<c:url value='/specification/edit/${specitem.spec_id}' />">Edit</a></td>
-                <td><a href="<c:url value='/specification/remove/${specitem.spec_id}' />">Delete</a></td>
+                <td><a href="<c:url value='/specification/edit/${specitem.spec_id}' />"><img src="${editImgUrl}"/></a></td>
+                <td><a href="<c:url value='/specification/remove/${specitem.spec_id}' />"><img src="${deleteImgUrl}"/></a></td>
             </tr>
         </c:forEach>
     </table>
 </c:if>
-</body>
-</html>
+</div>
