@@ -13,11 +13,17 @@
 <spring:message code="label.offer_sum" var="offer_sum"/>
 <spring:message code="label.offer_currency" var="offer_currency"/>
 <spring:message code="label.offer_loadfromfile" var="loadfromfile"/>
+<spring:message code="label.offer_list" var="offer_list"/>
+<spring:message code="label.edit" var="edit"/>
+<spring:message code="label.delete" var="delete"/>
+<spring:message code="label.add" var="add"/>
+<spring:message code="label.public_cancel" var="cancel"/>
 
-<c:url var="editImgUrl" value="/resources/img/edit.png"/>
-<c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
-<c:url var="addAction" value="/offers/add"/>
-<c:url var="loadAction" value="/offers/load"/>
+<spring:url var="editImgUrl" value="/resources/img/edit.png"/>
+<spring:url var="deleteImgUrl" value="/resources/img/delete.png"/>
+<spring:url var="addAction" value="/offers/add"/>
+<spring:url var="loadAction" value="/offers/load"/>
+<spring:url value="/offers" var="cancelAction"/>
 
 <div class="col-md-4">
     <form:form action="${loadAction}" method="post" enctype="multipart/form-data">
@@ -100,13 +106,14 @@
             <tr>
                 <td colspan="5">
                 <c:if test="${!empty offer.offer_id}">
-                    <input type="submit"
-                           value="<spring:message text="Edit"/>"/>
+                    <input type="submit" class="btn btn-info"
+                           value="<spring:message text="${edit}"/>"/>
                 </c:if>
                 <c:if test="${empty offer.offer_id}">
-                    <input type="submit"
-                           value="<spring:message text="Add"/>"/>
+                    <input type="submit" class="btn btn-info"
+                           value="<spring:message text="${add}"/>"/>
                 </c:if>
+                    <a href="${cancelAction}" class="btn btn-info" role="button">${cancel}</a>
                 </td>
             </tr>
         </table>
@@ -115,7 +122,7 @@
     <c:if test="${!empty listOffers}">
         <br>
 
-        <h3>offer list</h3>
+        <h3>${offer_list}</h3>
         <table class="table table-hover table-responsive">
             <tr>
                 <th>
@@ -156,8 +163,8 @@
                     <td>${offer_item.offer_price}</td>
                     <td>${offer_item.offer_num}</td>
                     <td>${offer_item.offer_sum}</td>
-                    <td><a href="<c:url value='/offers/edit/${offer_item.offer_id}' />"><img src="${editImgUrl}"/></a></td>
-                    <td><a href="<c:url value='/offers/remove/${offer_item.offer_id}' />"><img src="${deleteImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/offers/edit/${offer_item.offer_id}' />" title=${edit}><img src="${editImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/offers/remove/${offer_item.offer_id}' />" title=${delete}><img src="${deleteImgUrl}"/></a></td>
                 </tr>
             </c:forEach>
         </table>

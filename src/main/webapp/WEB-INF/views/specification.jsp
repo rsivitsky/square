@@ -7,10 +7,12 @@
 
 <spring:message code="label.add" var="add"/>
 <spring:message code="label.edit" var="edit"/>
+<spring:message code="label.delete" var="delete"/>
 <spring:message code="label.public_cancel" var="cancel"/>
 <spring:message code="label.spec_name" var="spec_name"/>
 <spring:message code="label.spec_typeofspec" var="spec_typeofspec"/>
 <spring:message code="label.spec_measure" var="spec_measure"/>
+<spring:message code="label.specification_list" var="specification_list"/>
 
 <spring:url value="/specification/add" var="addAction"/>
 <spring:url value="/specification" var="cancelAction"/>
@@ -63,7 +65,7 @@
     <c:if test="${!empty listSpec}">
         <br>
 
-        <h3>Specification List</h3>
+        <h3>${specification_list}</h3>
         <table class="table table-hover">
             <c:forEach items="${listSpec}" var="specitem">
                 <tr>
@@ -71,9 +73,9 @@
                     <td>${specitem.spec_name}</td>
                     <td>${specitem.typeofspec.tspec_name}</td>
                     <td>${specitem.measure.measure_name}</td>
-                    <td><a href="<c:url value='/specification/edit/${specitem.spec_id}' />"><img
+                    <td><a href="<c:url value='/specification/edit/${specitem.spec_id}' />" title=${edit}><img
                             src="${editImgUrl}"/></a></td>
-                    <td><a href="<c:url value='/specification/remove/${specitem.spec_id}' />"><img
+                    <td><a href="<c:url value='/specification/remove/${specitem.spec_id}' />" title=${delete}><img
                             src="${deleteImgUrl}"/></a></td>
                 </tr>
             </c:forEach>

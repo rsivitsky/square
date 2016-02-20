@@ -13,13 +13,16 @@
 <spring:message code="label.order_currency" var="order_currency"/>
 <spring:message code="label.order_sum" var="order_sum"/>
 <spring:message code="label.order_offer" var="order_offer"/>
-<spring:message code="label.edit" var="order_edit"/>
-<spring:message code="label.add" var="order_add"/>
-<spring:message code="label.delete" var="order_delete"/>
+<spring:message code="label.edit" var="edit"/>
+<spring:message code="label.add" var="add"/>
+<spring:message code="label.delete" var="delete"/>
+<spring:message code="label.order_list" var="order_list"/>
+<spring:message code="label.public_cancel" var="cancel"/>
 
-<c:url var="editImgUrl" value="/resources/img/edit.png"/>
-<c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
-<c:url var="addOrderUrl" value="/order/add"/>
+<spring:url var="editImgUrl" value="/resources/img/edit.png"/>
+<spring:url var="deleteImgUrl" value="/resources/img/delete.png"/>
+<spring:url var="addOrderUrl" value="/order/add"/>
+<spring:url value="/order/list" var="cancelAction"/>
 
 <div class="col-md-12">
     <form:form action="${addOrderUrl}" commandName="order" method="post" enctype="multipart/form-data">
@@ -72,29 +75,29 @@
             <td>
                 <form:select path="booking_status">
                     <form:option value="-" label="--Please Select"/>
-                    <form:options items="${Status}"/>
+                    <form:options items="${status}"/>
                 </form:select>
             </td>
             <tr>
                 <td colspan="7">
                     <c:if test="${!empty order.order_id}">
-                        <input type="submit"
-                               value="<spring:message text="${order_edit}"/>"/>
+                        <input type="submit" class="btn btn-info"
+                               value="<spring:message text="${edit}"/>"/>
                     </c:if>
                     <c:if test="${empty order.order_id}">
-                        <input type="submit"
-                               value="<spring:message text="${order_add}"/>"/>
+                        <input type="submit" class="btn btn-info"
+                               value="<spring:message text="${add}"/>"/>
                     </c:if>
+                    <a href="${cancelAction}" class="btn btn-info" role="button">${cancel}</a>
                 </td>
             </tr>
-        </tr>
     </table>
     </form:form>
 
     <c:if test="${!empty orderList}">
     <br>
 
-    <h3>order list</h3>
+    <h3>${order_list}</h3>
     <table class="table table-hover table-responsive">
         <tr>
             <th>
@@ -135,9 +138,9 @@
                 <td>${order_item.order_num}</td>
                 <td>${order_item.booking_sum}</td>
                 <td>${order_item.offer.currency.valuta_name}</td>
-                <td><a href="<c:url value='/order/edit/${order_item.order_id}' />" title=${order_edit}><img src="${editImgUrl}"/></a>
+                <td><a href="<c:url value='/order/edit/${order_item.order_id}' />" title=${edit}><img src="${editImgUrl}"/></a>
                 </td>
-                <td><a href="<c:url value='/order/remove/${order_item.order_id}' />" title=${order_delete}><img
+                <td><a href="<c:url value='/order/remove/${order_item.order_id}' />" title=${delete}><img
                         src="${deleteImgUrl}"/></a></td>
             </tr>
         </c:forEach>

@@ -45,7 +45,7 @@ public class OrderController {
         model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listUser", this.userService.listUsers());
         model.addAttribute("listPart", this.partService.listPart());
-        model.addAttribute("Status", OrderStatus.values());
+        model.addAttribute("status", OrderStatus.values());
         return "order";
     }
 
