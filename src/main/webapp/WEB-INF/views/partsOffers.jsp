@@ -3,12 +3,14 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <spring:url value="/part/photo" var="partPhotoUrl"/>
 <spring:url value="/part/description/${part[0]}" var="partInfo"/>
 <spring:message code="label.vendors" var="number_sellers"/>
 <spring:message code="label.put_to_cart" var="put_to_cart"/>
 
 <c:set var="quantity" scope="request"/>
+
 <div class="col-md-12">
     <c:if test="${part != null}">
         <div class="row">
@@ -54,4 +56,3 @@
        </table>
    </c:if>
 </div>
-

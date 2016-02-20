@@ -1,88 +1,93 @@
-<%@ page language="java" contentType="text/html; charset=utf8"
-		 pageEncoding="utf8"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-	<title>User Page</title>
-	<style type="text/css">
-		.tg  {border-collapse:collapse;border-spacing:0;border-color:#ccc;}
-		.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#fff;}
-		.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:#ccc;color:#333;background-color:#f0f0f0;}
-		.tg .tg-4eph{background-color:#f9f9f9}
-	</style>
-</head>
-<body>
-<h1>
-	Add a User
-</h1>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url var="addAction" value="/user/add" ></c:url>
+<spring:url var="addAction" value="/user/add"/>
+<spring:url value="/user" var="cancelAction"/>
+<spring:url var="editImgUrl" value="/resources/img/edit.png"/>
+<spring:url var="deleteImgUrl" value="/resources/img/delete.png"/>
 
+<spring:message code="label.user_list" var="user_list"/>
+<spring:message code="label.edit" var="edit"/>
+<spring:message code="label.delete" var="delete"/>
+<spring:message code="label.add" var="add"/>
+<spring:message code="label.public_cancel" var="cancel"/>
+
+<spring:message code="label.user_firstname" var="user_firstname"/>
+<spring:message code="label.user_lastname" var="user_lastname"/>
+<spring:message code="label.user_login" var="user_login"/>
+<spring:message code="label.user_password" var="user_password"/>
+<spring:message code="label.user_role" var="user_role"/>
+<spring:message code="label.user_vendor" var="user_vendor"/>
+
+<c:set var="vendor" value="${user.vendor.vendor_name}"/>
+<div>
 <form:form action="${addAction}" commandName="user">
-<table>
-	<tr>
-		<td>
-			<form:label path="firstname">
-				<spring:message text="FirstName"/>
-			</form:label>
-		</td>
-		<td>
-			<form:input path="firstname" />
-		</td> 
+	<table class="table table-hover">
+	<tr bgcolor="#87ceeb">
+		<th>
+			${user_firstname}
+		</th>
+		<th>
+			${user_lastname}
+		</th>
+		<th>
+			${user_login}
+		</th>
+		<th>
+			${user_password}
+		</th>
+		<th>
+			${user_role}
+		</th>
+		<th>
+			${user_vendor}
+		</th>
 	</tr>
 	<tr>
 		<td>
-			<form:label path="lastname">
-				<spring:message text="LastName"/>
-			</form:label>
+			<form:input path="firstname" />
 		</td>
 		<td>
 			<form:input path="lastname" />
 		</td>
-	</tr>
-	<tr>
-		<td>
-			<form:label path="login">
-				<spring:message text="Login"/>
-			</form:label>
-		</td>
 		<td>
 			<form:input path="login" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<form:label path="password">
-				<spring:message text="Password"/>
-			</form:label>
 		</td>
 		<td>
 			<form:input path="password" />
 		</td>
-	</tr>
-	<tr>
 		<td>
-			<form:select path="role.role_id" items="${listRoles}" itemValue="role_id" itemLabel="role_name" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<form:select path="vendor.vendor_id" items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name" />
-		</td>
-	</tr>
-	<tr>
-	<td colspan="2">
-			<c:if test="${!empty user.firstname}">
-				<input type="submit"
-					value="<spring:message text="Edit User"/>" />
-			</c:if>
+			<form:select path="role.role_id">
 			<c:if test="${empty user.firstname}">
-				<input type="submit"
-					value="<spring:message text="Add User"/>" />
+					<form:option value="NONE" label="--- Select ---" />
 			</c:if>
+                    <form:options items="${listRoles}" itemValue="role_id" itemLabel="role_name"  />
+            </form:select>
+        </td>
+		<td>
+			<form:select path="vendor.vendor_id">
+				<c:if test="${empty vendor}">
+					<form:option value="NONE" label="--- Select ---" />
+				</c:if>
+				<form:options items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name"  />
+			</form:select>
+		</td>
+	</tr>
+	<tr>
+	<td colspan="6">
+		<c:if test="${!empty user.firstname}">
+			<input type="submit" class="btn btn-info"
+				   value="<spring:message text="${edit}"/>"/>
+		</c:if>
+		<c:if test="${empty user.firstname}">
+			<input type="submit" class="btn btn-info"
+				   value="<spring:message text="${add}"/>"/>
+		</c:if>
+		<a href="${cancelAction}" class="btn btn-info" role="button">${cancel}</a>
 	</td>
 	</tr>
 </table>	
@@ -90,27 +95,19 @@
 
 <c:if test="${!empty listUsers}">
 	<br>
-	<h3>Users List</h3>
-	<table class="data">
-	<tr>
-		<th width="80">User ID</th>
-		<th width="120">User Firstname</th>
-		<th width="120">User Lastname</th>
-		<th width="120">User Role</th>
-		<th width="60">Edit</th>
-		<th width="60">Delete</th>
-	</tr>
+	<h3>${user_list}</h3>
+	<table class="table table-hover">
 	<c:forEach items="${listUsers}" var="useritem">
 		<tr>
 			<td>${useritem.user_id}</td>
 			<td>${useritem.firstname}</td>
 			<td>${useritem.lastname}</td>
 			<td>${useritem.role.role_name}</td>
-			<td><a href="<c:url value='/edit/${useritem.user_id}' />" >Edit</a></td>
-			<td><a href="<c:url value='/remove/${useritem.user_id}' />" >Delete</a></td>
+			<td><a href="<c:url value='/edit/${useritem.user_id}' />" title=${edit}><img src="${editImgUrl}"/></a>
+			<td><a href="<c:url value='/remove/${useritem.user_id}' />" title=${delete}><img
+				src="${deleteImgUrl}"/></a>
 		</tr>
 	</c:forEach>
 	</table>
 </c:if>
-</body>
-</html>
+</div>

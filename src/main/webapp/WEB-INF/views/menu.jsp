@@ -1,6 +1,8 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+
 <spring:message code="label.admin" var="admin"/>
 <spring:message code="label.home" var="home"/>
 <spring:message code="label.about" var="about"/>
@@ -20,19 +22,19 @@
 
 <spring:message code="label.contact_info" var="contact_info"/>
 
-<c:url var="roleUrl" value="/role"/>
-<c:url var="partUrl" value="/part/list"/>
-<c:url var="userUrl" value="/user"/>
-<c:url var="currencyUrl" value="/currency"/>
-<c:url var="manufacturUrl" value="/manufactur"/>
-<c:url var="vendorUrl" value="/vendor"/>
-<c:url var="measureUrl" value="/measure"/>
-<c:url var="specificationUrl" value="/specification"/>
-<c:url var="typeOfSpecUrl" value="/tspec"/>
-<c:url var="homeUrl" value="/index"/>
-<c:url var="offerUrl" value="/offers"/>
-<c:url var="orderUrl" value="/order/list"/>
-<c:url var="aboutUrl" value="#"/>
+<spring:url var="roleUrl" value="/role"/>
+<spring:url var="partUrl" value="/part/list"/>
+<spring:url var="userUrl" value="/user"/>
+<spring:url var="currencyUrl" value="/currency"/>
+<spring:url var="manufacturUrl" value="/manufactur"/>
+<spring:url var="vendorUrl" value="/vendor"/>
+<spring:url var="measureUrl" value="/measure"/>
+<spring:url var="specificationUrl" value="/specification"/>
+<spring:url var="typeOfSpecUrl" value="/tspec"/>
+<spring:url var="homeUrl" value="/index"/>
+<spring:url var="offerUrl" value="/offers"/>
+<spring:url var="orderUrl" value="/order/list"/>
+<spring:url var="aboutUrl" value="#"/>
 
 <nav>
     <nav class="navbar navbar-default">

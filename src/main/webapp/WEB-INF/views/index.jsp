@@ -12,10 +12,6 @@
 <spring:url value="/part/photo" var="partPhotoUrl"/>
 
 <c:set var="manufacturs" scope="session"/>
-<%--
-<c:set var="price_from" value="${price_from}" scope="session"/>
-<c:set var="price_to" value="${price_to}" scope="session"/>
---%>
 
 <div class="col-md-3">
     <form method="get" role="form" >
