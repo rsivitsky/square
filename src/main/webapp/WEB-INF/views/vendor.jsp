@@ -4,52 +4,53 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<c:url var="editImgUrl" value="/resources/img/edit.png"/>
-<c:url var="deleteImgUrl" value="/resources/img/delete.png"/>
+<spring:message code="label.add" var="add"/>
+<spring:message code="label.edit" var="edit"/>
+<spring:message code="label.delete" var="delete"/>
+<spring:message code="label.name" var="name"/>
+<spring:message code="label.public_cancel" var="cancel"/>
 
-<div>
-    <c:url var="addAction" value="/vendor/add"></c:url>
+<spring:url var="editImgUrl" value="/resources/img/edit.png"/>
+<spring:url var="deleteImgUrl" value="/resources/img/delete.png"/>
+<spring:url var="addAction" value="/vendor/add"/>
+<spring:url value="/vendor" var="cancelAction"/>
+
+<div class="col-md-3">
     <form:form action="${addAction}" commandName="vendor">
-        <table>
-            <tr>
-                <td>
-                    <form:label path="vendor_name">
-                        <spring:message text="VendorName"/>
-                    </form:label>
-                </td>
-                <td>
-                    <form:input path="vendor_name"/>
-                </td>
-            </tr>
-            <tr>
+        <div class="row">
+            <div class="col-md-12" align="center">
+                <form:input path="vendor_name"/>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6" align="center">
                 <c:if test="${!empty vendor.vendor_name}">
-                    <input type="submit"
-                           value="<spring:message text="Edit Vendor"/>"/>
+                    <input type="submit" class="btn btn-info"
+                           value="<spring:message text="${edit}"/>"/>
                 </c:if>
                 <c:if test="${empty vendor.vendor_name}">
-                    <input type="submit"
-                           value="<spring:message text="Add Vendor"/>"/>
+                    <input type="submit" class="btn btn-info"
+                           value="<spring:message text="${add}"/>"/>
                 </c:if>
-            </tr>
-        </table>
+            </div>
+            <div class="col-md-6" align="center">
+                <a href="${cancelAction}" class="btn btn-info" role="button">${cancel}</a>
+            </div>
+        </div>
     </form:form>
-
+</div>
+<div class="col-md-9">
     <c:if test="${!empty listVendors}">
-        <br>
-
-        <h3>Vendors List</h3>
-        <table class="data">
-            <tr>
-                <th width="80">Vendor ID</th>
-                <th width="120">Vendor Name</th>
-                <th width="60">Delete</th>
-            </tr>
+        <table class="table table-hover">
             <c:forEach items="${listVendors}" var="vendoritem">
                 <tr>
                     <td>${vendoritem.vendor_id}</td>
                     <td>${vendoritem.vendor_name}</td>
-                    <td><a href="<c:url value='/vendor/edit/${vendoritem.vendor_id}' />"><img src="${editImgUrl}"/></a></td>
-                    <td><a href="<c:url value='/vendor/remove/${vendoritem.vendor_id}' />"><img src="${deleteImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/vendor/edit/${vendoritem.vendor_id}' />" title=${edit}><img
+                            src="${editImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/vendor/remove/${vendoritem.vendor_id}' />" title=${delete}><img
+                            src="${deleteImgUrl}"/></a></td>
                 </tr>
             </c:forEach>
         </table>

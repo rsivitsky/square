@@ -20,7 +20,7 @@
 <div>
     <form:form action="${addAction}" commandName="tspec">
         <table class="table table-hover">
-            <tr>
+            <tr bgcolor="#87ceeb">
                 <th>
                         ${spec_typeofspec}
                 </th>

@@ -27,7 +27,7 @@
 <div class="col-md-12">
     <form:form action="${addOrderUrl}" commandName="order" method="post" enctype="multipart/form-data">
     <table class="table table-hover table-responsive">
-        <tr>
+        <tr bgcolor="#87ceeb">
             <th>
                 <span class="label label-primary">${order_date}</span>
             </th>
@@ -99,7 +99,7 @@
 
     <h3>${order_list}</h3>
     <table class="table table-hover table-responsive">
-        <tr>
+        <tr bgcolor="#87ceeb">
             <th>
                 <span class="label label-primary">${order_date}</span>
             </th>

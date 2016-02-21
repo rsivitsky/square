@@ -27,7 +27,7 @@
 
 <div class="col-md-4">
     <form:form action="${loadAction}" method="post" enctype="multipart/form-data">
-               <input type="file" name="offers_file" >
+        <input type="file" name="offers_file">
         <br>
         <input type="submit"
                value="<spring:message text="load"/>"/>
@@ -35,52 +35,38 @@
 </div>
 <div class="col-md-8">
     <form:form action="${addAction}" commandName="offer">
-        <table class="table table-hover table-responsive">
-            <tr>
+        <table class="table table-hover">
+            <tr bgcolor="#87ceeb">
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <th>
-                    <form:label path="vendor">
-                        <spring:message text="${offer_vendor}"/>
-                    </form:label>
-                </th>
+                    <th>
+                        ${offer_vendor}
+                    </th>
                 </sec:authorize>
                 <th>
-                    <form:label path="offer_date">
-                        <spring:message text="${offer_date}"/>
-                    </form:label>
+                        ${offer_date}
                 </th>
                 <th>
-                    <form:label path="part">
-                        <spring:message text="${offer_part}"/>
-                    </form:label>
+                        ${offer_part}
                 </th>
                 <th>
-                    <form:label path="currency">
-                        <spring:message text="${offer_currency}"/>
-                    </form:label>
+                        ${offer_currency}
                 </th>
                 <th>
-                    <form:label path="offer_price">
-                        <spring:message text="${offer_price}"/>
-                    </form:label>
+                        ${offer_price}
                 </th>
                 <th>
-                    <form:label path="offer_num">
-                        <spring:message text="${offer_num}"/>
-                    </form:label>
+                        ${offer_num}
                 </th>
                 <th>
-                    <form:label path="offer_sum">
-                        <spring:message text="${offer_sum}"/>
-                    </form:label>
+                        ${offer_sum}
                 </th>
             </tr>
             <tr>
                 <sec:authorize access="hasRole('ROLE_ADMIN')">
-                <td>
-                    <form:select path="vendor.vendor_id" name="vendor" items="${listVendor}" itemValue="vendor_id"
-                                 itemLabel="vendor_name" cssStyle="border: none"/>
-                </td>
+                    <td>
+                        <form:select path="vendor.vendor_id" name="vendor" items="${listVendor}" itemValue="vendor_id"
+                                     itemLabel="vendor_name" cssStyle="border: none"/>
+                    </td>
                 </sec:authorize>
                 <td>
                     <form:input type="date" path="offer_date" cssStyle="border: none"/>
@@ -105,14 +91,14 @@
             </tr>
             <tr>
                 <td colspan="5">
-                <c:if test="${!empty offer.offer_id}">
-                    <input type="submit" class="btn btn-info"
-                           value="<spring:message text="${edit}"/>"/>
-                </c:if>
-                <c:if test="${empty offer.offer_id}">
-                    <input type="submit" class="btn btn-info"
-                           value="<spring:message text="${add}"/>"/>
-                </c:if>
+                    <c:if test="${!empty offer.offer_id}">
+                        <input type="submit" class="btn btn-info"
+                               value="<spring:message text="${edit}"/>"/>
+                    </c:if>
+                    <c:if test="${empty offer.offer_id}">
+                        <input type="submit" class="btn btn-info"
+                               value="<spring:message text="${add}"/>"/>
+                    </c:if>
                     <a href="${cancelAction}" class="btn btn-info" role="button">${cancel}</a>
                 </td>
             </tr>
@@ -124,27 +110,27 @@
 
         <h3>${offer_list}</h3>
         <table class="table table-hover table-responsive">
-            <tr>
+            <tr bgcolor="#87ceeb" >
                 <th>
-                    ${offer_vendor}
+                        ${offer_vendor}
                 </th>
                 <th>
-                    ${offer_date}
+                        ${offer_date}
                 </th>
                 <th>
-                    ${offer_part}
+                        ${offer_part}
                 </th>
                 <th>
-                    ${offer_currency}
+                        ${offer_currency}
                 </th>
                 <th>
-                    ${offer_price}
+                        ${offer_price}
                 </th>
                 <th>
-                    ${offer_num}
+                        ${offer_num}
                 </th>
                 <th>
-                    ${offer_sum}
+                        ${offer_sum}
                 </th>
                 <th>
 
@@ -157,14 +143,16 @@
                 <tr>
                     <td>${offer_item.vendor.vendor_name}</td>
                     <td><fmt:formatDate pattern="dd-MM-yyyy"
-                                    value="${offer_item.offer_date}" /></td>
+                                        value="${offer_item.offer_date}"/></td>
                     <td>${offer_item.part.part_name}</td>
                     <td>${offer_item.currency.valuta_name}</td>
                     <td>${offer_item.offer_price}</td>
                     <td>${offer_item.offer_num}</td>
                     <td>${offer_item.offer_sum}</td>
-                    <td><a href="<c:url value='/offers/edit/${offer_item.offer_id}' />" title=${edit}><img src="${editImgUrl}"/></a></td>
-                    <td><a href="<c:url value='/offers/remove/${offer_item.offer_id}' />" title=${delete}><img src="${deleteImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/offers/edit/${offer_item.offer_id}' />" title=${edit}><img
+                            src="${editImgUrl}"/></a></td>
+                    <td><a href="<c:url value='/offers/remove/${offer_item.offer_id}' />" title=${delete}><img
+                            src="${deleteImgUrl}"/></a></td>
                 </tr>
             </c:forEach>
         </table>

@@ -25,7 +25,7 @@
 <div>
     <form:form action="${addAction}" commandName="specification">
         <table class="table table-hover">
-            <tr>
+            <tr bgcolor="#87ceeb">
                 <th>
                         ${spec_name}
                 </th>
