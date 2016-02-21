@@ -24,6 +24,7 @@
 <spring:message code="label.user_vendor" var="user_vendor"/>
 
 <c:set var="vendor" value="${user.vendor.vendor_name}"/>
+
 <div>
 <form:form action="${addAction}" commandName="user">
 	<table class="table table-hover">

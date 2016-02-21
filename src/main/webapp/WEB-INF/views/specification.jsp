@@ -19,6 +19,9 @@
 <spring:url value="/resources/img/edit.png" var="editImgUrl"/>
 <spring:url value="/resources/img/delete.png" var="deleteImgUrl"/>
 
+<c:set var="measure_name" value="${specification.measure.measure_name}"/>
+<c:set var="tspec_name" value="${specification.typeofspec.tspec_name}"/>
+
 <div>
     <form:form action="${addAction}" commandName="specification">
         <table class="table table-hover">
@@ -38,12 +41,20 @@
                     <form:input path="spec_name"/>
                 </td>
                 <td>
-                    <form:select path="typeofspec.tspec_id" items="${listTspec}" itemValue="tspec_id"
-                                 itemLabel="tspec_name"/>
+                    <form:select path="typeofspec.tspec_id">
+                        <c:if test="${empty tspec_name}">
+                            <form:option value="NONE" label="--- Select ---" />
+                        </c:if>
+                        <form:options items="${listTspec}" itemValue="tspec_id" itemLabel="tspec_name"  />
+                    </form:select>
                 </td>
                 <td>
-                    <form:select path="measure.measure_id" items="${listMeasure}" itemValue="measure_id"
-                                 itemLabel="measure_name"/>
+                    <form:select path="measure.measure_id">
+                        <c:if test="${empty measure_name}">
+                            <form:option value="NONE" label="--- Select ---" />
+                        </c:if>
+                        <form:options items="${listMeasure}" itemValue="measure_id" itemLabel="measure_name"  />
+                    </form:select>
                 </td>
             </tr>
             <tr>

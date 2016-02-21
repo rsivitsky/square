@@ -39,6 +39,9 @@
             </sec:authorize>
         </div>
     </div>
+    <div class="row">
+        <tiles:insertAttribute name="footer" ignore="true"/>
+    </div>
 </div>
 </body>
 
