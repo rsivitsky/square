@@ -7,8 +7,10 @@
 
 <spring:message code="label.add" var="add"/>
 <spring:message code="label.edit" var="edit"/>
+<spring:message code="label.delete" var="delete"/>
 <spring:message code="label.name" var="name"/>
 <spring:message code="label.public_cancel" var="cancel"/>
+
 <spring:url value="/role" var="list_role"/>
 <spring:url value="/role/add" var="addAction"/>
 <spring:url value="/resources/img/edit.png" var="editImgUrl"/>
@@ -47,8 +49,8 @@
 		<tr>
 			<td>${roleitem.role_id}</td>
 			<td>${roleitem.role_name}</td>
-			<td><a href="<c:url value='/role/edit/${roleitem.role_id}' />" ><img src="${editImgUrl}"/></a></td>
-			<td><a href="<c:url value='/role/remove/${roleitem.role_id}' />" ><img src="${deleteImgUrl}"/></a></td>
+			<td><a href="<c:url value='/role/edit/${roleitem.role_id}' />" title=${edit}><img src="${editImgUrl}"/></a></td>
+			<td><a href="<c:url value='/role/remove/${roleitem.role_id}' />" title=${delete}><img src="${deleteImgUrl}"/></a></td>
 		</tr>
 	</c:forEach>
 	</table>
