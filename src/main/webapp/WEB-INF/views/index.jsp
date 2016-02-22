@@ -77,8 +77,9 @@
                 </div>
             </div>
         </c:if>
+        <div class="bfh-selectbox bfh-languages" data-language="en_US" data-available="en_US,fr_CA,es_MX" data-flags="true">
+        </div>
     </div>
-
 </div>
 <div class="col-md-9">
     <table class="table table-hover">
