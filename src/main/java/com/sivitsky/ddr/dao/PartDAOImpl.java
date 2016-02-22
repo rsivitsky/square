@@ -35,8 +35,8 @@ public class PartDAOImpl implements PartDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> listPartWithDetail() {
-        return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").list();
+    public List<Object[]> listPartWithDetail(Integer firstResult, Integer maxResult) {
+        return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").setFirstResult(firstResult).setMaxResults(maxResult).list();
     }
 
     @SuppressWarnings("unchecked")

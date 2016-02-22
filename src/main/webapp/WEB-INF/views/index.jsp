@@ -77,8 +77,6 @@
                 </div>
             </div>
         </c:if>
-        <div class="bfh-selectbox bfh-languages" data-language="en_US" data-available="en_US,fr_CA,es_MX" data-flags="true">
-        </div>
     </div>
 </div>
 <div class="col-md-9">
@@ -101,6 +99,35 @@
         </c:forEach>
     </table>
     <br>
+    <%--For displaying Previous link except for the 1st page --%>
+    <c:if test="${currentPage != 1}">
+        <c:set var="page" value="${currentPage - 1}"/>
+        <td><a href="/index">Previous</a></td>
+    </c:if>
+
+    <%--For displaying Page numbers.
+    The when condition does not display a link for the current page--%>
+    <table border="1" cellpadding="5" cellspacing="5">
+        <tr>
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <td>${i}</td>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="page" value="${i}"/>
+                        <td><a href="/index">${i}</a></td>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+        </tr>
+    </table>
+
+    <%--For displaying Next link --%>
+    <c:if test="${currentPage lt noOfPages}">
+        <c:set var="page" value="${currentPage + 1}"/>
+        <td><a href="/index">Next</a></td>
+    </c:if>
 
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <p>Ваш логин: <sec:authentication property="principal.username"/></p>

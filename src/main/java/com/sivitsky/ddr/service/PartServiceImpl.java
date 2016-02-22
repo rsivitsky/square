@@ -22,8 +22,8 @@ public class PartServiceImpl implements PartService {
     }
 
     @Transactional
-    public List<Object[]> listPartWithDetail(){
-        return partDAO.listPartWithDetail();
+    public List<Object[]> listPartWithDetail(Integer firstResult, Integer maxResult){
+        return partDAO.listPartWithDetail(firstResult, maxResult);
     }
 
     @Transactional

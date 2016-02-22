@@ -32,7 +32,7 @@ public class PartController {
     @RequestMapping(value = "/part/list", method = RequestMethod.GET)
     public String startPart(Model model) {
         model.addAttribute("part", new Part());
-        model.addAttribute("listPart", partService.listPartWithDetail());
+        model.addAttribute("listPart", partService.listPartWithDetail(1, 10));
         return "part";
     }
 
