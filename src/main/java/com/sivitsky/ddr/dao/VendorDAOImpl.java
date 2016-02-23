@@ -13,12 +13,9 @@ import java.util.List;
 public class VendorDAOImpl implements VendorDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(VendorDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Vendor saveVendor(Vendor vendor) {
         sessionFactory.getCurrentSession().saveOrUpdate(vendor);

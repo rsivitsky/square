@@ -1,12 +1,14 @@
 package com.sivitsky.ddr;
 
-import com.sivitsky.ddr.model.*;
+import com.sivitsky.ddr.model.Manufactur;
+import com.sivitsky.ddr.model.OrderStatus;
+import com.sivitsky.ddr.model.Part;
+import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
@@ -16,10 +18,16 @@ import java.util.List;
 @Controller
 @SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList", "cartInfo"})
 public class HomeController {
-    private PartService partService;
+
+    @Autowired
     private ManufacturService manufacturService;
+    @Autowired
+    private PartService partService;
+    @Autowired
     private UserService userService;
+    @Autowired
     private OrderService orderService;
+
     private List<ManufacturFilterService> manufacturFilterList = new ArrayList<ManufacturFilterService>();
     private Float price_from;
     private Float price_to;
@@ -57,21 +65,6 @@ public class HomeController {
     }
 
     @Autowired(required = true)
-    public void setPartService(PartService partService) {
-        this.partService = partService;
-    }
-
-    @Autowired(required = true)
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired(required = true)
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
-    @Autowired(required = true)
     public void setManufacturService(ManufacturService manufacturService) {
         this.manufacturService = manufacturService;
         if (manufacturService.listManufactur().size() > 0) {
@@ -88,14 +81,13 @@ public class HomeController {
     public String startPage(@RequestParam(value = "manufacturs", required = false) String[] array_manufacturs,
                             @RequestParam(value = "price_from", required = false) String price_from,
                             @RequestParam(value = "price_to", required = false) String price_to,
-                            Model model, Principal principal, HttpServletRequest httpServletRequest)
-    {
-      if (principal!=null){
+                            Model model, Principal principal, HttpServletRequest httpServletRequest) {
+        if (principal != null) {
             String[] booking_status = new String[2];
             booking_status[0] = OrderStatus.NEW.name();
             booking_status[1] = OrderStatus.PAID.name();
             User user = userService.getUserByName(principal.getName());
-            if (user!=null){
+            if (user != null) {
                 model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user.getUser_id(), booking_status));
             }
         }
@@ -105,7 +97,7 @@ public class HomeController {
 
         Integer page = 1;
         Integer recordsPerPage = 5;
-        if(httpServletRequest.getParameter("page") != null)
+        if (httpServletRequest.getParameter("page") != null)
             page = Integer.parseInt(httpServletRequest.getParameter("page"));
 
         Long[] l_array_manufacturs;
@@ -139,10 +131,10 @@ public class HomeController {
 
         Integer page = 1;
         Integer recordsPerPage = 5;
-        if(httpServletRequest.getParameter("page") != null)
+        if (httpServletRequest.getParameter("page") != null)
             page = Integer.parseInt(httpServletRequest.getParameter("page"));
 
-        model.addAttribute("listPart", partService.listPartWithDetail((page-1)*recordsPerPage, recordsPerPage));
+        model.addAttribute("listPart", partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage));
         model.addAttribute("manufacturFilterList", manufacturFilterList);
         return "index";
     }

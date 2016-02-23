@@ -13,38 +13,20 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.awt.print.Book;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
-
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 @Component
 public class ExcelReaderServiceImpl implements ExcelReaderService {
 
+    @Autowired
     private CurrencyService currencyService;
+    @Autowired
     private OfferService offerService;
+    @Autowired
     private PartService partService;
-
-    @Autowired(required = true)
-    public void setPartService(PartService partService) {
-        this.partService = partService;
-    }
-
-    @Autowired(required = true)
-    public void setOfferService(OfferService offerService) {
-        this.offerService = offerService;
-    }
-
-    @Autowired(required = true)
-    public void setCurrencyService(CurrencyService currencyService) {
-        this.currencyService = currencyService;
-    }
 
     public Object getCellValue(Cell cell) {
         switch (cell.getCellType()) {
@@ -86,24 +68,21 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                                 break;
                             }
                         case 4:
-                                if (partService.getPartByName(nextCell.getStringCellValue())!=null)
-                                {
-                                    offer.setPart(partService.getPartByName(nextCell.getStringCellValue()));
-                                    break;
-                                }
-                                else
-                                {
-                                    Part part = new Part();
-                                    part.setPart_name(nextCell.getStringCellValue());
-                                    partService.savePart(part);
-                                    offer.setPart(part);
-                                    break;
-                                }
+                            if (partService.getPartByName(nextCell.getStringCellValue()) != null) {
+                                offer.setPart(partService.getPartByName(nextCell.getStringCellValue()));
+                                break;
+                            } else {
+                                Part part = new Part();
+                                part.setPart_name(nextCell.getStringCellValue());
+                                partService.savePart(part);
+                                offer.setPart(part);
+                                break;
+                            }
                         case 5:
                             offer.setOffer_num((int) nextCell.getNumericCellValue());
                             break;
                         case 6:
-                            offer.setOffer_sum((float)(nextCell.getNumericCellValue()));
+                            offer.setOffer_sum((float) (nextCell.getNumericCellValue()));
                             break;
                     }
                 }

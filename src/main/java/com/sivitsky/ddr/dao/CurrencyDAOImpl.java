@@ -1,23 +1,21 @@
 package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Currency;
-import com.sivitsky.ddr.model.Part;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public class CurrencyDAOImpl implements CurrencyDAO{
+@Repository
+public class CurrencyDAOImpl implements CurrencyDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(CurrencyDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Currency saveCurrency(Currency currency) {
         sessionFactory.getCurrentSession().saveOrUpdate(currency);
@@ -34,8 +32,8 @@ public class CurrencyDAOImpl implements CurrencyDAO{
         return (Currency) this.sessionFactory.getCurrentSession().get(Currency.class, id);
     }
 
-    public Currency getCurrencyByName(String name){
-       return (Currency)sessionFactory.getCurrentSession().createQuery("select v from Currency v where v.valuta_name = :valuta_name")
+    public Currency getCurrencyByName(String name) {
+        return (Currency) sessionFactory.getCurrentSession().createQuery("select v from Currency v where v.valuta_name = :valuta_name")
                 .setParameter("valuta_name", name).uniqueResult();
     }
 

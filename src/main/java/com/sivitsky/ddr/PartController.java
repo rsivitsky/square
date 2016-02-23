@@ -3,12 +3,12 @@ package com.sivitsky.ddr;
 import com.sivitsky.ddr.model.Part;
 import com.sivitsky.ddr.service.DescriptionService;
 import com.sivitsky.ddr.service.PartService;
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,18 +16,11 @@ import java.io.InputStream;
 @Controller
 @SessionAttributes({"part", "listPart"})
 public class PartController {
+
+    @Autowired
     private PartService partService;
+    @Autowired
     private DescriptionService descriptionService;
-
-    @Autowired(required = true)
-    public void setPartService(PartService partService) {
-        this.partService = partService;
-    }
-
-    @Autowired(required = true)
-    public void setDescriptionService(DescriptionService descriptionService) {
-        this.descriptionService = descriptionService;
-    }
 
     @RequestMapping(value = "/part/list", method = RequestMethod.GET)
     public String startPart(Model model) {
@@ -72,7 +65,7 @@ public class PartController {
         return "add_part";
     }
 
-    @RequestMapping(value="/part/description/{part_id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/part/description/{part_id}", method = RequestMethod.GET)
     public String partDescription(Model model, @PathVariable("part_id") Long part_id) {
         model.addAttribute("part", this.partService.getPartById(part_id));
         model.addAttribute("descriptions", this.descriptionService.listDescriptionByPartId(part_id));

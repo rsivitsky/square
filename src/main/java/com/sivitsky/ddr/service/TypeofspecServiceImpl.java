@@ -3,17 +3,20 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.dao.TypeofspecDAO;
 import com.sivitsky.ddr.model.Typeofspec;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class TypeofspecServiceImpl implements TypeofspecService {
 
+    @Autowired
     private TypeofspecDAO typeofspecDAO;
 
     @Transactional
     public Typeofspec saveTypeofspec(Typeofspec typeofspec) {
-        return  typeofspecDAO.saveTypeofspec(typeofspec);
+        return typeofspecDAO.saveTypeofspec(typeofspec);
     }
 
     @Transactional
@@ -26,14 +29,8 @@ public class TypeofspecServiceImpl implements TypeofspecService {
         typeofspecDAO.removeTypeofspec(id);
     }
 
-    @Autowired
-    public void setTypeofspecDAO(TypeofspecDAO typeofspecDAO) {
-        this.typeofspecDAO = typeofspecDAO;
-    }
-
     @Transactional
-    public Typeofspec getTypeofspecByID(Long id){
+    public Typeofspec getTypeofspecByID(Long id) {
         return typeofspecDAO.getTypeofspecById(id);
     }
-
 }

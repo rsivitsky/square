@@ -2,8 +2,10 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.OrderStatus;
-import com.sivitsky.ddr.model.User;
-import com.sivitsky.ddr.service.*;
+import com.sivitsky.ddr.service.OfferService;
+import com.sivitsky.ddr.service.OrderService;
+import com.sivitsky.ddr.service.PartService;
+import com.sivitsky.ddr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,33 +15,17 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @SessionAttributes({"order"})
 public class OrderController {
+    @Autowired
     private OrderService orderService;
+    @Autowired
     private PartService partService;
+    @Autowired
     private UserService userService;
+    @Autowired
     private OfferService offerService;
 
-    @Autowired(required = true)
-    public void setOrderService(OrderService orderService) {
-        this.orderService = orderService;
-    }
-
-    @Autowired(required = true)
-    public void setPartService(PartService partService) {
-        this.partService = partService;
-    }
-
-    @Autowired(required = true)
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired(required = true)
-    public void setOfferService(OfferService offerService) {
-        this.offerService = offerService;
-    }
-
     @RequestMapping("/order/list")
-    public String orderList(Model model){
+    public String orderList(Model model) {
         model.addAttribute("order", new Order());
         model.addAttribute("orderList", orderService.listOrder());
         model.addAttribute("listOffers", this.offerService.listOffer());

@@ -1,8 +1,6 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Measure;
 import com.sivitsky.ddr.model.Offer;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +13,9 @@ import java.util.List;
 public class OfferDAOImpl implements OfferDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(OfferDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Offer saveOffer(Offer offer) {
         sessionFactory.getCurrentSession().saveOrUpdate(offer);
@@ -45,21 +40,21 @@ public class OfferDAOImpl implements OfferDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Offer> getOffersByVendorId(Long vendor_id){
-       return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByVendorId")
+    public List<Offer> getOffersByVendorId(Long vendor_id) {
+        return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByVendorId")
                 .setParameter("vendor_id", vendor_id).list();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to){
+    public List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to) {
         return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersByPartId")
                 .setParameter("part_id", part_id)
                 .setParameter("price_from", price_from).setParameter("price_to", price_to)
                 .list();
-        }
+    }
 
     @SuppressWarnings("unchecked")
-    public Object getOffersMaxAndMinPrice(Long part_id, Float price_from, Float price_to){
+    public Object getOffersMaxAndMinPrice(Long part_id, Float price_from, Float price_to) {
         return sessionFactory.getCurrentSession().getNamedQuery("Offer.getOffersMaxAndMinPrice")
                 .setParameter("part_id", part_id)
                 .setParameter("price_from", price_from).setParameter("price_to", price_to)

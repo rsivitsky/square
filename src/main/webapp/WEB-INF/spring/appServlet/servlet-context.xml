@@ -32,7 +32,7 @@
                 p:fallbackToSystemLocale="false"
                 p:fileEncodings="UTF8"
                 p:defaultEncoding="UTF8"
-            />
+    />
 
     <!-- 1 -->
     <!--<beans:bean class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver"
@@ -68,10 +68,11 @@
     <beans:bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
                 destroy-method="close">
         <beans:property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <!--suppress SpringSecurityFiltersConfiguredInspection -->
         <beans:property name="url"
-                        value="jdbc:mysql://localhost:3306/offersdb"/>
-        <beans:property name="username" value="root"/>
-        <beans:property name="password" value="1111"/>
+                        value="jdbc:mysql://localhost:3307/offersdb"/>
+        <beans:property name="username" value="offersdb"/>
+        <beans:property name="password" value="offersdb"/>
     </beans:bean>
 
     <!--<interceptors>
@@ -114,124 +115,10 @@
                 <beans:prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect
                 </beans:prop>
                 <beans:prop key="hibernate.show_sql">true</beans:prop>
+                <beans:prop key="hibernate.format_sql">true</beans:prop>
+                <beans:prop key="hibernate.hbm2ddl.auto">update</beans:prop>
             </beans:props>
         </beans:property>
-    </beans:bean>
-
-    <beans:bean id="excelReaderService" class="com.sivitsky.ddr.service.ExcelReaderServiceImpl"/>
-
-    <beans:bean id="userDetailsService" class="com.sivitsky.ddr.service.UserDetailsServiceImpl"/>
-
-    <beans:bean id="partDAO" class="com.sivitsky.ddr.dao.PartDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="partService" class="com.sivitsky.ddr.service.PartServiceImpl">
-        <beans:property name="partDAO" ref="partDAO"/>
-    </beans:bean>
-
-    <beans:bean id="userDAO" class="com.sivitsky.ddr.dao.UserDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="userService" class="com.sivitsky.ddr.service.UserServiceImpl">
-        <beans:property name="userDAO" ref="userDAO"/>
-    </beans:bean>
-
-    <beans:bean id="currencyDAO" class="com.sivitsky.ddr.dao.CurrencyDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="currencyService" class="com.sivitsky.ddr.service.CurrencyServiceImpl">
-        <beans:property name="currencyDAO" ref="currencyDAO"/>
-    </beans:bean>
-
-    <beans:bean id="offerDAO" class="com.sivitsky.ddr.dao.OfferDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="offerService" class="com.sivitsky.ddr.service.OfferServiceImpl">
-        <beans:property name="offerDAO" ref="offerDAO"/>
-    </beans:bean>
-
-    <beans:bean id="orderDAO" class="com.sivitsky.ddr.dao.OrderDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="orderService" class="com.sivitsky.ddr.service.OrderServiceImpl">
-        <beans:property name="orderDAO" ref="orderDAO"/>
-    </beans:bean>
-
-    <beans:bean id="phoneDAO" class="com.sivitsky.ddr.dao.PhoneDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="phoneService" class="com.sivitsky.ddr.service.PhoneServiceImpl">
-        <beans:property name="phoneDAO" ref="phoneDAO"/>
-    </beans:bean>
-
-    <beans:bean id="roleDAO" class="com.sivitsky.ddr.dao.RoleDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="roleService" class="com.sivitsky.ddr.service.RoleServiceImpl">
-        <beans:property name="roleDAO" ref="roleDAO"/>
-    </beans:bean>
-
-    <beans:bean id="vendorDAO" class="com.sivitsky.ddr.dao.VendorDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="vendorService" class="com.sivitsky.ddr.service.VendorServiceImpl">
-        <beans:property name="vendorDAO" ref="vendorDAO"/>
-    </beans:bean>
-
-    <beans:bean id="manufacturDAO" class="com.sivitsky.ddr.dao.ManufacturDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="manufacturService" class="com.sivitsky.ddr.service.ManufacturServiceImpl">
-        <beans:property name="manufacturDAO" ref="manufacturDAO"/>
-    </beans:bean>
-
-    <beans:bean id="contactDAO" class="com.sivitsky.ddr.dao.ContactDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="contactService" class="com.sivitsky.ddr.service.ContactServiceImpl">
-        <beans:property name="contactDAO" ref="contactDAO"/>
-    </beans:bean>
-
-    <beans:bean id="descriptionDAO" class="com.sivitsky.ddr.dao.DescriptionDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="descriptionService" class="com.sivitsky.ddr.service.DescriptionServiceImpl">
-        <beans:property name="descriptionDAO" ref="descriptionDAO"/>
-    </beans:bean>
-
-    <beans:bean id="typeofspecDAO" class="com.sivitsky.ddr.dao.TypeofspecDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="typeofspecService" class="com.sivitsky.ddr.service.TypeofspecServiceImpl">
-        <beans:property name="typeofspecDAO" ref="typeofspecDAO"/>
-    </beans:bean>
-
-    <beans:bean id="specificationDAO" class="com.sivitsky.ddr.dao.SpecificationDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="specificationService" class="com.sivitsky.ddr.service.SpecificationServiceImpl">
-        <beans:property name="specificationDAO" ref="specificationDAO"/>
-    </beans:bean>
-
-    <beans:bean id="measureDAO" class="com.sivitsky.ddr.dao.MeasureDAOImpl">
-        <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
-    </beans:bean>
-
-    <beans:bean id="measureService" class="com.sivitsky.ddr.service.MeasureServiceImpl">
-        <beans:property name="measureDAO" ref="measureDAO"/>
     </beans:bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
@@ -239,5 +126,4 @@
     <beans:bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <beans:property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </beans:bean>
-
 </beans:beans>

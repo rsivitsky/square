@@ -3,10 +3,12 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.dao.ManufacturDAO;
 import com.sivitsky.ddr.model.Manufactur;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class ManufacturServiceImpl implements ManufacturService {
 
     @Autowired
@@ -14,7 +16,7 @@ public class ManufacturServiceImpl implements ManufacturService {
 
     @Transactional
     public Manufactur saveManufactur(Manufactur manufactur) {
-       return manufacturDAO.saveManufactur(manufactur);
+        return manufacturDAO.saveManufactur(manufactur);
     }
 
     @Transactional
@@ -27,13 +29,8 @@ public class ManufacturServiceImpl implements ManufacturService {
         manufacturDAO.removeManufactur(id);
     }
 
-    public void setManufacturDAO(ManufacturDAO manufacturDAO) {
-        this.manufacturDAO = manufacturDAO;
-    }
-
     @Transactional
     public Manufactur getManufacturById(Long id) {
         return this.manufacturDAO.getManufacturById(id);
     }
-
 }

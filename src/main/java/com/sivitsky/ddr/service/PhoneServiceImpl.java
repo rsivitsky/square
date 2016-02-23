@@ -3,12 +3,15 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.dao.PhoneDAOImpl;
 import com.sivitsky.ddr.model.Phone;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class PhoneServiceImpl implements PhoneService {
 
+    @Autowired
     private PhoneDAOImpl phoneDAO;
 
     @Transactional
@@ -30,10 +33,4 @@ public class PhoneServiceImpl implements PhoneService {
     public void removePhone(Long id) {
         this.phoneDAO.removePhone(id);
     }
-
-    @Autowired(required=true)
-    public void setPhoneDAO(PhoneDAOImpl phoneDAO) {
-        this.phoneDAO = phoneDAO;
-    }
-
 }

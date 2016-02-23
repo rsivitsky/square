@@ -1,6 +1,6 @@
-<%@page contentType="text/html" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -14,7 +14,7 @@
 <c:set var="manufacturs" scope="session"/>
 
 <div class="col-md-3">
-    <form method="get" role="form" >
+    <form method="get" role="form">
         <label class="control-label">${producer}</label>
         <c:forEach items="${manufacturFilterList}" var="manufacturFilter">
             <div class="checkbox col-lg-push-1">
@@ -86,7 +86,8 @@
             <c:url var="partDescription" value="/part/description/${part[0]}"/>
             <c:if test="${!empty part[1]}">
                 <tr>
-                    <td><a href="${partDescription}"><img src="${partPhotoUrl}/${part[0]}" class="img-rounded" height="40" width="150"/></a>
+                    <td><a href="${partDescription}"><img src="${partPhotoUrl}/${part[0]}" class="img-rounded"
+                                                          height="40" width="150"/></a>
                     </td>
                     <td><a href="${partDescription}"><c:out value="${part[1]}"/></a></td>
                     <td>
@@ -132,5 +133,4 @@
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <p>Ваш логин: <sec:authentication property="principal.username"/></p>
     </sec:authorize>
-
 </div>

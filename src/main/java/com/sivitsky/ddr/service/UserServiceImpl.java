@@ -11,6 +11,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    @Autowired
     private UserDAOImpl userDAO;
 
     @Transactional
@@ -37,10 +38,4 @@ public class UserServiceImpl implements UserService {
     public void removeUser(Long id) {
         this.userDAO.removeUser(id);
     }
-
-    @Autowired(required=true)
-    public void setUserDAO(UserDAOImpl userDAO) {
-        this.userDAO = userDAO;
-    }
-
 }

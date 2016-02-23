@@ -12,35 +12,30 @@ import org.springframework.web.bind.annotation.*;
 @SessionAttributes({"measure"})
 public class MeasureController {
 
-	private MeasureService measureService;
+    @Autowired
+    private MeasureService measureService;
 
-	@Autowired(required=true)
-	public void setMeasureService(MeasureService measureService)
-	{
-		this.measureService = measureService;
-	}
+    @RequestMapping(value = "/measure", method = RequestMethod.GET)
+    public String getMeasure(Model model) {
+        model.addAttribute("measure", new Measure());
+        model.addAttribute("listMeasure", measureService.listMeasure());
+        return "measure";
+    }
 
-	@RequestMapping(value = "/measure", method = RequestMethod.GET)
-	public String getMeasure(Model model) {
-		model.addAttribute("measure", new Measure());
-		model.addAttribute("listMeasure", measureService.listMeasure());
-		return "measure";
-	}
+    @RequestMapping(value = "/measure/add", method = RequestMethod.POST)
+    public String addMeasure(@ModelAttribute("measure") Measure measure, BindingResult result) {
+        this.measureService.saveMeasure(measure);
+        return "redirect:/measure";
+    }
 
-	@RequestMapping(value= "/measure/add", method = RequestMethod.POST)
-	public String addMeasure(@ModelAttribute("measure") Measure measure, BindingResult result){
-		this.measureService.saveMeasure(measure);
-		return "redirect:/measure";
-	}
-	
-	@RequestMapping("/measure/remove/{measure_id}")
-    public String removeMeasure(@PathVariable("measure_id") Long id){
+    @RequestMapping("/measure/remove/{measure_id}")
+    public String removeMeasure(@PathVariable("measure_id") Long id) {
         this.measureService.removeMeasure(id);
         return "redirect:/measure";
     }
- 
+
     @RequestMapping("/measure/edit/{measure_id}")
-    public String editMeasure(@PathVariable("measure_id") Long id, Model model){
+    public String editMeasure(@PathVariable("measure_id") Long id, Model model) {
         model.addAttribute("measure", this.measureService.getMeasureById(id));
         model.addAttribute("listMeasure", this.measureService.listMeasure());
         return "measure";

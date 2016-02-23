@@ -3,12 +3,15 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.dao.SpecificationDAO;
 import com.sivitsky.ddr.model.Specification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class SpecificationServiceImpl implements SpecificationService {
 
+    @Autowired
     private SpecificationDAO specificationDAO;
 
     @Transactional
@@ -26,14 +29,8 @@ public class SpecificationServiceImpl implements SpecificationService {
         specificationDAO.removeSpecification(id);
     }
 
-    @Autowired
-    public void setSpecificationDAO(SpecificationDAO specificationDAO) {
-        this.specificationDAO = specificationDAO;
-    }
-
     @Transactional
     public Specification getSpecificationById(Long id) {
         return this.specificationDAO.getSpecificationById(id);
     }
-
 }

@@ -1,8 +1,6 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Description;
 import com.sivitsky.ddr.model.Measure;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +13,9 @@ import java.util.List;
 public class MeasureDAOImpl implements MeasureDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(MeasureDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Measure saveMeasure(Measure measure) {
         sessionFactory.getCurrentSession().saveOrUpdate(measure);

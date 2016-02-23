@@ -1,9 +1,6 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Currency;
-import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.Part;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +13,9 @@ import java.util.List;
 public class PartDAOImpl implements PartDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(PartDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required = true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Part savePart(Part part) {
         sessionFactory.getCurrentSession().saveOrUpdate(part);
@@ -36,12 +30,18 @@ public class PartDAOImpl implements PartDAO {
 
     @SuppressWarnings("unchecked")
     public List<Object[]> listPartWithDetail(Integer firstResult, Integer maxResult) {
-        return sessionFactory.getCurrentSession().getNamedQuery("Part.findAllWithDetail").setFirstResult(firstResult).setMaxResults(maxResult).list();
+        return sessionFactory.getCurrentSession()
+                .getNamedQuery("Part.findAllWithDetail")
+                .setFirstResult(firstResult)
+                .setMaxResults(maxResult)
+                .list();
     }
 
     @SuppressWarnings("unchecked")
     public List<Part> listPartWithManufactursFilter(Long[] mas_id) {
-        return sessionFactory.getCurrentSession().getNamedQuery("Part.findByManufactId").setParameterList("mas_id", mas_id).list();
+        return sessionFactory.getCurrentSession()
+                .getNamedQuery("Part.findByManufactId")
+                .setParameterList("mas_id", mas_id).list();
     }
 
     @SuppressWarnings("unchecked")

@@ -13,6 +13,7 @@ import java.util.List;
 public class PhoneDAOImpl implements PhoneDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(PhoneDAOImpl.class);
+    @Autowired
     private SessionFactory sessionFactory;
 
     public Phone savePhone(Phone phone) {
@@ -35,10 +36,5 @@ public class PhoneDAOImpl implements PhoneDAO {
         if (null != phone) {
             sessionFactory.getCurrentSession().delete(phone);
         }
-    }
-
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
     }
 }

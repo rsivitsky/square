@@ -1,8 +1,6 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Role;
 import com.sivitsky.ddr.model.Specification;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +13,9 @@ import java.util.List;
 public class SpecificationDAOImpl implements SpecificationDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(SpecificationDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Specification saveSpecification(Specification specification) {
         sessionFactory.getCurrentSession().saveOrUpdate(specification);

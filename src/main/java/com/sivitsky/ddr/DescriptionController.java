@@ -18,46 +18,34 @@ import java.util.List;
 @SessionAttributes({"descriptionWrapper"})
 public class DescriptionController {
 
+    @Autowired
     private DescriptionService descriptionService;
+    @Autowired
     private PartService partService;
+    @Autowired
     private SpecificationService specificationService;
+
     private List<Description> descriptionList;
 
-    @Autowired(required=true)
-    public void setDescriptionService(DescriptionService descriptionService) {
-        this.descriptionService = descriptionService;
-    }
-
-    @Autowired(required=true)
-    public void setSpecificationService(SpecificationService specificationService) {
-        this.specificationService = specificationService;
-    }
-
-    @Autowired(required=true)
-    public void setPartService(PartService partService) {
-        this.partService = partService;
-    }
-
     @RequestMapping("/part/description")
-    public Model startDescription(Model model){
+    public Model startDescription(Model model) {
         model.addAttribute("description", new Description());
         return model;
     }
 
     @RequestMapping("/part/{part_id}/descript/remove/{descript_id}")
-    public String removeUser(@PathVariable("descript_id") Long id, @PathVariable("part_id") Long part_id){
+    public String removeUser(@PathVariable("descript_id") Long id, @PathVariable("part_id") Long part_id) {
         this.descriptionService.removeDescription(id);
-        return "redirect:/part/descript/edit/"+part_id.toString();
+        return "redirect:/part/descript/edit/" + part_id.toString();
     }
 
     @RequestMapping(value = "/part/descript/edit/{part_id}", method = RequestMethod.GET)
-    public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model){
+    public String addDescriptionGet(@PathVariable("part_id") Long part_id, Model model) {
         descriptionList = new ArrayList<Description>();
         descriptionList = descriptionService.listDescriptionByPartId(part_id);
-        if (descriptionList != null){
-        }
-        else{
-            for (Specification specification: specificationService.listSpecification()){
+        if (descriptionList != null) {
+        } else {
+            for (Specification specification : specificationService.listSpecification()) {
                 Description description = new Description();
                 description.setPart(partService.getPartById(part_id));
                 description.setSpecification(specification);
@@ -72,9 +60,8 @@ public class DescriptionController {
     }
 
     @RequestMapping(value = "/part/descript/save", method = RequestMethod.POST)
-    public String addDescriptionPost(@ModelAttribute("descriptionWrapper") DescriptionWrapper descriptionWrapper)
-    {
-        for (Description description: descriptionWrapper.getDescriptionList()){
+    public String addDescriptionPost(@ModelAttribute("descriptionWrapper") DescriptionWrapper descriptionWrapper) {
+        for (Description description : descriptionWrapper.getDescriptionList()) {
             descriptionService.saveDescription(description);
         }
         return "redirect:/part/list";

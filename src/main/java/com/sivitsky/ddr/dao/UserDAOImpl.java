@@ -1,7 +1,6 @@
 package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.User;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,12 +13,8 @@ import java.util.List;
 public class UserDAOImpl implements UserDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(UserDAOImpl.class);
+    @Autowired
     private SessionFactory sessionFactory;
-
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     public User saveUser(User user) {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
@@ -36,7 +31,7 @@ public class UserDAOImpl implements UserDAO {
         return (User) this.sessionFactory.getCurrentSession().get(User.class, id);
     }
 
-    public User getUserByName(String name){
+    public User getUserByName(String name) {
         return (User) this.sessionFactory.getCurrentSession().createQuery("select v from User v where v.login = :user_name")
                 .setParameter("user_name", name).uniqueResult();
     }

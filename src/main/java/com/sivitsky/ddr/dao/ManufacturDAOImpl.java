@@ -13,12 +13,9 @@ import java.util.List;
 public class ManufacturDAOImpl implements ManufacturDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(ManufacturDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Manufactur saveManufactur(Manufactur manufactur) {
         sessionFactory.getCurrentSession().saveOrUpdate(manufactur);

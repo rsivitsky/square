@@ -13,12 +13,9 @@ import java.util.List;
 public class DescriptionDAOImpl implements DescriptionDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(DescriptionDAOImpl.class);
-    private SessionFactory sessionFactory;
 
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+    @Autowired
+    private SessionFactory sessionFactory;
 
     public Description saveDescription(Description description) {
         sessionFactory.getCurrentSession().saveOrUpdate(description);
@@ -33,7 +30,7 @@ public class DescriptionDAOImpl implements DescriptionDAO {
 
     @SuppressWarnings("unchecked")
     public List<Description> listDescriptionByPartId(Long id) {
-        return sessionFactory.getCurrentSession().createQuery("from Description where part_id= :part_id").setParameter("part_id",id).list();
+        return sessionFactory.getCurrentSession().createQuery("from Description where part_id= :part_id").setParameter("part_id", id).list();
     }
 
     public Description getDescriptionById(Long id) {

@@ -11,6 +11,7 @@ import java.util.List;
 @Component
 public class ContactServiceImpl implements ContactService {
 
+    @Autowired
     private ContactDAO contactDAO;
 
     @Transactional
@@ -32,10 +33,4 @@ public class ContactServiceImpl implements ContactService {
     public void removeContact(Long id) {
         this.contactDAO.removeContact(id);
     }
-
-    @Autowired(required=true)
-    public void setContactDAO(ContactDAO contactDAO) {
-        this.contactDAO = contactDAO;
-    }
-
 }

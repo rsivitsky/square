@@ -1,8 +1,6 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Specification;
 import com.sivitsky.ddr.model.Typeofspec;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +13,8 @@ import java.util.List;
 public class TypeofspecDAOImpl implements TypeofspecDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(TypeofspecDAOImpl.class);
+
+    @Autowired
     private SessionFactory sessionFactory;
 
     public Typeofspec saveTypeofspec(Typeofspec typeofspec) {
@@ -38,10 +38,4 @@ public class TypeofspecDAOImpl implements TypeofspecDAO {
             sessionFactory.getCurrentSession().delete(typeofspec);
         }
     }
-
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
 }

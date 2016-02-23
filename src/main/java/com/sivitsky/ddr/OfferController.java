@@ -1,12 +1,9 @@
 package com.sivitsky.ddr;
 
-import com.sivitsky.ddr.model.Measure;
 import com.sivitsky.ddr.model.Offer;
 import com.sivitsky.ddr.model.User;
-import com.sivitsky.ddr.model.Vendor;
 import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,42 +18,18 @@ import java.security.Principal;
 @SessionAttributes({"offer", "listOffers", "vendor_id"})
 public class OfferController {
 
+    @Autowired
     private OfferService offerService;
+    @Autowired
     private CurrencyService currencyService;
+    @Autowired
     private PartService partService;
+    @Autowired
     private VendorService vendorService;
+    @Autowired
     private ExcelReaderService excelReaderService;
+    @Autowired
     private UserService userService;
-
-    @Autowired(required = true)
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    @Autowired(required = true)
-    public void setExcelReaderService(ExcelReaderService excelReaderService) {
-        this.excelReaderService = excelReaderService;
-    }
-
-    @Autowired(required = true)
-    public void setOfferService(OfferService offerService) {
-        this.offerService = offerService;
-    }
-
-    @Autowired(required = true)
-    public void setCurrencyService(CurrencyService currencyService) {
-        this.currencyService = currencyService;
-    }
-
-    @Autowired(required = true)
-    public void setPartService(PartService partService) {
-        this.partService = partService;
-    }
-
-    @Autowired(required = true)
-    public void setVendorService(VendorService vendorService) {
-        this.vendorService = vendorService;
-    }
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
     public String listOffers(HttpServletRequest request, Model model, Principal principal) {
@@ -111,8 +84,8 @@ public class OfferController {
         return "redirect:/offers";
     }
 
-    @RequestMapping(value="/offers/partinfo/{part_id}", method = RequestMethod.GET)
-    public String PartsOffers(HttpServletRequest request, Model model, @RequestParam(value = "price_from", required = false) Float price_from, @RequestParam(value = "price_to", required = false) Float price_to, @PathVariable("part_id") Long part_id){
+    @RequestMapping(value = "/offers/partinfo/{part_id}", method = RequestMethod.GET)
+    public String PartsOffers(HttpServletRequest request, Model model, @RequestParam(value = "price_from", required = false) Float price_from, @RequestParam(value = "price_to", required = false) Float price_to, @PathVariable("part_id") Long part_id) {
         Float max_price = Float.parseFloat(request.getSession().getAttribute("price_to").toString());
         Float min_price = Float.parseFloat(request.getSession().getAttribute("price_from").toString());
         model.addAttribute("part", this.offerService.getOffersMaxAndMinPrice(part_id, min_price, max_price));

@@ -3,10 +3,12 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.dao.VendorDAO;
 import com.sivitsky.ddr.model.Vendor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class VendorServiceImpl implements VendorService {
 
     @Autowired
@@ -14,7 +16,7 @@ public class VendorServiceImpl implements VendorService {
 
     @Transactional
     public Vendor saveVendor(Vendor vendor) {
-       return vendorDAO.saveVendor(vendor);
+        return vendorDAO.saveVendor(vendor);
     }
 
     @Transactional
@@ -27,13 +29,8 @@ public class VendorServiceImpl implements VendorService {
         vendorDAO.removeVendor(id);
     }
 
-    public void setVendorDAO(VendorDAO vendorDAO) {
-        this.vendorDAO = vendorDAO;
-    }
-
     @Transactional
     public Vendor getVendorById(Long id) {
         return this.vendorDAO.getVendorById(id);
     }
-
 }

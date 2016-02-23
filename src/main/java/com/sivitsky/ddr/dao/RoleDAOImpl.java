@@ -1,8 +1,6 @@
 package com.sivitsky.ddr.dao;
 
-import com.sivitsky.ddr.model.Phone;
 import com.sivitsky.ddr.model.Role;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +13,8 @@ import java.util.List;
 public class RoleDAOImpl implements RoleDAO {
 
     private static final Logger logger = LoggerFactory.getLogger(RoleDAOImpl.class);
+
+    @Autowired
     private SessionFactory sessionFactory;
 
     public Role saveRole(Role role) {
@@ -38,10 +38,4 @@ public class RoleDAOImpl implements RoleDAO {
             sessionFactory.getCurrentSession().delete(role);
         }
     }
-
-    @Autowired(required=true)
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
 }
