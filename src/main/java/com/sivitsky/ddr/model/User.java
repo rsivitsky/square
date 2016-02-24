@@ -1,6 +1,8 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,9 +12,23 @@ import java.util.Set;
 public class User implements Serializable{
 
     private Long user_id;
+    @Size(min = 3, max = 20,
+            message = "Login must be between 3 and 20 characters long.")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$",
+            message = "Username must be alphanumeric with no spaces")
     private String login;
+    @Size(min = 6, max = 20,
+            message = "The password must be at least 6 characters long.")
     private String password;
+    @Pattern(regexp = "^[a-zA-Z0-9]+$",
+            message = "Firstname must be alphanumeric with no spaces")
+    @Size(min = 3, max = 50,
+            message = "Your firstname must be between 3 and 50 characters long.")
     private String firstname;
+    @Pattern(regexp = "^[a-zA-Z0-9]+$",
+            message = "Lastname must be alphanumeric with no spaces")
+    @Size(min = 3, max = 50,
+            message = "Your lastname must be between 3 and 50 characters long.")
     private String lastname;
     private Role role;
     private Vendor vendor;

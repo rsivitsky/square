@@ -23,6 +23,7 @@
                 </th>
                 <td>
                     <form:input path="firstname"/>
+                    <form:errors path="firstname" cssClass="error"/>
                 </td>
             </tr>
             <tr>
@@ -31,6 +32,7 @@
                 </th>
                 <td>
                     <form:input path="lastname"/>
+                    <form:errors path="lastname" cssClass="error"/>
                 </td>
             </tr>
             <tr>
@@ -39,6 +41,7 @@
                 </th>
                 <td>
                     <form:input path="login"/>
+                    <form:errors path="login" cssClass="error"/>
                 </td>
             </tr>
             <tr>
@@ -47,6 +50,7 @@
                 </th>
                 <td>
                     <form:input path="password"/>
+                    <form:errors path="password" cssClass="error"/>
                 </td>
             </tr>
             <tr>

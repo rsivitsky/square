@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
+
 @Controller
 public class LoginController {
 
@@ -37,12 +39,14 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute("user") User user, BindingResult result) {
+    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+        if (result.hasErrors()) {
+            return "redirect:/registration";
+        }
         if (user.getVendor().getVendor_id() == null) {
             user.setVendor(null);
         }
         this.userService.saveUser(user);
-
         return "redirect:/index";
     }
 }
