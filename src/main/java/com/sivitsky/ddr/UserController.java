@@ -33,7 +33,7 @@ public class UserController {
     //For add and update person both
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user, BindingResult result) {
-        user = this.userService.saveUser(user);
+        this.userService.saveUser(user);
         return "redirect:/user";
     }
 

@@ -54,4 +54,7 @@
     <definition name="user" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/user.jsp"/>
     </definition>
+    <definition name="registration" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/registration.jsp"/>
+    </definition>
 </tiles-definitions>

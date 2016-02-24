@@ -50,7 +50,7 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public Object getOrderTotalByUserId(Long user_id, String[] booking_status) {
+    public Object getOrderTotalByUserId(Long user_id) {
         return sessionFactory.getCurrentSession().getNamedQuery("Order.getCountAndSumOrdersByUserId")
                 .setParameter("user_id", user_id)
                 .uniqueResult();

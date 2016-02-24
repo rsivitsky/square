@@ -1,7 +1,6 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Manufactur;
-import com.sivitsky.ddr.model.OrderStatus;
 import com.sivitsky.ddr.model.Part;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.*;
@@ -85,11 +84,14 @@ public class HomeController {
                             Model model, Principal principal) {
         if (principal != null) {
             String[] booking_status = new String[2];
-            booking_status[0] = OrderStatus.NEW.name();
-            booking_status[1] = OrderStatus.PAID.name();
+            /*booking_status[0] = OrderStatus.NEW.name();
+            booking_status[1] = OrderStatus.PAID.name();*/
             User user = userService.getUserByName(principal.getName());
             if (user != null) {
-                model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user.getUser_id(), booking_status));
+                Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());
+                if (cartInfo != null) {
+                    model.addAttribute("cartInfo", cartInfo);
+                }
             }
         }
         setUsageAsFalse();

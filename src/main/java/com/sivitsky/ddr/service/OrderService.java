@@ -1,7 +1,6 @@
 package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.model.Order;
-import com.sivitsky.ddr.model.User;
 
 import java.util.List;
 
@@ -15,7 +14,7 @@ public interface OrderService {
 
     Order getOrderById(Long id);
 
-    Object getOrderTotalByUserId(Long user, String[] status);
+    Object getOrderTotalByUserId(Long user);
 
     List<Order> getOrdersByUserId(Long user_id);
 

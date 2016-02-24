@@ -1,7 +1,6 @@
 package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Order;
-import com.sivitsky.ddr.model.User;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface OrderDAO {
 
     List<Order> listOrderByUserId(Long id);
 
-    Object getOrderTotalByUserId(Long user_id, String[] status);
+    Object getOrderTotalByUserId(Long user_id);
 
     List<Order> getOrdersByUserId(Long user_id);
 

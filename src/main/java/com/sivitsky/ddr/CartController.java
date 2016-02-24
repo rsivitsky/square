@@ -2,7 +2,6 @@ package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.Offer;
 import com.sivitsky.ddr.model.Order;
-import com.sivitsky.ddr.model.OrderStatus;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.OfferService;
 import com.sivitsky.ddr.service.OrderService;
@@ -69,9 +68,9 @@ public class CartController {
         User user = userService.getUserByName(principal.getName());
         if (user!=null){
             String[] booking_status = new String[2];
-            booking_status[0] = OrderStatus.NEW.name();
-            booking_status[1] = OrderStatus.PAID.name();
-            model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user.getUser_id(), booking_status));
+            /*booking_status[0] = OrderStatus.NEW.name();
+            booking_status[1] = OrderStatus.PAID.name();*/
+            model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user.getUser_id()));
             model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user.getUser_id()));
         }
         return "cart";

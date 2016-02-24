@@ -16,6 +16,7 @@
 <spring:url value="/resources/img/gb.png" var="gbImgUrl"/>
 <spring:url var="logoutUrl" value="/j_spring_security_logout"/>
 <spring:url value="/j_spring_security_check" var="loginUrl"/>
+<spring:url value="/registration" var="registrationUrl"/>
 
 <div>
     <a href="?lang=en_US" title="english"><img src="${gbImgUrl}"/></a> | <a href="?lang=ru_RU" title="русский"><img src="${ruImgUrl}"/></a>
@@ -70,6 +71,11 @@
                         <div class="divider" style="background-color: transparent"></div>
                         <div class="form-group">
                             <a href="#">${forgot_passw}</a>
+                        </div>
+                        <div class="form-group">
+                            Want an account?
+                            <a href="${registrationUrl}">Join for free</a>
+                            It's fast and easy!
                         </div>
                     </form>
                 </div>

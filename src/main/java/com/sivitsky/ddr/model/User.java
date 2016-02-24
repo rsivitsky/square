@@ -84,7 +84,7 @@ public class User implements Serializable{
         this.role = role;
     }
 
-    @ManyToOne(targetEntity=Vendor.class, fetch=FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "vendor_id")
     public Vendor getVendor() {
         return vendor;

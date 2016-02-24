@@ -35,8 +35,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public Object getOrderTotalByUserId(Long user, String[] status) {
-        return this.orderDAO.getOrderTotalByUserId(user, status);
+    public Object getOrderTotalByUserId(Long user) {
+        return this.orderDAO.getOrderTotalByUserId(user);
     }
 
     @Transactional
