@@ -1,6 +1,6 @@
-<%@ page contentType="text/html" pageEncoding="UTF-8" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
@@ -100,24 +100,24 @@
         </c:forEach>
     </table>
     <br>
+
     <%--For displaying Previous link except for the 1st page --%>
-    <c:if test="${currentPage != 1}">
-        <c:set var="page" value="${currentPage - 1}"/>
-        <td><a href="/index">Previous</a></td>
+    <c:if test="${page != 1}">
+        <td><a href="/index?page=${page-1}">Previous</a></td>
     </c:if>
 
     <%--For displaying Page numbers.
     The when condition does not display a link for the current page--%>
+
     <table border="1" cellpadding="5" cellspacing="5">
         <tr>
             <c:forEach begin="1" end="${noOfPages}" var="i">
                 <c:choose>
-                    <c:when test="${currentPage eq i}">
+                    <c:when test="${page eq i}">
                         <td>${i}</td>
                     </c:when>
                     <c:otherwise>
-                        <c:set var="page" value="${i}"/>
-                        <td><a href="/index">${i}</a></td>
+                        <td><a href="/index?page=${i}">${i}</a></td>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
@@ -125,12 +125,12 @@
     </table>
 
     <%--For displaying Next link --%>
-    <c:if test="${currentPage lt noOfPages}">
-        <c:set var="page" value="${currentPage + 1}"/>
-        <td><a href="/index">Next</a></td>
+    <c:if test="${page lt noOfPages}">
+        <td><a href="/index?page=${page+1}">Next</a></td>
     </c:if>
 
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <p>Ваш логин: <sec:authentication property="principal.username"/></p>
     </sec:authorize>
+
 </div>

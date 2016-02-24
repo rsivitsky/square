@@ -77,11 +77,12 @@ public class HomeController {
         }
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String startPage(@RequestParam(value = "manufacturs", required = false) String[] array_manufacturs,
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
+    public String startPage(@RequestParam(value = "page", required = false) Integer page,
+                            @RequestParam(value = "manufacturs", required = false) String[] array_manufacturs,
                             @RequestParam(value = "price_from", required = false) String price_from,
                             @RequestParam(value = "price_to", required = false) String price_to,
-                            Model model, Principal principal, HttpServletRequest httpServletRequest) {
+                            Model model, Principal principal) {
         if (principal != null) {
             String[] booking_status = new String[2];
             booking_status[0] = OrderStatus.NEW.name();
@@ -95,10 +96,10 @@ public class HomeController {
         this.setPrice_from((price_from != null) ? price_from : "0");
         this.setPrice_to((price_to != null) ? price_to : "0");
 
-        Integer page = 1;
-        Integer recordsPerPage = 5;
-        if (httpServletRequest.getParameter("page") != null)
-            page = Integer.parseInt(httpServletRequest.getParameter("page"));
+        Integer recordsPerPage = 2;
+        if (page == null) {
+            page = 1;
+        }
 
         Long[] l_array_manufacturs;
         if (array_manufacturs != null && array_manufacturs.length > 0 || this.getPrice_from() != 0 || this.getPrice_to() != 0) {
@@ -115,10 +116,11 @@ public class HomeController {
         } else {
             model.addAttribute("listPart", partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage));
         }
-        int noOfRecords = 10;
+
+        int noOfRecords = partService.getCountOfPart();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
-        httpServletRequest.setAttribute("noOfPages", noOfPages);
-        httpServletRequest.setAttribute("currentPage", page);
+        model.addAttribute("noOfPages", noOfPages);
+        model.addAttribute("page", page);
 
         model.addAttribute("price_from", this.getPrice_from());
         model.addAttribute("price_to", this.getPrice_to());
@@ -126,7 +128,7 @@ public class HomeController {
         return "index";
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.POST)
     public String startPagePost(Model model, HttpServletRequest httpServletRequest) {
 
         Integer page = 1;
@@ -137,11 +139,6 @@ public class HomeController {
         model.addAttribute("listPart", partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage));
         model.addAttribute("manufacturFilterList", manufacturFilterList);
         return "index";
-    }
-
-    @RequestMapping(value = "/index", method = RequestMethod.GET)
-    public String startPageIdx() {
-        return "redirect:/";
     }
 
     @RequestMapping(value = "/part/photo/{part_id}", method = RequestMethod.GET)

@@ -22,4 +22,6 @@ public interface PartService {
 
     Part getPartByName(String name);
 
+    Integer getCountOfPart();
+
 }

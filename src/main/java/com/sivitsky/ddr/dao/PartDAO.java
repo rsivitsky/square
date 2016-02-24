@@ -21,4 +21,6 @@ public interface PartDAO {
     Part getPartByName(String name);
 
     void removePart(Long id);
+
+    Integer getCountOfPart();
 }

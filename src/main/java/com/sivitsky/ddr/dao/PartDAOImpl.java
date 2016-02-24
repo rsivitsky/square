@@ -79,4 +79,11 @@ public class PartDAOImpl implements PartDAO {
             sessionFactory.getCurrentSession().delete(part);
         }
     }
+
+    @SuppressWarnings("unchecked")
+    public Integer getCountOfPart() {
+        return sessionFactory.getCurrentSession()
+                .getNamedQuery("Part.findAllWithDetail")
+                .list().size();
+    }
 }

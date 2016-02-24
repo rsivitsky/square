@@ -54,4 +54,9 @@ public class PartServiceImpl implements PartService {
         return this.partDAO.getPartByName(name);
     }
 
+    @Transactional
+    public Integer getCountOfPart() {
+        return partDAO.getCountOfPart();
+    }
+
 }
