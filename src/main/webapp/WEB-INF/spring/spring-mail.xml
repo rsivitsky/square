@@ -8,11 +8,12 @@
         <property name="port" value="587"/>
         <property name="username" value="rsivitsky"/>
         <property name="password" value="novogrudok2015"/>
-
+        <!--https://www.google.com/settings/security/lesssecureapps - should click  TURN ON-->
         <property name="javaMailProperties">
             <props>
                 <prop key="mail.smtp.auth">true</prop>
                 <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>
             </props>
         </property>
     </bean>
