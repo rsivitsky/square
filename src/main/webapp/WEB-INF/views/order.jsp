@@ -15,9 +15,9 @@
 <spring:message code="label.order_offer" var="order_offer"/>
 <spring:message code="label.edit" var="edit"/>
 <spring:message code="label.add" var="add"/>
+<spring:message code="label.public_cancel" var="cancel"/>
 <spring:message code="label.delete" var="delete"/>
 <spring:message code="label.order_list" var="order_list"/>
-<spring:message code="label.public_cancel" var="cancel"/>
 
 <spring:url var="editImgUrl" value="/resources/img/edit.png"/>
 <spring:url var="deleteImgUrl" value="/resources/img/delete.png"/>

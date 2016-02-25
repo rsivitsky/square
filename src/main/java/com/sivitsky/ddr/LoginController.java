@@ -8,13 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.validation.Valid;
 
 @Controller
+@SessionAttributes({"listRolesWithoutAdmin", "listVendors"})
 public class LoginController {
 
     @Autowired
@@ -32,16 +33,15 @@ public class LoginController {
     @RequestMapping(value = "/registration")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("listUsers", userService.listUsers());
-        model.addAttribute("listRoles", roleService.listRole());
+        model.addAttribute("listRolesWithoutAdmin", roleService.listRoleWithoutAdmin());
         model.addAttribute("listVendors", vendorService.listVendor());
         return "registration";
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)
-    public String saveUser(@Valid @ModelAttribute("user") User user, BindingResult result) {
+    public String saveUser(@Valid User user, BindingResult result) {
         if (result.hasErrors()) {
-            return "redirect:/registration";
+            return "registration";
         }
         if (user.getVendor().getVendor_id() == null) {
             user.setVendor(null);

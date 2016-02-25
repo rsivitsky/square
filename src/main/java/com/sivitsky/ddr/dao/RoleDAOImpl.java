@@ -28,6 +28,11 @@ public class RoleDAOImpl implements RoleDAO {
         return sessionFactory.getCurrentSession().createQuery("from Role").list();
     }
 
+    @SuppressWarnings("unchecked")
+    public List<Role> listRoleWithoutAdmin() {
+        return sessionFactory.getCurrentSession().createQuery("from Role where role_name != 'ROLE_ADMIN'").list();
+    }
+
     public Role getRoleById(Long id) {
         return (Role) this.sessionFactory.getCurrentSession().get(Role.class, id);
     }

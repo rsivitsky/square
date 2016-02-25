@@ -25,6 +25,11 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Transactional
+    public List<Role> listRoleWithoutAdmin() {
+        return roleDAO.listRoleWithoutAdmin();
+    }
+
+    @Transactional
     public void removeRole(Long id) {
         roleDAO.removeRole(id);
     }

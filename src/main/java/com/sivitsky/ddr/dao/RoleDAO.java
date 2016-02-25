@@ -8,6 +8,8 @@ public interface RoleDAO {
 
     List<Role> listRoles();
 
+    List<Role> listRoleWithoutAdmin();
+
     Role saveRole(Role role);
 
     Role getRoleById(Long id);

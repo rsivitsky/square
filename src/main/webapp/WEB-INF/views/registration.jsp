@@ -4,20 +4,44 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<style>
+    .error {
+        color: #ff0000;
+    }
+
+    <%--
+        .errorblock {
+            color: #000;
+            background-color: #ffEEEE;
+            border: 3px solid #ff0000;
+            padding: 8px;
+            margin: 16px;
+        }--%>
+</style>
+
 <spring:message code="label.user_firstname" var="user_firstname"/>
 <spring:message code="label.user_lastname" var="user_lastname"/>
 <spring:message code="label.user_login" var="user_login"/>
 <spring:message code="label.user_password" var="user_password"/>
 <spring:message code="label.user_role" var="user_role"/>
 <spring:message code="label.user_vendor" var="user_vendor"/>
+<spring:message code="label.edit" var="edit"/>
+<spring:message code="label.add" var="add"/>
+<spring:message code="label.public_cancel" var="cancel"/>
 
 <spring:url var="addAction" value="/registration/save"/>
 <spring:url value="/registration" var="cancelAction"/>
 
 <div>
     <form:form action="${addAction}" commandName="user">
+        <%--   <form:errors path="*" cssClass="errorblock" element="div" />--%>
         <table class="table table-hover">
             <tr bgcolor="#87ceeb">
+                <td colspan="2">
+                    <h3> Please, fill registration fields </h3>
+                </td>
+            </tr>
+            <tr>
                 <th>
                         ${user_firstname}
                 </th>
@@ -58,27 +82,25 @@
                         ${user_role}
                 </th>
                 <td>
-                    <form:select path="role.role_id">
-                        <c:if test="${empty user.firstname}">
-                            <form:option value="NONE" label="--- Select ---"/>
-                        </c:if>
-                        <form:options items="${listRoles}" itemValue="role_id" itemLabel="role_name"/>
+                    <form:select path="role.role_id" name="role">
+                        <form:option value="NONE" label="--- Select ---"/>
+                        <form:options items="${listRolesWithoutAdmin}" itemValue="role_id" itemLabel="role_name"/>
                     </form:select>
                 </td>
             </tr>
-            <tr>
-                <th>
-                        ${user_vendor}
-                </th>
-                <td>
-                    <form:select path="vendor.vendor_id">
-                        <c:if test="${empty vendor}">
+            <c:if test="${user.role.role_name=='ROLE_VENDOR'}">
+                <tr>
+                    <th>
+                            ${user_vendor}
+                    </th>
+                    <td>
+                        <form:select path="vendor.vendor_id">
                             <form:option value="NONE" label="--- Select ---"/>
-                        </c:if>
-                        <form:options items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name"/>
-                    </form:select>
-                </td>
-            </tr>
+                            <form:options items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name"/>
+                        </form:select>
+                    </td>
+                </tr>
+            </c:if>
             <tr>
                 <td colspan="6">
                     <c:if test="${!empty user.firstname}">

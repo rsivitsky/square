@@ -10,6 +10,8 @@ public interface RoleService {
 
     List<Role> listRole();
 
+    List<Role> listRoleWithoutAdmin();
+
     void removeRole(Long id);
 
     Role getRoleByID(Long id);
