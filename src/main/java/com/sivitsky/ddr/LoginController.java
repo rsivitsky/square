@@ -1,6 +1,7 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.service.MailService;
 import com.sivitsky.ddr.service.RoleService;
 import com.sivitsky.ddr.service.UserService;
 import com.sivitsky.ddr.service.VendorService;
@@ -24,6 +25,8 @@ public class LoginController {
     private RoleService roleService;
     @Autowired
     private VendorService vendorService;
+    @Autowired
+    private MailService mailService;
 
     @RequestMapping(value = "/j_spring_security_check", method = RequestMethod.POST)
     public String loginPagePost(Model model) {
@@ -43,10 +46,12 @@ public class LoginController {
         if (result.hasErrors()) {
             return "registration";
         }
-        if (user.getVendor().getVendor_id() == null) {
+        if (user.getVendor() == null) {
             user.setVendor(null);
         }
         this.userService.saveUser(user);
+        this.mailService.sendMail("rsivitsky@gmail.com", "renek77@mail.ru", "Testing123",
+                "Testing only \n\n Hello Spring Email Sender");
         return "redirect:/index";
     }
 }
