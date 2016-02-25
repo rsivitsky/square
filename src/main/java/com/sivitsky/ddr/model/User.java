@@ -30,6 +30,9 @@ public class User implements Serializable{
     @Size(min = 3, max = 50,
             message = "Your lastname must be between 3 and 50 characters long.")
     private String lastname;
+    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
+            message = "Invalid email address.")
+    private String email;
     private Role role;
     private Vendor vendor;
     private Set<Order> orders = new HashSet<Order>();
@@ -61,6 +64,15 @@ public class User implements Serializable{
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Column(name = "password")

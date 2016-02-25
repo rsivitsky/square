@@ -50,8 +50,8 @@ public class LoginController {
             user.setVendor(null);
         }
         this.userService.saveUser(user);
-        this.mailService.sendMail("rsivitsky@gmail.com", "renek77@mail.ru", "Testing123",
-                "Testing only \n\n Hello Spring Email Sender");
+        this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
+                "Hi, " + user.getFirstname() + ",\n your login is: " + user.getLogin() + " \n and your password is: " + user.getPassword());
         return "redirect:/index";
     }
 }

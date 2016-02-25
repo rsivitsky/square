@@ -23,6 +23,7 @@
 <spring:message code="label.user_lastname" var="user_lastname"/>
 <spring:message code="label.user_login" var="user_login"/>
 <spring:message code="label.user_password" var="user_password"/>
+<spring:message code="label.user_email" var="user_email"/>
 <spring:message code="label.user_role" var="user_role"/>
 <spring:message code="label.user_vendor" var="user_vendor"/>
 <spring:message code="label.edit" var="edit"/>
@@ -75,6 +76,15 @@
                 <td>
                     <form:input path="password"/>
                     <form:errors path="password" cssClass="error"/>
+                </td>
+            </tr>
+            <tr>
+                <th>
+                        ${user_email}
+                </th>
+                <td>
+                    <form:input path="email"/>
+                    <form:errors path="email" cssClass="error"/>
                 </td>
             </tr>
             <tr>
