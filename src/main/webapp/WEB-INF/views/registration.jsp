@@ -1,22 +1,13 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <style>
     .error {
         color: #ff0000;
     }
-
-    <%--
-        .errorblock {
-            color: #000;
-            background-color: #ffEEEE;
-            border: 3px solid #ff0000;
-            padding: 8px;
-            margin: 16px;
-        }--%>
 </style>
 
 <spring:message code="label.user_firstname" var="user_firstname"/>
@@ -29,17 +20,17 @@
 <spring:message code="label.edit" var="edit"/>
 <spring:message code="label.add" var="add"/>
 <spring:message code="label.public_cancel" var="cancel"/>
+<spring:message code="label.registration_welcome" var="registration_welcome"/>
 
 <spring:url var="addAction" value="/registration/save"/>
 <spring:url value="/registration" var="cancelAction"/>
 
-<div>
+<div class="col-md-8">
     <form:form action="${addAction}" commandName="user">
-        <%--   <form:errors path="*" cssClass="errorblock" element="div" />--%>
         <table class="table table-hover">
             <tr bgcolor="#87ceeb">
                 <td colspan="2">
-                    <h3> Please, fill registration fields </h3>
+                    <h3> ${registration_welcome} </h3>
                 </td>
             </tr>
             <tr>
@@ -47,7 +38,7 @@
                         ${user_firstname}
                 </th>
                 <td>
-                    <form:input path="firstname"/>
+                    <form:input path="firstname" size="50"/>
                     <form:errors path="firstname" cssClass="error"/>
                 </td>
             </tr>
@@ -56,7 +47,7 @@
                         ${user_lastname}
                 </th>
                 <td>
-                    <form:input path="lastname"/>
+                    <form:input path="lastname" size="50"/>
                     <form:errors path="lastname" cssClass="error"/>
                 </td>
             </tr>
@@ -65,7 +56,7 @@
                         ${user_login}
                 </th>
                 <td>
-                    <form:input path="login"/>
+                    <form:input path="login" size="50"/>
                     <form:errors path="login" cssClass="error"/>
                 </td>
             </tr>
@@ -74,7 +65,7 @@
                         ${user_password}
                 </th>
                 <td>
-                    <form:input path="password"/>
+                    <form:input path="password" size="50"/>
                     <form:errors path="password" cssClass="error"/>
                 </td>
             </tr>
@@ -83,7 +74,7 @@
                         ${user_email}
                 </th>
                 <td>
-                    <form:input path="email"/>
+                    <form:input path="email" size="50"/>
                     <form:errors path="email" cssClass="error"/>
                 </td>
             </tr>
@@ -92,25 +83,33 @@
                         ${user_role}
                 </th>
                 <td>
-                    <form:select path="role.role_id" name="role">
-                        <form:option value="NONE" label="--- Select ---"/>
+                    <form:select path="role.role_id" id="select_role" onchange="
+                    {
+                    if(
+                       this.options[this.selectedIndex].label != 'ROLE_VENDOR')
+                       {
+                            document.getElementById('s_vendor').style.display = 'none';
+                       }
+                       else
+                       {
+                            document.getElementById('s_vendor').style.display = 'table-row';
+                       }
+                         }">
                         <form:options items="${listRolesWithoutAdmin}" itemValue="role_id" itemLabel="role_name"/>
                     </form:select>
                 </td>
             </tr>
-            <c:if test="${user.role.role_name=='ROLE_VENDOR'}">
-                <tr>
-                    <th>
-                            ${user_vendor}
-                    </th>
-                    <td>
-                        <form:select path="vendor.vendor_id">
-                            <form:option value="NONE" label="--- Select ---"/>
-                            <form:options items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name"/>
-                        </form:select>
-                    </td>
-                </tr>
-            </c:if>
+            <tr id="s_vendor" style="display: none">
+                <th>
+                        ${user_vendor}
+                </th>
+                <td>
+                    <form:select path="vendor.vendor_id" id="select_vendor">
+                        <form:option value="NONE" label="--- Select ---"/>
+                        <form:options items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name"/>
+                    </form:select>
+                </td>
+            </tr>
             <tr>
                 <td colspan="6">
                     <c:if test="${!empty user.firstname}">
