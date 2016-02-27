@@ -38,7 +38,7 @@
                         ${user_firstname}
                 </th>
                 <td>
-                    <form:input path="firstname" size="50"/>
+                    <form:input path="firstname" size="50" value=""/>
                     <form:errors path="firstname" cssClass="error"/>
                 </td>
             </tr>
@@ -47,7 +47,7 @@
                         ${user_lastname}
                 </th>
                 <td>
-                    <form:input path="lastname" size="50"/>
+                    <form:input path="lastname" size="50" value=""/>
                     <form:errors path="lastname" cssClass="error"/>
                 </td>
             </tr>
@@ -56,7 +56,7 @@
                         ${user_login}
                 </th>
                 <td>
-                    <form:input path="login" size="50"/>
+                    <form:input path="login" size="50" value=" "/>
                     <form:errors path="login" cssClass="error"/>
                 </td>
             </tr>
@@ -65,7 +65,7 @@
                         ${user_password}
                 </th>
                 <td>
-                    <form:input path="password" size="50"/>
+                    <form:password path="password" size="50" value=" "/>
                     <form:errors path="password" cssClass="error"/>
                 </td>
             </tr>
@@ -74,7 +74,7 @@
                         ${user_email}
                 </th>
                 <td>
-                    <form:input path="email" size="50"/>
+                    <form:input path="email" size="50" value=""/>
                     <form:errors path="email" cssClass="error"/>
                 </td>
             </tr>
@@ -105,7 +105,7 @@
                 </th>
                 <td>
                     <form:select path="vendor.vendor_id" id="select_vendor">
-                        <form:option value="NONE" label="--- Select ---"/>
+                        <form:option value="0" label="--- Select ---"/>
                         <form:options items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name"/>
                     </form:select>
                 </td>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -42,11 +43,11 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)
-    public String saveUser(@Valid User user, BindingResult result) {
+    public String saveUser(@Valid User user, BindingResult result, Model model, HttpServletRequest request) {
         if (result.hasErrors()) {
             return "registration";
         }
-        if (user.getVendor() == null) {
+        if (user.getVendor().getVendor_id() == 0) {
             user.setVendor(null);
         }
         this.userService.saveUser(user);

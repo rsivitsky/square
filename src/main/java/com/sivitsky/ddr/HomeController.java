@@ -83,9 +83,6 @@ public class HomeController {
                             @RequestParam(value = "price_to", required = false) String price_to,
                             Model model, Principal principal) {
         if (principal != null) {
-            String[] booking_status = new String[2];
-            /*booking_status[0] = OrderStatus.NEW.name();
-            booking_status[1] = OrderStatus.PAID.name();*/
             User user = userService.getUserByName(principal.getName());
             if (user != null) {
                 Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());

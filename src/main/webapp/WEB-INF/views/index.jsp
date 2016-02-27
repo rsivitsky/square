@@ -102,32 +102,42 @@
     <br>
 
     <%--For displaying Previous link except for the 1st page --%>
-    <c:if test="${page != 1}">
-        <td><a href="/index?page=${page-1}">Previous</a></td>
-    </c:if>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1">
+                <c:if test="${page != 1}">
+                    <a href="/index?page=${page-1}">Previous</a>
+                </c:if>
+            </div>
+        </div>
+        <%--For displaying Page numbers.
+        The when condition does not display a link for the current page--%>
+        <div class="row">
+            <div class="col-md-10">
+                <ul class="pagination">
+                    <c:forEach begin="1" end="${noOfPages}" var="i">
+                        <c:choose>
+                            <c:when test="${page eq i}">
+                                <li class="active"><a href="/index?page=${i}">${i}</a></li>
+                            </c:when>
+                            <c:otherwise>
+                                <li><a href="/index?page=${i}">${i}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+                </ul>
+            </div>
+        </div>
 
-    <%--For displaying Page numbers.
-    The when condition does not display a link for the current page--%>
-
-    <table border="1" cellpadding="5" cellspacing="5">
-        <tr>
-            <c:forEach begin="1" end="${noOfPages}" var="i">
-                <c:choose>
-                    <c:when test="${page eq i}">
-                        <td>${i}</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td><a href="/index?page=${i}">${i}</a></td>
-                    </c:otherwise>
-                </c:choose>
-            </c:forEach>
-        </tr>
-    </table>
-
-    <%--For displaying Next link --%>
-    <c:if test="${page lt noOfPages}">
-        <td><a href="/index?page=${page+1}">Next</a></td>
-    </c:if>
+        <%--For displaying Next link --%>
+        <div class="row">
+            <div class="col-md-1">
+                <c:if test="${page lt noOfPages}">
+                    <a href="/index?page=${page+1}">Next</a>
+                </c:if>
+            </div>
+        </div>
+    </div>
 
     <sec:authorize access="hasRole('ROLE_ADMIN')">
         <p>Ваш логин: <sec:authentication property="principal.username"/></p>
