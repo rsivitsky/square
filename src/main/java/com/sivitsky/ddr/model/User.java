@@ -20,6 +20,9 @@ public class User implements Serializable{
     @Size(min = 6, max = 20,
             message = "The password must be at least 6 characters long.")
     private String password;
+    @Size(min = 6, max = 20,
+            message = "The password must be at least 6 characters long.")
+    private String confirmPassword;
     @Pattern(regexp = "^[a-zA-Z0-9]+$",
             message = "Firstname must be alphanumeric with no spaces")
     @Size(min = 3, max = 50,

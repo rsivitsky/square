@@ -6,6 +6,11 @@ import com.sivitsky.ddr.service.RoleService;
 import com.sivitsky.ddr.service.UserService;
 import com.sivitsky.ddr.service.VendorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 @Controller
@@ -27,6 +33,8 @@ public class LoginController {
     private VendorService vendorService;
     @Autowired
     private MailService mailService;
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @RequestMapping(value = "/j_spring_security_check", method = RequestMethod.POST)
     public String loginPagePost(Model model) {
@@ -42,7 +50,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)
-    public String saveUser(@Valid User user, BindingResult result) {
+    public String saveUser(@Valid User user, BindingResult result, HttpServletRequest request) {
         if (result.hasErrors()) {
             return "registration";
         }
@@ -52,6 +60,14 @@ public class LoginController {
         this.userService.saveUser(user);
         this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
                 "Hi, " + user.getFirstname() + ",\n your login is: " + user.getLogin() + " \n and your password is: " + user.getPassword());
+        autoLogin(user.getLogin(), user.getPassword(), request);
         return "redirect:/index";
+    }
+
+    public void autoLogin(String username, String password, HttpServletRequest request) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        Authentication authentication = authenticationManager.authenticate(token);
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
     }
 }

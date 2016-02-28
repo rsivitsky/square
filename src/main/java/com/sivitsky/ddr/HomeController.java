@@ -82,6 +82,7 @@ public class HomeController {
                             @RequestParam(value = "price_from", required = false) String price_from,
                             @RequestParam(value = "price_to", required = false) String price_to,
                             Model model, Principal principal) {
+
         if (principal != null) {
             User user = userService.getUserByName(principal.getName());
             if (user != null) {
@@ -129,7 +130,6 @@ public class HomeController {
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.POST)
     public String startPagePost(Model model, HttpServletRequest httpServletRequest) {
-
         Integer page = 1;
         Integer recordsPerPage = 5;
         if (httpServletRequest.getParameter("page") != null)
