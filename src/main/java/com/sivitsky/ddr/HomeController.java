@@ -3,6 +3,7 @@ package com.sivitsky.ddr;
 import com.sivitsky.ddr.model.Manufactur;
 import com.sivitsky.ddr.model.Part;
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.repository.UserRepository;
 import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class HomeController {
     private UserService userService;
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     private List<ManufacturFilterService> manufacturFilterList = new ArrayList<ManufacturFilterService>();
     private Float price_from;
@@ -74,6 +78,15 @@ public class HomeController {
                 manufacturFilterList.add(manufacturFilterService);
             }
         }
+    }
+
+    @RequestMapping("/givemeuser")
+    public String listUsers() {
+        Iterable<User> users = userRepository.findAll();
+
+        System.out.println(users);
+
+        return "index";
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)

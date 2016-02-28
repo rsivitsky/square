@@ -37,7 +37,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/part" access="permitAll"/>
         <intercept-url pattern="/registration" access="permitAll"/>
         <intercept-url pattern="/registration/save" access="permitAll"/>
-        <intercept-url pattern="/**" access="permitAll"/>
+        <intercept-url pattern="/WEB-INF/spring" access="permitAll"/>
 
         <form-login login-page="/index"
                     authentication-failure-url="/index"

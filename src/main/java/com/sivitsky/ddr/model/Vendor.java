@@ -9,15 +9,23 @@ import java.util.Set;
 @Table(name = "vendor")
 public class Vendor implements Serializable {
 
+    @Id
+    @Column(name = "vendor_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long vendor_id;
+
+    @Column(name = "vendor_name")
     private String vendor_name;
+
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users = new HashSet<User>();
+
+    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Offer> offers = new HashSet<Offer>();
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "vendor")
     private Contact contact;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "vendor_id")
     public Long getVendor_id() {
         return vendor_id;
     }
@@ -26,7 +34,6 @@ public class Vendor implements Serializable {
         this.vendor_id = vendor_id;
     }
 
-    @Column(name = "vendor_name")
     public String getVendor_name() {
         return vendor_name;
     }
@@ -35,7 +42,6 @@ public class Vendor implements Serializable {
         this.vendor_name = vendor_name;
     }
 
-    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<User> getUsers() {
         return users;
     }
@@ -44,7 +50,6 @@ public class Vendor implements Serializable {
         this.users = users;
     }
 
-    @OneToOne(cascade=CascadeType.ALL, mappedBy="vendor")
     public Contact getContact() {
         return contact;
     }
@@ -53,7 +58,6 @@ public class Vendor implements Serializable {
         this.contact = contact;
     }
 
-    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Offer> getOffers() {
         return offers;
     }

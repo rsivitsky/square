@@ -9,46 +9,57 @@ import java.util.Set;
 
 @Entity
 @Table(name = "user")
-public class User implements Serializable{
+public class User implements Serializable {
 
+    @Id
+    @Column(name = "user_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long user_id;
-    @Size(min = 3, max = 20,
-            message = "Login must be between 3 and 20 characters long.")
-    @Pattern(regexp = "^[a-zA-Z0-9]+$",
-            message = "Username must be alphanumeric with no spaces")
+
+    @Size(min = 3, max = 20, message = "Login must be between 3 and 20 characters long.")
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username must be alphanumeric with no spaces")
+    @Column(name = "username")
     private String login;
-    @Size(min = 6, max = 20,
-            message = "The password must be at least 6 characters long.")
+
+    @Size(min = 6, max = 20, message = "The password must be at least 6 characters long.")
+    @Column(name = "password")
     private String password;
-    @Pattern(regexp = "^[a-zA-Z0-9]+$",
-            message = "Firstname must be alphanumeric with no spaces")
-    @Size(min = 3, max = 50,
-            message = "Your firstname must be between 3 and 50 characters long.")
+
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Firstname must be alphanumeric with no spaces")
+    @Size(min = 3, max = 50, message = "Your firstname must be between 3 and 50 characters long.")
+    @Column(name = "firstname")
     private String firstname;
-    @Pattern(regexp = "^[a-zA-Z0-9]+$",
-            message = "Lastname must be alphanumeric with no spaces")
-    @Size(min = 3, max = 50,
-            message = "Your lastname must be between 3 and 50 characters long.")
+
+    @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Lastname must be alphanumeric with no spaces")
+    @Size(min = 3, max = 50, message = "Your lastname must be between 3 and 50 characters long.")
+    @Column(name = "lastname")
     private String lastname;
-    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}",
-            message = "Invalid email address.")
+
+    @Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "Invalid email address.")
+    @Column(name = "email")
     private String email;
+
+    @ManyToOne(targetEntity = Role.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "role_id")
     private Role role;
+
+    @ManyToOne
+    @JoinColumn(name = "vendor_id")
     private Vendor vendor;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Order> orders = new HashSet<Order>();
 
-    public User(){}
+    public User() {
+    }
 
-    public User(String login, String password, String firstname, String lastname){
+    public User(String login, String password, String firstname, String lastname) {
         this.login = login;
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
     }
 
-    @Id
-    @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getUser_id() {
         return this.user_id;
     }
@@ -57,7 +68,6 @@ public class User implements Serializable{
         this.user_id = user_id;
     }
 
-    @Column(name = "username")
     public String getLogin() {
         return this.login;
     }
@@ -66,7 +76,6 @@ public class User implements Serializable{
         this.login = login;
     }
 
-    @Column(name = "email")
     public String getEmail() {
         return this.email;
     }
@@ -75,7 +84,6 @@ public class User implements Serializable{
         this.email = email;
     }
 
-    @Column(name = "password")
     public String getPassword() {
         return this.password;
     }
@@ -84,7 +92,6 @@ public class User implements Serializable{
         this.password = password;
     }
 
-    @Column(name = "firstname")
     public String getFirstname() {
         return this.firstname;
     }
@@ -93,7 +100,6 @@ public class User implements Serializable{
         this.firstname = firstname;
     }
 
-    @Column(name = "lastname")
     public String getLastname() {
         return this.lastname;
     }
@@ -102,8 +108,6 @@ public class User implements Serializable{
         this.lastname = lastname;
     }
 
-    @ManyToOne(targetEntity=Role.class, fetch=FetchType.EAGER)
-    @JoinColumn(name = "role_id")
     public Role getRole() {
         return this.role;
     }
@@ -112,8 +116,6 @@ public class User implements Serializable{
         this.role = role;
     }
 
-    @ManyToOne
-    @JoinColumn(name = "vendor_id")
     public Vendor getVendor() {
         return vendor;
     }
@@ -122,7 +124,6 @@ public class User implements Serializable{
         this.vendor = vendor;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     public Set<Order> getOrders() {
         return orders;
     }
@@ -133,6 +134,6 @@ public class User implements Serializable{
 
     @Override
     public String toString() {
-        return ((firstname != null)?firstname:"-")+" "+((lastname != null)?lastname:"-");
+        return ((firstname != null) ? firstname : "-") + " " + ((lastname != null) ? lastname : "-");
     }
 }

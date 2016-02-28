@@ -2,6 +2,7 @@ package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.UserDAOImpl;
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,6 +14,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDAOImpl userDAO;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Transactional
     public User saveUser(User user) {

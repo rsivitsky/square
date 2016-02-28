@@ -2,17 +2,22 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
+
     <groupId>com.sivitsky.ddr</groupId>
     <artifactId>ddr</artifactId>
-    <name>ddr</name>
-    <packaging>war</packaging>
     <version>1.0.0-BUILD-SNAPSHOT</version>
+
+    <name>ddr</name>
+
+    <packaging>war</packaging>
+
     <properties>
-        <org.springframework-version>4.0.3.RELEASE</org.springframework-version>
+        <org.springframework-version>4.1.6.RELEASE</org.springframework-version>
         <org.aspectj-version>1.7.4</org.aspectj-version>
         <org.slf4j-version>1.7.5</org.slf4j-version>
         <hibernate.version>4.3.5.Final</hibernate.version>
     </properties>
+
     <dependencies>
         <!-- Spring -->
         <dependency>
@@ -28,6 +33,11 @@
             </exclusions>
         </dependency>
         <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.6</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-support</artifactId>
             <version>2.0.6</version>
@@ -41,6 +51,12 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${org.springframework-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-jpa</artifactId>
+            <version>1.9.4.RELEASE</version>
         </dependency>
 
         <!--Spring Security-->

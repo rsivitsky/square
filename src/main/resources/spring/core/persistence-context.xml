@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <jpa:repositories base-package="com.sivitsky.ddr.repository"/>
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3307/offersdb"/>
+        <property name="username" value="offersdb"/>
+        <property name="password" value="offersdb"/>
+        <!--<property name="url" value="jdbc:mysql://localhost:3306/offersdb"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="1111"/>-->
+    </bean>
+
+    <!-- Hibernate 4 SessionFactory Bean definition -->
+    <bean id="hibernate4AnnotatedSessionFactory"
+          class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="com.sivitsky.ddr.model"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">validate</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--<tx:annotation-driven transaction-manager="transactionManager"/>-->
+
+    <!--<bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">-->
+    <!--<property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>-->
+    <!--</bean>-->
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="default"/>
+        <property name="persistenceProviderClass" value="org.hibernate.jpa.HibernatePersistenceProvider"/>
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+                <entry key="hibernate.hbm2ddl.auto" value="update"/>
+                <!--Disabling auto detection-->
+                <entry key="hibernate.archive.autodetection" value=""/>
+
+                <entry key="hibernate.cache.region.factory_class"
+                       value="org.hibernate.cache.internal.NoCachingRegionFactory"/>
+                <!--We can cache the exact results of a query by setting the hibernate.cache.use_query_cache property-->
+                <!--Then, we can use the query.setHint("org.hibernate.cacheable", true) method on any query we wish to cache.-->
+                <entry key="hibernate.cache.use_query_cache" value="false"/>
+
+                <entry key="hibernate.show_sql" value="false"/>
+                <entry key="hibernate.format_sql" value="false"/>
+                <entry key="hibernate.use_sql_comments" value="false"/>
+            </map>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+        <qualifier value="defaultTransactionManager"/>
+    </bean>
+
+    <!--It's better to use interface proxy, so using proxy-target-class="false"-->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
+
+    <bean id="sharedTransactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"/>
+        <aop:scoped-proxy proxy-target-class="false"/>
+    </bean>
+</beans>

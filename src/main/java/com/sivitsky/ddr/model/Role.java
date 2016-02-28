@@ -7,11 +7,13 @@ import java.util.Set;
 
 @Entity
 @Table(name = "role")
-@NamedQueries({@NamedQuery(name="Role.FindById", query="select distinct c from Role c left join fetch c.users t " +
-        "where c.role_id = :id"), @NamedQuery(name="Role.findAllWithDetail", query="select distinct c from Role c " +
-        "left join fetch c.users")
+@NamedQueries({
+        @NamedQuery(name = "Role.FindById", query = "select distinct c from Role c left join fetch c.users t " +
+                "where c.role_id = :id"),
+        @NamedQuery(name = "Role.findAllWithDetail", query = "select distinct c from Role c " +
+                "left join fetch c.users")
 })
-public class Role implements Serializable{
+public class Role implements Serializable {
 
     private Long role_id;
     private String role_name;
@@ -46,12 +48,12 @@ public class Role implements Serializable{
         this.users = users;
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         user.setRole(this);
         getUsers().add(user);
     }
 
-    public void removeUser(User user){
+    public void removeUser(User user) {
         getUsers().remove(user);
     }
 }

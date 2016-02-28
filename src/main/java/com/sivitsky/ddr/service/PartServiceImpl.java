@@ -25,17 +25,17 @@ public class PartServiceImpl implements PartService {
     }
 
     @Transactional
-    public List<Object[]> listPartWithDetail(Integer firstResult, Integer maxResult){
+    public List<Object[]> listPartWithDetail(Integer firstResult, Integer maxResult) {
         return partDAO.listPartWithDetail(firstResult, maxResult);
     }
 
     @Transactional
-    public List<Part> listPartWithManufactursFilter(Long[] mas_id){
+    public List<Part> listPartWithManufactursFilter(Long[] mas_id) {
         return partDAO.listPartWithManufactursFilter(mas_id);
     }
 
     @Transactional
-    public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to){
+    public List<Part> listPartByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to) {
         return partDAO.listPartByManufactIdAndPrice(mas_id, price_from, price_to);
     }
 
@@ -58,5 +58,4 @@ public class PartServiceImpl implements PartService {
     public Integer getCountOfPart() {
         return partDAO.getCountOfPart();
     }
-
 }

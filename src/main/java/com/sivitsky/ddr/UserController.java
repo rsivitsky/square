@@ -1,6 +1,7 @@
 package com.sivitsky.ddr;
 
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.repository.UserRepository;
 import com.sivitsky.ddr.service.RoleService;
 import com.sivitsky.ddr.service.UserService;
 import com.sivitsky.ddr.service.VendorService;
@@ -21,6 +22,9 @@ public class UserController {
     @Autowired
     private VendorService vendorService;
 
+    @Autowired
+    private UserRepository userRepository;
+
     @RequestMapping(value = "/user", method = RequestMethod.GET)
     public String startPage(Model model) {
         model.addAttribute("user", new User());
@@ -33,7 +37,7 @@ public class UserController {
     //For add and update person both
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
     public String addUser(@ModelAttribute("user") User user, BindingResult result) {
-        this.userService.saveUser(user);
+        userRepository.save(user);
         return "redirect:/user";
     }
 
