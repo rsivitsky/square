@@ -30,7 +30,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-	<!-- Начало конфигурация Spring Security -->
+	<!-- begin Spring Security -->
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy
@@ -40,7 +40,7 @@
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- Конец конфигурация Spring Security -->
+	<!-- end Spring Security -->
 
 	<!-- Фильтр для перекодировки в utf8 -->
 	<filter>
