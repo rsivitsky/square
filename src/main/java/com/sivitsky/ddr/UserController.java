@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @SessionAttributes({"user"})
 public class UserController {
+
     @Autowired
     private UserService userService;
     @Autowired
@@ -42,16 +43,16 @@ public class UserController {
 
     @RequestMapping("/remove/{user_id}")
     public String removeUser(@PathVariable("user_id") Long id) {
-        this.userService.removeUser(id);
+        userRepository.delete(id);
         return "redirect:/user";
     }
 
     @RequestMapping("/edit/{user_id}")
     public String editUser(@PathVariable("user_id") Long id, Model model) {
-        model.addAttribute("user", this.userService.getUserById(id));
-        model.addAttribute("listUsers", this.userService.listUsers());
-        model.addAttribute("listRoles", this.roleService.listRole());
-        model.addAttribute("listVendors", this.vendorService.listVendor());
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("listUsers", userService.listUsers());
+        model.addAttribute("listRoles", roleService.listRole());
+        model.addAttribute("listVendors", vendorService.listVendor());
         return "user";
     }
 }

@@ -15,5 +15,4 @@ public interface CurrencyService {
     Currency getCurrencyById(Long id);
 
     Currency getCurrencyByName(String name);
-
 }
