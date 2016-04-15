@@ -3,7 +3,6 @@ package com.sivitsky.ddr;
 import com.sivitsky.ddr.model.Specification;
 import com.sivitsky.ddr.service.MeasureService;
 import com.sivitsky.ddr.service.SpecificationService;
-import com.sivitsky.ddr.service.TypeofspecService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +15,7 @@ public class SpecificationController {
 
     @Autowired
     private SpecificationService specificationService;
-    @Autowired
-    private TypeofspecService typeofspecService;
+
     @Autowired
     private MeasureService measureService;
 
@@ -25,7 +23,6 @@ public class SpecificationController {
     public String startPage(Model model) {
         model.addAttribute("specification", new Specification());
         model.addAttribute("listSpec", specificationService.listSpecification());
-        model.addAttribute("listTspec", typeofspecService.listTypeofspec());
         model.addAttribute("listMeasure", measureService.listMeasure());
         return "specification";
     }
@@ -47,7 +44,6 @@ public class SpecificationController {
     public String editUser(@PathVariable("spec_id") Long id, Model model) {
         model.addAttribute("specification", this.specificationService.getSpecificationById(id));
         model.addAttribute("listSpec", this.specificationService.listSpecification());
-        model.addAttribute("listTspec", this.typeofspecService.listTypeofspec());
         model.addAttribute("listMeasure", this.measureService.listMeasure());
         return "specification";
     }

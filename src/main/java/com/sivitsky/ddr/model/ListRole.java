@@ -1,5 +1,5 @@
 package com.sivitsky.ddr.model;
 
 public enum ListRole {
-    ADMIN, USER
+    ROLE_ADMIN, ROLE_USER, ROLE_VENDOR
 }

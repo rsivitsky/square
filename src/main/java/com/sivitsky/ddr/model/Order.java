@@ -28,6 +28,7 @@ public class Order implements Serializable {
     private String booking_status;
     private Offer offer;
     private User user;
+    private Cart cart;
     private Part part;
 
     public Order() {
@@ -109,5 +110,15 @@ public class Order implements Serializable {
 
     public void setBooking_sum(Float booking_sum) {
         this.booking_sum = booking_sum;
+    }
+
+    @ManyToOne(targetEntity = Cart.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "cart_id")
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

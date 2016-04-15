@@ -38,5 +38,3 @@
     </form>
   </div>
 </sec:authorize>
-</body>
-</html>

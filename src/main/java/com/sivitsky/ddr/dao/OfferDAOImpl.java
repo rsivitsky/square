@@ -60,4 +60,29 @@ public class OfferDAOImpl implements OfferDAO {
                 .setParameter("price_from", price_from).setParameter("price_to", price_to)
                 .uniqueResult();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Offer> getOffersByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to) {
+        if (mas_id.length == 0) {
+            String hql = "select part.part_id as part_id, part.part_name as part_name, min(offer.offer_price) as min_price, " +
+                    "count (offer.offer_id) as offer_count, currency as valuta_name " +
+                    "from Offer offer join offer.part part " +
+                    "where (:price_from=0.0f or offer.offer_price >= :price_from) and (:price_to=0.0f or offer.offer_price <= :price_to) " +
+                    "group by part.part_id";
+
+            return sessionFactory.getCurrentSession().createQuery(hql)
+                    .setParameter("price_from", price_from)
+                    .setParameter("price_to", price_to).list();
+        } else {
+            String hql = "select part.part_id as part_id, part.part_name as part_name, min(offer.offer_price) as min_price, " +
+                    "count (offer.offer_id) as offer_count, currency as valuta_name " +
+                    "from Offer offer join offer.part part " +
+                    "where (:price_from=0.0f or offer.offer_price >= :price_from) and (:price_to=0.0f or offer.offer_price <= :price_to) and (part.manufactur in (select distinct m from Manufactur m where m.manufactur_id in (:mas_id)))" +
+                    "group by part.part_id";
+
+            return sessionFactory.getCurrentSession().createQuery(hql).setParameterList("mas_id", mas_id)
+                    .setParameter("price_from", price_from)
+                    .setParameter("price_to", price_to).list();
+        }
+    }
 }

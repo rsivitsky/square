@@ -2,22 +2,21 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "vendor")
 public class Vendor implements Serializable {
 
-    private Long vendor_id;
-    private String vendor_name;
-    private Set<User> users = new HashSet<User>();
-    private Set<Offer> offers = new HashSet<Offer>();
-    private Contact contact;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "vendor_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long vendor_id;
+
+    private String vendor_name;
+    private String vendor_phone;
+    private String vendor_email;
+    private String vendor_addr;
+
     public Long getVendor_id() {
         return vendor_id;
     }
@@ -35,30 +34,30 @@ public class Vendor implements Serializable {
         this.vendor_name = vendor_name;
     }
 
-    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<User> getUsers() {
-        return users;
+    @Column(name = "vendor_phone")
+    public String getVendor_phone() {
+        return vendor_phone;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setVendor_phone(String vendor_phone) {
+        this.vendor_phone = vendor_phone;
     }
 
-    @OneToOne(cascade=CascadeType.ALL, mappedBy="vendor")
-    public Contact getContact() {
-        return contact;
+    @Column(name = "vendor_email")
+    public String getVendor_email() {
+        return vendor_email;
     }
 
-    public void setContact(Contact contact) {
-        this.contact = contact;
+    public void setVendor_email(String vendor_email) {
+        this.vendor_email = vendor_email;
     }
 
-    @OneToMany(mappedBy = "vendor", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<Offer> getOffers() {
-        return offers;
+    @Column(name = "vendor_addr")
+    public String getVendor_addr() {
+        return vendor_addr;
     }
 
-    public void setOffers(Set<Offer> offers) {
-        this.offers = offers;
+    public void setVendor_addr(String vendor_addr) {
+        this.vendor_addr = vendor_addr;
     }
 }

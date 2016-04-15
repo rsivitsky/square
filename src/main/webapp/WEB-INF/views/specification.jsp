@@ -10,7 +10,6 @@
 <spring:message code="label.delete" var="delete"/>
 <spring:message code="label.public_cancel" var="cancel"/>
 <spring:message code="label.spec_name" var="spec_name"/>
-<spring:message code="label.spec_typeofspec" var="spec_typeofspec"/>
 <spring:message code="label.spec_measure" var="spec_measure"/>
 <spring:message code="label.specification_list" var="specification_list"/>
 
@@ -20,7 +19,6 @@
 <spring:url value="/resources/img/delete.png" var="deleteImgUrl"/>
 
 <c:set var="measure_name" value="${specification.measure.measure_name}"/>
-<c:set var="tspec_name" value="${specification.typeofspec.tspec_name}"/>
 
 <div>
     <form:form action="${addAction}" commandName="specification">
@@ -30,23 +28,12 @@
                         ${spec_name}
                 </th>
                 <th>
-                        ${spec_typeofspec}
-                </th>
-                <th>
                         ${spec_measure}
                 </th>
             </tr>
             <tr>
                 <td>
                     <form:input path="spec_name"/>
-                </td>
-                <td>
-                    <form:select path="typeofspec.tspec_id">
-                        <c:if test="${empty tspec_name}">
-                            <form:option value="NONE" label="--- Select ---" />
-                        </c:if>
-                        <form:options items="${listTspec}" itemValue="tspec_id" itemLabel="tspec_name"  />
-                    </form:select>
                 </td>
                 <td>
                     <form:select path="measure.measure_id">
@@ -82,7 +69,6 @@
                 <tr>
                     <td>${specitem.spec_id}</td>
                     <td>${specitem.spec_name}</td>
-                    <td>${specitem.typeofspec.tspec_name}</td>
                     <td>${specitem.measure.measure_name}</td>
                     <td><a href="<c:url value='/specification/edit/${specitem.spec_id}' />" title=${edit}><img
                             src="${editImgUrl}"/></a></td>

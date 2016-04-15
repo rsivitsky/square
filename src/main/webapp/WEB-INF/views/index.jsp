@@ -34,11 +34,11 @@
         <div class="row" id="price_row">
             <div class="col-md-6 form-group">
                 <input type="number" class="form-control" name="price_from"
-                       value=${price_from}  onchange="this.form.submit();">
+                       value=${sessionScope.price_from}  onchange="this.form.submit();">
             </div>
             <div class="col-md-6 form-group">
                 <input type="number" class="form-control" name="price_to"
-                       value=${price_to} onchange="this.form.submit();">
+                       value=${sessionScope.price_to} onchange="this.form.submit();">
             </div>
         </div>
     </form>

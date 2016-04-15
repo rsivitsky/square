@@ -19,10 +19,6 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/specification" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/user/*" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/user" access="hasAnyRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/currency/*" access="hasAnyRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/currency" access="hasAnyRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/role/*" access="hasAnyRole('ROLE_ADMIN')"/>
-        <intercept-url pattern="/role" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/order/*" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/order" access="hasAnyRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/offer/*" access="hasAnyRole('ROLE_ADMIN','ROLE_VENDOR')"/>
@@ -37,7 +33,7 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
         <intercept-url pattern="/part" access="permitAll"/>
         <intercept-url pattern="/registration" access="permitAll"/>
         <intercept-url pattern="/registration/save" access="permitAll"/>
-        <intercept-url pattern="/**" access="permitAll"/>
+        <intercept-url pattern="/WEB-INF/spring" access="permitAll"/>
 
         <form-login login-page="/index"
                     authentication-failure-url="/index"
@@ -49,8 +45,8 @@ http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     <authentication-manager alias="authenticationManager">
         <authentication-provider>
             <jdbc-user-service data-source-ref="dataSource"
-                               users-by-username-query="select username,password, TRUE from user where username = ? "
-                               authorities-by-username-query="select u1.username, u2.role_name from user u1, role u2 where u1.role_id = u2.role_id and u1.username =?"/>
+                               users-by-username-query="select email,password, TRUE from user where email = ? "
+                               authorities-by-username-query="select email, role from user where email = ?"/>
         </authentication-provider>
     </authentication-manager>
 

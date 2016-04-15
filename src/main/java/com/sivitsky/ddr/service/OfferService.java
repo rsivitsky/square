@@ -14,6 +14,8 @@ public interface OfferService {
 
     List<Offer> getOffersByPartId(Long part_id, Float price_from, Float price_to);
 
+    List<Offer> listOffersByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to);
+
     void removeOffer(Long id);
 
     Offer getOfferById(Long id);

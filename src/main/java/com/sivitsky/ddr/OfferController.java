@@ -1,5 +1,6 @@
 package com.sivitsky.ddr;
 
+import com.sivitsky.ddr.model.ListCurrency;
 import com.sivitsky.ddr.model.Offer;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.*;
@@ -18,10 +19,11 @@ import java.security.Principal;
 @SessionAttributes({"offer", "listOffers", "vendor_id"})
 public class OfferController {
 
+    private ListCurrency listCurrency;
+
     @Autowired
     private OfferService offerService;
-    @Autowired
-    private CurrencyService currencyService;
+
     @Autowired
     private PartService partService;
     @Autowired
@@ -43,7 +45,7 @@ public class OfferController {
             model.addAttribute("listOffers", this.offerService.getOffersByVendorId(user.getVendor().getVendor_id()));
         }
         model.addAttribute("offer", offer);
-        model.addAttribute("listCurrency", this.currencyService.listCurrency());
+        model.addAttribute("listCurrency", this.listCurrency);
         model.addAttribute("listPart", this.partService.listPart());
         model.addAttribute("listVendor", this.vendorService.listVendor());
         return "offers";
@@ -60,7 +62,7 @@ public class OfferController {
         model.addAttribute("offer", this.offerService.getOfferById(offer_id));
         model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listVendor", this.vendorService.listVendor());
-        model.addAttribute("listCurrency", this.currencyService.listCurrency());
+        model.addAttribute("listCurrency", this.listCurrency);
         model.addAttribute("listPart", this.partService.listPart());
         return "offers";
     }

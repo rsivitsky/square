@@ -1,5 +1,6 @@
 package com.sivitsky.ddr;
 
+import com.sivitsky.ddr.model.ListRole;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.MailService;
 import com.sivitsky.ddr.service.RoleService;
@@ -44,30 +45,32 @@ public class LoginController {
     @RequestMapping(value = "/registration")
     public String addUser(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("listRolesWithoutAdmin", roleService.listRoleWithoutAdmin());
-        model.addAttribute("listVendors", vendorService.listVendor());
-        return "registration";
+        return "quick_registration";
     }
 
     @RequestMapping(value = "/registration/save", method = RequestMethod.POST)
     public String saveUser(@Valid User user, BindingResult result, HttpServletRequest request) {
+
         if (result.hasErrors()) {
-            return "registration";
+            return "quick_registration";
         }
-        if (user.getVendor().getVendor_id() == 0) {
-            user.setVendor(null);
+        if (user.getRole() == null) {
+            user.setRole(ListRole.ROLE_USER.toString());
         }
         this.userService.saveUser(user);
         this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
-                "Hi, " + user.getFirstname() + ",\n your login is: " + user.getLogin() + " \n and your password is: " + user.getPassword());
-        autoLogin(user.getLogin(), user.getPassword(), request);
+                "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword());
+        autoLogin(user.getEmail(), user.getPassword(), request);
         return "redirect:/index";
+
     }
 
-    public void autoLogin(String username, String password, HttpServletRequest request) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+    public void autoLogin(String email, String password, HttpServletRequest request) {
+
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(email, password);
         Authentication authentication = authenticationManager.authenticate(token);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         request.getSession().setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, SecurityContextHolder.getContext());
+
     }
 }

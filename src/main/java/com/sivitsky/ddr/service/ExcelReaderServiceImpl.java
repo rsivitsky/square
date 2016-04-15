@@ -1,6 +1,6 @@
 package com.sivitsky.ddr.service;
 
-import com.sivitsky.ddr.model.Currency;
+import com.sivitsky.ddr.model.ListCurrency;
 import com.sivitsky.ddr.model.Offer;
 import com.sivitsky.ddr.model.Part;
 import com.sivitsky.ddr.model.Vendor;
@@ -21,8 +21,6 @@ import java.util.Iterator;
 @Component
 public class ExcelReaderServiceImpl implements ExcelReaderService {
 
-    @Autowired
-    private CurrencyService currencyService;
     @Autowired
     private OfferService offerService;
     @Autowired
@@ -60,11 +58,11 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                             break;
                         case 3:
                             try {
-                                Currency currency = currencyService.getCurrencyByName(nextCell.getStringCellValue());
-                                offer.setCurrency(currency != null ? currency : currencyService.getCurrencyById(1L));
+                                String currency = ListCurrency.valueOf(nextCell.getStringCellValue()).toString();
+                                offer.setCurrency(currency != null ? currency : ListCurrency.USD.toString());
                                 break;
                             } catch (NullPointerException e) {
-                                offer.setCurrency(currencyService.getCurrencyById(1L));
+                                offer.setCurrency(ListCurrency.USD.toString());
                                 break;
                             }
                         case 4:

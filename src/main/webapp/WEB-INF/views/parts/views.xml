@@ -27,14 +27,8 @@
     <definition name="partDescription" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/partDescription.jsp"/>
     </definition>
-    <definition name="role" extends="default">
-        <put-attribute name="body" value="/WEB-INF/views/role.jsp"/>
-    </definition>
     <definition name="cart" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/cart.jsp"/>
-    </definition>
-    <definition name="currency" extends="default">
-        <put-attribute name="body" value="/WEB-INF/views/currency.jsp"/>
     </definition>
     <definition name="measure" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/measure.jsp"/>
@@ -48,13 +42,13 @@
     <definition name="specification" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/specification.jsp"/>
     </definition>
-    <definition name="tspec" extends="default">
-        <put-attribute name="body" value="/WEB-INF/views/tspec.jsp"/>
-    </definition>
     <definition name="user" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/user.jsp"/>
     </definition>
     <definition name="registration" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/registration.jsp"/>
+    </definition>
+    <definition name="quick_registration" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/quick_registration.jsp"/>
     </definition>
 </tiles-definitions>

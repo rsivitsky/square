@@ -2,8 +2,6 @@ package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "manufactur")
@@ -11,7 +9,6 @@ public class Manufactur implements Serializable {
 
     private Long manufactur_id;
     private String manufactur_name;
-    private Set<Part> parts = new HashSet<Part>();
 
     @Id
     @Column(name = "manufactur_id")
@@ -31,15 +28,6 @@ public class Manufactur implements Serializable {
 
     public void setManufactur_name(String manufactur_name) {
         this.manufactur_name = manufactur_name;
-    }
-
-    @OneToMany(mappedBy = "manufactur", cascade = CascadeType.ALL, orphanRemoval = true)
-    public Set<Part> getParts() {
-        return parts;
-    }
-
-    public void setParts(Set<Part> parts) {
-        this.parts = parts;
     }
 
 }

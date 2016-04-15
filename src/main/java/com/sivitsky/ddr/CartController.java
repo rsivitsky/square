@@ -3,6 +3,7 @@ package com.sivitsky.ddr;
 import com.sivitsky.ddr.model.Offer;
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.repository.CartRepository;
 import com.sivitsky.ddr.service.OfferService;
 import com.sivitsky.ddr.service.OrderService;
 import com.sivitsky.ddr.service.UserService;
@@ -24,6 +25,9 @@ public class CartController {
     private OrderService orderService;
     private OfferService offerService;
     private UserService userService;
+
+    @Autowired
+    private CartRepository cartRepository;
 
     @Autowired(required = true)
     public void setUserService(UserService userService) {

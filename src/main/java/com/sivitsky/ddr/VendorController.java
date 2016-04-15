@@ -24,7 +24,7 @@ public class VendorController {
 
     @RequestMapping(value = "/vendor/add", method = RequestMethod.POST)
     public String addVendor(@ModelAttribute("vendor") Vendor vendor, BindingResult result) {
-        vendor = this.vendorService.saveVendor(vendor);
+        vendorService.saveVendor(vendor);
         return "redirect:/vendor";
     }
 
@@ -40,6 +40,4 @@ public class VendorController {
         model.addAttribute("listVendors", this.vendorService.listVendor());
         return "vendor";
     }
-
-
 }
