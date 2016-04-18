@@ -1,5 +1,6 @@
 package com.sivitsky.ddr;
 
+import com.sivitsky.ddr.model.ListRole;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.repository.UserRepository;
 import com.sivitsky.ddr.service.RoleService;
@@ -64,5 +65,17 @@ public class UserController {
         model.addAttribute("listRoles", roleService.getRolesWithoutAdmin());
         model.addAttribute("listVendors", vendorService.listVendor());
         return "account";
+    }
+
+    @RequestMapping(value = "/account/save", method = RequestMethod.POST)
+    public String saveUser(@ModelAttribute("user") User user, BindingResult result) {
+        if (user.getVendor().getVendor_id() == null) {
+            user.setVendor(null);
+        }
+        if (user.getRole().equals("NONE")) {
+            user.setRole(ListRole.ROLE_USER.toString());
+        }
+        userRepository.save(user);
+        return "redirect:/";
     }
 }

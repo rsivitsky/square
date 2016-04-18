@@ -62,13 +62,11 @@
 			<form:input path="password" />
 		</td>
 		<td>
-			<form:select path="role.role_id">
-			<c:if test="${empty user.firstname}">
-					<form:option value="NONE" label="--- Select ---" />
-			</c:if>
-                    <form:options items="${listRoles}" itemValue="role_id" itemLabel="role_name"  />
-            </form:select>
-        </td>
+			<form:select path="role">
+				<form:option value="NONE" label="--- Select ---"/>
+				<form:options items="${listRoles}"/>
+			</form:select>
+		</td>
 		<td>
 			<form:select path="vendor.vendor_id">
 				<c:if test="${empty vendor}">

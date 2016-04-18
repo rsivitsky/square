@@ -5,7 +5,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-<spring:url var="addAction" value="/user/add"/>
+<spring:url var="addAction" value="/account/save"/>
 <spring:url value="/account" var="cancelAction"/>
 <spring:url var="editImgUrl" value="/resources/img/edit.png"/>
 <spring:url var="deleteImgUrl" value="/resources/img/delete.png"/>
@@ -18,6 +18,7 @@
 <spring:message code="label.user_firstname" var="user_firstname"/>
 <spring:message code="label.user_lastname" var="user_lastname"/>
 <spring:message code="label.user_login" var="user_login"/>
+<spring:message code="label.user_email" var="user_email"/>
 <spring:message code="label.user_password" var="user_password"/>
 <spring:message code="label.user_role" var="user_role"/>
 <spring:message code="label.user_vendor" var="user_vendor"/>
@@ -36,6 +37,9 @@
                 </th>
                 <th>
                         ${user_login}
+                </th>
+                <th>
+                        ${user_email}
                 </th>
                 <th>
                         ${user_password}
@@ -58,20 +62,21 @@
                     <form:input path="login"/>
                 </td>
                 <td>
+                    <form:input path="email"/>
+                </td>
+                <td>
                     <form:input path="password"/>
                 </td>
                 <td>
-                    <form:select path="role.role_id">
-                        <c:if test="${empty role}">
-                            <form:option value="NONE" label="--- Select ---"/>
-                        </c:if>
-                        <form:options items="${listRoles}" itemValue="role_id" itemLabel="role_name"/>
+                    <form:select path="role">
+                        <form:option value="NONE" label="--- Select ---"/>
+                        <form:options items="${listRoles}"/>
                     </form:select>
                 </td>
                 <td>
                     <form:select path="vendor.vendor_id">
                         <c:if test="${empty vendor}">
-                            <form:option value="NONE" label="--- Select ---"/>
+                            <form:option value="null" label="--- Select ---"/>
                         </c:if>
                         <form:options items="${listVendors}" itemValue="vendor_id" itemLabel="vendor_name"/>
                     </form:select>
