@@ -39,6 +39,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Transactional
+    public User getUserByEmail(String email) {
+        return this.userDAO.getUserByEmail(email);
+    }
+
+    @Transactional
     public void removeUser(Long id) {
         this.userDAO.removeUser(id);
     }

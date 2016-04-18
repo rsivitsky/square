@@ -30,7 +30,6 @@
             <input id="remember_me"
                    name="_spring_security_remember_me"
                    type="checkbox"/>
-            <!-- Флажок "запомнить меня" -->
           </td>
         </tr>
       </table>

@@ -39,25 +39,6 @@ public class HomeController {
     private UserRepository userRepository;
 
     private List<ManufacturFilterService> manufacturFilterList = new ArrayList<ManufacturFilterService>();
-    /*private Float price_from;
-    private Float price_to;
-
-    public Float getPrice_from() {
-        return price_from;
-    }
-
-    public void setPrice_from(String price_from) {
-        this.price_from = Float.parseFloat(price_from);
-    }
-
-    public Float getPrice_to() {
-        return price_to;
-    }
-
-    public void setPrice_to(String price_to) {
-        this.price_to = Float.parseFloat(price_to);
-    }
-    */
 
     void setUsageAsFalse() {
         for (ManufacturFilterService manufacturFilter : manufacturFilterList) {
@@ -97,11 +78,6 @@ public class HomeController {
     }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
-   /* public String startPage(@RequestParam(value = "page", required = false) Integer page,
-                            @RequestParam(value = "manufacturs", required = false) String[] array_manufacturs,
-                            @RequestParam(value = "price_from", required = false) String price_from,
-                            @RequestParam(value = "price_to", required = false) String price_to,
-                            Model model, Principal principal, HttpServletRequest httpRequest) {*/
     public String startPage(@RequestParam(value = "page", required = false) Integer page,
                             @RequestParam(value = "manufacturs", required = false) String[] array_manufacturs,
                             @RequestParam(value = "price_from", required = false) String price_from,
@@ -116,12 +92,15 @@ public class HomeController {
         Float price_too = Float.parseFloat(session.getAttribute("price_to").toString());
 
         if (principal != null) {
-            User user = userService.getUserByName(principal.getName());
+            User user = userService.getUserByEmail(principal.getName());
             if (user != null) {
                 session.setAttribute("cart", cartService.getCartByUser(user));
                 Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());
                 if (cartInfo != null) {
                     model.addAttribute("cartInfo", cartInfo);
+                }
+                if (session.getAttribute("user_id") == null) {
+                    session.setAttribute("user_id", user.getUser_id());
                 }
             }
         } else {

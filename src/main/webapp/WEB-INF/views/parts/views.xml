@@ -51,4 +51,7 @@
     <definition name="quick_registration" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/quick_registration.jsp"/>
     </definition>
+    <definition name="account" extends="default">
+        <put-attribute name="body" value="/WEB-INF/views/account.jsp"/>
+    </definition>
 </tiles-definitions>

@@ -54,6 +54,10 @@ public class LoginController {
         if (result.hasErrors()) {
             return "quick_registration";
         }
+        if (userService.getUserByEmail(user.getEmail()) != null) {
+            request.setAttribute("user_already_exist", true);
+            return "quick_registration";
+        }
         if (user.getRole() == null) {
             user.setRole(ListRole.ROLE_USER.toString());
         }
@@ -61,6 +65,7 @@ public class LoginController {
         this.mailService.sendMail("rsivitsky@gmail.com", user.getEmail(), "registration on http://pansivitsky.net",
                 "Hi, " + user.getEmail() + ",\n your login is: " + user.getEmail() + " \n and your password is: " + user.getPassword());
         autoLogin(user.getEmail(), user.getPassword(), request);
+        request.getSession().setAttribute("user_id", user.getUser_id());
         return "redirect:/index";
 
     }

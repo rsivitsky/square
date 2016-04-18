@@ -36,6 +36,11 @@ public class UserDAOImpl implements UserDAO {
                 .setParameter("user_name", name).uniqueResult();
     }
 
+    public User getUserByEmail(String email) {
+        return (User) this.sessionFactory.getCurrentSession().createQuery("select v from User v where v.email = :email")
+                .setParameter("email", email).uniqueResult();
+    }
+
     public void removeUser(Long id) {
         User user = (User) sessionFactory.getCurrentSession().load(User.class, id);
         if (null != user) {

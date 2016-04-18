@@ -57,4 +57,12 @@ public class UserController {
         model.addAttribute("listVendors", vendorService.listVendor());
         return "user";
     }
+
+    @RequestMapping("/account/{user_id}")
+    public String editAccount(@PathVariable("user_id") Long id, Model model) {
+        model.addAttribute("user", userService.getUserById(id));
+        model.addAttribute("listRoles", roleService.getRolesWithoutAdmin());
+        model.addAttribute("listVendors", vendorService.listVendor());
+        return "account";
+    }
 }

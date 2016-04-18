@@ -9,7 +9,7 @@
 <spring:message code="label.offer" var="offer"/>
 <spring:message code="label.order" var="order"/>
 <spring:message code="label.vendor" var="vendor"/>
-<spring:message code="label.role" var="role"/>
+<spring:message code="label.account" var="account"/>
 <spring:message code="label.measure" var="measure"/>
 <spring:message code="label.currency" var="currency"/>
 <spring:message code="label.manufactur" var="manufactur"/>
@@ -22,7 +22,6 @@
 
 <spring:message code="label.contact_info" var="contact_info"/>
 
-<spring:url var="roleUrl" value="/role"/>
 <spring:url var="partUrl" value="/part/list"/>
 <spring:url var="userUrl" value="/user"/>
 <spring:url var="currencyUrl" value="/currency"/>
@@ -49,7 +48,6 @@
                     <ul class="dropdown-menu">
                         <li><a href=${offerUrl}>${offer}</a></li>
                         <li><a href=${orderUrl}>${order}</a></li>
-                        <li><a href=${roleUrl}>${role}</a></li>
                         <li><a href=${userUrl}>${user}</a></li>
                         <li><a href=${partUrl}>${part}</a></li>
                         <li><a href=${measureUrl}>${measure}</a></li>
@@ -68,6 +66,9 @@
                 <li><a href="${orderUrl}">${order}</a></li>
             </sec:authorize>
             <li class="active"><a href="${aboutUrl}">${about}</a></li>
+            <sec:authorize access="isAuthenticated()">
+                <li><a href="/account/${sessionScope.user_id}">${account}</a></li>
+            </sec:authorize>
         </ul>
     </nav>
 </nav>

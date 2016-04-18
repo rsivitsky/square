@@ -21,6 +21,7 @@
 <spring:message code="label.add" var="add"/>
 <spring:message code="label.public_cancel" var="cancel"/>
 <spring:message code="label.registration_welcome" var="registration_welcome"/>
+<spring:message code="label.user_already_exist" var="user_already_exist"/>
 
 <spring:url var="addAction" value="/registration/save"/>
 <spring:url value="/registration" var="cancelAction"/>
@@ -33,6 +34,13 @@
                     <h3> ${registration_welcome} </h3>
                 </td>
             </tr>
+            <c:if test="${!empty requestScope.user_already_exist}">
+                <tr bgcolor="#ff69b4">
+                    <td colspan="2">
+                        <h3> ${user_already_exist} </h3>
+                    </td>
+                </tr>
+            </c:if>
             <tr>
                 <th>
                         ${user_email}
