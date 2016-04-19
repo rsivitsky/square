@@ -52,10 +52,10 @@ public class User implements Serializable {
         this.firstname = firstname;
         this.lastname = lastname;
     }
-
+/*
     public User(Long user_id) {
         this.user_id = user_id;
-    }
+    }*/
 
     public Long getUser_id() {
         return this.user_id;

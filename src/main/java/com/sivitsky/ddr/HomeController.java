@@ -89,14 +89,17 @@ public class HomeController {
         Float price_froom = Float.parseFloat(session.getAttribute("price_from").toString());
         Float price_too = Float.parseFloat(session.getAttribute("price_to").toString());
 
+        Cart cart_from, cart_to;
+
         if (principal != null) {
             User user = userService.getUserByEmail(principal.getName());
             if (user != null) {
                 if (cartService.getCartByUser(user) == null) {
-                    Random random = new Random();
-                    Long cart_id = random.nextLong();
-                    Cart cart = new Cart(cart_id);
-                    cart.setUser(user);
+                    Random random = new Random(47);
+                    int cart_id = random.nextInt(Integer.MAX_VALUE);
+                    cart_to = new Cart((long) cart_id);
+                    cart_to.setUser(user);
+                    this.cartService.saveCart(cart_to);
                 }
 
                 if (orderService.getOrdersByUserId(session.getCreationTime()) != null) {
@@ -118,7 +121,8 @@ public class HomeController {
                 Random random = new Random();
                 Long cart_id = random.nextLong();
                 Cart cart = new Cart(cart_id);
-                cart.setUser(new User(session.getCreationTime()));
+                //cart.setUser(new User(session.getCreationTime()));
+                cart.setUser(new User());
                 session.setAttribute("cart", cart);
             }
         }

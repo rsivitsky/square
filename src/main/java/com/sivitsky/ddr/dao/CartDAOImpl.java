@@ -18,14 +18,14 @@ public class CartDAOImpl implements CartDAO {
     private SessionFactory sessionFactory;
 
     public Cart saveCart(Cart cart) {
-        sessionFactory.getCurrentSession().saveOrUpdate(cart);
+        sessionFactory.getCurrentSession().save(cart);
         logger.info("Cart updated successfully, cart id=" + cart.getCart_id());
         return cart;
     }
 
     @SuppressWarnings("unchecked")
     public Cart getCartByUser(User user) {
-        return (Cart) sessionFactory.getCurrentSession().createQuery("from Cart cart where cart.user = :user")
+        return (Cart) sessionFactory.getCurrentSession().createQuery("from Cart where user = :user")
                 .setParameter("user", user).uniqueResult();
     }
 

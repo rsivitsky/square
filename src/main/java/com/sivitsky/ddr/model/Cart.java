@@ -7,9 +7,6 @@ import javax.persistence.*;
 public class Cart {
 
     private Long cart_id;
-
-    @OneToOne(targetEntity = User.class, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
     private User user;
 
     public Cart() {
@@ -20,8 +17,7 @@ public class Cart {
     }
 
     @Id
-    @Column(name = "cart_id", unique = true)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "cart_id")
     public Long getCart_id() {
         return cart_id;
     }
@@ -30,6 +26,9 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    // @PrimaryKeyJoinColumn
     public User getUser() {
         return user;
     }

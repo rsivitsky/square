@@ -14,6 +14,7 @@
         <class>com.sivitsky.ddr.model.Part</class>
         <class>com.sivitsky.ddr.model.Specification</class>
         <class>com.sivitsky.ddr.model.Vendor</class>
+        <class>com.sivitsky.ddr.model.Cart</class>
 
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
         <properties>
