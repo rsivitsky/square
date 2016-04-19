@@ -2,6 +2,7 @@ package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.User;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,5 +35,15 @@ public class CartDAOImpl implements CartDAO {
             sessionFactory.getCurrentSession().delete(cart);
         }
 
+    }
+
+    public void replaceCartInOrder(Cart cart_from, Cart cart_to) {
+        Query query = sessionFactory.getCurrentSession().createQuery("update Order set cart = :cart_to" +
+                ", user = :user where cart = :cart_from");
+        query.setParameter("cart_to", cart_to);
+        query.setParameter("cart_from", cart_from);
+        query.setParameter("user", cart_to.getUser());
+        int result = query.executeUpdate();
+        logger.info("Cart updated successfully, new cart id=" + cart_to.getCart_id());
     }
 }

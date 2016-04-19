@@ -5,9 +5,8 @@ import com.sivitsky.ddr.model.User;
 
 public interface CartService {
     Cart saveCart(Cart cart);
-
     void removeCart(Long id);
-
     Cart getCartByUser(User user);
-    // void CartInit();
+
+    void replaceCartInOrder(Cart cart_from, Cart cart_to);
 }

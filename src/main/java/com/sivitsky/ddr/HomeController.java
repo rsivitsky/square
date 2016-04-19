@@ -71,9 +71,7 @@ public class HomeController {
     @RequestMapping("/givemeuser")
     public String listUsers() {
         Iterable<User> users = userRepository.findAll();
-
         System.out.println(users);
-
         return "index";
     }
 
@@ -94,6 +92,18 @@ public class HomeController {
         if (principal != null) {
             User user = userService.getUserByEmail(principal.getName());
             if (user != null) {
+                if (cartService.getCartByUser(user) == null) {
+                    Random random = new Random();
+                    Long cart_id = random.nextLong();
+                    Cart cart = new Cart(cart_id);
+                    cart.setUser(user);
+                }
+
+                if (orderService.getOrdersByUserId(session.getCreationTime()) != null) {
+                    User tempUser = userService.getUserById(session.getCreationTime());
+                    cartService.replaceCartInOrder(cartService.getCartByUser(tempUser), cartService.getCartByUser(user));
+                }
+
                 session.setAttribute("cart", cartService.getCartByUser(user));
                 Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());
                 if (cartInfo != null) {
@@ -108,13 +118,11 @@ public class HomeController {
                 Random random = new Random();
                 Long cart_id = random.nextLong();
                 Cart cart = new Cart(cart_id);
+                cart.setUser(new User(session.getCreationTime()));
                 session.setAttribute("cart", cart);
             }
         }
         setUsageAsFalse();
-       /* this.setPrice_from((price_from != null) ? price_from : "0");
-        this.setPrice_to((price_to != null) ? price_to : "0");*/
-
         Integer recordsPerPage = 2;
         if (page == null) {
             page = 1;
@@ -141,8 +149,6 @@ public class HomeController {
         model.addAttribute("noOfPages", noOfPages);
         model.addAttribute("page", page);
 
-       /* model.addAttribute("price_from", this.getPrice_from());
-        model.addAttribute("price_to", this.getPrice_to());*/
         model.addAttribute("manufacturFilterList", manufacturFilterList);
         return "index";
     }

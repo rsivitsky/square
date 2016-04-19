@@ -5,8 +5,8 @@ import com.sivitsky.ddr.model.User;
 
 public interface CartDAO {
     Cart saveCart(Cart cart);
-
     Cart getCartByUser(User user);
-
     void removeCart(Long id);
+
+    void replaceCartInOrder(Cart cart_from, Cart cart_to);
 }
