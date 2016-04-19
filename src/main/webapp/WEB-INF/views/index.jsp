@@ -139,8 +139,4 @@
         </div>
     </div>
 
-    <sec:authorize access="hasRole('ROLE_ADMIN')">
-        <p>Ваш логин: <sec:authentication property="principal.username"/></p>
-    </sec:authorize>
-
 </div>
