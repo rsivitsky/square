@@ -39,8 +39,10 @@ public class UserController {
 
     //For add and update person both
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    public String addUser(@ModelAttribute("user") User user, BindingResult result) {
-        userRepository.save(user);
+    public String addUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            userRepository.save(user);
+        }
         return "redirect:/user";
     }
 
@@ -68,14 +70,16 @@ public class UserController {
     }
 
     @RequestMapping(value = "/account/save", method = RequestMethod.POST)
-    public String saveUser(@ModelAttribute("user") User user, BindingResult result) {
-        if (user.getVendor().getVendor_id() == null) {
-            user.setVendor(null);
+    public String saveUser(@ModelAttribute("user") User user, BindingResult bindingResult) {
+        if (!bindingResult.hasErrors()) {
+            if (user.getVendor().getVendor_id() == null) {
+                user.setVendor(null);
+            }
+            if (user.getRole().equals("NONE")) {
+                user.setRole(ListRole.ROLE_USER.toString());
+            }
+            userRepository.save(user);
         }
-        if (user.getRole().equals("NONE")) {
-            user.setRole(ListRole.ROLE_USER.toString());
-        }
-        userRepository.save(user);
         return "redirect:/";
     }
 }
