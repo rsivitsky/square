@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 
@@ -34,13 +33,11 @@ public class OfferController {
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
     public String listOffers(HttpServletRequest request, @ModelAttribute("user") User user, Model model) {
-        HttpSession session = request.getSession(true);
         Offer offer = new Offer();
         SecurityContextHolderAwareRequestWrapper securityContextHolderAwareRequestWrapper = new SecurityContextHolderAwareRequestWrapper(request, "");
         if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_ADMIN")) {
             model.addAttribute("listOffers", this.offerService.listOffer());
         } else if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_VENDOR")) {
-            //User user = userService.getUserByName(principal.getName());
             offer.setVendor(user.getVendor());
             model.addAttribute("listOffers", this.offerService.getOffersByVendorId(user.getVendor().getVendor_id()));
         }
