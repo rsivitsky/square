@@ -67,7 +67,7 @@
             </sec:authorize>
             <li class="active"><a href="${aboutUrl}">${about}</a></li>
             <sec:authorize access="isAuthenticated()">
-                <li><a href="/account/${sessionScope.user_id}">${account}</a></li>
+                <li><a href="/account">${account}</a></li>
             </sec:authorize>
         </ul>
     </nav>

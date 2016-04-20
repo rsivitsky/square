@@ -12,11 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.security.Principal;
 
 @Controller
-@SessionAttributes({"offer", "listOffers", "vendor_id"})
+@SessionAttributes({"offer", "listOffers", "vendor_id", "user_id"})
 public class OfferController {
 
     private ListCurrency listCurrency;
@@ -35,6 +36,7 @@ public class OfferController {
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
     public String listOffers(HttpServletRequest request, Model model, Principal principal) {
+        HttpSession session = request.getSession(true);
         Offer offer = new Offer();
         SecurityContextHolderAwareRequestWrapper securityContextHolderAwareRequestWrapper = new SecurityContextHolderAwareRequestWrapper(request, "");
         if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_ADMIN")) {
@@ -48,13 +50,13 @@ public class OfferController {
         model.addAttribute("listCurrency", this.listCurrency);
         model.addAttribute("listPart", this.partService.listPart());
         model.addAttribute("listVendor", this.vendorService.listVendor());
-        return "offers";
+        return "offer";
     }
 
     @RequestMapping("/offers/remove/{offer_id}")
     public String removeOffer(@PathVariable("offer_id") Long offer_id) {
         this.offerService.removeOffer(offer_id);
-        return "redirect:/offers";
+        return "redirect:/offer";
     }
 
     @RequestMapping("/offers/edit/{offer_id}")
@@ -64,13 +66,13 @@ public class OfferController {
         model.addAttribute("listVendor", this.vendorService.listVendor());
         model.addAttribute("listCurrency", this.listCurrency);
         model.addAttribute("listPart", this.partService.listPart());
-        return "offers";
+        return "offer";
     }
 
     @RequestMapping(value = "/offers/add", method = RequestMethod.POST)
     public String addOffer(@ModelAttribute("offer") Offer offer, BindingResult result) {
         this.offerService.saveOffer(offer);
-        return "redirect:/offers";
+        return "redirect:/offer";
     }
 
     @RequestMapping(value = "/offers/load", method = RequestMethod.POST)
@@ -83,7 +85,7 @@ public class OfferController {
                 e.printStackTrace();
             }
         }
-        return "redirect:/offers";
+        return "redirect:/offer";
     }
 
     @RequestMapping(value = "/offers/partinfo/{part_id}", method = RequestMethod.GET)

@@ -12,7 +12,7 @@
     <definition name="part" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/part.jsp"/>
     </definition>
-    <definition name="offers" extends="default">
+    <definition name="offer" extends="default">
         <put-attribute name="body" value="/WEB-INF/views/offer.jsp"/>
     </definition>
     <definition name="order" extends="default">

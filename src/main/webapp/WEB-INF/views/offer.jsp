@@ -33,6 +33,7 @@
                value="<spring:message text="load"/>"/>
     </form:form>
 </div>
+<%--
 <div class="col-md-8">
     <form:form action="${addAction}" commandName="offer">
         <table class="table table-hover">
@@ -157,4 +158,4 @@
             </c:forEach>
         </table>
     </c:if>
-</div>
+</div>--%>

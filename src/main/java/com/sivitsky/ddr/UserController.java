@@ -12,6 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 @SessionAttributes({"user"})
 public class UserController {
@@ -61,9 +64,10 @@ public class UserController {
         return "user";
     }
 
-    @RequestMapping("/account/{user_id}")
-    public String editAccount(@PathVariable("user_id") Long id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
+    @RequestMapping("/account")
+    public String editAccount(@ModelAttribute("user") User user, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(true);
+        model.addAttribute("user", user);
         model.addAttribute("listRoles", roleService.getRolesWithoutAdmin());
         model.addAttribute("listVendors", vendorService.listVendor());
         return "account";

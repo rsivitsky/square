@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
-@SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList", "cartInfo"})
+@SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList", "cartInfo", "user", "cart"})
 public class HomeController {
 
     @Autowired
@@ -89,8 +89,6 @@ public class HomeController {
         Float price_froom = Float.parseFloat(session.getAttribute("price_from").toString());
         Float price_too = Float.parseFloat(session.getAttribute("price_to").toString());
 
-        //Cart cart_from, cart_to;
-
         if (principal != null) {
             User user = userService.getUserByEmail(principal.getName());
             if (user != null) {
@@ -112,17 +110,17 @@ public class HomeController {
                 if (cartInfo != null) {
                     model.addAttribute("cartInfo", cartInfo);
                 }
-                if (session.getAttribute("user_id") == null) {
-                    session.setAttribute("user_id", user.getUser_id());
-                }
+                model.addAttribute("user", user);
             }
         } else {
             if (session.getAttribute("cart") == null) {
                 Random random = new Random();
                 Long cart_id = random.nextLong();
                 Cart cart = new Cart(cart_id);
-                cart.setUser(new User());
-                session.setAttribute("cart", cart);
+                User user = new User();
+                cart.setUser(user);
+                model.addAttribute("user", user);
+                model.addAttribute("cart", cart);
             }
         }
         setUsageAsFalse();
@@ -151,7 +149,6 @@ public class HomeController {
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
         model.addAttribute("noOfPages", noOfPages);
         model.addAttribute("page", page);
-
         model.addAttribute("manufacturFilterList", manufacturFilterList);
         return "index";
     }
