@@ -50,7 +50,7 @@ public class OfferController {
     @RequestMapping("/offers/remove/{offer_id}")
     public String removeOffer(@PathVariable("offer_id") Long offer_id) {
         this.offerService.removeOffer(offer_id);
-        return "redirect:/offer";
+        return "redirect:/offers";
     }
 
     @RequestMapping("/offers/edit/{offer_id}")
@@ -66,7 +66,7 @@ public class OfferController {
     @RequestMapping(value = "/offers/add", method = RequestMethod.POST)
     public String addOffer(@ModelAttribute("offer") Offer offer, BindingResult result) {
         this.offerService.saveOffer(offer);
-        return "redirect:/offer";
+        return "redirect:/offers";
     }
 
     @RequestMapping(value = "/offers/load", method = RequestMethod.POST)

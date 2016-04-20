@@ -58,7 +58,7 @@ public class ExcelReaderServiceImpl implements ExcelReaderService {
                             break;
                         case 3:
                             try {
-                                String currency = ListCurrency.valueOf(nextCell.getStringCellValue()).toString();
+                                String currency = ListCurrency.valueOf(nextCell.getStringCellValue().toUpperCase()).toString();
                                 offer.setCurrency(currency != null ? currency : ListCurrency.USD.toString());
                                 break;
                             } catch (NullPointerException e) {

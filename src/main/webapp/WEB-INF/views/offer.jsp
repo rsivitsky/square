@@ -153,7 +153,7 @@
                     <td><fmt:formatDate pattern="dd-MM-yyyy"
                                         value="${offer_item.offer_date}"/></td>
                     <td>${offer_item.part.part_name}</td>
-                    <td>${offer_item.currency.valuta_name}</td>
+                    <td>${offer_item.currency}</td>
                     <td>${offer_item.offer_price}</td>
                     <td>${offer_item.offer_num}</td>
                     <td>${offer_item.offer_sum}</td>
