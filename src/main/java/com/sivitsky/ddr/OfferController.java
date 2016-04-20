@@ -1,6 +1,5 @@
 package com.sivitsky.ddr;
 
-import com.sivitsky.ddr.model.ListCurrency;
 import com.sivitsky.ddr.model.Offer;
 import com.sivitsky.ddr.model.User;
 import com.sivitsky.ddr.service.*;
@@ -17,14 +16,11 @@ import java.io.IOException;
 import java.security.Principal;
 
 @Controller
-@SessionAttributes({"offer", "listOffers", "vendor_id", "user_id"})
+@SessionAttributes({"offer", "listOffers", "vendor_id", "user"})
 public class OfferController {
-
-    private ListCurrency listCurrency;
 
     @Autowired
     private OfferService offerService;
-
     @Autowired
     private PartService partService;
     @Autowired
@@ -33,21 +29,23 @@ public class OfferController {
     private ExcelReaderService excelReaderService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private CurrencyService currencyService;
 
     @RequestMapping(value = "/offers", method = RequestMethod.GET)
-    public String listOffers(HttpServletRequest request, Model model, Principal principal) {
+    public String listOffers(HttpServletRequest request, @ModelAttribute("user") User user, Model model) {
         HttpSession session = request.getSession(true);
         Offer offer = new Offer();
         SecurityContextHolderAwareRequestWrapper securityContextHolderAwareRequestWrapper = new SecurityContextHolderAwareRequestWrapper(request, "");
         if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_ADMIN")) {
             model.addAttribute("listOffers", this.offerService.listOffer());
         } else if (securityContextHolderAwareRequestWrapper.isUserInRole("ROLE_VENDOR")) {
-            User user = userService.getUserByName(principal.getName());
+            //User user = userService.getUserByName(principal.getName());
             offer.setVendor(user.getVendor());
             model.addAttribute("listOffers", this.offerService.getOffersByVendorId(user.getVendor().getVendor_id()));
         }
         model.addAttribute("offer", offer);
-        model.addAttribute("listCurrency", this.listCurrency);
+        model.addAttribute("listCurrency", this.currencyService.getCurrencies());
         model.addAttribute("listPart", this.partService.listPart());
         model.addAttribute("listVendor", this.vendorService.listVendor());
         return "offer";
@@ -64,7 +62,7 @@ public class OfferController {
         model.addAttribute("offer", this.offerService.getOfferById(offer_id));
         model.addAttribute("listOffers", this.offerService.listOffer());
         model.addAttribute("listVendor", this.vendorService.listVendor());
-        model.addAttribute("listCurrency", this.listCurrency);
+        model.addAttribute("listCurrency", this.currencyService.getCurrencies());
         model.addAttribute("listPart", this.partService.listPart());
         return "offer";
     }

@@ -33,7 +33,7 @@
                value="<spring:message text="load"/>"/>
     </form:form>
 </div>
-<%--
+
 <div class="col-md-8">
     <form:form action="${addAction}" commandName="offer">
         <table class="table table-hover">
@@ -77,8 +77,10 @@
                                  itemLabel="part_name" cssStyle="border: none"/>
                 </td>
                 <td>
-                    <form:select path="currency.valuta_id" name="currency" items="${listCurrency}" itemValue="valuta_id"
-                                 itemLabel="valuta_name" cssStyle="border: none"/>
+                    <form:select path="currency">
+                        <form:option value="NONE" label="--- Select ---"/>
+                        <form:options items="${listCurrency}"/>
+                    </form:select>
                 </td>
                 <td>
                     <form:input path="offer_price" cssStyle="border: none"/>
@@ -158,4 +160,4 @@
             </c:forEach>
         </table>
     </c:if>
-</div>--%>
+</div>
