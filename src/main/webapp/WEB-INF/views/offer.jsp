@@ -17,6 +17,7 @@
 <spring:message code="label.edit" var="edit"/>
 <spring:message code="label.delete" var="delete"/>
 <spring:message code="label.add" var="add"/>
+<spring:message code="label.user_dont_have_vendor" var="user_dont_have_vendor"/>
 <spring:message code="label.public_cancel" var="cancel"/>
 
 <spring:url var="editImgUrl" value="/resources/img/edit.png"/>
@@ -27,11 +28,15 @@
 
 <div class="col-md-4">
     <form:form action="${loadAction}" method="post" enctype="multipart/form-data">
+        <c:if test="${user.vendor==null}">
+            <h12 style="background-color: #ff69b4"> ${user_dont_have_vendor} </h12>
+        </c:if>
         <input type="file" name="offers_file">
         <br>
         <input type="submit"
                value="<spring:message text="load"/>"/>
     </form:form>
+
 </div>
 
 <div class="col-md-8">

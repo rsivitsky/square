@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.security.Principal;
 
 @Controller
 @SessionAttributes({"offer", "listOffers", "vendor_id", "user"})
@@ -71,16 +70,19 @@ public class OfferController {
     }
 
     @RequestMapping(value = "/offers/load", method = RequestMethod.POST)
-    public String loadOffer(@ModelAttribute("offer") Offer offer, @RequestParam(value = "offers_file", required = false) javax.servlet.http.Part offers_file, Principal principal, BindingResult result) {
+    public String loadOffer(@ModelAttribute("offer") Offer offer, User user, @RequestParam(value = "offers_file", required = false) javax.servlet.http.Part offers_file) {
         if (offers_file != null) {
             try {
-                User user = userService.getUserByName(principal.getName());
-                excelReaderService.readBooksFromExcelFile(offers_file, user.getVendor());
+                if (user.getVendor() != null) {
+                    excelReaderService.readBooksFromExcelFile(offers_file, user.getVendor());
+                } else {
+                    return "redirect:/offers";
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        return "redirect:/offer";
+        return "redirect:/offers";
     }
 
     @RequestMapping(value = "/offers/partinfo/{part_id}", method = RequestMethod.GET)
