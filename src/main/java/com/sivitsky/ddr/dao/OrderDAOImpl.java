@@ -18,6 +18,7 @@ public class OrderDAOImpl implements OrderDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     public Order saveOrder(Order order) {
         sessionFactory.getCurrentSession().saveOrUpdate(order);
         logger.info("Order updated successfully, Order id=" + order.getOrder_id());
@@ -60,6 +61,13 @@ public class OrderDAOImpl implements OrderDAO {
     public List<Order> getOrdersByUserId(Long user_id) {
         return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrdersByUserId")
                 .setParameter("user_id", user_id)
+                .list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Order> getOrdersByCartId(Long cart_id) {
+        return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrdersByCartId")
+                .setParameter("cart_id", cart_id)
                 .list();
     }
 

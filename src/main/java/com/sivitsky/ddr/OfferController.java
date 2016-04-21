@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
-@SessionAttributes({"offer", "listOffers", "vendor_id", "user"})
+@SessionAttributes({"offer", "listOffers", "vendor_id", "user", "part", "listPartsOffers"})
 public class OfferController {
 
     @Autowired

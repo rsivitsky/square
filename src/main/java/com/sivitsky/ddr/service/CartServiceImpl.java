@@ -21,7 +21,6 @@ public class CartServiceImpl implements CartService {
     @Transactional
     public void replaceCartInOrder(Cart cart_from, Cart cart_to) {
         cartDAO.replaceCartInOrder(cart_from, cart_to);
-
     }
 
     @Transactional

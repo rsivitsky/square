@@ -1,10 +1,11 @@
 package com.sivitsky.ddr.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "cart")
-public class Cart {
+public class Cart implements Serializable {
 
     private Long cart_id;
     private User user;
@@ -26,7 +27,7 @@ public class Cart {
         this.cart_id = cart_id;
     }
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne//s(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     // @PrimaryKeyJoinColumn
     public User getUser() {

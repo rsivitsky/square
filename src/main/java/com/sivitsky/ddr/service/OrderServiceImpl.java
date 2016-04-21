@@ -45,6 +45,11 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
+    public List<Order> getOrdersByCartId(Long cart_id) {
+        return this.orderDAO.getOrdersByCartId(cart_id);
+    }
+
+    @Transactional
     public List<Order> getOrdersByVendorId(Long vendor_id) {
         return this.orderDAO.getOrdersByVendorId(vendor_id);
     }

@@ -17,8 +17,9 @@ public class CartDAOImpl implements CartDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     public Cart saveCart(Cart cart) {
-        sessionFactory.getCurrentSession().save(cart);
+        sessionFactory.getCurrentSession().saveOrUpdate(cart);
         logger.info("Cart updated successfully, cart id=" + cart.getCart_id());
         return cart;
     }

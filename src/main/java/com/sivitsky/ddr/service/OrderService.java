@@ -18,6 +18,8 @@ public interface OrderService {
 
     List<Order> getOrdersByUserId(Long user_id);
 
+    List<Order> getOrdersByCartId(Long cart_id);
+
     List<Order> getOrdersByVendorId(Long vendor_id);
 
     void cancelOrder(Long order_id);

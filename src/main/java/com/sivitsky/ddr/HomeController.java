@@ -1,9 +1,6 @@
 package com.sivitsky.ddr;
 
-import com.sivitsky.ddr.model.Cart;
-import com.sivitsky.ddr.model.Manufactur;
-import com.sivitsky.ddr.model.Part;
-import com.sivitsky.ddr.model.User;
+import com.sivitsky.ddr.model.*;
 import com.sivitsky.ddr.repository.UserRepository;
 import com.sivitsky.ddr.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
-@SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList", "cartInfo", "user", "cart"})
+@SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList", "cartInfo", "user", "cart", "listPart", "listOrders"})
 public class HomeController {
 
     @Autowired
@@ -80,47 +77,47 @@ public class HomeController {
                             @RequestParam(value = "manufacturs", required = false) String[] array_manufacturs,
                             @RequestParam(value = "price_from", required = false) String price_from,
                             @RequestParam(value = "price_to", required = false) String price_to,
-                            Model model, Principal principal, HttpServletRequest httpRequest) {
+                            Model model, Principal principal, HttpServletRequest httpRequest,
+                            Cart cart, User user, List<Order> listOrders) {
 
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute("price_from", (price_from == null) ? 0 : Float.parseFloat(price_from));
         session.setAttribute("price_to", (price_to == null) ? 0 : Float.parseFloat(price_to));
-
+        Cart new_cart = new Cart();
         Float price_froom = Float.parseFloat(session.getAttribute("price_from").toString());
         Float price_too = Float.parseFloat(session.getAttribute("price_to").toString());
 
         if (principal != null) {
-            User user = userService.getUserByEmail(principal.getName());
-            if (user != null) {
+            user = userService.getUserByEmail(principal.getName());
+            if (user.getUser_id() != null) {
                 if (cartService.getCartByUser(user) == null) {
-                    Random random = new Random(47);
+                    Random random = new Random();
                     int cart_id = random.nextInt(Integer.MAX_VALUE);
-                    Cart cart = new Cart((long) cart_id);
-                    cart.setUser(user);
-                    this.cartService.saveCart(cart);
+                    new_cart.setCart_id((long) cart_id);
+                    new_cart.setUser(user);
+                    cartService.saveCart(new_cart);
+                }
+                if (listOrders.size() > 0) {
+                    for (Order or : listOrders) {
+                        or.setUser(user);
+                        orderService.saveOrder(or);
+                    }
                 }
 
-                if (orderService.getOrdersByUserId(session.getCreationTime()) != null) {
-                    User tempUser = userService.getUserById(session.getCreationTime());
-                    cartService.replaceCartInOrder(cartService.getCartByUser(tempUser), cartService.getCartByUser(user));
+                if (orderService.getOrdersByCartId(cart.getCart_id()) != null) {
+                    cartService.replaceCartInOrder(cart, new_cart);
                 }
-
-                session.setAttribute("cart", cartService.getCartByUser(user));
+                cart = new_cart;
                 Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());
                 if (cartInfo != null) {
                     model.addAttribute("cartInfo", cartInfo);
                 }
-                model.addAttribute("user", user);
             }
         } else {
-            if (session.getAttribute("cart") == null) {
+            if (cart.getCart_id() == null) {
                 Random random = new Random();
-                Long cart_id = random.nextLong();
-                Cart cart = new Cart(cart_id);
-                User user = new User();
-                cart.setUser(user);
-                model.addAttribute("user", user);
-                model.addAttribute("cart", cart);
+                int cart_id = random.nextInt(Integer.MAX_VALUE);
+                cart.setCart_id((long) cart_id);
             }
         }
         setUsageAsFalse();
@@ -150,6 +147,8 @@ public class HomeController {
         model.addAttribute("noOfPages", noOfPages);
         model.addAttribute("page", page);
         model.addAttribute("manufacturFilterList", manufacturFilterList);
+        model.addAttribute("user", user);
+        model.addAttribute("cart", cart);
         return "index";
     }
 

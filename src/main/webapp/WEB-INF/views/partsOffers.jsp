@@ -5,9 +5,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
 <spring:url value="/part/photo" var="partPhotoUrl"/>
-<spring:url value="/part/description/${part[0]}" var="partInfo"/>
+<spring:url value="/part/description/${part[2]}" var="partInfo"/>
 <spring:message code="label.vendors" var="number_sellers"/>
 <spring:message code="label.put_to_cart" var="put_to_cart"/>
+<spring:message code="label.price_range" var="price_range"/>
 
 <c:set var="quantity" scope="request"/>
 
@@ -22,7 +23,7 @@
                 <label class="control-label">${part[1]}</label>
             </div>
             <div class="col-md-4">
-                <label class="control-label">${part[2]} - ${part[3]}</label>
+                <label class="control-label">${price_range}: ${part[2]} - ${part[3]}</label>
             </div>
         </div>
         <div class="row">
@@ -31,28 +32,26 @@
             </div>
         </div>
     </c:if>
-    <c:if test="${!empty listPartsOffers}">
-        <table class="table table-hover">
+    <c:if test="${listPartsOffers !=null}">
             <c:forEach items="${listPartsOffers}" var="partsOffer">
-                <form action="/cart/add/${partsOffer.offer_id}" method="get">
+                <table class="table table-hover">
                 <tr>
-                    <td>
-                            ${partsOffer.offer_price} ${partsOffer.currency.valuta_name}
-                    </td>
+                        <%--  <form action="/cart/add/${partsOffer.offer_id}" method="get"> --%>
 
+                    <td>
+                            ${partsOffer.offer_price} ${partsOffer.currency}
+                    </td>
+                    <td>
+                        <a href="/cart/add/${partsOffer.offer_id}"
+                           class="btn btn-primary glyphicon glyphicon-shopping-cart" role="button">${put_to_cart}</a>
+                    </td>
                     <td>
                             ${partsOffer.vendor.vendor_name}
                     </td>
-                    <td>
-                        <input type="number" name="quantity" value="1">
-                       </td>
-                    <td>
-                             <input type="submit"
-                                    value="<spring:message text="${put_to_cart}"/>"/>
-                   </td>
-               </tr>
-                </form>
-           </c:forEach>
-       </table>
-   </c:if>
+
+                        <%--</form>--%>
+                </tr>
+                </table>
+            </c:forEach>
+    </c:if>
 </div>

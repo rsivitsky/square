@@ -16,6 +16,7 @@ public class UserDAOImpl implements UserDAO {
     @Autowired
     private SessionFactory sessionFactory;
 
+    @SuppressWarnings("unchecked")
     public User saveUser(User user) {
         sessionFactory.getCurrentSession().saveOrUpdate(user);
         logger.info("User updated successfully, User id=" + user.getUser_id());

@@ -82,18 +82,18 @@
 <div class="col-md-9">
     <table class="table table-hover">
         <c:forEach items="${listPart}" var="part">
-            <c:url var="offersInfo" value="/offers/partinfo/${part[0]}"/>
-            <c:url var="partDescription" value="/part/description/${part[0]}"/>
+            <c:url var="offersInfo" value="/offers/partinfo/${part[2]}"/>
+            <c:url var="partDescription" value="/part/description/${part[2]}"/>
             <c:if test="${!empty part[1]}">
                 <tr>
-                    <td><a href="${partDescription}"><img src="${partPhotoUrl}/${part[0]}" class="img-rounded"
+                    <td><a href="${partDescription}"><img src="${partPhotoUrl}/${part[2]}" class="img-rounded"
                                                           height="40" width="150"/></a>
                     </td>
-                    <td><a href="${partDescription}"><c:out value="${part[1]}"/></a></td>
+                    <td><a href="${partDescription}"><c:out value="${part[3]}"/></a></td>
                     <td>
-                        <a href="${offersInfo}">от <c:out value="${part[2]}"/> <c:out value="${part[4]}"/></a>
+                        <a href="${offersInfo}">от <c:out value="${part[0]}"/> <c:out value="${part[4]}"/></a>
                         <br>
-                        <a href="${offersInfo}"><c:out value="${part[3]}"/> предложений</a>
+                        <a href="${offersInfo}"><c:out value="${part[1]}"/> предложений</a>
                     </td>
                 </tr>
             </c:if>
