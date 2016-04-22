@@ -21,7 +21,6 @@ import java.security.Principal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Controller
 @SessionAttributes({"cart", "user", "part", "listOrders"})
@@ -29,7 +28,7 @@ public class CartController {
     private OrderService orderService;
     private OfferService offerService;
     private UserService userService;
-    private List<Order> listOrders = new ArrayList<Order>();
+    // private List<Order> listOrders = new ArrayList<Order>();
 
     @Autowired
     private CartRepository cartRepository;
@@ -50,7 +49,7 @@ public class CartController {
     }
 
     @RequestMapping(value = "/cart/add/{offer_id}", method = RequestMethod.GET)
-    public String addToCart(@PathVariable("offer_id") Long offer_id, Model model, Cart cart, User user, List<Order> listOrders) throws ParseException {
+    public String addToCart(@PathVariable("offer_id") Long offer_id, Model model, Cart cart, User user, ArrayList<Order> listOrders) throws ParseException {
         Order order = new Order();
 
         Offer offer = offerService.getOfferById(offer_id);

@@ -78,7 +78,7 @@ public class HomeController {
                             @RequestParam(value = "price_from", required = false) String price_from,
                             @RequestParam(value = "price_to", required = false) String price_to,
                             Model model, Principal principal, HttpServletRequest httpRequest,
-                            Cart cart, User user, List<Order> listOrders) {
+                            Cart cart, User user, ArrayList<Order> listOrders) {
 
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute("price_from", (price_from == null) ? 0 : Float.parseFloat(price_from));
@@ -97,10 +97,12 @@ public class HomeController {
                     new_cart.setUser(user);
                     cartService.saveCart(new_cart);
                 }
-                if (listOrders.size() > 0) {
-                    for (Order or : listOrders) {
-                        or.setUser(user);
-                        orderService.saveOrder(or);
+                if (listOrders != null) {
+                    if (listOrders.size() > 0) {
+                        for (Order or : listOrders) {
+                            or.setUser(user);
+                            orderService.saveOrder(or);
+                        }
                     }
                 }
 
