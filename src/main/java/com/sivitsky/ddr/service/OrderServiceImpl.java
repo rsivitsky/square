@@ -3,6 +3,7 @@ package com.sivitsky.ddr.service;
 import com.sivitsky.ddr.dao.OrderDAO;
 import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.Order;
+import com.sivitsky.ddr.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,13 +37,13 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public Object getOrderTotalByUserId(Long user) {
+    public Object getOrderTotalByUserId(User user) {
         return this.orderDAO.getOrderTotalByUserId(user);
     }
 
     @Transactional
-    public List<Order> getOrdersByUserId(Long user_id) {
-        return this.orderDAO.getOrdersByUserId(user_id);
+    public List<Order> getOrdersByUserId(User user) {
+        return this.orderDAO.getOrdersByUserId(user);
     }
 
     @Transactional
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public void cancelOrder(Long order_id) {
-        this.orderDAO.cancelOrder(order_id);
+    public void cancelOrder(Long booking_id) {
+        this.orderDAO.cancelOrder(booking_id);
     }
 }

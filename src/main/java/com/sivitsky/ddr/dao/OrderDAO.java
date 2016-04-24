@@ -2,6 +2,7 @@ package com.sivitsky.ddr.dao;
 
 import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.Order;
+import com.sivitsky.ddr.model.User;
 
 import java.util.List;
 
@@ -15,16 +16,16 @@ public interface OrderDAO {
 
     void removeOrder(Long id);
 
-    List<Order> listOrderByUserId(Long id);
+    List<Order> listOrderByUserId(User user);
 
-    Object getOrderTotalByUserId(Long user_id);
+    Object getOrderTotalByUserId(User user);
 
-    List<Order> getOrdersByUserId(Long user_id);
+    List<Order> getOrdersByUserId(User user);
 
     List<Order> getOrdersByCart(Cart cart);
 
     List<Order> getOrdersByVendorId(Long vendor_id);
 
-    void cancelOrder(Long order_id);
+    void cancelOrder(Long booking_id);
 
 }

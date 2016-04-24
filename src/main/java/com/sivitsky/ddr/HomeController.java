@@ -111,10 +111,11 @@ public class HomeController {
             }
 
             cart = new_cart;
-            Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());
+            Object cartInfo = orderService.getOrderTotalByUserId(user);
             if (cartInfo != null) {
                 model.addAttribute("cartInfo", cartInfo);
             }
+
         } else {
             if (cart.getCart_id() == null) {
                 if (!model.containsAttribute("listOrders")) {

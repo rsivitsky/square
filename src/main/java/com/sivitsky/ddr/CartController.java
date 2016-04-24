@@ -50,9 +50,9 @@ public class CartController {
 
         Offer offer = offerService.getOfferById(offer_id);
         order.setOffer(offer);
-        order.setOrder_date(new Date());
+        order.setBooking_date(new Date());
         order.setPart(offer.getPart());
-        order.setOrder_num(1);
+        order.setBooking_num(1);
         order.setBooking_sum(1 * offer.getOffer_price());
         if (user.getUser_id() != null) {
             order.setUser(user);
@@ -71,18 +71,18 @@ public class CartController {
 
     @RequestMapping(value = "/cart/info", method = RequestMethod.GET)
     public String cartInfoByUserId(Model model, User user) throws ParseException {
-        model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user.getUser_id()));
+        model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user));
         return "cart";
     }
 
     @RequestMapping(value = "/order/cancel/{order_id}", method = RequestMethod.GET)
-    public String cancelCart(HttpServletRequest request, @PathVariable("order_id") Long order_id, Model model, Principal principal){
-        orderService.cancelOrder(order_id);
-        User user = userService.getUserByName(principal.getName());
-        if (user!=null){
-            model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user.getUser_id()));
-            model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user.getUser_id()));
-        }
+    public String cancelCart(HttpServletRequest request, @PathVariable("order_id") Long booking_id, Model model, Principal principal, User user) {
+        orderService.cancelOrder(booking_id);
+        //User user = userService.getUserByName(principal.getName());
+        //if (user!=null){
+        model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user));
+        model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user));
+        //}
         return "cart";
     }
 }

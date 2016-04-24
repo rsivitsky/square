@@ -9,15 +9,15 @@ import java.util.Date;
 @Entity
 @Table(name = "booking")
 @NamedQueries({
-        @NamedQuery(name="Order.getOrderesByVendorId", query="select o.order_date, o.part.part_name, o.order_num, o.booking_status " +
+        @NamedQuery(name = "Order.getOrderesByVendorId", query = "select o.booking_date, o.part.part_name, o.booking_num, o.booking_status " +
                 "from Order o join o.offer off join off.vendor ven " +
                 "where ven.vendor_id = :vendor_id" ),
-        @NamedQuery(name="Order.getOrderesByUserId", query="select order_date, part.part_name, order_num, booking_status from Order " +
-                "where user_id = :user_id and booking_status in (:booking_status)" ),
-        @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order_id) as cart_num, " +
-                "sum(booking_sum) as total_sum from Order where user_id = :user_id and booking_status ='NEW' group by user_id"),
+        @NamedQuery(name = "Order.getOrderesByUserId", query = "select booking_date, part.part_name, booking_num, booking_status from Order " +
+                "where user = :user and booking_status in (:booking_status)"),
+        @NamedQuery(name = "Order.getCountAndSumOrdersByUserId", query = "select count(booking_id) as cart_num, " +
+                "sum(booking_sum) as total_sum from Order where user = :user and booking_status ='NEW' group by user"),
         @NamedQuery(name = "Order.getOrdersByCart", query = "from Order where cart = :cart"),
-        @NamedQuery(name="Order.getOrdersByUserId", query="from Order where user_id = :user_id and booking_status not in ('CLOSED', 'CANCELED')")
+        @NamedQuery(name = "Order.getOrdersByUserId", query = "from Order where user = :user and booking_status not in ('CLOSED', 'CANCELED')")
 })
 
 public class Order implements Serializable {
@@ -39,29 +39,30 @@ public class Order implements Serializable {
     @Id
     @Column(name = "booking_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long getOrder_id() {
+    public Long getBooking_id() {
         return booking_id;
     }
 
-    public void setOrder_id(Long order_id) {
-        this.booking_id = order_id;
+    public void setBooking_id(Long booking_id) {
+        this.booking_id = booking_id;
     }
 
     @Column(name = "booking_num")
-    public Integer getOrder_num() {return booking_num;
+    public Integer getBooking_num() {
+        return booking_num;
     }
 
-    public void setOrder_num(Integer booking_num) {
+    public void setBooking_num(Integer booking_num) {
         this.booking_num = booking_num;
     }
 
     @Column(name = "booking_date")
     @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
-    public Date getOrder_date() {
+    public Date getBooking_date() {
         return booking_date;
     }
 
-    public void setOrder_date(Date booking_date) {
+    public void setBooking_date(Date booking_date) {
         this.booking_date = booking_date;
     }
 

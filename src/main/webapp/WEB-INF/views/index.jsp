@@ -44,7 +44,7 @@
     </form>
 
     <div>
-        <c:if test="${!empty cartInfo}">
+        <c:if test="${cartInfo!=null}">
             <div class="row">
                 <div class="col-md-6">
                     <span class="label label-primary">${cart_num}</span>
@@ -62,7 +62,7 @@
                 </div>
             </div>
         </c:if>
-        <c:if test="${empty cartInfo}">
+        <c:if test="${cartInfo==null}">
             <div class="row">
                 <div class="col-md-6">
                     <span class="label label-primary">${cart_num}</span>

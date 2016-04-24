@@ -3,6 +3,7 @@ package com.sivitsky.ddr.dao;
 import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.OrderStatus;
+import com.sivitsky.ddr.model.User;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ public class OrderDAOImpl implements OrderDAO {
     @SuppressWarnings("unchecked")
     public Order saveOrder(Order order) {
         sessionFactory.getCurrentSession().saveOrUpdate(order);
-        logger.info("Order updated successfully, Order id=" + order.getOrder_id());
+        logger.info("Order updated successfully, Order id=" + order.getBooking_id());
         return order;
     }
 
@@ -43,25 +44,25 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Order> listOrderByUserId(Long user_id) {
+    public List<Order> listOrderByUserId(User user) {
         String[] booking_status = {OrderStatus.NEW.toString(), OrderStatus.PAID.toString()};
         return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrderesByUserId")
-                .setParameter("user", user_id)
+                .setParameter("user", user)
                 .setParameter("booking_status", booking_status)
                 .list();
     }
 
     @SuppressWarnings("unchecked")
-    public Object getOrderTotalByUserId(Long user_id) {
+    public Object getOrderTotalByUserId(User user) {
         return sessionFactory.getCurrentSession().getNamedQuery("Order.getCountAndSumOrdersByUserId")
-                .setParameter("user_id", user_id)
+                .setParameter("user", user)
                 .uniqueResult();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Order> getOrdersByUserId(Long user_id) {
+    public List<Order> getOrdersByUserId(User user) {
         return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrdersByUserId")
-                .setParameter("user_id", user_id)
+                .setParameter("user", user)
                 .list();
     }
 
@@ -79,8 +80,8 @@ public class OrderDAOImpl implements OrderDAO {
                 .list();
     }
 
-    public void cancelOrder(Long order_id) {
+    public void cancelOrder(Long booking_id) {
         sessionFactory.getCurrentSession().createQuery("update Order set booking_status = 'CANCELED'" +
-                " where order_id = :order_id").setParameter("order_id", order_id).executeUpdate();
+                " where booking_id = :booking_id").setParameter("booking_id", booking_id).executeUpdate();
     }
 }
