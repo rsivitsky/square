@@ -1,5 +1,6 @@
 package com.sivitsky.ddr.dao;
 
+import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.Order;
 import com.sivitsky.ddr.model.OrderStatus;
 import org.hibernate.SessionFactory;
@@ -65,9 +66,9 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Order> getOrdersByCartId(Long cart_id) {
-        return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrdersByCartId")
-                .setParameter("cart_id", cart_id)
+    public List<Order> getOrdersByCart(Cart cart) {
+        return sessionFactory.getCurrentSession().getNamedQuery("Order.getOrdersByCart")
+                .setParameter("cart", cart)
                 .list();
     }
 

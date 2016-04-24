@@ -43,15 +43,16 @@
     </tr>
     <c:forEach items="${orderListByUser}" var="order_item">
       <tr>
-        <td><fmt:formatDate pattern="dd-MM-yyyy"
-                            value="${order_item.order_date}"/></td>
-        <td>${order_item.booking_status}</td>
-        <td>${order_item.part.part_name}</td>
-        <td>${order_item.order_num}</td>
-        <td>${order_item.booking_sum}</td>
-        <td>${order_item.offer.currency.valuta_name}</td>
-        <td><a href="<c:url value='/order/cancel/${order_item.order_id}' />" title=${order_cancel}><img src="${cancelImgUrl}"/></a>
-        </td>
+          <%--<td><fmt:formatDate pattern="dd-MM-yyyy"
+                              value="${order_item.booking_date}"/></td>
+          <td>${order_item.booking_status}</td>
+          <td>${order_item.part.part_name}</td>--%>
+        <td>${order_item.booking_num}</td>
+
+          <%--  <td>${order_item.offer.currency}</td>
+                  <td>${order_item.booking_sum}</td>
+            <td><a href="<c:url value='/order/cancel/${order_item.booking_id}' />" title=${order_cancel}><img src="${cancelImgUrl}"/></a>
+            </td>--%>
       </tr>
     </c:forEach>
   </table>

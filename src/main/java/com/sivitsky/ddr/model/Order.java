@@ -16,7 +16,7 @@ import java.util.Date;
                 "where user_id = :user_id and booking_status in (:booking_status)" ),
         @NamedQuery(name="Order.getCountAndSumOrdersByUserId", query="select count(order_id) as cart_num, " +
                 "sum(booking_sum) as total_sum from Order where user_id = :user_id and booking_status ='NEW' group by user_id"),
-        @NamedQuery(name = "Order.getOrdersByCartId", query = "from Order where cart_id = :cart_id"),
+        @NamedQuery(name = "Order.getOrdersByCart", query = "from Order where cart = :cart"),
         @NamedQuery(name="Order.getOrdersByUserId", query="from Order where user_id = :user_id and booking_status not in ('CLOSED', 'CANCELED')")
 })
 

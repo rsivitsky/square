@@ -1,6 +1,7 @@
 package com.sivitsky.ddr.service;
 
 import com.sivitsky.ddr.dao.OrderDAO;
+import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,8 +46,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Transactional
-    public List<Order> getOrdersByCartId(Long cart_id) {
-        return this.orderDAO.getOrdersByCartId(cart_id);
+    public List<Order> getOrdersByCart(Cart cart) {
+        return this.orderDAO.getOrdersByCart(cart);
     }
 
     @Transactional

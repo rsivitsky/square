@@ -83,40 +83,43 @@ public class HomeController {
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute("price_from", (price_from == null) ? 0 : Float.parseFloat(price_from));
         session.setAttribute("price_to", (price_to == null) ? 0 : Float.parseFloat(price_to));
-        Cart new_cart = new Cart();
+
+        Cart new_cart;
         Float price_froom = Float.parseFloat(session.getAttribute("price_from").toString());
         Float price_too = Float.parseFloat(session.getAttribute("price_to").toString());
 
         if (principal != null) {
             user = userService.getUserByEmail(principal.getName());
-            if (user.getUser_id() != null) {
-                if (cartService.getCartByUser(user) == null) {
-                    Random random = new Random();
-                    int cart_id = random.nextInt(Integer.MAX_VALUE);
-                    new_cart.setCart_id((long) cart_id);
-                    new_cart.setUser(user);
-                    cartService.saveCart(new_cart);
-                }
-                if (listOrders != null) {
-                    if (listOrders.size() > 0) {
-                        for (Order or : listOrders) {
-                            or.setUser(user);
-                            orderService.saveOrder(or);
-                        }
-                    }
-                }
+            new_cart = cartService.getCartByUser(user);
+            if (new_cart == null) {
+                Random random = new Random();
+                new_cart = new Cart();
+                int cart_id = random.nextInt(Integer.MAX_VALUE);
+                new_cart.setCart_id((long) cart_id);
+                new_cart.setUser(user);
+                cartService.saveCart(new_cart);
+            }
 
-                if (orderService.getOrdersByCartId(cart.getCart_id()) != null) {
-                    cartService.replaceCartInOrder(cart, new_cart);
+            if (((ArrayList) session.getAttribute("listOrders")).size() > 0) {
+                for (Order or : (ArrayList<Order>) session.getAttribute("listOrders")) {
+                    or.setCart(new_cart);
+                    or.setUser(user);
+                    orderService.saveOrder(or);
                 }
-                cart = new_cart;
-                Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());
-                if (cartInfo != null) {
-                    model.addAttribute("cartInfo", cartInfo);
-                }
+                //session.setAttribute("listOrders", new ArrayList<Order>());
+                model.addAttribute("listOrders", new ArrayList<Order>());
+            }
+
+            cart = new_cart;
+            Object cartInfo = orderService.getOrderTotalByUserId(user.getUser_id());
+            if (cartInfo != null) {
+                model.addAttribute("cartInfo", cartInfo);
             }
         } else {
             if (cart.getCart_id() == null) {
+                if (!model.containsAttribute("listOrders")) {
+                    model.addAttribute("listOrders", new ArrayList<Order>());
+                }
                 Random random = new Random();
                 int cart_id = random.nextInt(Integer.MAX_VALUE);
                 cart.setCart_id((long) cart_id);

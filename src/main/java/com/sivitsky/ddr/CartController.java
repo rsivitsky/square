@@ -11,16 +11,13 @@ import com.sivitsky.ddr.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.security.Principal;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @SessionAttributes({"cart", "user", "part", "listOrders"})
@@ -28,7 +25,6 @@ public class CartController {
     private OrderService orderService;
     private OfferService offerService;
     private UserService userService;
-    // private List<Order> listOrders = new ArrayList<Order>();
 
     @Autowired
     private CartRepository cartRepository;
@@ -49,7 +45,7 @@ public class CartController {
     }
 
     @RequestMapping(value = "/cart/add/{offer_id}", method = RequestMethod.GET)
-    public String addToCart(@PathVariable("offer_id") Long offer_id, Model model, Cart cart, User user, ArrayList<Order> listOrders) throws ParseException {
+    public String addToCart(@PathVariable("offer_id") Long offer_id, Model model, Cart cart, User user, @ModelAttribute("listOrders") List<Order> listOrders) throws ParseException {
         Order order = new Order();
 
         Offer offer = offerService.getOfferById(offer_id);
@@ -69,15 +65,13 @@ public class CartController {
             orderService.saveOrder(order);
         } else {
             listOrders.add(order);
-            model.addAttribute(listOrders);
         }
-        return "redirect:/offers/partinfo/" + offer.getPart().getPart_id();
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/cart/info", method = RequestMethod.GET)
-    public String cartInfoByUserId(Model model, Principal principal) throws ParseException {
-        Long user_id = userService.getUserByName(principal.getName()).getUser_id();
-        model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user_id));
+    public String cartInfoByUserId(Model model, User user) throws ParseException {
+        model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user.getUser_id()));
         return "cart";
     }
 
@@ -86,9 +80,6 @@ public class CartController {
         orderService.cancelOrder(order_id);
         User user = userService.getUserByName(principal.getName());
         if (user!=null){
-            String[] booking_status = new String[2];
-            /*booking_status[0] = OrderStatus.NEW.name();
-            booking_status[1] = OrderStatus.PAID.name();*/
             model.addAttribute("cartInfo", orderService.getOrderTotalByUserId(user.getUser_id()));
             model.addAttribute("orderListByUser", orderService.getOrdersByUserId(user.getUser_id()));
         }

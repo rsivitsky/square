@@ -1,5 +1,6 @@
 package com.sivitsky.ddr.service;
 
+import com.sivitsky.ddr.model.Cart;
 import com.sivitsky.ddr.model.Order;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface OrderService {
 
     List<Order> getOrdersByUserId(Long user_id);
 
-    List<Order> getOrdersByCartId(Long cart_id);
+    List<Order> getOrdersByCart(Cart cart);
 
     List<Order> getOrdersByVendorId(Long vendor_id);
 
