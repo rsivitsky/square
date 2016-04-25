@@ -8,36 +8,36 @@
 <spring:message code="label.cart_num" var="cart_num"/>
 <spring:message code="label.cart_sum" var="cart_sum"/>
 <spring:message code="label.cancel" var="cancel"/>
-
+<%--
 <c:set var="user_id" value="${cartInfo[0]}" scope="session"/>
-
+ --%>
 <div class="hero-unit">
-<c:set var="cartInfo" value= "${cartInfo}"/>
-    <sec:authorize access="isAuthenticated()">
-        <c:if test="${!empty cartInfo}">
-            <div class="row">
-                <div class="col-md-6">
-                    <span class="label label-primary">${cart_num}</span>
-                </div>
-                <div class="col-md-6">
-                    <span class="label label-primary">${cart_sum}</span>
-                </div>
+    <c:set var="cartInfo" value="${cartInfo}"/>
+    <%--  <sec:authorize access="isAuthenticated()"> --%>
+    <c:if test="${!empty cartInfo}">
+        <div class="row">
+            <div class="col-md-6">
+                <span class="label label-primary">${cart_num}</span>
             </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[0]}</a>
-                </div>
-                <div class="col-md-6">
-                    <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[1]}</a>
-                </div>
+            <div class="col-md-6">
+                <span class="label label-primary">${cart_sum}</span>
             </div>
-        </c:if>
-        <c:if test="${empty cartInfo}">
-            <div class="row">
-                <div class="col-md-12">
-                    empty cart
-                </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[0]}</a>
             </div>
-        </c:if>
-    </sec:authorize>
+            <div class="col-md-6">
+                <a href="<c:url value='/cart/info' />" title=${cart}>${cartInfo[1]}</a>
+            </div>
+        </div>
+    </c:if>
+    <c:if test="${empty cartInfo}">
+        <div class="row">
+            <div class="col-md-12">
+                empty cart
+            </div>
+        </div>
+    </c:if>
+    <%-- </sec:authorize> --%>
 </div>
