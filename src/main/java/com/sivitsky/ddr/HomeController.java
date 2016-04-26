@@ -78,7 +78,7 @@ public class HomeController {
                             @RequestParam(value = "price_from", required = false) String price_from,
                             @RequestParam(value = "price_to", required = false) String price_to,
                             Model model, Principal principal, HttpServletRequest httpRequest,
-                            Cart cart, User user, ArrayList<Order> listOrders) {
+                            Cart cart, User user) {
 
         HttpSession session = httpRequest.getSession(true);
         session.setAttribute("price_from", (price_from == null) ? 0 : Float.parseFloat(price_from));
@@ -88,7 +88,12 @@ public class HomeController {
         Float price_froom = Float.parseFloat(session.getAttribute("price_from").toString());
         Float price_too = Float.parseFloat(session.getAttribute("price_to").toString());
 
+        if (session.getAttribute("anonym") == null) {
+            session.setAttribute("anonym", userService.saveUser(new User()));
+        }
+
         if (principal != null) {
+
             user = userService.getUserByEmail(principal.getName());
             new_cart = cartService.getCartByUser(user);
             if (new_cart == null) {
@@ -100,6 +105,14 @@ public class HomeController {
                 cartService.saveCart(new_cart);
             }
 
+            if (orderService.getOrdersByUserId((User) session.getAttribute("anonym")).size() > 0) {
+                for (Order or : orderService.getOrdersByUserId((User) session.getAttribute("anonym"))) {
+                    or.setCart(new_cart);
+                    or.setUser(user);
+                    orderService.saveOrder(or);
+                }
+            }
+/*
             if (((ArrayList) session.getAttribute("listOrders")).size() > 0) {
                 for (Order or : (ArrayList<Order>) session.getAttribute("listOrders")) {
                     or.setCart(new_cart);
@@ -109,7 +122,7 @@ public class HomeController {
                 //session.setAttribute("listOrders", new ArrayList<Order>());
                 model.addAttribute("listOrders", new ArrayList<Order>());
             }
-
+*/
             cart = new_cart;
             Object cartInfo = orderService.getOrderTotalByUserId(user);
             if (cartInfo != null) {
@@ -117,13 +130,21 @@ public class HomeController {
             }
 
         } else {
+            //user = (User)session.getAttribute("user");
+          /*  if (user.getUser_id() == null) {
+                user = new User();
+                userService.saveUser(user);
+                session.setAttribute("user", user);
+            }*/
             if (cart.getCart_id() == null) {
                 if (!model.containsAttribute("listOrders")) {
                     model.addAttribute("listOrders", new ArrayList<Order>());
                 }
                 Random random = new Random();
                 int cart_id = random.nextInt(Integer.MAX_VALUE);
+                cart.setUser((User) session.getAttribute("anonym"));
                 cart.setCart_id((long) cart_id);
+                cartService.saveCart(cart);
             }
         }
         setUsageAsFalse();

@@ -12,6 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -42,7 +44,8 @@ public class CartController {
     }
 
     @RequestMapping(value = "/cart/add/{offer_id}", method = RequestMethod.GET)
-    public String addToCart(@PathVariable("offer_id") Long offer_id, Cart cart, User user, @ModelAttribute("listOrders") List<Order> listOrders) throws ParseException {
+    public String addToCart(@PathVariable("offer_id") Long offer_id, Cart cart, User user, HttpServletRequest httpRequest, @ModelAttribute("listOrders") List<Order> listOrders) throws ParseException {
+        HttpSession session = httpRequest.getSession(true);
         Order order = new Order();
         Offer offer = offerService.getOfferById(offer_id);
         order.setOffer(offer);
@@ -53,12 +56,15 @@ public class CartController {
         if (cart.getCart_id() != null) {
             order.setCart(cart);
         }
+        /*
         if (user.getUser_id() != null) {
             order.setUser(user);
             orderService.saveOrder(order);
         } else {
             listOrders.add(order);
-        }
+        }*/
+        order.setUser((User) session.getAttribute("anonym"));
+        orderService.saveOrder(order);
         return "redirect:/index";
     }
 
