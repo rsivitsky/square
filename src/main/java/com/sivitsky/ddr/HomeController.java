@@ -93,8 +93,9 @@ public class HomeController {
         }
 
         if (principal != null) {
-
-            user = userService.getUserByEmail(principal.getName());
+            if (user.getUser_id() == null) {
+                user = userService.getUserByEmail(principal.getName());
+            }
             new_cart = cartService.getCartByUser(user);
             if (new_cart == null) {
                 Random random = new Random();
@@ -104,7 +105,6 @@ public class HomeController {
                 new_cart.setUser(user);
                 cartService.saveCart(new_cart);
             }
-
             if (orderService.getOrdersByUserId((User) session.getAttribute("anonym")).size() > 0) {
                 for (Order or : orderService.getOrdersByUserId((User) session.getAttribute("anonym"))) {
                     or.setCart(new_cart);
@@ -112,17 +112,7 @@ public class HomeController {
                     orderService.saveOrder(or);
                 }
             }
-/*
-            if (((ArrayList) session.getAttribute("listOrders")).size() > 0) {
-                for (Order or : (ArrayList<Order>) session.getAttribute("listOrders")) {
-                    or.setCart(new_cart);
-                    or.setUser(user);
-                    orderService.saveOrder(or);
-                }
-                //session.setAttribute("listOrders", new ArrayList<Order>());
-                model.addAttribute("listOrders", new ArrayList<Order>());
-            }
-*/
+
             cart = new_cart;
             Object cartInfo = orderService.getOrderTotalByUserId(user);
             if (cartInfo != null) {
@@ -130,12 +120,6 @@ public class HomeController {
             }
 
         } else {
-            //user = (User)session.getAttribute("user");
-          /*  if (user.getUser_id() == null) {
-                user = new User();
-                userService.saveUser(user);
-                session.setAttribute("user", user);
-            }*/
             if (cart.getCart_id() == null) {
                 if (!model.containsAttribute("listOrders")) {
                     model.addAttribute("listOrders", new ArrayList<Order>());
@@ -145,6 +129,10 @@ public class HomeController {
                 cart.setUser((User) session.getAttribute("anonym"));
                 cart.setCart_id((long) cart_id);
                 cartService.saveCart(cart);
+            }
+            Object cartInfo = orderService.getOrderTotalByUserId((User) session.getAttribute("anonym"));
+            if (cartInfo != null) {
+                model.addAttribute("cartInfo", cartInfo);
             }
         }
         setUsageAsFalse();

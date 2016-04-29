@@ -14,7 +14,7 @@
 <div class="hero-unit">
     <c:set var="cartInfo" value="${cartInfo}"/>
     <%--  <sec:authorize access="isAuthenticated()"> --%>
-    <c:if test="${!empty cartInfo}">
+    <c:if test="${cartInfo[0]!=0}">
         <div class="row">
             <div class="col-md-6">
                 <span class="label label-primary">${cart_num}</span>
@@ -32,7 +32,7 @@
             </div>
         </div>
     </c:if>
-    <c:if test="${empty cartInfo}">
+    <c:if test="${cartInfo[0]==0}">
         <div class="row">
             <div class="col-md-12">
                 empty cart
