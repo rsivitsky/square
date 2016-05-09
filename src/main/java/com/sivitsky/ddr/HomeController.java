@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 @Controller
-@SessionAttributes({"manufacturFilterList", "price_from", "price_to", "offerFilterList", "cartInfo", "user", "cart", "listPart", "listOrders"})
+@SessionAttributes({"manufacturFilterList", "offerFilterList", "cartInfo", "user", "cart", "listPart", "listOrders"})
 public class HomeController {
 
     @Autowired
@@ -85,8 +85,6 @@ public class HomeController {
         session.setAttribute("price_to", (price_to == null) ? 0 : Float.parseFloat(price_to));
 
         Cart new_cart;
-        Float price_froom = Float.parseFloat(session.getAttribute("price_from").toString());
-        Float price_too = Float.parseFloat(session.getAttribute("price_to").toString());
 
         if (session.getAttribute("anonym") == null) {
             session.setAttribute("anonym", userService.saveUser(new User()));
@@ -142,7 +140,7 @@ public class HomeController {
         }
 
         Long[] l_array_manufacturs;
-        if (array_manufacturs != null && array_manufacturs.length > 0 || price_froom != 0 || price_too != 0) {
+        if (array_manufacturs != null && array_manufacturs.length > 0 || Float.parseFloat(session.getAttribute("price_from").toString()) != 0 || Float.parseFloat(session.getAttribute("price_to").toString()) != 0) {
             if (array_manufacturs != null) {
                 l_array_manufacturs = new Long[array_manufacturs.length];
                 for (int i = 0; i < array_manufacturs.length; i++) {
@@ -152,7 +150,7 @@ public class HomeController {
             } else {
                 l_array_manufacturs = new Long[0];
             }
-            model.addAttribute("listPart", offerService.listOffersByManufactIdAndPrice(l_array_manufacturs, price_froom, price_too));
+            model.addAttribute("listPart", offerService.listOffersByManufactIdAndPrice(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString())));
         } else {
             model.addAttribute("listPart", partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage));
         }

@@ -12,6 +12,12 @@
 <spring:url value="/part/photo" var="partPhotoUrl"/>
 
 <c:set var="manufacturs" scope="session"/>
+<c:if test="${sessionScope.price_from==null}">
+    <c:set var="price_from" value="0.0" scope="session"/>
+</c:if>
+<c:if test="${sessionScope.price_to==null}">
+    <c:set var="price_to" value="0.0" scope="session"/>
+</c:if>
 
 <div class="col-md-3">
     <form method="get" role="form">
@@ -106,7 +112,7 @@
         <div class="row">
             <div class="col-md-1">
                 <c:if test="${page != 1}">
-                    <a href="/index?page=${page-1}">Previous</a>
+                    <a href="/index?page=${page-1}&price_from=${sessionScope.price_from}&price_to=${sessionScope.price_to}">Previous</a>
                 </c:if>
             </div>
         </div>
@@ -118,10 +124,14 @@
                     <c:forEach begin="1" end="${noOfPages}" var="i">
                         <c:choose>
                             <c:when test="${page eq i}">
-                                <li class="active"><a href="/index?page=${i}">${i}</a></li>
+                                <li class="active"><a
+                                        href="/index?page=${i}&price_from=${sessionScope.price_from}&price_to=${sessionScope.price_to}">${i}</a>
+                                </li>
                             </c:when>
                             <c:otherwise>
-                                <li><a href="/index?page=${i}">${i}</a></li>
+                                <li>
+                                    <a href="/index?page=${i}&price_from=${sessionScope.price_from}&price_to=${sessionScope.price_to}">${i}</a>
+                                </li>
                             </c:otherwise>
                         </c:choose>
                     </c:forEach>
@@ -133,7 +143,7 @@
         <div class="row">
             <div class="col-md-1">
                 <c:if test="${page lt noOfPages}">
-                    <a href="/index?page=${page+1}">Next</a>
+                    <a href="/index?page=${page+1}&price_from=${sessionScope.price_from}&price_to=${sessionScope.price_to}">Next</a>
                 </c:if>
             </div>
         </div>

@@ -54,7 +54,7 @@ public class CartController {
         }
         order.setUser((User) session.getAttribute("anonym"));
         orderService.saveOrder(order);
-        return "redirect:/index";
+        return "redirect:/index?price_from=" + session.getAttribute("price_from") + "&price_to=" + session.getAttribute("price_to");
     }
 
     @RequestMapping(value = "/cart/info", method = RequestMethod.GET)
