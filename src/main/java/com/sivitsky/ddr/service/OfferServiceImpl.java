@@ -50,7 +50,12 @@ public class OfferServiceImpl implements OfferService {
     }
 
     @Transactional
-    public List<Offer> listOffersByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to) {
-        return this.offerDAO.getOffersByManufactIdAndPrice(mas_id, price_from, price_to);
+    public List<Offer> listOffersByManufactIdAndPrice(Long[] mas_id, Float price_from, Float price_to, Integer firstResult, Integer maxResult) {
+        return this.offerDAO.getOffersByManufactIdAndPrice(mas_id, price_from, price_to, firstResult, maxResult);
+    }
+
+    @Transactional
+    public Object getCountOffers(Long[] mas_id, Float price_from, Float price_to) {
+        return this.offerDAO.getCountOffers(mas_id, price_from, price_to);
     }
 }

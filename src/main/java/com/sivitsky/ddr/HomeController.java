@@ -140,6 +140,8 @@ public class HomeController {
         }
 
         Long[] l_array_manufacturs;
+        int noOfRecords = 0;
+        List listPart = new ArrayList();
         if (array_manufacturs != null && array_manufacturs.length > 0 || Float.parseFloat(session.getAttribute("price_from").toString()) != 0 || Float.parseFloat(session.getAttribute("price_to").toString()) != 0) {
             if (array_manufacturs != null) {
                 l_array_manufacturs = new Long[array_manufacturs.length];
@@ -150,12 +152,14 @@ public class HomeController {
             } else {
                 l_array_manufacturs = new Long[0];
             }
-            model.addAttribute("listPart", offerService.listOffersByManufactIdAndPrice(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString())));
+            listPart = offerService.listOffersByManufactIdAndPrice(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString()), (page - 1) * recordsPerPage, recordsPerPage);
+            model.addAttribute("listPart", listPart);
+            noOfRecords = Integer.parseInt(offerService.getCountOffers(l_array_manufacturs, Float.parseFloat(session.getAttribute("price_from").toString()), Float.parseFloat(session.getAttribute("price_to").toString())).toString());
         } else {
-            model.addAttribute("listPart", partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage));
+            listPart = partService.listPartWithDetail((page - 1) * recordsPerPage, recordsPerPage);
+            model.addAttribute("listPart", listPart);
+            noOfRecords = partService.getCountOfPart();
         }
-
-        int noOfRecords = partService.getCountOfPart();
         int noOfPages = (int) Math.ceil(noOfRecords * 1.0 / recordsPerPage);
         model.addAttribute("noOfPages", noOfPages);
         model.addAttribute("page", page);
